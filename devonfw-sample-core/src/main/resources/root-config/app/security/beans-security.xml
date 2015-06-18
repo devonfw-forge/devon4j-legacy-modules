@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - Sample namespace-based configuration - -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:security="http://www.springframework.org/schema/security"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                      http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+  <bean id="CORSFilter" class="com.capgemini.devonfw.sample.general.security.CORSFilter">
+    <property name="disabled" value="${corsDisabled}"/>
+  </bean>
+
+  <bean id="SecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+    <constructor-arg>
+      <list>
+        <!--JS Client is publicly available -->
+        <security:filter-chain pattern="/jsclient/**" filters="none"/>
+        <security:filter-chain pattern="/websocket/**" filters="none"/>
+
+        <!--REST login without CSRF filter -->
+        <security:filter-chain pattern="/services/rest/login"
+            filters="RequestContextFilter,
+                   CORSFilter,
+                   SecurityContextPersistenceFilter,
+                   RestLogoutFilter,
+                   JsonUsernamePasswordAuthenticationFilter,
+                   RequestCacheAwareFilter,
+                   SecurityContextHolderAwareRequestFilter,
+                   AnonymousAuthenticationFilter,
+                   SessionManagementFilter,
+                   RestExceptionTranslationFilter,
+                   FilterSecurityInterceptor"/>
+        <!-- REST Services intended for JS Client are secured based on a session cookies and have REST login/logout API -->
+        <security:filter-chain pattern="/services/rest/**"
+          filters="RequestContextFilter,
+                   CORSFilter,
+                   SecurityContextPersistenceFilter,
+                   CsrfFilterWrapper,
+                   RestLogoutFilter,
+                   JsonUsernamePasswordAuthenticationFilter,
+                   RequestCacheAwareFilter,
+                   SecurityContextHolderAwareRequestFilter,
+                   AnonymousAuthenticationFilter,
+                   SessionManagementFilter,
+                   RestExceptionTranslationFilter,
+                   FilterSecurityInterceptor"/>
+        <!-- Defaults to form based strategy -->
+        <security:filter-chain pattern="/**"
+          filters="RequestContextFilter,
+                   CORSFilter,
+                   SecurityContextPersistenceFilter,
+                   LogoutFilter,
+                   UsernamePasswordAuthenticationFilter,
+                   RequestCacheAwareFilter,
+                   SecurityContextHolderAwareRequestFilter,
+                   AnonymousAuthenticationFilter,
+                   SessionManagementFilter,
+                   ExceptionTranslationFilter,
+                   FilterSecurityInterceptor"/>
+      </list>
+    </constructor-arg>
+  </bean>
+
+</beans>
