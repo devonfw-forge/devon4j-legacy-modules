@@ -41,8 +41,6 @@
       </property>
   </bean>
 
-   <import resource="security/beans-security.xml"/>
-
   <context:component-scan base-package="com.capgemini.devonfw.sample.*.websocket"/>
   <context:component-scan base-package="com.capgemini.devonfw.sample.*.logic"/>
   <context:component-scan base-package="com.capgemini.devonfw.sample.*.service"/>
