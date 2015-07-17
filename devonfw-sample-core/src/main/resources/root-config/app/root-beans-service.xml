@@ -7,17 +7,6 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="locations">
-
-
-      <list>
-        <value>classpath:/root-config/app/application-default.properties</value>
-        <value>classpath:/root-config/env/application.properties</value>
-      </list>
-    </property>
-  </bean>
-
    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="flyway">
     <property name="packagesToScan">
       <list>
@@ -40,8 +29,6 @@
           </map>
       </property>
   </bean>
-
-   <import resource="security/beans-security.xml"/>
 
   <context:component-scan base-package="com.capgemini.devonfw.sample.*.websocket"/>
   <context:component-scan base-package="com.capgemini.devonfw.sample.*.logic"/>
