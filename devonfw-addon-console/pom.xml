@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.capgemini.devonfw</groupId>
+		<artifactId>devonfw-sample</artifactId>
+		<version>dev-SNAPSHOT</version>
+	</parent>
+	<groupId>com.capgemini.devonfw</groupId>
+	<artifactId>devonfw-addon-console</artifactId>
+	<version>dev-SNAPSHOT</version>
+	<name>devonfw-addon-console</name>
+	<packaging>jar</packaging>
+
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+    
+      <dependency>
+      <groupId>io.oasp.java.modules</groupId>
+      <artifactId>oasp4j-rest</artifactId>
+    </dependency>
+    
+    <!-- solo para una prueba, quitar -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <scope>test</scope>
+    </dependency>
+	</dependencies>
+	
+</project>
