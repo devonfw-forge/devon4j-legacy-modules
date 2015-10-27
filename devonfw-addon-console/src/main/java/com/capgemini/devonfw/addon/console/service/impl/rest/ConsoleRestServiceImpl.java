@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import com.capgemini.devonfw.addon.console.logic.api.Console;
 import com.capgemini.devonfw.addon.console.service.api.rest.ConsoleTo;
-import com.google.common.io.Resources;
 
 
 @Path("/devonfw/console/v1")
@@ -52,18 +51,4 @@ public class ConsoleRestServiceImpl {
 		this.console = console;
 	}
 	
-	@PostConstruct
-	public void post(){
-		
-		try {
-			URL resource = Resources.getResource("config/env/application.properties");
-			System.out.println("===> === >resource"+resource.getFile());
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("===> === >Excepcion obteniendo resource");
-		}
-		
-	}
 }
