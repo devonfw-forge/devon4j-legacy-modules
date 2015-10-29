@@ -23,6 +23,7 @@
     <module>devonfw-sample-ear</module>
     <module>devonfw-sample-core</module>
     <module>devonfw-sample-server</module>
+    <module>devonfw-addon-console</module>
   </modules>
 
   <dependencyManagement>
