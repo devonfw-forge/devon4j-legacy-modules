@@ -6,16 +6,17 @@
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
-
-
   
-  <import resource="classpath:config/app/beans-application.xml"/>
-  <import resource="root-beans-service.xml"/>
- 
-  <!-- import beans from all devonfw addons -->
-  <import resource="classpath*:config/app/beans-addon.xml"/>
+  <context:component-scan base-package="com.capgemini.devonfw.addon.*.logic"/>
+  <context:component-scan base-package="com.capgemini.devonfw.addon.*.service"/>
   
- 
-  
+   <bean id="propertyConfigurer" class="com.capgemini.devonfw.addon.console.logic.impl.SpringPropertiesUtil">
+    <property name="locations">
+      <list>
+        <value>classpath:/config/app/application-default.properties</value>
+        <value>classpath:/config/env/application.properties</value>
+      </list>
+    </property>
+  </bean>
 
 </beans>

@@ -7,7 +7,6 @@
     <artifactId>devonfw-sample</artifactId>
     <version>dev-SNAPSHOT</version>
   </parent>
-  <groupId>com.capgemini.devonfw</groupId>
   <artifactId>devonfw-sample-server</artifactId>
   <packaging>war</packaging>
   <name>${project.artifactId}</name>
@@ -22,6 +21,11 @@
     <dependency>
       <groupId>io.oasp.java.samples</groupId>
       <artifactId>oasp4j-sample-core</artifactId>
+      <version>dev-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.capgemini.devonfw</groupId>
+      <artifactId>devonfw-addon-console</artifactId>
       <version>dev-SNAPSHOT</version>
     </dependency>
   </dependencies>
