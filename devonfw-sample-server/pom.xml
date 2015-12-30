@@ -44,7 +44,7 @@
       <dependencies>
         <dependency>
           <groupId>com.capgemini.devonfw</groupId>
-          <artifactId>ext5-sample</artifactId>
+          <artifactId>extjs-sample</artifactId>
           <version>1.0.0-SNAPSHOT</version>
           <type>zip</type>
           <classifier>web</classifier>
@@ -60,7 +60,7 @@
               <overlays>
                 <overlay>
                   <groupId>com.capgemini.devonfw</groupId>
-                  <artifactId>ext5-sample</artifactId>
+                  <artifactId>extjs-sample</artifactId>
                   <type>zip</type>
                   <classifier>web</classifier>
                   <targetPath>jsclient</targetPath>
