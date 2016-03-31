@@ -3,7 +3,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.capgemini.devonfw</groupId>
+    <groupId>com.capgemini.devonfw.dev</groupId>
     <artifactId>devonfw-sample</artifactId>
     <version>dev-SNAPSHOT</version>
   </parent>
@@ -33,6 +33,16 @@
         <filtering>true</filtering>
       </resource>
     </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <!--  version>${maven.war.plugin.version}</version  -->
+        <configuration>
+           <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+    </plugin>
+    </plugins>
   </build>
 
   <!-- Overlays for JavaScript client -->
