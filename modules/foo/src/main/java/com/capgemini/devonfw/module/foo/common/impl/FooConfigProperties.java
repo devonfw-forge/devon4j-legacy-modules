@@ -1,5 +1,7 @@
 package com.capgemini.devonfw.module.foo.common.impl;
 
+import java.util.HashMap;
+
 import javax.inject.Named;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -15,6 +17,21 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class FooConfigProperties {
 
   private String baz;
+
+  private HashMap<String, String> bar;
+
+  /**
+   * @return roles
+   */
+  public HashMap<String, String> getBar() {
+
+    return this.bar;
+  }
+
+  public void setBar(HashMap<String, String> bar) {
+
+    this.bar = bar;
+  }
 
   /**
    * @return baz

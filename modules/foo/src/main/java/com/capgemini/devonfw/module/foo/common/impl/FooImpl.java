@@ -1,5 +1,7 @@
 package com.capgemini.devonfw.module.foo.common.impl;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -34,9 +36,15 @@ public class FooImpl implements Foo {
   }
 
   @Override
-  public String bar() {
+  public String baz() {
 
     return this.props.getBaz();
+  }
+
+  @Override
+  public HashMap<String, String> bar() {
+
+    return this.props.getBar();
   }
 
 }
