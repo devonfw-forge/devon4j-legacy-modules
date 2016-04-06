@@ -1,6 +1,6 @@
 package com.capgemini.devonfw.module.foo.common.api;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * TODO ivanderk This type ...
@@ -12,5 +12,5 @@ public interface Foo {
 
   public String baz();
 
-  public HashMap<String, String> bar();
+  public Map<String, String> bar();
 }

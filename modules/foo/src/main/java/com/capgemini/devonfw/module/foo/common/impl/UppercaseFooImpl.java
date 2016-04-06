@@ -1,5 +1,6 @@
 package com.capgemini.devonfw.module.foo.common.impl;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -13,8 +14,8 @@ import com.capgemini.devonfw.module.foo.common.api.Foo;
  * @author ivanderk
  * @since 1.1
  */
-@Named("lowercaseFoo")
-public class FooImpl implements Foo {
+@Named("uppercaseFoo")
+public class UppercaseFooImpl implements Foo {
 
   @Inject
   private FooConfigProperties props;
@@ -38,13 +39,19 @@ public class FooImpl implements Foo {
   @Override
   public String baz() {
 
-    return this.props.getBaz();
+    return this.props.getBaz().toUpperCase();
   }
 
   @Override
   public Map<String, String> bar() {
 
-    return this.props.getBar();
+    Map<String, String> map = this.props.getBar();
+    Map<String, String> newmap = new HashMap<String, String>();
+
+    for (Map.Entry<String, String> entry : map.entrySet()) {
+      newmap.put(entry.getKey(), entry.getValue().toUpperCase());
+    }
+    return newmap;
   }
 
 }
