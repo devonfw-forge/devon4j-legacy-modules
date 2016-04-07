@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>devonfw</artifactId>
-  <groupId>com.capgemini.devonfw.dev</groupId>
-  <version>dev-SNAPSHOT</version> <!-- This POM will never be released -->
+  <parent>
+    <artifactId>devonfw</artifactId>
+    <groupId>com.capgemini.devonfw.dev</groupId>
+    <version>dev-SNAPSHOT</version>
+  </parent>
+  <artifactId>devonfw-sample</artifactId>
+  <groupId>com.capgemini.devonfw</groupId>
+  <version>${devonfw.version}</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>Application based on the Open Application Standard Platform for Java (OASP4J).</description>
 
   <properties>
-    <oasp4j.version>2.1.0-SNAPSHOT</oasp4j.version>
-    <devonfw.version>1.1-SNAPSHOT</devonfw.version>
     <spring.boot.version>1.3.0.RELEASE</spring.boot.version>
     <java.version>1.7</java.version>
     <oasp.port.range>81</oasp.port.range>
@@ -20,7 +23,8 @@
   </properties>
 
   <modules>
-    <module>modules</module>
+    <module>core</module>
+    <module>server</module>
   </modules>
 
   <dependencyManagement>
@@ -37,7 +41,7 @@
       <dependency>
         <groupId>io.oasp.java</groupId>
         <artifactId>oasp4j-bom</artifactId>
-        <version>${oasp4j.version}</version>
+        <version>2.0.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -62,7 +66,7 @@
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
           <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
+            <version>1.0.0</version>
           <configuration>
             <lifecycleMappingMetadata>
               <pluginExecutions>
@@ -77,7 +81,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -91,7 +95,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -104,7 +108,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -117,7 +121,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -157,7 +161,6 @@
     <profile>
       <id>systemtest</id>
       <properties>
-        <oasp.test.excluded.groups/>
       </properties>
     </profile>
   </profiles>
