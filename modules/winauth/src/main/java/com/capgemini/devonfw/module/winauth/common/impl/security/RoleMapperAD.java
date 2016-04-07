@@ -11,10 +11,9 @@ import javax.inject.Named;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * TODO jhcore This type ...
+ * This class contains the methods to map the AD groups to Application groups.
  *
  * @author jhcore
- * @since 2.0.0
  */
 @ConfigurationProperties(prefix = "devon.winauth")
 @Named("RoleMapperAD")
@@ -46,7 +45,7 @@ public class RoleMapperAD {
   }
 
   /**
-   * @param roles new value of {@link #getroles}.
+   * @param roles new value of the user roles.
    */
   public void setRoles(HashMap<String, ArrayList<String>> roles) {
 
@@ -54,20 +53,10 @@ public class RoleMapperAD {
   }
 
   /**
-   * @throws Exception
-   */
-  /*
-   * @PostConstruct public void postContructMethod() throws Exception {
-   *
-   * // this.groups = this.roles.values().toArray(this.groups);
-   *
-   * }
-   */
-
-  /**
    * @param memberOf chair with the AD groups
    * @return an ArrayList with the the mapping roles
    */
+  @SuppressWarnings("hiding")
   public ArrayList<String> rolesMapping(String memberOf) {
 
     ArrayList<String> result = new ArrayList<>();

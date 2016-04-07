@@ -8,22 +8,21 @@ import javax.naming.directory.Attributes;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import com.capgemini.devonfw.module.winauth.common.api.UserProfileAD;
-import com.capgemini.devonfw.module.winauth.common.api.UsermanagementAD;
+import com.capgemini.devonfw.module.winauth.common.api.PrincipalProfile;
+import com.capgemini.devonfw.module.winauth.common.api.Usermanagement;
 import com.capgemini.devonfw.module.winauth.common.api.to.UserDetailsClientToAD;
 
 /**
- * TODO jhcore This type ...
+ * Implementation of {@link Usermanagement}.
  *
  * @author jhcore
- * @since 1.1
  */
-@Named("UsermanagementADImpl")
+@Named
 @ConfigurationProperties(prefix = "devon.winauth")
-public class UsermanagementADImpl /* extends AbstractBeanMapperSupport */ implements UsermanagementAD {
+public class UsermanagementADImpl implements Usermanagement {
 
   @Inject
-  AuthenticationSourceADImpl authenticationSourceADImpl;
+  private AuthenticationSourceADImpl authenticationSourceADImpl;
 
   @Inject
   private RoleMapperAD roleMapperAD;
@@ -36,7 +35,7 @@ public class UsermanagementADImpl /* extends AbstractBeanMapperSupport */ implem
   }
 
   @Override
-  public UserProfileAD findUserProfileByLogin(String login) {
+  public PrincipalProfile findPrincipalProfileByLogin(String login) {
 
     Attributes attributes = this.authenticationSourceADImpl.searchUserByUsername(login);
 
@@ -52,7 +51,7 @@ public class UsermanagementADImpl /* extends AbstractBeanMapperSupport */ implem
     user.setName(cn);
     user.setFirstName(givenname);
     user.setLastName(sn);
-    user.setRoles(roles);
+    user.setGroups(roles);
 
     return user;
   }

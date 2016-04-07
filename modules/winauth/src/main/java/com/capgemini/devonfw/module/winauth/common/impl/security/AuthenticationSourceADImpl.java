@@ -11,18 +11,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.capgemini.devonfw.module.winauth.common.api.AuthenticationSourceAD;
+import com.capgemini.devonfw.module.winauth.common.api.AuthenticationSource;
 import com.capgemini.devonfw.module.winauth.common.api.accesscontrol.ActiveDirectory;
 
 /**
  * TODO jhcore This type ...
  *
  * @author jhcore
- * @since 2.0.0
  */
 @ConfigurationProperties(prefix = "devon.winauth")
-@Named("AuthenticationSourceADImpl")
-public class AuthenticationSourceADImpl implements AuthenticationSourceAD {
+@Named
+public class AuthenticationSourceADImpl implements AuthenticationSource {
 
   private static final Logger LOG = LoggerFactory.getLogger(AuthenticationSourceADImpl.class);
 
@@ -61,6 +60,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSourceAD {
    * @param password
    * @param domain
    */
+  @SuppressWarnings("javadoc")
   public AuthenticationSourceADImpl(String username, String password, String domain) {
     super();
   }
@@ -97,9 +97,8 @@ public class AuthenticationSourceADImpl implements AuthenticationSourceAD {
   }
 
   /**
-   * @param activeDirectory new value of {@link #getactiveDirectory}.
+   * @param activeDirectory new value of {@link ActiveDirectory}.
    */
-  // @Inject
   public void setActiveDirectory(ActiveDirectory activeDirectory) {
 
     this.activeDirectory = activeDirectory;
@@ -117,6 +116,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSourceAD {
   /**
    * @param username new value of {@link #getusername}.
    */
+  @SuppressWarnings("javadoc")
   @Override
   public void setUsername(String username) {
 
@@ -135,6 +135,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSourceAD {
   /**
    * @param password new value of {@link #getpassword}.
    */
+  @SuppressWarnings("javadoc")
   @Override
   public void setPassword(String password) {
 
@@ -153,6 +154,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSourceAD {
   /**
    * @param domain new value of {@link #getdomain}.
    */
+  @SuppressWarnings("javadoc")
   @Override
   public void setDomain(String domain) {
 

@@ -3,15 +3,14 @@ package com.capgemini.devonfw.module.winauth.common.impl.security;
 import java.util.List;
 import java.util.Locale;
 
-import com.capgemini.devonfw.module.winauth.common.api.UserProfileAD;
+import com.capgemini.devonfw.module.winauth.common.api.PrincipalProfile;
 
 /**
- * TODO jhcore This type ...
+ * Implementation of {@link PrincipalProfile}.
  *
  * @author jhcore
- * @since dev
  */
-public class UserProfileADImpl implements UserProfileAD {
+public class PrincipalProfileImpl implements PrincipalProfile {
 
   private String name;
 
@@ -19,14 +18,14 @@ public class UserProfileADImpl implements UserProfileAD {
 
   private String lastName;
 
-  private List<String> roles;
+  private List<String> groups;
 
   private Locale language;
 
   /**
    * The constructor.
    */
-  public UserProfileADImpl() {
+  public PrincipalProfileImpl() {
   }
 
   /**
@@ -39,7 +38,7 @@ public class UserProfileADImpl implements UserProfileAD {
   }
 
   /**
-   * @param name new value of {@link #getname}.
+   * @param name new value of user name.
    */
   public void setName(String name) {
 
@@ -56,7 +55,7 @@ public class UserProfileADImpl implements UserProfileAD {
   }
 
   /**
-   * @param firstName new value of {@link #getfirstName}.
+   * @param firstName new value of user first name.
    */
   public void setFirstName(String firstName) {
 
@@ -73,7 +72,7 @@ public class UserProfileADImpl implements UserProfileAD {
   }
 
   /**
-   * @param lastName new value of {@link #getlastName}.
+   * @param lastName new value of user last name.
    */
   public void setLastName(String lastName) {
 
@@ -84,24 +83,23 @@ public class UserProfileADImpl implements UserProfileAD {
    * @return role
    */
   @Override
-  public List<String> getRoles() {
+  public List<String> getGroups() {
 
-    return this.roles;
+    return this.groups;
   }
 
   /**
-   * @param role new value of {@link #getrole}.
+   * @param groups new value of user groups
    */
-  public void setRoles(List<String> roles) {
+  public void setGroups(List<String> groups) {
 
-    this.roles = roles;
+    this.groups = groups;
   }
 
   @Override
   public Long getId() {
 
-    // TODO Auto-generated method stub
-    return null;
+    return getId();
   }
 
   /**
@@ -119,16 +117,5 @@ public class UserProfileADImpl implements UserProfileAD {
 
     this.language = language;
   }
-  /*
-   * @Override public Collection<String> getNames() {
-   * 
-   * Collection<String> names = new ArrayList<String>(); for (int i = 0; i < this.roles.size(); i++) {
-   * names.add(this.roles.get(i).getName()); } return names; }
-   */
 
-  @Override
-  public String getRole() {
-
-    return this.roles.get(0);
-  }
 }

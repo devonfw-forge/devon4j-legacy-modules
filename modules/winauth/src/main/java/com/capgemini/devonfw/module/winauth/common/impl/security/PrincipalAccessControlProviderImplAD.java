@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import javax.inject.Named;
 
-import com.capgemini.devonfw.module.winauth.common.api.UserProfileAD;
+import com.capgemini.devonfw.module.winauth.common.api.PrincipalProfile;
 
 import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;
 
@@ -19,7 +19,7 @@ import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlPr
  * @author hohwille
  */
 @Named
-public class PrincipalAccessControlProviderImplAD implements PrincipalAccessControlProvider<UserProfileAD> {
+public class PrincipalAccessControlProviderImplAD implements PrincipalAccessControlProvider<PrincipalProfile> {
 
   /**
    * The constructor.
@@ -30,9 +30,9 @@ public class PrincipalAccessControlProviderImplAD implements PrincipalAccessCont
   }
 
   @Override
-  public Collection<String> getAccessControlIds(UserProfileAD principal) {
+  public Collection<String> getAccessControlIds(PrincipalProfile principal) {
 
-    return principal.getRoles();
+    return principal.getGroups();
   }
 
 }
