@@ -15,6 +15,7 @@
 
   <modules>
     <module>foo</module>
+	<module>reporting</module>
   </modules>
 
   <dependencyManagement>
