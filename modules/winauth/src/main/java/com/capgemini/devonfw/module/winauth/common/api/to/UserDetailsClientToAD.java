@@ -2,16 +2,16 @@ package com.capgemini.devonfw.module.winauth.common.api.to;
 
 import java.util.List;
 
-import com.capgemini.devonfw.module.winauth.common.api.UserProfileAD;
+import com.capgemini.devonfw.module.winauth.common.api.PrincipalProfile;
 
 import io.oasp.module.basic.common.api.to.AbstractTo;
 
 /**
- * This is the {@link AbstractTo TO} for the client view on the user details.
+ * This is the {@link AbstractTo TO} for the client view on the user AD details.
  *
- * @author hohwille
+ * @author hohwille, jhcore
  */
-public class UserDetailsClientToAD extends AbstractTo implements UserProfileAD {
+public class UserDetailsClientToAD extends AbstractTo implements PrincipalProfile {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 1L;
@@ -59,7 +59,7 @@ public class UserDetailsClientToAD extends AbstractTo implements UserProfileAD {
   }
 
   @Override
-  public List<String> getRoles() {
+  public List<String> getGroups() {
 
     return this.roles;
   }
@@ -101,30 +101,9 @@ public class UserDetailsClientToAD extends AbstractTo implements UserProfileAD {
   /**
    * @param roles2
    */
-  public void setRoles(List<String> roles) {
+  public void setGroups(List<String> roles) {
 
     this.roles = roles;
-
-  }
-  /*
-   * @Override public Collection<String> getNames() {
-   *
-   * Collection<String> names = new ArrayList<String>(); for (int i = 0; i < this.roles.size(); i++) { //
-   * names.add(this.roles.get(i).getName()); } return names; }
-   */
-
-  @Override
-  public String getRole() {
-
-    return this.roles.get(0);
-  }
-
-  /**
-   * @param role
-   */
-  public void setRole(String role) {
-
-    this.roles.add(0, role);
 
   }
 
