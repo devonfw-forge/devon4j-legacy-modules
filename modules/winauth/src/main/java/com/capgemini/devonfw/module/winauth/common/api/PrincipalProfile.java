@@ -4,14 +4,14 @@ import java.security.Principal;
 import java.util.List;
 
 /**
- * TODO jhcore This type ...
+ * This is the interface for the profile of a user in Active Directory.
  *
  * @author jhcore
  * @since dev
  */
-public interface UserProfileAD extends Principal {
+public interface PrincipalProfile extends Principal {
   /**
-   * @return
+   * @return the unique id of the user for authentication and identification.
    */
   Long getId();
 
@@ -32,18 +32,8 @@ public interface UserProfileAD extends Principal {
   String getLastName();
 
   /**
-   * @return {@link Role} of this {@link UserProfile}.
+   * @return the list of groups of this {@link PrincipalProfile}.
    */
-  List<String> getRoles();
-
-  /**
-   * @return the name of the roles
-   */
-  // Collection<String> getNames();
-
-  /**
-   * @return
-   */
-  String getRole();
+  List<String> getGroups();
 
 }

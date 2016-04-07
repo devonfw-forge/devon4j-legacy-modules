@@ -3,46 +3,45 @@ package com.capgemini.devonfw.module.winauth.common.api;
 import javax.naming.directory.Attributes;
 
 /**
- * TODO jhcore This type ...
+ * This class contains the configuration
  *
  * @author jhcore
- * @since 2.0.0
  */
-public interface AuthenticationSourceAD {
+public interface AuthenticationSource {
 
   /**
-   * @return username
+   * @return AD username
    */
   public String getUsername();
 
   /**
-   * @param username new value of {@link #getusername}.
+   * @param username new value of AD username.
    */
   public void setUsername(String username);
 
   /**
-   * @return password
+   * @return AD password
    */
   public String getPassword();
 
   /**
-   * @param password new value of {@link #getpassword}.
+   * @param password new value of AD password.
    */
   public void setPassword(String password);
 
   /**
-   * @return domain
+   * @return AD domain
    */
   public String getDomain();
 
   /**
-   * @param domain new value of {@link #getdomain}.
+   * @param domain new value of AD getdomain.
    */
   public void setDomain(String domain);
 
   /**
-   * @param username
-   * @return
+   * @param username AD username
+   * @return The user AD attributes
    */
   public Attributes searchUserByUsername(String username);
 }
