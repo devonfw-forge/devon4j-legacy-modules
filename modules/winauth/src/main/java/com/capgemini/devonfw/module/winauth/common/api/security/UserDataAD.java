@@ -8,19 +8,19 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
-import com.capgemini.devonfw.module.winauth.common.api.UserProfileAD;
+import com.capgemini.devonfw.module.winauth.common.api.PrincipalProfile;
 import com.capgemini.devonfw.module.winauth.common.api.to.UserDetailsClientToAD;
 
 /**
  * Container class for the profile of a user.
  *
- * @author hohwille
+ * @author hohwille, jhcore
  */
 public class UserDataAD extends User implements Principal {
 
   private static final long serialVersionUID = 1L;
 
-  private UserProfileAD userProfile;
+  private PrincipalProfile userProfile;
 
   /**
    * The constructor.
@@ -58,7 +58,7 @@ public class UserDataAD extends User implements Principal {
   }
 
   /**
-   * @return an instance of {@link UserDetailsClientTo} with the client side representation of this {@link UserDataAD}
+   * @return an instance of {@link UserDetailsClientToAD} with the client side representation of this {@link UserDataAD}
    *         instance.
    */
   public UserDetailsClientToAD toClientTo() {
@@ -68,7 +68,7 @@ public class UserDataAD extends User implements Principal {
     clientTo.setName(this.userProfile.getName());
     clientTo.setFirstName(this.userProfile.getFirstName());
     clientTo.setLastName(this.userProfile.getLastName());
-    clientTo.setRole(this.userProfile.getRole());
+    clientTo.setGroups(this.userProfile.getGroups());
     return clientTo;
   }
 
@@ -81,7 +81,7 @@ public class UserDataAD extends User implements Principal {
   /**
    * @return userProfile
    */
-  public UserProfileAD getUserProfile() {
+  public PrincipalProfile getUserProfile() {
 
     return this.userProfile;
   }
@@ -89,7 +89,7 @@ public class UserDataAD extends User implements Principal {
   /**
    * @param userProfile the userProfile com.capgemini.devonfw.module.winauth.common.api.to set
    */
-  public void setUserProfile(UserProfileAD userProfile) {
+  public void setUserProfile(PrincipalProfile userProfile) {
 
     this.userProfile = userProfile;
   }

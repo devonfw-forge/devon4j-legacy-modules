@@ -14,27 +14,29 @@ import javax.naming.directory.SearchResult;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- * TODO jhcore This type ...
+ * This class contains the configuration to connect with Active Directory
  *
  * @author jhcore
- * @since dev
  */
-// @Named
 public class ActiveDirectory {
-  // Logger
   private static final Logger LOG = Logger.getLogger(ActiveDirectory.class.getName());
 
-  // required private variables
+  /** Properties of the DirContext {"@link javax.naming.directory.DirContext} **/
   public Properties properties;
 
+  /** Context of the {@link ActiveDirectory} **/
   public DirContext dirContext;
 
+  /** Encapsulates factors that determine scope of search **/
   public SearchControls searchCtls;
 
+  /** Attributes of the query to ActiveDirectory **/
   public String[] returnAttributes = { "sAMAccountName", "givenName", "sn", "cn", "mail", "memberOf" };
 
+  /** Domain of the server of ActiveDirectory **/
   public String domainBase;
 
+  /** **/
   public String baseFilter = "(&((&(objectCategory=Person)(objectClass=User)))";
 
   /**
@@ -78,9 +80,9 @@ public class ActiveDirectory {
   }
 
   /**
-   * @param username
-   * @param password
-   * @param domainController
+   * @param username -> AD username
+   * @param password -> AD password
+   * @param domainController -> AD domainController
    */
   public void connect(String username, String password, String domainController) {
 
@@ -110,6 +112,7 @@ public class ActiveDirectory {
   /**
    * @param returnAttributes
    */
+  @SuppressWarnings("javadoc")
   public void setAttributes(String[] returnAttributes) {
 
     this.searchCtls.setReturningAttributes(this.returnAttributes);
@@ -120,9 +123,8 @@ public class ActiveDirectory {
    *
    * @param searchValue a {@link java.lang.String} object - search value used for AD search for eg. username or email
    * @param searchBy a {@link java.lang.String} object - scope of search by username or by email id
-   * @param searchBase a {@link java.lang.String} object - search base value for scope tree for eg. DC=myjeeva,DC=com
+   * @param searchBase a {@link java.lang.String} object - search base value for scope tree
    * @return search result a {@link javax.naming.NamingEnumeration} object - active directory search result
-   * @throws NamingException
    */
   @SuppressWarnings("unchecked")
   public NamingEnumeration<SearchResult> searchUser(String searchValue, String searchBy, String searchBase) {
@@ -175,9 +177,6 @@ public class ActiveDirectory {
 
   /**
    * creating a domain base value from domain controller name
-   *
-   * @param base a {@link java.lang.String} object - name of the domain controller
-   * @return a {@link java.lang.String} object - base name for eg. DC=myjeeva,DC=com
    */
   private static String getDomainBase(String base) {
 

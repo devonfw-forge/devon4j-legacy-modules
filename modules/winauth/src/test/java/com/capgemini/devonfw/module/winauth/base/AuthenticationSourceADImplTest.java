@@ -9,22 +9,22 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.winauth.SpringBootApp;
-import com.capgemini.devonfw.module.winauth.common.api.AuthenticationSourceAD;
+import com.capgemini.devonfw.module.winauth.common.api.AuthenticationSource;
+import com.capgemini.devonfw.module.winauth.common.impl.security.AuthenticationSourceADImpl;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
- * TODO jhcore This type ...
+ * This is the test-case for {@link AuthenticationSourceADImpl}
  *
  * @author jhcore
- * @since 1.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SpringBootApp.class)
 public class AuthenticationSourceADImplTest extends ComponentTest {
 
   @Inject
-  AuthenticationSourceAD authenticationSourceAD;
+  AuthenticationSource authenticationSource;
 
   /**
    * Test method for
@@ -35,13 +35,13 @@ public class AuthenticationSourceADImplTest extends ComponentTest {
   public void testSearchUserByUsername() {
 
     // Given
-    assertThat(this.authenticationSourceAD).isNotNull();
+    assertThat(this.authenticationSource).isNotNull();
 
     // When
     String searchValue = "jhcore";
 
     // Then
-    Attributes attributes = this.authenticationSourceAD.searchUserByUsername(searchValue);
+    Attributes attributes = this.authenticationSource.searchUserByUsername(searchValue);
 
     assertThat(attributes).isNotNull();
 
