@@ -24,7 +24,7 @@ public class UserDetailsClientToAD extends AbstractTo implements PrincipalProfil
 
   private String lastName;
 
-  private List<String> roles;
+  private List<String> groups;
 
   /**
    * The constructor.
@@ -61,7 +61,7 @@ public class UserDetailsClientToAD extends AbstractTo implements PrincipalProfil
   @Override
   public List<String> getGroups() {
 
-    return this.roles;
+    return this.groups;
   }
 
   /**
@@ -99,11 +99,11 @@ public class UserDetailsClientToAD extends AbstractTo implements PrincipalProfil
   }
 
   /**
-   * @param roles2
+   * @param groups of the AD user
    */
-  public void setGroups(List<String> roles) {
+  public void setGroups(List<String> groups) {
 
-    this.roles = roles;
+    this.groups = groups;
 
   }
 
