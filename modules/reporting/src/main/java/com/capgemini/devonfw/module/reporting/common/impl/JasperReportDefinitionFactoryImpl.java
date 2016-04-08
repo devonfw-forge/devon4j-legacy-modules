@@ -22,14 +22,16 @@ public class JasperReportDefinitionFactoryImpl implements ReportDefinitionFactor
     if (type == ReportType.Generic) {
       return createReportDefinition();
     } else {
-      return (BaseReportDefinition) createReporttemplate();
+      return createReporttemplate();
     }
   }
 
   @Override
   public GenericReportDefinition createReportDefinition() {
 
-    return new JasperGenReportDefImpl();
+    // TODO implement JasperGenReportDefImpl
+    // return new JasperGenReportDefImpl();
+    return null;
   }
 
   @Override

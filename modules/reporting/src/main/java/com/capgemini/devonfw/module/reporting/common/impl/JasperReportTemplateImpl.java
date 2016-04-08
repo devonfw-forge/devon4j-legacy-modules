@@ -17,9 +17,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.engine.xml.JRXmlTemplateLoader;
 
-import org.springframework.util.ResourceUtils;
-
-import com.capgemini.devonfw.module.reporting.common.exception.ReportingException;
+import com.capgemini.devonfw.module.reporting.common.template.Report;
 import com.capgemini.devonfw.module.reporting.common.template.ReportTemplate;
 
 /**
@@ -108,7 +106,7 @@ public class JasperReportTemplateImpl implements ReportTemplate {
     }
   }
 
-  public JasperReport compile() {
+  public JasperReport compile() throws Exception {
 
     JasperDesign design = null;
     try {
@@ -145,7 +143,9 @@ public class JasperReportTemplateImpl implements ReportTemplate {
       return JasperUtils.compileReport(design);
 
     } catch (Exception je) {
-      throw new ReportingException(je);
+      // TODO fix ReportingException
+      // throw new ReportingException(je);
+      throw new Exception(je);
     }
   }
 
@@ -155,7 +155,10 @@ public class JasperReportTemplateImpl implements ReportTemplate {
     if (this.template instanceof String) {
       return (String) this.template;
     } else {
-      throw new ReportingException("fwk.reporting.notemplatepath");
+      // TODO fix the throw Exception
+      // throw new ReportingException("fwk.reporting.notemplatepath");
+      System.out.println("fwk.reporting.notemplatepath");
+      return null;
     }
   }
 
@@ -165,10 +168,13 @@ public class JasperReportTemplateImpl implements ReportTemplate {
     if (this.template instanceof TemplateData) {
       return ((TemplateData) this.template).Text;
     } else if (this.template instanceof String) {
-      return ResourceUtils.getClassPathResourceAsString((String) this.template);
+      return (String) this.template;
 
     } else {
-      throw new ReportingException("fwk.reporting.notemplatedata");
+      // TODO fix the throw Exception
+      // throw new ReportingException("fwk.reporting.notemplatedata");
+      System.out.println("fwk.reporting.notemplatedata");
+      return null;
     }
   }
 
@@ -197,7 +203,10 @@ public class JasperReportTemplateImpl implements ReportTemplate {
       return new JasperReportImpl(this);
     } catch (Exception e) {
 
-      throw new ReportingException(e, "Error creating new report");
+      // TODO fix ReportingException
+      // throw new ReportingException(e, "Error creating new report");
+      System.out.println("Error creating new report");
+      return null;
     }
   }
 
@@ -251,13 +260,15 @@ class TemplateData {
     return new ByteArrayInputStream(this.Text.getBytes());
   }
 
-  public ByteArrayInputStream getInputStream(String charsetName) {
+  public ByteArrayInputStream getInputStream(String charsetName) throws Exception {
 
     try {
       return new ByteArrayInputStream(this.Text.getBytes(charsetName));
     } catch (UnsupportedEncodingException e) {
 
-      throw new FrameworkException(e);
+      // TODO fix FrameworkException
+      // throw new FrameworkException(e);
+      throw new Exception(e);
     }
   }
 }

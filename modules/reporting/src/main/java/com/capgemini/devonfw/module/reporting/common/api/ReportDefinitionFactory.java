@@ -1,5 +1,7 @@
 package com.capgemini.devonfw.module.reporting.common.api;
 
+import com.capgemini.devonfw.module.reporting.common.template.ReportTemplate;
+
 /**
  * TODO pparrado This type ...
  *

@@ -7,5 +7,5 @@ package com.capgemini.devonfw.module.reporting.common.api;
  * @since 1.1
  */
 public interface BaseReportDefinition {
-  public BaseReport newReport();
+  public BaseReport newReport() throws Exception;
 }

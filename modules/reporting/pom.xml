@@ -51,5 +51,12 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- JASPER REPORTS LIBRARY -->
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports</artifactId>
+      <version>6.2.1</version>
+    </dependency>
+
   </dependencies>
 </project>
