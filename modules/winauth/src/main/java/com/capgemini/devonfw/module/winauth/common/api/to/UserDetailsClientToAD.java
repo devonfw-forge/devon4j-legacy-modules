@@ -16,7 +16,7 @@ public class UserDetailsClientToAD extends AbstractTo implements PrincipalProfil
   /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  private Long id;
+  private String id;
 
   private String name;
 
@@ -35,7 +35,7 @@ public class UserDetailsClientToAD extends AbstractTo implements PrincipalProfil
   }
 
   @Override
-  public Long getId() {
+  public String getId() {
 
     return this.id;
   }
@@ -69,7 +69,7 @@ public class UserDetailsClientToAD extends AbstractTo implements PrincipalProfil
    *
    * @param id the ID com.capgemini.devonfw.module.winauth.common.api.to set
    */
-  public void setId(Long id) {
+  public void setId(String id) {
 
     this.id = id;
   }

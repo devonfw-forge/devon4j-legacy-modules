@@ -97,7 +97,7 @@ public class PrincipalProfileImpl implements PrincipalProfile {
   }
 
   @Override
-  public Long getId() {
+  public String getId() {
 
     return getId();
   }

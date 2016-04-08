@@ -13,7 +13,7 @@ public interface PrincipalProfile extends Principal {
   /**
    * @return the unique id of the user for authentication and identification.
    */
-  Long getId();
+  String getId();
 
   /**
    * @return the unique login of the user for authentication and identification.

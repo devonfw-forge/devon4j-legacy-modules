@@ -1,7 +1,6 @@
 package com.capgemini.devonfw.module.winauth.common.api.accesscontrol;
 
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
@@ -11,6 +10,8 @@ import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
@@ -19,7 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * @author jhcore
  */
 public class ActiveDirectory {
-  private static final Logger LOG = Logger.getLogger(ActiveDirectory.class.getName());
+  private static final Logger LOG = LoggerFactory.getLogger(ActiveDirectory.class);
 
   /** Properties of the DirContext {"@link javax.naming.directory.DirContext} **/
   public Properties properties;
@@ -60,7 +61,7 @@ public class ActiveDirectory {
     try {
       this.dirContext = new InitialDirContext(this.properties);
     } catch (NamingException e) {
-      LOG.severe(e.getMessage());
+      LOG.error(e.getMessage());
     }
 
     // default domain base for search
@@ -97,7 +98,7 @@ public class ActiveDirectory {
     try {
       this.dirContext = new InitialDirContext(this.properties);
     } catch (NamingException e) {
-      LOG.severe(e.getMessage());
+      LOG.error(e.getMessage());
     }
 
     // default domain base for search
@@ -139,7 +140,12 @@ public class ActiveDirectory {
     } catch (NamingException e) {
       e.printStackTrace();
       UsernameNotFoundException exception = new UsernameNotFoundException("Authentication failed.", e);
-      // LOG.severe("Failed com.capgemini.devonfw.module.winauth.common.api.to get user {}." + searchValue + exception);
+      LOG.error("Failed com.capgemini.devonfw.module.winauth.common.api.to get user {}." + searchValue + exception);
+      throw exception;
+    } catch (Exception e) {
+      e.printStackTrace();
+      UsernameNotFoundException exception = new UsernameNotFoundException("Authentication failed.", e);
+      LOG.error("Failed com.capgemini.devonfw.module.winauth.common.api.to get user {}." + searchValue + exception);
       throw exception;
     }
   }
@@ -153,7 +159,7 @@ public class ActiveDirectory {
       if (this.dirContext != null)
         this.dirContext.close();
     } catch (NamingException e) {
-      LOG.severe(e.getMessage());
+      LOG.error(e.getMessage());
     }
   }
 
