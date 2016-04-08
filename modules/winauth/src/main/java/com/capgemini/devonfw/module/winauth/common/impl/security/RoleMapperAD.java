@@ -24,17 +24,13 @@ public class RoleMapperAD {
    */
   public RoleMapperAD() {
     super();
+    this.roles = new HashMap<>();
   }
 
   /**
    *
    */
   public HashMap<String, ArrayList<String>> roles;
-
-  /**
-   *
-   */
-  public String[] groups;
 
   /**
    * @return roles
@@ -56,7 +52,6 @@ public class RoleMapperAD {
    * @param memberOf chair with the AD groups
    * @return an ArrayList with the the mapping roles
    */
-  @SuppressWarnings("hiding")
   public ArrayList<String> rolesMapping(String memberOf) {
 
     ArrayList<String> result = new ArrayList<>();
