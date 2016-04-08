@@ -14,11 +14,9 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.capgemini.devonfw.module.reporting.common.api.BaseReportDefinition;
-import com.capgemini.devonfw.module.reporting.common.api.GenericReport;
-import com.capgemini.devonfw.module.reporting.common.api.GenericReportDefinition;
-import com.capgemini.devonfw.module.reporting.common.api.ReportDefinitionHandler;
+import com.capgemini.devonfw.module.reporting.common.api.dataType.DataRecordType;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
+import com.capgemini.devonfw.module.reporting.common.impl.JasperReportImpl;
 import com.capgemini.devonfw.module.reporting.common.managers.ReportingManager;
 
 /**
@@ -43,23 +41,27 @@ public class ReportingTest {
   @Test
   public void generateGeneric() throws IOException, Exception {
 
-    GenericReport report = (GenericReport) this.reportingManager
-        .newGenericReportDefinition("gen-report-def", new ReportDefinitionHandler() {
-
-          @Override
-          public void define(BaseReportDefinition repdef) {
-
-            ((GenericReportDefinition) repdef).getMainSegment().addColumn("id", "id", "java.lang.Long", 100)
-                .addColumn("nombre", "nombre", "java.lang.String", 100)
-                .addColumn("capacidad", "capacidad", "java.lang.Integer", 100).end();
-          }
-        }).newReport();
-
-    // report.bindData(createList(), DataRecordType.Map);
-    report.bindData(createList());
+    // GenericReport report = (GenericReport) this.reportingManager
+    // .newGenericReportDefinition("gen-report-def", new ReportDefinitionHandler() {
+    //
+    // @Override
+    // public void define(BaseReportDefinition repdef) {
+    // ((GenericReportDefinition) repdef).getMainSegment().addColumn("id", "id", "java.lang.Long", 100)
+    // .addColumn("nombre", "nombre", "java.lang.String", 100)
+    // .addColumn("capacidad", "capacidad", "java.lang.Integer", 100).end();
+    // }
+    // }).newReport();
 
     File pdf = File.createTempFile("tst", ".pdf");
-    report.generate(ReportFormat.Pdf, pdf);
+
+    JasperReportImpl jri = new JasperReportImpl();
+    jri.bindData(createList(), DataRecordType.Map);
+
+    jri.generate(ReportFormat.Pdf, pdf);
+
+    // report.bindData(createList(), DataRecordType.Map);
+    // report.bindData(createList());
+    // report.generate(ReportFormat.Pdf, pdf);
 
     assertTrue(pdf.length() > 0);
     // assertTrue(false);
@@ -68,18 +70,19 @@ public class ReportingTest {
   public static Collection<? extends Object> createList() {
 
     List lst = new ArrayList();
-    lst.add(createItem("Paco Porro", 400));
-    lst.add(createItem("Kevin Kostner de Jesus", 900));
-    lst.add(createItem("Pietje Puk", 100));
+    lst.add(createItem("Tom Waits", 92, "is the devil"));
+    lst.add(createItem("Nick Cave", 97, "woooow"));
+    lst.add(createItem("PJ Harvey", 95, "ask for marriage"));
     return lst;
   }
 
-  public static Object createItem(String nombre, int capacidad) {
+  public static Object createItem(String name, int capacidad, String comment) {
 
     Map map = new HashMap();
     map.put("ID", rnd.nextLong());
-    map.put("Nombre", nombre);
-    map.put("Capacidad", capacidad);
+    map.put("Name", name);
+    map.put("Rating", capacidad);
+    map.put("Comment", comment);
     return map;
   }
 

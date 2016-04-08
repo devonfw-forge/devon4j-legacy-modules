@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Collection;
 
+import com.capgemini.devonfw.module.reporting.common.api.dataType.DataRecordType;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 
 /**
@@ -18,5 +19,5 @@ public interface BaseReport {
 
   public BaseReport generate(ReportFormat format, File file);
 
-  BaseReport bindData(Collection<? extends Object> data);
+  BaseReport bindData(Collection<? extends Object> data, DataRecordType type);
 }

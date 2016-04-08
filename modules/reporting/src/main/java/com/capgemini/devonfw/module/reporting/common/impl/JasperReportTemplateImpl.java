@@ -89,7 +89,7 @@ public class JasperReportTemplateImpl implements ReportTemplate {
     return (JRTemplate) o;
   }
 
-  private JRTemplate getTemplate(String template) {
+  public JRTemplate getTemplate(String template) {
 
     try {
       return JRXmlTemplateLoader.load(template);
@@ -103,6 +103,26 @@ public class JasperReportTemplateImpl implements ReportTemplate {
         System.out.println(e1.getMessage());
         return null;
       }
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
+      return null;
+    }
+  }
+
+  public JasperReport compile(JRTemplate template) throws Exception {
+
+    JasperDesign design = new JasperDesign();
+    try {
+      for (JRStyle style : template.getStyles()) {
+        design.addStyle(style);
+      }
+
+      return JasperUtils.compileReport(design);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      // TODO implement throw Exception
+      // throw e;
+      return null;
     }
   }
 

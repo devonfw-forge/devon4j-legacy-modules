@@ -20,6 +20,33 @@ public class JasperUtils {
 
   private static final Log log = LogFactory.getLog(JasperUtils.class);
 
+  // public static JRAbstractExporter getExporter(ReportFormat format) {
+  //
+  // switch (format) {
+  //
+  // case Excel:
+  // return new JRXlsExporter();
+  // case Pdf:
+  // return new JRPdfExporter();
+  // case Csv:
+  // return new JRCsvExporter();
+  // case Word:
+  // case Rtf:
+  // return new JRRtfExporter();
+  // case Word_docx:
+  // return new JRDocxExporter();
+  // case Excel_xlsx:
+  // return new JRXlsxExporter();
+  // case Html:
+  // return new JRHtmlExporter();
+  // case OpenDocumentText:
+  // return new JROdtExporter();
+  // case OpenDocumentSheet:
+  // return new JROdsExporter();
+  // default:
+  // return new JRTextExporter();
+  // }
+  // }
   public static String getRealPackagePath(Class klass) {
 
     String resourcePath = klass.getCanonicalName().replace('.', '/') + ".class";
