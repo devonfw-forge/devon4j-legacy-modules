@@ -7,7 +7,10 @@ import javax.inject.Named;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * TODO ivanderk This type ...
+ * This is the configuration class for the foo module. Spring will inject values with prefix = "devon.foo" from any
+ * configured property source (application.properties etc)
+ *
+ * Examples: devon.foo.baz=baz devon.foo.bar.one=bar1 devon.foo.bar.two=bar2
  *
  * @author ivanderk
  * @since 1.1
@@ -21,7 +24,7 @@ public class FooConfigProperties {
   private HashMap<String, String> bar;
 
   /**
-   * @return roles
+   * @return bar as a collection of name-value pairs
    */
   public HashMap<String, String> getBar() {
 

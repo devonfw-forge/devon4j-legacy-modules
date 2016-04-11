@@ -8,7 +8,7 @@ import javax.inject.Named;
 import com.capgemini.devonfw.module.foo.common.api.Foo;
 
 /**
- * TODO ivanderk This type ...
+ * Basic implementation of the {@link Foo} interface. returns configured property values without changes
  *
  * @author ivanderk
  * @since 1.1
@@ -16,6 +16,9 @@ import com.capgemini.devonfw.module.foo.common.api.Foo;
 @Named("lowercaseFoo")
 public class FooImpl implements Foo {
 
+  /**
+   * Configured properties
+   */
   @Inject
   private FooConfigProperties props;
 
