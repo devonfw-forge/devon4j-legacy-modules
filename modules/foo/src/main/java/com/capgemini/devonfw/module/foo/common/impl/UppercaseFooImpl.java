@@ -9,7 +9,8 @@ import javax.inject.Named;
 import com.capgemini.devonfw.module.foo.common.api.Foo;
 
 /**
- * TODO ivanderk This type ...
+ * 'Advanced' implementation of the {@link Foo} interface. which changes to uppercase all configured property string
+ * values
  *
  * @author ivanderk
  * @since 1.1
