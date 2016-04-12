@@ -91,20 +91,6 @@ public class JasperReportImpl implements Report {
     return generate(format, fo);
   }
 
-  @Override
-  public ReportTemplate getTemplate() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Report end() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
   private ReportTemplate reportTemplate = null;
 
   private JasperPrint printDoc = null;
@@ -120,24 +106,28 @@ public class JasperReportImpl implements Report {
     // this.subreports = new HashMap<String, JasperSubreport>();
   }
 
-  //
-  // public ReportTemplate getTemplate() {
-  // return reportTemplate;
-  // }
-  //
-  // public Object getParameter(String name) {
-  // return parameters.get(name);
-  // }
-  //
-  // public Map<String, Object> getParameters() {
-  // return parameters;
-  // }
-  //
-  // public Report setParameter(String name, Object value) {
-  // parameters.put(name, value);
-  // return this;
-  // }
-  //
+  @Override
+  public ReportTemplate getTemplate() {
+
+    return this.reportTemplate;
+  }
+
+  public Object getParameter(String name) {
+
+    return this.parameters.get(name);
+  }
+
+  public Map<String, Object> getParameters() {
+
+    return this.parameters;
+  }
+
+  public Report setParameter(String name, Object value) {
+
+    this.parameters.put(name, value);
+    return this;
+  }
+
   @Override
   public Report bindData(Collection<? extends Object> data, DataRecordType type) {
 
@@ -223,6 +213,7 @@ public class JasperReportImpl implements Report {
 
     JRDataSource ds = (this.datasource == null) ? new JREmptyDataSource() : this.datasource;
 
+    this.parameters = new HashMap<String, Object>();
     HashMap<String, Object> allParams = new HashMap<String, Object>(this.parameters);
 
     // for (String param : subreports.keySet()) {
@@ -244,19 +235,23 @@ public class JasperReportImpl implements Report {
     return JasperFillManager.fillReport(actualreport, allParams, ds);
   }
 
-  //
-  // public JRDataSource getDatasource() {
-  // return datasource;
-  // }
-  //
-  // public Report end() {
-  // return this;
-  // }
-  //
-  // public BaseReport setParameters(Map<String, Object> params) {
-  // parameters.putAll(params);
-  // return this;
-  // }
+  public JRDataSource getDatasource() {
+
+    return this.datasource;
+  }
+
+  @Override
+  public Report end() {
+
+    return this;
+  }
+
+  public BaseReport setParameters(Map<String, Object> params) {
+
+    this.parameters.putAll(params);
+    return this;
+  }
+
   //
   // public ConcatenatedReport concat(BaseReport report) {
   // return new JasperConcatenatedReportImpl().add(report);

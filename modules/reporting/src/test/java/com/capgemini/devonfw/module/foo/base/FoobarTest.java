@@ -15,10 +15,14 @@
 //
 // import io.oasp.module.test.common.base.ComponentTest;
 //
-/// **
-// * Test class to test the {@link GenericDao}.
-// *
-// * @author fawinter
+/// ***Test
+//
+// class to
+// test the
+//
+// {@link GenericDao}.**
+//
+// @author fawinter
 // */
 // @RunWith(SpringJUnit4ClassRunner.class)
 // @SpringApplicationConfiguration(classes = FooTestApp.class)
