@@ -1,6 +1,6 @@
 package com.capgemini.devonfw.module.reporting.common.impl;
 
-import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Map;
 
@@ -24,11 +24,15 @@ import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.oasis.JROdsExporter;
 import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRPptxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.export.ExporterInput;
 import net.sf.jasperreports.export.ExporterOutput;
 import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
+import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -77,9 +81,12 @@ public class JasperUtils {
       return new JROdtExporter();
     case OpenDocumentSheet:
       return new JROdsExporter();
+    case Pptx:
+      return new JRPptxExporter();
     default:
       return new JRTextExporter();
     }
+
   }
 
   /**
@@ -89,13 +96,53 @@ public class JasperUtils {
    * @param exporter
    * @param jasperPrint
    * @param stream
+   * @param format
    */
-  public static void configureExporter(JRAbstractExporter exporter, JasperPrint jasperPrint, FileOutputStream stream) {
+  public static void configureExporter(JRAbstractExporter exporter, JasperPrint jasperPrint, OutputStream stream,
+      ReportFormat format) {
 
     ExporterInput exporterInput = new SimpleExporterInput(jasperPrint);
+    ExporterOutput exporterOutput = null;
+
+    switch (format) {
+    case Excel:
+      exporterOutput = new SimpleOutputStreamExporterOutput(stream);
+      SimpleXlsReportConfiguration xlsConfiguration = new SimpleXlsReportConfiguration();
+      xlsConfiguration.setOnePagePerSheet(false);
+      exporter.setConfiguration(xlsConfiguration);
+      break;
+    case Pdf:
+    case Word_docx:
+    case Pptx:
+      exporterOutput = new SimpleOutputStreamExporterOutput(stream);
+      break;
+    // case Csv:
+    // return new JRCsvExporter();
+    // case Word:
+    // case Rtf:
+    // return new JRRtfExporter();
+    // case Word_docx:
+    // return new JRDocxExporter();
+    case Excel_xlsx:
+      exporterOutput = new SimpleOutputStreamExporterOutput(stream);
+      SimpleXlsxReportConfiguration xlsxConfiguration = new SimpleXlsxReportConfiguration();
+      xlsxConfiguration.setOnePagePerSheet(false);
+      exporter.setConfiguration(xlsxConfiguration);
+      break;
+    case Html:
+      exporterOutput = new SimpleHtmlExporterOutput(stream);
+      break;
+    // case OpenDocumentText:
+    // return new JROdtExporter();
+    // case OpenDocumentSheet:
+    // return new JROdsExporter();
+    // default:
+    // return new JRTextExporter();
+    }
+
     exporter.setExporterInput(exporterInput);
-    ExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(stream);
     exporter.setExporterOutput(exporterOutput);
+
   }
 
   public static String getRealPackagePath(Class klass) {

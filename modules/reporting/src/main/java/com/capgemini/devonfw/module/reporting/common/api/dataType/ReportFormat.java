@@ -7,5 +7,5 @@ package com.capgemini.devonfw.module.reporting.common.api.dataType;
  * @since 1.1
  */
 public enum ReportFormat {
-  Pdf, Excel, Text, Csv, Html, Word, Rtf, Word_docx, Excel_xlsx, OpenDocumentText, OpenDocumentSheet
+  Pdf, Excel, Text, Csv, Html, Word, Rtf, Word_docx, Excel_xlsx, OpenDocumentText, OpenDocumentSheet, Pptx
 }
