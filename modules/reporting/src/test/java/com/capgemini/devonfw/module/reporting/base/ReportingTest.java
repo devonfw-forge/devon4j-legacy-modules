@@ -12,13 +12,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.inject.Inject;
+
+import net.sf.jasperreports.engine.JRException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.capgemini.devonfw.module.reporting.common.ReportingTestApp;
+import com.capgemini.devonfw.module.reporting.common.api.PropertiesManager;
 import com.capgemini.devonfw.module.reporting.common.api.ReportManager;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
-import com.capgemini.devonfw.module.reporting.common.impl.JasperReportManagerImpl;
+
+import io.oasp.module.test.common.base.ComponentTest;
 
 /**
  * TODO pparrado This type ...
@@ -26,13 +38,24 @@ import com.capgemini.devonfw.module.reporting.common.impl.JasperReportManagerImp
  * @author pparrado
  * @since 1.1
  */
-public class ReportingTest {
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = ReportingTestApp.class)
+public class ReportingTest extends ComponentTest {
 
-  private ReportManager<HashMap> reportManager = null;
+  @Value("${devon.reporting.txtConfig.CharWidth}")
+  private String CharWidth;
 
-  private String templatePath;
+  @Inject
+  @Qualifier("properties")
+  private PropertiesManager props;
 
-  private HashMap<String, Object> params;
+  // private ReportManager<HashMap> reportManager = null;
+  @Inject
+  private ReportManager<HashMap> reportManager;
+
+  private String templatePath = this.getClass().getResource("/reportingtest.jrxml").getPath();
+
+  private HashMap<String, Object> params = new HashMap<String, Object>();
 
   private static Random rnd = new Random();
 
@@ -41,62 +64,110 @@ public class ReportingTest {
   @Before
   public void init() {
 
-    this.reportManager = new JasperReportManagerImpl<HashMap>();
+    // this.reportManager = new JasperReportManagerImpl<HashMap>();
+    this.params.put("ReportTitle", "Test");
+    this.params.put("ReportDescription", "This is a Test File Report");
   }
 
   @Test
-  public void generateReportFile() throws IOException, Exception {
+  public void generateReportPdfFile() throws IOException, Exception {
 
     File pdf = File.createTempFile("tst", ".pdf");
-
-    this.templatePath = this.getClass().getResource("/reportingtest.jrxml").getPath();
-    this.params = new HashMap<String, Object>();
-    this.params.put("ReportTitle", "Test");
-    this.params.put("ReportDescription", "This is a Test File Report");
-
     this.reportManager.generateReport(createList(), this.templatePath, this.params, pdf, ReportFormat.Pdf);
-
     assertTrue(pdf.length() > 0);
+  }
+
+  @Test
+  public void generateReportExcelFile() throws JRException, IOException {
 
     File excel = File.createTempFile("tst", ".xls");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, excel, ReportFormat.Excel);
     assertTrue(excel.length() > 0);
+  }
 
-    // File excel_xls = File.createTempFile("tst", ".xlsx");
-    // this.reportManager.generateReport(createList(), this.templatePath, this.params, excel_xls,
-    // ReportFormat.Excel_xlsx);
-    // assertTrue(excel_xls.length() > 0);
+  @Test
+  public void generateReportXlsxFile() throws JRException, IOException {
 
-    // File html = File.createTempFile("tst", ".html");
-    // this.reportManager.generateReport(createList(), this.templatePath, this.params, html, ReportFormat.Html);
-    // assertTrue(html.length() > 0);
+    File excel_xlsx = File.createTempFile("tst", ".xlsx");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, excel_xlsx,
+        ReportFormat.Excel_xlsx);
+    assertTrue(excel_xlsx.length() > 0);
+  }
 
-    // File ods = File.createTempFile("tst", ".ods");
-    // this.reportManager.generateReport(createList(), this.templatePath, this.params, ods,
-    // ReportFormat.OpenDocumentSheet);
-    // assertTrue(ods.length() > 0);
-    //
-    // File odt = File.createTempFile("tst", ".odt");
-    // this.reportManager.generateReport(createList(), this.templatePath, this.params, odt,
-    // ReportFormat.OpenDocumentText);
-    // assertTrue(odt.length() > 0);
-    //
-    // File doc = File.createTempFile("tst", ".doc");
-    // this.reportManager.generateReport(createList(), this.templatePath, this.params, doc, ReportFormat.Word);
-    // assertTrue(doc.length() > 0);
-    //
-    // File docx = File.createTempFile("tst", ".docx");
-    // this.reportManager.generateReport(createList(), this.templatePath, this.params, docx, ReportFormat.Word_docx);
-    // assertTrue(docx.length() > 0);
-    //
-    // File pptx = File.createTempFile("tst", ".pptx");
-    // this.reportManager.generateReport(createList(), this.templatePath, this.params, pptx, ReportFormat.Pptx);
-    // assertTrue(pptx.length() > 0);
+  @Test
+  public void generateReportHtmlFile() throws JRException, IOException {
 
-    // File rtf = File.createTempFile("tst", ".rtf");
-    // this.reportManager.generateReport(createList(), this.templatePath, this.params, rtf, ReportFormat.Rtf);
-    // assertTrue(rtf.length() > 0);
+    File html = File.createTempFile("tst", ".html");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, html, ReportFormat.Html);
+    assertTrue(html.length() > 0);
+  }
 
+  @Test
+  public void generateReportOdsFile() throws JRException, IOException {
+
+    File ods = File.createTempFile("tst", ".ods");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, ods,
+        ReportFormat.OpenDocumentSheet);
+    assertTrue(ods.length() > 0);
+  }
+
+  @Test
+  public void generateReportOdtFile() throws JRException, IOException {
+
+    File odt = File.createTempFile("tst", ".odt");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, odt, ReportFormat.OpenDocumentText);
+    assertTrue(odt.length() > 0);
+  }
+
+  @Test
+  public void generateReportDocFile() throws JRException, IOException {
+
+    File doc = File.createTempFile("tst", ".doc");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, doc, ReportFormat.Word);
+    assertTrue(doc.length() > 0);
+  }
+
+  @Test
+  public void generateReportDocxFile() throws JRException, IOException {
+
+    File docx = File.createTempFile("tst", ".docx");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, docx, ReportFormat.Word_docx);
+    assertTrue(docx.length() > 0);
+  }
+
+  @Test
+  public void generateReportPowerpointFile() throws JRException, IOException {
+
+    File pptx = File.createTempFile("tst", ".pptx");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, pptx, ReportFormat.Pptx);
+    assertTrue(pptx.length() > 0);
+  }
+
+  @Test
+  public void generateReportRtfFile() throws JRException, IOException {
+
+    File rtf = File.createTempFile("tst", ".rtf");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, rtf, ReportFormat.Rtf);
+    assertTrue(rtf.length() > 0);
+  }
+
+  @Test
+  public void generateReportCsvFile() throws JRException, IOException {
+
+    File csv = File.createTempFile("tst", ".csv");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, csv, ReportFormat.Csv);
+    assertTrue(csv.length() > 0);
+  }
+
+  @Test
+  public void generateReportTextFile() throws IOException, JRException {
+
+    assertThat(this.props).isNotNull();
+    Map<String, String> propsTxtConfig = this.props.txtConfig();
+    System.out.println(propsTxtConfig.get("CharWidth"));
+    File txt = File.createTempFile("tst", ".txt");
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, txt, ReportFormat.Text);
+    assertTrue(txt.length() > 0);
   }
 
   @Test
@@ -111,10 +182,9 @@ public class ReportingTest {
     this.reportManager.generateReport(createList(), this.templatePath, this.params, this.stream, ReportFormat.Pdf);
 
     /*
-     * // check the stream writing to a file File f = File.createTempFile("stream", ".pdf"); FileOutputStream fos = new
-     * FileOutputStream(f);
-     *
-     * byte[] content = ((ByteArrayOutputStream) this.stream).toByteArray(); fos.write(content); fos.close();
+     * // checking the stream File f = File.createTempFile("stream", ".pdf"); FileOutputStream fos = new
+     * FileOutputStream(f); byte[] content = ((ByteArrayOutputStream) this.stream).toByteArray(); fos.write(content);
+     * fos.close();
      */
 
     assertTrue(((ByteArrayOutputStream) this.stream).size() > 0);

@@ -7,6 +7,9 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import net.sf.jasperreports.engine.JRAbstractExporter;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -31,7 +34,12 @@ import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
  * @param <T>
  * @since 1.1
  */
+@Named
 public class JasperReportManagerImpl<T> implements ReportManager<T> {
+
+  @Inject
+  private JasperUtils utils;
+
   private static final Log log = LogFactory.getLog(JasperReportManagerImpl.class);
 
   private JRDataSource dataSource = null;
@@ -51,7 +59,8 @@ public class JasperReportManagerImpl<T> implements ReportManager<T> {
 
       stream = new FileOutputStream(file);
 
-      JasperUtils.configureExporter(exporter, jasperPrint, stream, format);
+      // JasperUtils.configureExporter(exporter, jasperPrint, stream, format);
+      this.utils.configureExporter(exporter, jasperPrint, stream, format);
       exporter.exportReport();
 
     } catch (Exception e) {
@@ -75,7 +84,8 @@ public class JasperReportManagerImpl<T> implements ReportManager<T> {
       JasperDesign design = JRXmlLoader.load(templatePath);
       JasperReport report = JasperCompileManager.compileReport(design);
       JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, this.dataSource);
-      JasperUtils.configureExporter(exporter, jasperPrint, stream, format);
+      // JasperUtils.configureExporter(exporter, jasperPrint, stream, format);
+      this.utils.configureExporter(exporter, jasperPrint, stream, format);
       exporter.exportReport();
       // JasperFillManager.fillReportToStream(report, stream, params);
     } catch (Exception e) {

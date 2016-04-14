@@ -4,6 +4,9 @@ import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import net.sf.jasperreports.engine.JRAbstractExporter;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -31,12 +34,17 @@ import net.sf.jasperreports.export.ExporterOutput;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleTextReportConfiguration;
+import net.sf.jasperreports.export.SimpleWriterExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 
+import com.capgemini.devonfw.module.reporting.common.api.PropertiesManager;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 
 /**
@@ -45,7 +53,15 @@ import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
  * @author pparrado
  * @since 1.1
  */
+@Named
 public class JasperUtils {
+
+  @Value("${devon.reporting.txtConfig.CharWidth}")
+  private String CharWidth;
+
+  @Inject
+  @Qualifier("properties")
+  private PropertiesManager props;
 
   private static final Log log = LogFactory.getLog(JasperUtils.class);
 
@@ -98,7 +114,7 @@ public class JasperUtils {
    * @param stream
    * @param format
    */
-  public static void configureExporter(JRAbstractExporter exporter, JasperPrint jasperPrint, OutputStream stream,
+  public void configureExporter(JRAbstractExporter exporter, JasperPrint jasperPrint, OutputStream stream,
       ReportFormat format) {
 
     ExporterInput exporterInput = new SimpleExporterInput(jasperPrint);
@@ -114,15 +130,25 @@ public class JasperUtils {
     case Pdf:
     case Word_docx:
     case Pptx:
+    case OpenDocumentSheet:
+    case OpenDocumentText:
       exporterOutput = new SimpleOutputStreamExporterOutput(stream);
       break;
-    // case Csv:
-    // return new JRCsvExporter();
-    // case Word:
-    // case Rtf:
-    // return new JRRtfExporter();
-    // case Word_docx:
-    // return new JRDocxExporter();
+    case Csv:
+    case Word:
+    case Rtf:
+      exporterOutput = new SimpleWriterExporterOutput(stream);
+      break;
+    case Text:
+      exporterOutput = new SimpleWriterExporterOutput(stream);
+      SimpleTextReportConfiguration txtConfiguration = new SimpleTextReportConfiguration();
+
+      txtConfiguration.setCharWidth(Float.parseFloat(this.props.txtConfig().get("CharWidth")));
+      txtConfiguration.setCharHeight(Float.parseFloat(this.props.txtConfig().get("CharHeight")));
+      txtConfiguration.setPageWidthInChars(Integer.parseInt(this.props.txtConfig().get("PageWidthInChars")));
+      txtConfiguration.setPageHeightInChars(Integer.parseInt(this.props.txtConfig().get("PageHeightInChars")));
+      exporter.setConfiguration(txtConfiguration);
+      break;
     case Excel_xlsx:
       exporterOutput = new SimpleOutputStreamExporterOutput(stream);
       SimpleXlsxReportConfiguration xlsxConfiguration = new SimpleXlsxReportConfiguration();
@@ -132,12 +158,6 @@ public class JasperUtils {
     case Html:
       exporterOutput = new SimpleHtmlExporterOutput(stream);
       break;
-    // case OpenDocumentText:
-    // return new JROdtExporter();
-    // case OpenDocumentSheet:
-    // return new JROdsExporter();
-    // default:
-    // return new JRTextExporter();
     }
 
     exporter.setExporterInput(exporterInput);
