@@ -20,7 +20,7 @@ import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 public interface ReportManager<T> {
 
   void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, File file, ReportFormat format)
-      throws JRException, IOException;
+      throws JRException, IOException, Exception;
 
   void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, OutputStream stream,
       ReportFormat format) throws Exception;

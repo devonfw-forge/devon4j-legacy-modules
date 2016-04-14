@@ -14,8 +14,6 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
-import net.sf.jasperreports.engine.JRException;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +47,6 @@ public class ReportingTest extends ComponentTest {
   @Qualifier("properties")
   private PropertiesManager props;
 
-  // private ReportManager<HashMap> reportManager = null;
   @Inject
   private ReportManager<HashMap> reportManager;
 
@@ -64,7 +61,6 @@ public class ReportingTest extends ComponentTest {
   @Before
   public void init() {
 
-    // this.reportManager = new JasperReportManagerImpl<HashMap>();
     this.params.put("ReportTitle", "Test");
     this.params.put("ReportDescription", "This is a Test File Report");
   }
@@ -78,7 +74,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportExcelFile() throws JRException, IOException {
+  public void generateReportExcelFile() throws Exception {
 
     File excel = File.createTempFile("tst", ".xls");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, excel, ReportFormat.Excel);
@@ -86,7 +82,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportXlsxFile() throws JRException, IOException {
+  public void generateReportXlsxFile() throws Exception {
 
     File excel_xlsx = File.createTempFile("tst", ".xlsx");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, excel_xlsx,
@@ -95,7 +91,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportHtmlFile() throws JRException, IOException {
+  public void generateReportHtmlFile() throws Exception {
 
     File html = File.createTempFile("tst", ".html");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, html, ReportFormat.Html);
@@ -103,7 +99,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportOdsFile() throws JRException, IOException {
+  public void generateReportOdsFile() throws Exception {
 
     File ods = File.createTempFile("tst", ".ods");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, ods,
@@ -112,7 +108,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportOdtFile() throws JRException, IOException {
+  public void generateReportOdtFile() throws Exception {
 
     File odt = File.createTempFile("tst", ".odt");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, odt, ReportFormat.OpenDocumentText);
@@ -120,7 +116,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportDocFile() throws JRException, IOException {
+  public void generateReportDocFile() throws Exception {
 
     File doc = File.createTempFile("tst", ".doc");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, doc, ReportFormat.Word);
@@ -128,7 +124,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportDocxFile() throws JRException, IOException {
+  public void generateReportDocxFile() throws Exception {
 
     File docx = File.createTempFile("tst", ".docx");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, docx, ReportFormat.Word_docx);
@@ -136,7 +132,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportPowerpointFile() throws JRException, IOException {
+  public void generateReportPowerpointFile() throws Exception {
 
     File pptx = File.createTempFile("tst", ".pptx");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, pptx, ReportFormat.Pptx);
@@ -144,7 +140,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportRtfFile() throws JRException, IOException {
+  public void generateReportRtfFile() throws Exception {
 
     File rtf = File.createTempFile("tst", ".rtf");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, rtf, ReportFormat.Rtf);
@@ -152,7 +148,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportCsvFile() throws JRException, IOException {
+  public void generateReportCsvFile() throws Exception {
 
     File csv = File.createTempFile("tst", ".csv");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, csv, ReportFormat.Csv);
@@ -160,11 +156,8 @@ public class ReportingTest extends ComponentTest {
   }
 
   @Test
-  public void generateReportTextFile() throws IOException, JRException {
+  public void generateReportTextFile() throws Exception {
 
-    assertThat(this.props).isNotNull();
-    Map<String, String> propsTxtConfig = this.props.txtConfig();
-    System.out.println(propsTxtConfig.get("CharWidth"));
     File txt = File.createTempFile("tst", ".txt");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, txt, ReportFormat.Text);
     assertTrue(txt.length() > 0);

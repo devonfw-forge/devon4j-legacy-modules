@@ -18,8 +18,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperReportsContext;
 import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.export.HtmlExporter;
 import net.sf.jasperreports.engine.export.JRCsvExporter;
-import net.sf.jasperreports.engine.export.JRHtmlExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRRtfExporter;
 import net.sf.jasperreports.engine.export.JRTextExporter;
@@ -92,7 +92,7 @@ public class JasperUtils {
     case Excel_xlsx:
       return new JRXlsxExporter();
     case Html:
-      return new JRHtmlExporter();
+      return new HtmlExporter();
     case OpenDocumentText:
       return new JROdtExporter();
     case OpenDocumentSheet:
@@ -113,9 +113,10 @@ public class JasperUtils {
    * @param jasperPrint
    * @param stream
    * @param format
+   * @throws Exception
    */
   public void configureExporter(JRAbstractExporter exporter, JasperPrint jasperPrint, OutputStream stream,
-      ReportFormat format) {
+      ReportFormat format) throws Exception {
 
     ExporterInput exporterInput = new SimpleExporterInput(jasperPrint);
     ExporterOutput exporterOutput = null;
@@ -123,16 +124,7 @@ public class JasperUtils {
     switch (format) {
     case Excel:
       exporterOutput = new SimpleOutputStreamExporterOutput(stream);
-      SimpleXlsReportConfiguration xlsConfiguration = new SimpleXlsReportConfiguration();
-      xlsConfiguration.setOnePagePerSheet(false);
-      exporter.setConfiguration(xlsConfiguration);
-      break;
-    case Pdf:
-    case Word_docx:
-    case Pptx:
-    case OpenDocumentSheet:
-    case OpenDocumentText:
-      exporterOutput = new SimpleOutputStreamExporterOutput(stream);
+      exporter.setConfiguration(getXlsConfiguration());
       break;
     case Csv:
     case Word:
@@ -141,23 +133,17 @@ public class JasperUtils {
       break;
     case Text:
       exporterOutput = new SimpleWriterExporterOutput(stream);
-      SimpleTextReportConfiguration txtConfiguration = new SimpleTextReportConfiguration();
-
-      txtConfiguration.setCharWidth(Float.parseFloat(this.props.txtConfig().get("CharWidth")));
-      txtConfiguration.setCharHeight(Float.parseFloat(this.props.txtConfig().get("CharHeight")));
-      txtConfiguration.setPageWidthInChars(Integer.parseInt(this.props.txtConfig().get("PageWidthInChars")));
-      txtConfiguration.setPageHeightInChars(Integer.parseInt(this.props.txtConfig().get("PageHeightInChars")));
-      exporter.setConfiguration(txtConfiguration);
+      exporter.setConfiguration(getTxtConfiguration());
       break;
     case Excel_xlsx:
       exporterOutput = new SimpleOutputStreamExporterOutput(stream);
-      SimpleXlsxReportConfiguration xlsxConfiguration = new SimpleXlsxReportConfiguration();
-      xlsxConfiguration.setOnePagePerSheet(false);
-      exporter.setConfiguration(xlsxConfiguration);
+      exporter.setConfiguration(getXlsxConfiguration());
       break;
     case Html:
       exporterOutput = new SimpleHtmlExporterOutput(stream);
       break;
+    default:
+      exporterOutput = new SimpleOutputStreamExporterOutput(stream);
     }
 
     exporter.setExporterInput(exporterInput);
@@ -235,5 +221,33 @@ public class JasperUtils {
     }
 
     return cnv;
+  }
+
+  private SimpleTextReportConfiguration getTxtConfiguration() throws Exception {
+
+    SimpleTextReportConfiguration txtConfiguration = new SimpleTextReportConfiguration();
+    try {
+      txtConfiguration.setCharWidth(Float.parseFloat(this.props.txtConfig().get("CharWidth")));
+      txtConfiguration.setCharHeight(Float.parseFloat(this.props.txtConfig().get("CharHeight")));
+      txtConfiguration.setPageWidthInChars(Integer.parseInt(this.props.txtConfig().get("PageWidthInChars")));
+      txtConfiguration.setPageHeightInChars(Integer.parseInt(this.props.txtConfig().get("PageHeightInChars")));
+      return txtConfiguration;
+    } catch (Exception e) {
+      throw new Exception("Some txtConfig parameter in application.properties may have an invalid value.");
+    }
+  }
+
+  private SimpleXlsReportConfiguration getXlsConfiguration() {
+
+    SimpleXlsReportConfiguration xlsConfiguration = new SimpleXlsReportConfiguration();
+    xlsConfiguration.setOnePagePerSheet(false);
+    return xlsConfiguration;
+  }
+
+  private SimpleXlsxReportConfiguration getXlsxConfiguration() {
+
+    SimpleXlsxReportConfiguration xlsxConfiguration = new SimpleXlsxReportConfiguration();
+    xlsxConfiguration.setOnePagePerSheet(false);
+    return xlsxConfiguration;
   }
 }

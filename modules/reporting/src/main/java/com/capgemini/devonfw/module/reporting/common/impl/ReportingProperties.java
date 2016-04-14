@@ -39,26 +39,4 @@ public class ReportingProperties {
     this.txtConfig = txtConfig;
   }
 
-  // /**
-  // * @return charWidth
-  // */
-  // public String getCharWidth() {
-  //
-  // System.out.println(this.CharWidth);
-  // return this.CharWidth;
-  // }
-  //
-  // public String yourCharWidth() {
-  //
-  // System.out.println(this.CharWidth + " from yourCharWidth");
-  // return this.CharWidth;
-  // }
-  //
-  // /**
-  // * @param charWidth new value of {@link #getcharWidth}.
-  // */
-  // public void setCharWidth(String charWidth) {
-  //
-  // this.CharWidth = charWidth;
-  // }
 }

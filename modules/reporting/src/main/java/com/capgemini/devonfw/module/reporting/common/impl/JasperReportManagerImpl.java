@@ -2,7 +2,6 @@ package com.capgemini.devonfw.module.reporting.common.impl;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +11,6 @@ import javax.inject.Named;
 
 import net.sf.jasperreports.engine.JRAbstractExporter;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -46,7 +44,7 @@ public class JasperReportManagerImpl<T> implements ReportManager<T> {
 
   @Override
   public void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, File file,
-      ReportFormat format) throws JRException, IOException {
+      ReportFormat format) throws Exception {
 
     FileOutputStream stream = null;
     try {
@@ -59,7 +57,6 @@ public class JasperReportManagerImpl<T> implements ReportManager<T> {
 
       stream = new FileOutputStream(file);
 
-      // JasperUtils.configureExporter(exporter, jasperPrint, stream, format);
       this.utils.configureExporter(exporter, jasperPrint, stream, format);
       exporter.exportReport();
 
@@ -83,11 +80,10 @@ public class JasperReportManagerImpl<T> implements ReportManager<T> {
       JRAbstractExporter<?, ?, ExporterOutput, ?> exporter = JasperUtils.getExporter(format);
       JasperDesign design = JRXmlLoader.load(templatePath);
       JasperReport report = JasperCompileManager.compileReport(design);
+      // JasperFillManager.fillReportToStream(report, stream, params);
       JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, this.dataSource);
-      // JasperUtils.configureExporter(exporter, jasperPrint, stream, format);
       this.utils.configureExporter(exporter, jasperPrint, stream, format);
       exporter.exportReport();
-      // JasperFillManager.fillReportToStream(report, stream, params);
     } catch (Exception e) {
       log.error(e.getMessage());
       throw e;
