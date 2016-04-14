@@ -10,7 +10,6 @@ import javax.inject.Named;
 import net.sf.jasperreports.engine.JRAbstractExporter;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPropertiesUtil;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -166,7 +165,7 @@ public class JasperUtils {
     }
   }
 
-  public static JasperReport compileReport(JasperDesign design) throws JRException {
+  public static JasperReport compileReport(JasperDesign design) throws Exception {
 
     String jasperPath = getRealPackagePath(JasperReport.class);
     JasperReportsContext jasperReportsContext = null;
