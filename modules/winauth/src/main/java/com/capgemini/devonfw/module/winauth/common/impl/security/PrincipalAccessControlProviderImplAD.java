@@ -2,8 +2,6 @@ package com.capgemini.devonfw.module.winauth.common.impl.security;
 
 import java.util.Collection;
 
-import javax.inject.Named;
-
 import com.capgemini.devonfw.module.winauth.common.api.PrincipalProfile;
 
 import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;
@@ -18,7 +16,7 @@ import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlPr
  *
  * @author hohwille
  */
-@Named
+// @Named
 public class PrincipalAccessControlProviderImplAD implements PrincipalAccessControlProvider<PrincipalProfile> {
 
   /**

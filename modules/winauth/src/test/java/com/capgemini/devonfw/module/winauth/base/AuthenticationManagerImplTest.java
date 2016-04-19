@@ -25,9 +25,7 @@ public class AuthenticationManagerImplTest extends ComponentTest {
   AuthenticationManagerAD authenticationManagerAD;
 
   /**
-   * Test method for
-   * {@link com.capgemini.devonfw.module.winauth.common.impl.security.AuthenticationManagerImpl#AuthenticationManagerImpl(org.springframework.security.config.annotation.ObjectPostProcessor)}
-   * .
+   * Test method for {@link com.capgemini.devonfw.module.winauth.common.impl.security.AuthenticationManagerImpl} .
    */
   @Test
   public void testAuthenticationManagerImpl() {
@@ -35,8 +33,6 @@ public class AuthenticationManagerImplTest extends ComponentTest {
     // given
     assertThat(this.authenticationManagerAD).isNotNull();
 
-    // then
-    // assertThat(this.authenticationManager.getAuthenticationSource()).isNotNull();
   }
 
 }

@@ -15,10 +15,9 @@ import org.springframework.security.ldap.userdetails.UserDetailsContextMapper;
 import com.capgemini.devonfw.module.winauth.common.api.AuthenticationManagerAD;
 
 /**
- * TODO jhcore This type ...
+ * Implementation of {@link AuthenticationManagerAD}
  *
  * @author jhcore
- * @since 1.1
  */
 @Named
 @Configuration
@@ -40,7 +39,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   /**
    * Server domain
    */
-  private String domain;
+  private String url;
 
   private String userSearchFilter = "(uid={0})";
 
@@ -58,6 +57,39 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
     return ldapAuthenticationProvider;
   }
 
+  /**
+   * @return userDetailsContextMapper
+   */
+  @Bean
+  public UserDetailsContextMapper getUserDetailsContextMapper() {
+
+    if (this.userDetailsContextMapper != null)
+      return this.userDetailsContextMapper;
+    else
+      return new UserDetailsContextMapperAD();
+  }
+
+  /**
+   * @param userDetailsContextMapper new value of userDetailsContextMapper.
+   */
+
+  public void setUserDetailsContextMapper(UserDetailsContextMapper userDetailsContextMapper) {
+
+    this.userDetailsContextMapper = userDetailsContextMapper;
+  }
+
+  // @Bean
+  // public UserDetailsContextMapper UserDetailsContextMapper() {
+  //
+  // return new UserDetailsContextMapperAD();
+  // }
+
+  /**
+   * The class BindAuthenticator in the package {@link org.springframework.security.ldap.authentication} implements the
+   * bind authentication strategy. It simply attempts to bind as the user.
+   *
+   * @return the bind authentication strategy
+   */
   @Bean
   public BindAuthenticator BindAuthenticator() {
 
@@ -67,17 +99,28 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
 
   }
 
+  /**
+   * ContextSource implementation which uses Spring LDAP's LdapContextSource as a base class. Used internally by the
+   * Spring Security LDAP namespace configuration.
+   *
+   * @return the LdapContextSource
+   */
   @Bean
   public DefaultSpringSecurityContextSource contextSource() {
 
     DefaultSpringSecurityContextSource defaultSpringSecurityContextSource =
-        new DefaultSpringSecurityContextSource(this.domain);
+        new DefaultSpringSecurityContextSource(this.url);
     defaultSpringSecurityContextSource.setUserDn(this.username);
     defaultSpringSecurityContextSource.setPassword(this.password);
     return defaultSpringSecurityContextSource;
 
   }
 
+  /**
+   * LdapUserSearch implementation which uses an Ldap filter to locate the user.
+   *
+   * @return the LdapUserSearch
+   */
   @Bean
   public FilterBasedLdapUserSearch userSearch() {
 
@@ -95,7 +138,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   }
 
   /**
-   * @param username new value of {@link #getusername}.
+   * @param username new value of username.
    */
   public void setUsername(String username) {
 
@@ -111,7 +154,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   }
 
   /**
-   * @param password new value of {@link #getpassword}.
+   * @param password new value of password.
    */
   public void setPassword(String password) {
 
@@ -121,18 +164,6 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   /**
    * @return domain
    */
-  public String getDomain() {
-
-    return this.domain;
-  }
-
-  /**
-   * @param domain new value of {@link #getdomain}.
-   */
-  public void setDomain(String domain) {
-
-    this.domain = domain;
-  }
 
   /**
    * @return userSearchFilter
@@ -143,7 +174,23 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   }
 
   /**
-   * @param userSearchFilter new value of {@link #getuserSearchFilter}.
+   * @return url
+   */
+  public String getUrl() {
+
+    return this.url;
+  }
+
+  /**
+   * @param url new value of url.
+   */
+  public void setUrl(String url) {
+
+    this.url = url;
+  }
+
+  /**
+   * @param userSearchFilter new value of userSearchFilter.
    */
   public void setUserSearchFilter(String userSearchFilter) {
 
@@ -159,7 +206,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   }
 
   /**
-   * @param userSearchBase new value of {@link #getuserSearchBase}.
+   * @param userSearchBase new value of userSearchBase.
    */
   public void setUserSearchBase(String userSearchBase) {
 

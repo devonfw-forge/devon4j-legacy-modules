@@ -12,13 +12,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
 
 import com.capgemini.devonfw.module.winauth.common.api.AuthenticationSource;
 import com.capgemini.devonfw.module.winauth.common.api.accesscontrol.ActiveDirectory;
 
 /**
- * TODO jhcore This type ...
+ * Implementation of {@link AuthenticationSource}
  *
  * @author jhcore
  */
@@ -32,8 +31,6 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
    * Instance of the ActiveDirectory class. We need it to do the query.
    */
   private ActiveDirectory activeDirectory;
-
-  private LdapAuthenticationProvider ldapAuthenticationProvider;
 
   /**
    * User name of the server authentication
@@ -69,7 +66,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param searchBy new value of {@link #getsearchBy}.
+   * @param searchBy new value of searchBy.
    */
   public void setSearchBy(String searchBy) {
 
@@ -222,7 +219,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param userSearchFiler new value of {@link #getuserSearchFilter}.
+   * @param userSearchFiler new value of userSearchFilter.
    */
   @Override
   public void setUserSearchFilter(String userSearchFiler) {
@@ -240,7 +237,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param userSearchBase new value of {@link #getuserSearchBase}.
+   * @param userSearchBase new value of userSearchBase.
    */
   @Override
   public void setUserSearchBase(String userSearchBase) {
@@ -258,7 +255,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param rolePrefix new value of {@link #getrolePrefix}.
+   * @param rolePrefix new value of rolePrefix.
    */
   @Override
   public void setRolePrefix(String rolePrefix) {
@@ -276,7 +273,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param url new value of {@link #geturl}.
+   * @param url new value of url.
    */
   @Override
   public void setUrl(String url) {

@@ -28,8 +28,7 @@ public class GroupMapperADTest extends ComponentTest {
   private GroupMapperAD groupMapperAD;
 
   /**
-   * Test method for
-   * {@link com.capgemini.devonfw.module.winauth.common.impl.security.GroupMapperAD#setRoles(java.util.HashMap)}.
+   * Test method for {@link com.capgemini.devonfw.module.winauth.common.impl.security.GroupMapperAD}.
    */
   @Test
   public void testSetGroups() {
@@ -52,8 +51,7 @@ public class GroupMapperADTest extends ComponentTest {
   }
 
   /**
-   * Test method for
-   * {@link com.capgemini.devonfw.module.winauth.common.impl.security.GroupMapperAD#rolesMapping(java.lang.String)}.
+   * Test method for {@link com.capgemini.devonfw.module.winauth.common.impl.security.GroupMapperAD}.
    */
   @Test
   public void testGroupsMapping() {

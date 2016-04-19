@@ -3,11 +3,13 @@ package com.capgemini.devonfw.module.winauth.common.api;
 import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
 
 /**
- * TODO jhcore This type ...
+ * This class contains the configuration to the Active Directory authentication
  *
  * @author jhcore
- * @since 1.1
  */
 public interface AuthenticationManagerAD {
+  /**
+   * @return the LDAP authentication provider
+   */
   public LdapAuthenticationProvider LdapAuthenticationProvider();
 }

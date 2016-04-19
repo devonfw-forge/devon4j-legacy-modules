@@ -54,5 +54,4 @@ public class AuthenticationSourceADImplTest extends ComponentTest {
     // assertThat(sn).isEqualTo("Core");
     // assertThat(memberOf).isNotNull();
   }
-
 }

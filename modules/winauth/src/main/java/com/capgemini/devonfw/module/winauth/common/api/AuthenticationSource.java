@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer;
 
 /**
- * This class contains the configuration
+ * This class contains the configuration of the Active Directory
  *
  * @author jhcore
  */
@@ -54,7 +54,7 @@ public interface AuthenticationSource {
   public String getUserSearchFilter();
 
   /**
-   * @param userSearchFiler new value of {@link #getuserSearchFilter}.
+   * @param userSearchFiler new value of userSearchFilter.
    */
   public void setUserSearchFilter(String userSearchFiler);
 
@@ -64,7 +64,7 @@ public interface AuthenticationSource {
   public String getUserSearchBase();
 
   /**
-   * @param userSearchBase new value of {@link #getuserSearchBase}.
+   * @param userSearchBase new value of userSearchBase.
    */
   public void setUserSearchBase(String userSearchBase);
 
@@ -74,7 +74,7 @@ public interface AuthenticationSource {
   public String getRolePrefix();
 
   /**
-   * @param groupsPrefix new value of {@link #getgroupsPrefix}.
+   * @param groupsPrefix new value of groupsPrefix.
    */
   public void setRolePrefix(String groupsPrefix);
 
@@ -84,10 +84,13 @@ public interface AuthenticationSource {
   public String getUrl();
 
   /**
-   * @param url new value of {@link #geturl}.
+   * @param url new value of url.
    */
   public void setUrl(String url);
 
+  /**
+   * @return the authentication LDAP provider
+   */
   public LdapAuthenticationProviderConfigurer<AuthenticationManagerBuilder> getLdapAuthenticationProviderConfigurer();
 
 }
