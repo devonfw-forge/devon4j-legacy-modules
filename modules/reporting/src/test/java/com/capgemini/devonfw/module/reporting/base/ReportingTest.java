@@ -19,13 +19,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.reporting.common.ReportingTestApp;
-import com.capgemini.devonfw.module.reporting.common.api.PropertiesManager;
-import com.capgemini.devonfw.module.reporting.common.api.ReportManager;
+import com.capgemini.devonfw.module.reporting.common.api.Properties;
+import com.capgemini.devonfw.module.reporting.common.api.Reporting;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 
 import io.oasp.module.test.common.base.ComponentTest;
@@ -40,24 +39,23 @@ import io.oasp.module.test.common.base.ComponentTest;
 @SpringApplicationConfiguration(classes = ReportingTestApp.class)
 public class ReportingTest extends ComponentTest {
 
-  @Value("${devon.reporting.txtConfig.CharWidth}")
-  private String CharWidth;
-
   @Inject
   @Qualifier("properties")
-  private PropertiesManager props;
+  private Properties props;
 
+  @SuppressWarnings("rawtypes")
   @Inject
-  private ReportManager<HashMap> reportManager;
+  private Reporting<HashMap> reportManager;
 
   private String templatePath = this.getClass().getResource("/reportingtest.jrxml").getPath();
 
-  private HashMap<String, Object> params = new HashMap<String, Object>();
+  private HashMap<String, Object> params = new HashMap<>();
 
   private static Random rnd = new Random();
 
   OutputStream stream = null;
 
+  @SuppressWarnings("javadoc")
   @Before
   public void init() {
 
@@ -65,24 +63,39 @@ public class ReportingTest extends ComponentTest {
     this.params.put("ReportDescription", "This is a Test File Report");
   }
 
+  /**
+   * Test that checks the creation of a report file in pdf format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportPdfFile() throws IOException, Exception {
+  public void generateReportPdfFile() throws IOException {
 
     File pdf = File.createTempFile("tst", ".pdf");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, pdf, ReportFormat.Pdf);
     assertTrue(pdf.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in xls format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportExcelFile() throws Exception {
+  public void generateReportExcelFile() throws IOException {
 
     File excel = File.createTempFile("tst", ".xls");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, excel, ReportFormat.Excel);
     assertTrue(excel.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in xlsx format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportXlsxFile() throws Exception {
+  public void generateReportXlsxFile() throws IOException {
 
     File excel_xlsx = File.createTempFile("tst", ".xlsx");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, excel_xlsx,
@@ -90,16 +103,26 @@ public class ReportingTest extends ComponentTest {
     assertTrue(excel_xlsx.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in html format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportHtmlFile() throws Exception {
+  public void generateReportHtmlFile() throws IOException {
 
     File html = File.createTempFile("tst", ".html");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, html, ReportFormat.Html);
     assertTrue(html.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in ods format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportOdsFile() throws Exception {
+  public void generateReportOdsFile() throws IOException {
 
     File ods = File.createTempFile("tst", ".ods");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, ods,
@@ -107,82 +130,116 @@ public class ReportingTest extends ComponentTest {
     assertTrue(ods.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in odt format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportOdtFile() throws Exception {
+  public void generateReportOdtFile() throws IOException {
 
     File odt = File.createTempFile("tst", ".odt");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, odt, ReportFormat.OpenDocumentText);
     assertTrue(odt.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in doc format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportDocFile() throws Exception {
+  public void generateReportDocFile() throws IOException {
 
     File doc = File.createTempFile("tst", ".doc");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, doc, ReportFormat.Word);
     assertTrue(doc.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in docx format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportDocxFile() throws Exception {
+  public void generateReportDocxFile() throws IOException {
 
     File docx = File.createTempFile("tst", ".docx");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, docx, ReportFormat.Word_docx);
     assertTrue(docx.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in pptx format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportPowerpointFile() throws Exception {
+  public void generateReportPowerpointFile() throws IOException {
 
     File pptx = File.createTempFile("tst", ".pptx");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, pptx, ReportFormat.Pptx);
     assertTrue(pptx.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in rtf format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportRtfFile() throws Exception {
+  public void generateReportRtfFile() throws IOException {
 
     File rtf = File.createTempFile("tst", ".rtf");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, rtf, ReportFormat.Rtf);
     assertTrue(rtf.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in csv format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportCsvFile() throws Exception {
+  public void generateReportCsvFile() throws IOException {
 
     File csv = File.createTempFile("tst", ".csv");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, csv, ReportFormat.Csv);
     assertTrue(csv.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report file in txt format.
+   *
+   * @throws IOException if the temp file can not be created.
+   */
   @Test
-  public void generateReportTextFile() throws Exception {
+  public void generateReportTextFile() throws IOException {
 
     File txt = File.createTempFile("tst", ".txt");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, txt, ReportFormat.Text);
     assertTrue(txt.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a report stream in pdf format.
+   *
+   */
   @Test
-  public void generateReportStream() throws Exception {
+  public void generateReportStream() {
 
     this.stream = new ByteArrayOutputStream();
     this.templatePath = this.getClass().getResource("/reportingtest.jrxml").getPath();
-    this.params = new HashMap<String, Object>();
+    this.params = new HashMap<>();
     this.params.put("ReportTitle", "Test");
     this.params.put("ReportDescription", "This is a Test Stream Report");
 
     this.reportManager.generateReport(createList(), this.templatePath, this.params, this.stream, ReportFormat.Pdf);
 
-    /*
-     * // checking the stream File f = File.createTempFile("stream", ".pdf"); FileOutputStream fos = new
-     * FileOutputStream(f); byte[] content = ((ByteArrayOutputStream) this.stream).toByteArray(); fos.write(content);
-     * fos.close();
-     */
-
     assertTrue(((ByteArrayOutputStream) this.stream).size() > 0);
   }
 
+  @SuppressWarnings("javadoc")
   @After
   public void end() throws IOException {
 
@@ -190,6 +247,7 @@ public class ReportingTest extends ComponentTest {
       this.stream.close();
   }
 
+  @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
   public static List<HashMap> createList() {
 
     List lst = new ArrayList();
@@ -199,6 +257,7 @@ public class ReportingTest extends ComponentTest {
     return lst;
   }
 
+  @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
   public static Object createItem(String name, int rating) {
 
     Map map = new HashMap();

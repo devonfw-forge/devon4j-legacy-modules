@@ -4,11 +4,10 @@ import java.util.HashMap;
 
 import javax.inject.Named;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * TODO pparrado This type ...
+ * This is the class responsible for access properties.
  *
  * @author pparrado
  * @since 1.1
@@ -17,9 +16,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "devon.reporting")
 @Named
 public class ReportingProperties {
-
-  @Value("${devon.reporting.txtConfig.CharWidth}")
-  private String CharWidth;
 
   private HashMap<String, String> txtConfig;
 
@@ -32,7 +28,7 @@ public class ReportingProperties {
   }
 
   /**
-   * @param txtConfig new value of {@link #gettxtConfig}.
+   * @param txtConfig collection of properties
    */
   public void setTxtConfig(HashMap<String, String> txtConfig) {
 

@@ -10,13 +10,8 @@ import javax.inject.Named;
 import net.sf.jasperreports.engine.JRAbstractExporter;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRPropertiesUtil;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.JasperReportsContext;
 import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
-import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.HtmlExporter;
 import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -41,13 +36,13 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 
-import com.capgemini.devonfw.module.reporting.common.api.PropertiesManager;
+import com.capgemini.devonfw.module.reporting.common.api.Properties;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
+import com.capgemini.devonfw.module.reporting.common.exception.ReportingException;
 
 /**
- * TODO pparrado This type ...
+ * This is the implementation of several basic functionalities associated to Jasper Reports Library.
  *
  * @author pparrado
  * @since 1.1
@@ -55,16 +50,20 @@ import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 @Named
 public class JasperUtils {
 
-  @Value("${devon.reporting.txtConfig.CharWidth}")
-  private String CharWidth;
-
   @Inject
   @Qualifier("properties")
-  private PropertiesManager props;
+  private Properties props;
 
   private static final Log log = LogFactory.getLog(JasperUtils.class);
 
-  public static JRDataSource getDataSource(Collection<? extends Object> data) {
+  /**
+   * Returns the data provided as JRDataSource type in order to fill the report.
+   *
+   * @param data the data to be included in the report.
+   * @return JRDataSource
+   */
+  @SuppressWarnings("unchecked")
+  public JRDataSource getDataSource(Collection<? extends Object> data) {
 
     if (data.size() == 0) {
       return new JREmptyDataSource();
@@ -73,7 +72,14 @@ public class JasperUtils {
     }
   }
 
-  public static JRAbstractExporter getExporter(ReportFormat format) {
+  /**
+   * Returns the {@link JRAbstractExporter exporter} according to the {@link ReportFormat}
+   *
+   * @param format the {@link ReportFormat} report resultant
+   * @return JRAbstractExporter
+   */
+  @SuppressWarnings("rawtypes")
+  public JRAbstractExporter getExporter(ReportFormat format) {
 
     switch (format) {
 
@@ -108,14 +114,15 @@ public class JasperUtils {
    * Configures a Jasper Reports Exporter setting its input (a JasperPrint object) and output (a FileOutputStream
    * object)
    *
-   * @param exporter
-   * @param jasperPrint
-   * @param stream
-   * @param format
-   * @throws Exception
+   * @param exporter the {@linkplain JRAbstractExporter} to configure
+   * @param jasperPrint the {@link JasperPrint} object to configure as the exporter input.
+   * @param stream the {@link OutputStream} to configure as the exporter output.
+   * @param format the {@link ReportFormat} according to which the exporter will be configured.
+   * @throws ReportingException if the configuration process of the exporter fails.
    */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public void configureExporter(JRAbstractExporter exporter, JasperPrint jasperPrint, OutputStream stream,
-      ReportFormat format) throws Exception {
+      ReportFormat format) throws ReportingException {
 
     ExporterInput exporterInput = new SimpleExporterInput(jasperPrint);
     ExporterOutput exporterOutput = null;
@@ -150,79 +157,7 @@ public class JasperUtils {
 
   }
 
-  public static String getRealPackagePath(Class klass) {
-
-    String resourcePath = klass.getCanonicalName().replace('.', '/') + ".class";
-
-    String path = Thread.currentThread().getContextClassLoader().getResource(resourcePath).toString();
-    log.debug(String.format("JasperUtils#getRealPackagePath: path -> %s", path));
-
-    if (path.indexOf("!") > -1) {
-      return stripResourceProtocol(path.substring(0, path.indexOf("!")));
-    } else {
-      path = stripResourceProtocol(path);
-      return path.substring(0, (path.length() - resourcePath.length() - 1));
-    }
-  }
-
-  public static JasperReport compileReport(JasperDesign design) throws Exception {
-
-    String jasperPath = getRealPackagePath(JasperReport.class);
-    JasperReportsContext jasperReportsContext = null;
-    JRPropertiesUtil JRprop = JRPropertiesUtil.getInstance(jasperReportsContext);
-    // TODO "net.sf.jasperreports.compiler.class" was a constant from the deprecated JRProperties class and is not
-    // present in the new JRPropertiesUtil class.
-    JRprop.setProperty("net.sf.jasperreports.compiler.class",
-        jasperPath + System.getProperty("path.separator") + System.getProperty("java.class.path"));
-
-    try {
-
-      return JasperCompileManager.compileReport(design);
-
-    } catch (Exception ex) {
-
-      log.info(ex);
-      // TODO fix FrameworkException
-      // throw new FrameworkException(ex);
-      throw ex;
-    }
-  }
-
-  /**
-   *
-   * @param path routa del componente con protocol en uso son "jar:", "file", "zip:" (weblogic), "vfszip" y "ip:"
-   *        (Jboss)
-   * @return
-   */
-  public static String stripResourceProtocol(String path) {
-
-    String cnv = path;
-    boolean hasprotocol = true;
-    while (hasprotocol) {
-      if (cnv.indexOf("jar:", 0) > -1) {
-        cnv = cnv.substring("jar:".length());
-        hasprotocol = true;
-      } else if (cnv.indexOf("file:", 0) > -1) {
-        cnv = cnv.substring("file:".length());
-        hasprotocol = true;
-      } else if (cnv.indexOf("zip:", 0) > -1) {
-        cnv = cnv.substring("zip:".length());
-        hasprotocol = true;
-      } else if (cnv.indexOf("vfszip:", 0) > -1) {
-        cnv = cnv.substring("vfszip:".length());
-        hasprotocol = true;
-      } else if (cnv.indexOf("ip:", 0) > -1) {
-        cnv = cnv.substring("ip:".length());
-        hasprotocol = true;
-      } else {
-        hasprotocol = false;
-      }
-    }
-
-    return cnv;
-  }
-
-  private SimpleTextReportConfiguration getTxtConfiguration() throws Exception {
+  private SimpleTextReportConfiguration getTxtConfiguration() throws ReportingException {
 
     SimpleTextReportConfiguration txtConfiguration = new SimpleTextReportConfiguration();
     try {
@@ -231,8 +166,9 @@ public class JasperUtils {
       txtConfiguration.setPageWidthInChars(Integer.parseInt(this.props.txtConfig().get("PageWidthInChars")));
       txtConfiguration.setPageHeightInChars(Integer.parseInt(this.props.txtConfig().get("PageHeightInChars")));
       return txtConfiguration;
-    } catch (Exception e) {
-      throw new Exception("Some txtConfig parameter in application.properties may have an invalid value.");
+    } catch (NumberFormatException e) {
+      log.error(e.getMessage(), e);
+      throw new ReportingException("Some txtConfig parameter in application.properties may have an invalid value.");
     }
   }
 

@@ -3,6 +3,12 @@ package com.capgemini.devonfw.module.reporting.common;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * This is the entry point for unit tests.
+ *
+ * @author pparrado
+ * @since 1.1
+ */
 @SpringBootApplication
 public class ReportingTestApp {
   /**
