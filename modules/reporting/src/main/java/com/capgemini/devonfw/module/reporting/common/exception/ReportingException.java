@@ -1,40 +1,36 @@
 package com.capgemini.devonfw.module.reporting.common.exception;
 
 /**
- * This is the custom exception for Reporting module.
+ * This is the checked exception for Reporting module.
  *
  * @author pparrado
  * @since 1.1
  */
 public class ReportingException extends RuntimeException {
-  /**
-   *
-   */
-  private static final long serialVersionUID = 1L;
+
+  private static final long serialVersionUID = 4302233160793428238L;
 
   /**
-   * The constructor.
+   * Constructs an {@code ReportingException} with the specified message and root cause.
    */
   public ReportingException() {
     super();
   }
 
   /**
-   * The constructor.
+   * Constructs an {@code ReportingException} with the root cause.
    *
-   * @param cause
+   * @param cause the root cause
    */
-  @SuppressWarnings("javadoc")
   public ReportingException(Throwable cause) {
     super(cause);
   }
 
   /**
-   * The constructor.
+   * Constructs an {@code ReportingException} with the specified message.
    *
-   * @param msg
+   * @param msg the detail message
    */
-  @SuppressWarnings("javadoc")
   public ReportingException(String msg) {
     super(msg);
   }
