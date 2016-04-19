@@ -29,7 +29,7 @@ public class UsermanagementADImpl implements Usermanagement {
   private AuthenticationSourceADImpl authenticationSourceADImpl;
 
   @Inject
-  private RoleMapperAD roleMapperAD;
+  private GroupMapperAD groupMapperAD;
 
   /**
    * The constructor.
@@ -60,7 +60,7 @@ public class UsermanagementADImpl implements Usermanagement {
       throw exception;
     }
 
-    ArrayList<String> roles = this.roleMapperAD.rolesMapping(memberOf);
+    ArrayList<String> groups = this.groupMapperAD.groupsMapping(memberOf);
 
     UserDetailsClientToAD user = new UserDetailsClientToAD();
 
@@ -68,7 +68,7 @@ public class UsermanagementADImpl implements Usermanagement {
     user.setName(cn);
     user.setFirstName(givenname);
     user.setLastName(sn);
-    user.setGroups(roles);
+    user.setGroups(groups);
 
     return user;
   }

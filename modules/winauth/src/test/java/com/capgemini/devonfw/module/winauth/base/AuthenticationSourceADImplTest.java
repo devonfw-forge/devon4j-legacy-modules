@@ -1,11 +1,14 @@
 package com.capgemini.devonfw.module.winauth.base;
 
+import javax.inject.Inject;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.winauth.SpringBootApp;
+import com.capgemini.devonfw.module.winauth.common.api.AuthenticationSource;
 import com.capgemini.devonfw.module.winauth.common.impl.security.AuthenticationSourceADImpl;
 
 import io.oasp.module.test.common.base.ComponentTest;
@@ -19,8 +22,8 @@ import io.oasp.module.test.common.base.ComponentTest;
 @SpringApplicationConfiguration(classes = SpringBootApp.class)
 public class AuthenticationSourceADImplTest extends ComponentTest {
 
-  // @Inject
-  // AuthenticationSource authenticationSource;
+  @Inject
+  AuthenticationSource authenticationSource;
 
   /**
    * Test method for

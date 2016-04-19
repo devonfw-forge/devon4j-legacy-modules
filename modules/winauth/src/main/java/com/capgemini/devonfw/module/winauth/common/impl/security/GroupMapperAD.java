@@ -16,43 +16,43 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author jhcore
  */
 @ConfigurationProperties(prefix = "devon.winauth")
-@Named("RoleMapperAD")
-public class RoleMapperAD {
+@Named("GroupMapperAD")
+public class GroupMapperAD {
 
   /**
    * The constructor.
    */
-  public RoleMapperAD() {
+  public GroupMapperAD() {
     super();
-    this.roles = new HashMap<>();
+    this.groups = new HashMap<>();
   }
 
   /**
    *
    */
-  public HashMap<String, ArrayList<String>> roles;
+  public HashMap<String, ArrayList<String>> groups;
 
   /**
-   * @return roles
+   * @return groups
    */
-  public HashMap<String, ArrayList<String>> getRoles() {
+  public HashMap<String, ArrayList<String>> getGroups() {
 
-    return this.roles;
+    return this.groups;
   }
 
   /**
-   * @param roles new value of the user roles.
+   * @param groups new value of the user groups.
    */
-  public void setRoles(HashMap<String, ArrayList<String>> roles) {
+  public void setGroups(HashMap<String, ArrayList<String>> groups) {
 
-    this.roles = roles;
+    this.groups = groups;
   }
 
   /**
    * @param memberOf chair with the AD groups
-   * @return an ArrayList with the the mapping roles
+   * @return an ArrayList with the the mapping groups
    */
-  public ArrayList<String> rolesMapping(String memberOf) {
+  public ArrayList<String> groupsMapping(String memberOf) {
 
     ArrayList<String> result = new ArrayList<>();
 
@@ -60,17 +60,17 @@ public class RoleMapperAD {
     Pattern p = Pattern.compile("CN=[A-Za-z0-9-\\--\\.]*");
     Matcher m = p.matcher(memberOf);
 
-    ArrayList<String> groups = new ArrayList<>();
+    ArrayList<String> groupsAD = new ArrayList<>();
 
     // Delete the substring "CN="
     while (m.find()) {
-      groups.add(m.group().substring(3));
+      groupsAD.add(m.group().substring(3));
     }
 
-    // Mapping the groups to roles
-    for (int i = 0; i < groups.size(); i++) {
-      if (this.roles.values().toString().contains(groups.get(i))) {
-        result.add(getKeysByValue(groups.get(i)));
+    // Mapping the groupsAD to groups
+    for (int i = 0; i < groupsAD.size(); i++) {
+      if (this.groups.values().toString().contains(groupsAD.get(i))) {
+        result.add(getKeysByValue(groupsAD.get(i)));
       }
     }
 
@@ -81,7 +81,7 @@ public class RoleMapperAD {
 
     String result = null;
 
-    for (Entry<String, ArrayList<String>> e : this.roles.entrySet()) {
+    for (Entry<String, ArrayList<String>> e : this.groups.entrySet()) {
       for (int i = 0; i < e.getValue().size(); i++)
         if (e.getValue().get(i).equals(value)) {
           result = e.getKey();

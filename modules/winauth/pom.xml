@@ -13,6 +13,35 @@
   <description>Active Directory base authentication.</description>
 
   <dependencies>
+<!-- LDAP dependencies -->
+  <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-ldap</artifactId>
+  </dependency>
+  <dependency>
+      <groupId>org.apache.directory.server</groupId>
+      <artifactId>apacheds-server-jndi</artifactId>
+      <version>1.5.5</version>
+  </dependency>
+
+<dependency>
+  <groupId>org.springframework.security.kerberos</groupId>
+  <artifactId>spring-security-kerberos-core</artifactId>
+  <version>1.0.1.RELEASE</version>
+</dependency>
+<dependency>
+  <groupId>org.springframework.security.kerberos</groupId>
+  <artifactId>spring-security-kerberos-web</artifactId>
+  <version>1.0.1.RELEASE</version>
+</dependency>
+<dependency>
+  <groupId>org.springframework.security.kerberos</groupId>
+  <artifactId>spring-security-kerberos-client</artifactId>
+  <version>1.0.1.RELEASE</version>
+</dependency>
+  <!-- END LDAP dependencies -->
+
+
 
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -62,12 +91,12 @@
       <artifactId>oasp4j-basic</artifactId>
     </dependency>
 
-     <!--
+
      <dependency>
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-rest</artifactId>
-    </dependency>-->
-<dependency>
+    </dependency>
+     <dependency>
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-beanmapping</artifactId>
     </dependency>

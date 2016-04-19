@@ -80,7 +80,7 @@ public class PrincipalProfileImpl implements PrincipalProfile {
   }
 
   /**
-   * @return role
+   * @return groups
    */
   @Override
   public List<String> getGroups() {

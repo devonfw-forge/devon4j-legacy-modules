@@ -93,7 +93,7 @@ public class ActiveDirectory {
     this.properties.put(Context.PROVIDER_URL, "LDAP://" + domainController);
     this.properties.put(Context.SECURITY_PRINCIPAL, username + "@" + domainController);
     this.properties.put(Context.SECURITY_CREDENTIALS, password);
-
+    this.properties.put(Context.REFERRAL, "follow");
     // initializing active directory LDAP connection
     try {
       this.dirContext = new InitialDirContext(this.properties);
@@ -140,12 +140,12 @@ public class ActiveDirectory {
     } catch (NamingException e) {
       e.printStackTrace();
       UsernameNotFoundException exception = new UsernameNotFoundException("Authentication failed.", e);
-      LOG.error("Failed com.capgemini.devonfw.module.winauth.common.api.to get user {}." + searchValue + exception);
+      LOG.warn("Failed com.capgemini.devonfw.module.winauth.common.api.to get user {}." + searchValue + exception);
       throw exception;
     } catch (Exception e) {
       e.printStackTrace();
       UsernameNotFoundException exception = new UsernameNotFoundException("Authentication failed.", e);
-      LOG.error("Failed com.capgemini.devonfw.module.winauth.common.api.to get user {}." + searchValue + exception);
+      LOG.warn("Failed com.capgemini.devonfw.module.winauth.common.api.to get user {}." + searchValue + exception);
       throw exception;
     }
   }
@@ -173,11 +173,11 @@ public class ActiveDirectory {
   private String getFilter(String searchValue, String searchBy) {
 
     String filter = this.baseFilter;
-    if (searchBy.equals("email")) {
-      filter += "(mail=" + searchValue + "))";
-    } else if (searchBy.equals("username")) {
-      filter += "(samaccountname=" + searchValue + "))";
-    }
+    filter += "(" + searchBy + "=" + searchValue + "))";
+    /*
+     * if (searchBy.equals("email")) { filter += "(mail=" + searchValue + "))"; } else if (searchBy.equals("username"))
+     * { filter += "(samaccountname=" + searchValue + "))"; }
+     */
     return filter;
   }
 
