@@ -6,7 +6,7 @@ package com.capgemini.devonfw.module.reporting.common.exception;
  * @author pparrado
  * @since 1.1
  */
-public class ReportingException extends Throwable {
+public class ReportingException extends RuntimeException {
   /**
    *
    */
@@ -21,7 +21,7 @@ public class ReportingException extends Throwable {
 
   /**
    * The constructor.
-   * 
+   *
    * @param cause
    */
   @SuppressWarnings("javadoc")
@@ -31,7 +31,7 @@ public class ReportingException extends Throwable {
 
   /**
    * The constructor.
-   * 
+   *
    * @param msg
    */
   @SuppressWarnings("javadoc")

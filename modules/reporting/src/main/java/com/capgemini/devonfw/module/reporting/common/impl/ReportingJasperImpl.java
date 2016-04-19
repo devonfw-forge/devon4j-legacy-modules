@@ -49,8 +49,10 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
   public void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, File file,
       ReportFormat format) {
 
+    FileOutputStream stream = null;
+
     try {
-      FileOutputStream stream = null;
+
       this.dataSource = this.utils.getDataSource(data);
       JRAbstractExporter<?, ?, ExporterOutput, ?> exporter = this.utils.getExporter(format);
       JasperDesign design = JRXmlLoader.load(templatePath);
@@ -61,23 +63,19 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       this.utils.configureExporter(exporter, jasperPrint, stream, format);
       exporter.exportReport();
 
-      if (stream != null)
-        stream.close();
-
     } catch (ReportingException | JRException | IOException e) {
       log.error("An error occurred while trying to create the report: " + e.getMessage(), e);
-      // throw new ReportingException();
+      throw new ReportingException(e);
 
-    } // catch(IOException ioex) {
-    //
-    // } catch(JRException jrex){
-    //
-    // }
-
-    // finally {
-    // if (stream != null)
-    // stream.close();
-    // }
+    } finally {
+      try {
+        if (stream != null)
+          stream.close();
+      } catch (IOException ioex) {
+        throw new ReportingException(
+            "The stream associated to the temp file could not be closed. " + ioex.getMessage());
+      }
+    }
 
   }
 
@@ -95,7 +93,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       exporter.exportReport();
     } catch (ReportingException | JRException e) {
       log.error("An error occurred while trying to create the report. " + e.getMessage(), e);
-      // throw e;
+      throw new ReportingException(e);
     }
 
   }
