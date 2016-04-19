@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.capgemini.devonfw.module.reporting.common.ReportingTestApp;
+import com.capgemini.devonfw.module.reporting.common.SpringBootApp;
 import com.capgemini.devonfw.module.reporting.common.api.Properties;
 import com.capgemini.devonfw.module.reporting.common.api.Reporting;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
@@ -36,7 +36,7 @@ import io.oasp.module.test.common.base.ComponentTest;
  * @since 1.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ReportingTestApp.class)
+@SpringApplicationConfiguration(classes = SpringBootApp.class)
 public class ReportingTest extends ComponentTest {
 
   @Inject

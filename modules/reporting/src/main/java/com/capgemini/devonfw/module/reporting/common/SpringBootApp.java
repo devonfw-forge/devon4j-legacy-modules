@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.1
  */
 @SpringBootApplication
-public class ReportingTestApp {
+public class SpringBootApp {
   /**
    * Entry point for spring-boot based app
    *
@@ -18,6 +18,6 @@ public class ReportingTestApp {
    */
   public static void main(String[] args) {
 
-    SpringApplication.run(ReportingTestApp.class, args);
+    SpringApplication.run(SpringBootApp.class, args);
   }
 }
