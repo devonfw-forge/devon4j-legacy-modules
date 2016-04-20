@@ -22,6 +22,8 @@ public class PrincipalProfileImpl implements PrincipalProfile {
 
   private Locale language;
 
+  private String id;
+
   /**
    * The constructor.
    */
@@ -80,7 +82,7 @@ public class PrincipalProfileImpl implements PrincipalProfile {
   }
 
   /**
-   * @return role
+   * @return groups
    */
   @Override
   public List<String> getGroups() {
@@ -99,7 +101,7 @@ public class PrincipalProfileImpl implements PrincipalProfile {
   @Override
   public String getId() {
 
-    return getId();
+    return this.id;
   }
 
   /**
@@ -116,6 +118,12 @@ public class PrincipalProfileImpl implements PrincipalProfile {
   public void setLanguage(Locale language) {
 
     this.language = language;
+  }
+
+  @Override
+  public void setId(String id) {
+
+    this.id = id;
   }
 
 }
