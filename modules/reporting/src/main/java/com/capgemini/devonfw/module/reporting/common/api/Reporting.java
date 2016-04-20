@@ -44,4 +44,5 @@ public interface Reporting<T> {
   void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, OutputStream stream,
       ReportFormat format);
 
+  void generateSubreport(List<Report> reports, File file, ReportFormat format);
 }
