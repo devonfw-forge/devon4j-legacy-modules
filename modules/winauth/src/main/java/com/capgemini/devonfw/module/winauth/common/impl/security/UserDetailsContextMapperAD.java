@@ -33,6 +33,38 @@ public class UserDetailsContextMapperAD implements UserDetailsContextMapper {
   @Inject
   private GroupMapperAD groupMapperAD;
 
+  /**
+   * @return authenticationSource
+   */
+  public AuthenticationSource getAuthenticationSource() {
+
+    return this.authenticationSource;
+  }
+
+  /**
+   * @param authenticationSource new value of {@link #getauthenticationSource}.
+   */
+  public void setAuthenticationSource(AuthenticationSource authenticationSource) {
+
+    this.authenticationSource = authenticationSource;
+  }
+
+  /**
+   * @return groupMapperAD
+   */
+  public GroupMapperAD getGroupMapperAD() {
+
+    return this.groupMapperAD;
+  }
+
+  /**
+   * @param groupMapperAD new value of {@link #getgroupMapperAD}.
+   */
+  public void setGroupMapperAD(GroupMapperAD groupMapperAD) {
+
+    this.groupMapperAD = groupMapperAD;
+  }
+
   @Override
   public UserDetails mapUserFromContext(DirContextOperations ctx, String username,
       Collection<? extends GrantedAuthority> authorities) {
