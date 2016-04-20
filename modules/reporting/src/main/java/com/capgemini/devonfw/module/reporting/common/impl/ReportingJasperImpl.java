@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,8 +107,8 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
     try {
 
-      List<JasperReport> jasperReportList = new ArrayList<JasperReport>();
-      Map<String, Object> subReportsParams = new HashMap<String, Object>();
+      // List<JasperReport> jasperReportList = new ArrayList<JasperReport>();
+      Map<String, Object> subReportsParams = new HashMap<>();
 
       JasperDesign design = null;
       JasperReport subReport = null;
@@ -139,7 +138,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       exporter.exportReport();
 
     } catch (Exception e) {
-      log.error("An error occurred while trying to create the report. " + e.getMessage());
+      log.error("An error occurred while trying to create the subreport. " + e.getMessage());
       throw new ReportingException(e);
     }
   }

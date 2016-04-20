@@ -15,22 +15,6 @@ public class Report<T> {
 
   private String dataSourceName;
 
-  /**
-   * @return dataSourceName
-   */
-  public String getDataSourceName() {
-
-    return this.dataSourceName;
-  }
-
-  /**
-   * @param dataSourceName new value of {@link #getdataSourceName}.
-   */
-  public void setDataSourceName(String dataSourceName) {
-
-    this.dataSourceName = dataSourceName;
-  }
-
   private List<T> data;
 
   private String templatePath;
@@ -51,6 +35,22 @@ public class Report<T> {
   public void setName(String name) {
 
     this.name = name;
+  }
+
+  /**
+   * @return dataSourceName
+   */
+  public String getDataSourceName() {
+
+    return this.dataSourceName;
+  }
+
+  /**
+   * @param dataSourceName new value of {@link #getdataSourceName}.
+   */
+  public void setDataSourceName(String dataSourceName) {
+
+    this.dataSourceName = dataSourceName;
   }
 
   /**
