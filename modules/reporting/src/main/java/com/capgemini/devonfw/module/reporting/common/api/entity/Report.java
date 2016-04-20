@@ -11,11 +11,47 @@ import java.util.List;
  * @since 1.1
  */
 public class Report<T> {
+  private String name;
+
+  private String dataSourceName;
+
+  /**
+   * @return dataSourceName
+   */
+  public String getDataSourceName() {
+
+    return this.dataSourceName;
+  }
+
+  /**
+   * @param dataSourceName new value of {@link #getdataSourceName}.
+   */
+  public void setDataSourceName(String dataSourceName) {
+
+    this.dataSourceName = dataSourceName;
+  }
+
   private List<T> data;
 
   private String templatePath;
 
   private HashMap<String, Object> params;
+
+  /**
+   * @return name
+   */
+  public String getName() {
+
+    return this.name;
+  }
+
+  /**
+   * @param name new value of {@link #getname}.
+   */
+  public void setName(String name) {
+
+    this.name = name;
+  }
 
   /**
    * @return data

@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,6 +28,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.capgemini.devonfw.module.reporting.common.api.Reporting;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
+import com.capgemini.devonfw.module.reporting.common.api.entity.Report;
 import com.capgemini.devonfw.module.reporting.common.exception.ReportingException;
 
 /**
@@ -96,6 +99,49 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       throw new ReportingException(e);
     }
 
+  }
+
+  @Override
+  public void generateSubreport(Report master, List<Report> subs, File file, ReportFormat format) {
+
+    FileOutputStream stream = null;
+
+    try {
+
+      List<JasperReport> jasperReportList = new ArrayList<JasperReport>();
+      Map<String, Object> subReportsParams = new HashMap<String, Object>();
+
+      JasperDesign design = null;
+      JasperReport subReport = null;
+      JasperPrint jasperPrint = null;
+      JRDataSource subDataSource = null;
+
+      HashMap<String, Object> masterParams = master.getParams();
+      this.dataSource = this.utils.getDataSource(master.getData());
+      JRAbstractExporter exporter = this.utils.getExporter(format);
+      JasperDesign masterDesign = JRXmlLoader.load(master.getTemplatePath());
+      JasperReport masterReport = JasperCompileManager.compileReport(masterDesign);
+
+      for (Report sub : subs) {
+        subDataSource = this.utils.getDataSource(sub.getData());
+        design = JRXmlLoader.load(sub.getTemplatePath());
+        subReport = JasperCompileManager.compileReport(design);
+        // jasperPrint = JasperFillManager.fillReport(subReport, report.getParams(), this.dataSource);
+        subReportsParams.put(sub.getName(), subReport);
+        subReportsParams.put(sub.getDataSourceName(), subDataSource);
+      }
+
+      masterParams.putAll(subReportsParams);
+      jasperPrint = JasperFillManager.fillReport(masterReport, masterParams, this.dataSource);
+
+      stream = new FileOutputStream(file);
+      this.utils.configureExporter(exporter, jasperPrint, stream, format);
+      exporter.exportReport();
+
+    } catch (Exception e) {
+      log.error("An error occurred while trying to create the report. " + e.getMessage());
+      throw new ReportingException(e);
+    }
   }
 
 }
