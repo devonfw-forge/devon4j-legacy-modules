@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
+import com.capgemini.devonfw.module.reporting.common.api.entity.Report;
 import com.capgemini.devonfw.module.reporting.common.exception.ReportingException;
 
 /**
@@ -45,4 +46,5 @@ public interface Reporting<T> {
       ReportFormat format);
 
   void generateSubreport(List<Report> reports, File file, ReportFormat format);
+
 }
