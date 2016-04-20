@@ -36,4 +36,9 @@ public interface PrincipalProfile extends Principal {
    */
   List<String> getGroups();
 
+  /**
+   * @param id
+   */
+  void setId(String id);
+
 }
