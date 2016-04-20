@@ -45,7 +45,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator-annotation-processor</artifactId>
-      <version>4.1.0.Final</version>
+      <version>4.1.0.Final</version><!--$NO-MVN-MAN-VER$-->
     </dependency>
     <!-- END Note -->
 

@@ -42,7 +42,7 @@ public class UserDetailsContextMapperAD implements UserDetailsContextMapper {
   }
 
   /**
-   * @param authenticationSource new value of {@link #getauthenticationSource}.
+   * @param authenticationSource new value of authenticationSource.
    */
   public void setAuthenticationSource(AuthenticationSource authenticationSource) {
 
@@ -58,7 +58,7 @@ public class UserDetailsContextMapperAD implements UserDetailsContextMapper {
   }
 
   /**
-   * @param groupMapperAD new value of {@link #getgroupMapperAD}.
+   * @param groupMapperAD new value of groupMapperAD.
    */
   public void setGroupMapperAD(GroupMapperAD groupMapperAD) {
 
