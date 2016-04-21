@@ -128,6 +128,13 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
         // jasperPrint = JasperFillManager.fillReport(subReport, report.getParams(), this.dataSource);
         subReportsParams.put(sub.getName(), subReport);
         subReportsParams.put(sub.getDataSourceName(), subDataSource);
+
+        // List tempMasterData = master.getData();
+        // Map map = new HashMap<String, Object>();
+        // map.put("ProductsSubreport", subReport);
+        // map.put("ProductsSubreportDS", subDataSource);
+        // tempMasterData.add(map);
+        // this.dataSource = this.utils.getDataSource(tempMasterData);
       }
 
       masterParams.putAll(subReportsParams);
