@@ -135,10 +135,57 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       this.utils.configureExporter(exporter, jasperPrint, stream, format);
       exporter.exportReport();
 
-    } catch (IOException | JRException e) {
+    } catch (ReportingException | JRException | IOException e) {
+      log.error("An error occurred while trying to create the subreport. " + e.getMessage());
+      throw new ReportingException(e);
+    } finally {
+      try {
+        if (stream != null)
+          stream.close();
+      } catch (IOException ioex) {
+        throw new ReportingException(
+            "The stream associated to the temp file could not be closed. " + ioex.getMessage());
+      }
+    }
+  }
+
+  @Override
+  public void generateSubreport(Report master, List<Report> subs, OutputStream stream, ReportFormat format) {
+
+    try {
+
+      Map<String, Object> subReportsParams = new HashMap<>();
+
+      JasperDesign design = null;
+      JasperReport subReport = null;
+      JasperPrint jasperPrint = null;
+      JRDataSource subDataSource = null;
+
+      HashMap<String, Object> masterParams = master.getParams();
+      this.dataSource = this.utils.getDataSource(master.getData());
+      JRAbstractExporter exporter = this.utils.getExporter(format);
+      JasperDesign masterDesign = JRXmlLoader.load(master.getTemplatePath());
+      JasperReport masterReport = JasperCompileManager.compileReport(masterDesign);
+
+      for (Report sub : subs) {
+        subDataSource = this.utils.getDataSource(sub.getData());
+        design = JRXmlLoader.load(sub.getTemplatePath());
+        subReport = JasperCompileManager.compileReport(design);
+        subReportsParams.put(sub.getName(), subReport);
+        subReportsParams.put(sub.getDataSourceName(), subDataSource);
+      }
+
+      masterParams.putAll(subReportsParams);
+      jasperPrint = JasperFillManager.fillReport(masterReport, masterParams, this.dataSource);
+
+      this.utils.configureExporter(exporter, jasperPrint, stream, format);
+      exporter.exportReport();
+
+    } catch (ReportingException | JRException e) {
       log.error("An error occurred while trying to create the subreport. " + e.getMessage());
       throw new ReportingException(e);
     }
+
   }
 
 }

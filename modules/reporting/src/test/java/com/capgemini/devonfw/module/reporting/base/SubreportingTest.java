@@ -2,8 +2,10 @@ package com.capgemini.devonfw.module.reporting.base;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,6 +47,8 @@ public class SubreportingTest extends ComponentTest {
   private final String CITY = "Valencia";
 
   private String templatePath = null;
+
+  private OutputStream stream = null;
 
   @Before
   public void init() {
@@ -180,6 +185,21 @@ public class SubreportingTest extends ComponentTest {
     File file = File.createTempFile("subreport_", ".txt");
     this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Text);
     assertTrue(file.length() > 0);
+  }
+
+  @Test
+  public void generateSubrerportStream() throws IOException {
+
+    this.stream = new ByteArrayOutputStream();
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, this.stream, ReportFormat.Pdf);
+    assertTrue(((ByteArrayOutputStream) this.stream).size() > 0);
+  }
+
+  @After
+  public void end() throws IOException {
+
+    if (this.stream != null)
+      this.stream.close();
   }
 
   private List<HashMap> getCitiesAsMapList(String[] cities) {
