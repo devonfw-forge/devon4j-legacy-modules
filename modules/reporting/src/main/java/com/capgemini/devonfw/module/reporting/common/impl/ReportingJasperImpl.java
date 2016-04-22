@@ -107,7 +107,6 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
     try {
 
-      // List<JasperReport> jasperReportList = new ArrayList<JasperReport>();
       Map<String, Object> subReportsParams = new HashMap<>();
 
       JasperDesign design = null;
@@ -125,16 +124,8 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
         subDataSource = this.utils.getDataSource(sub.getData());
         design = JRXmlLoader.load(sub.getTemplatePath());
         subReport = JasperCompileManager.compileReport(design);
-        // jasperPrint = JasperFillManager.fillReport(subReport, report.getParams(), this.dataSource);
         subReportsParams.put(sub.getName(), subReport);
         subReportsParams.put(sub.getDataSourceName(), subDataSource);
-
-        // List tempMasterData = master.getData();
-        // Map map = new HashMap<String, Object>();
-        // map.put("ProductsSubreport", subReport);
-        // map.put("ProductsSubreportDS", subDataSource);
-        // tempMasterData.add(map);
-        // this.dataSource = this.utils.getDataSource(tempMasterData);
       }
 
       masterParams.putAll(subReportsParams);
@@ -144,7 +135,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       this.utils.configureExporter(exporter, jasperPrint, stream, format);
       exporter.exportReport();
 
-    } catch (Exception e) {
+    } catch (IOException | JRException e) {
       log.error("An error occurred while trying to create the subreport. " + e.getMessage());
       throw new ReportingException(e);
     }

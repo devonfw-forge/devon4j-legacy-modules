@@ -5,17 +5,13 @@
 	<style name="Sans_Bold" fontName="Serif" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Sans_Italic" fontName="Serif" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
 
-	<!-- MAPPING JasperReports & JRDataSources TO PARAMETERS FOR BERNE -->
-	<parameter name="ProductsBerne" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="ProductsBerneDS" class="net.sf.jasperreports.engine.JRDataSource" />
-	<parameter name="AddressBerne" class="net.sf.jasperreports.engine.JasperReport"/>
-  <parameter name="AddressBerneDS" class="net.sf.jasperreports.engine.JRDataSource" />
-
-  <!-- MAPPING JasperReports & JRDataSources TO PARAMETERS FOR BOSTON
-  <parameter name="ProductsBoston" class="net.sf.jasperreports.engine.JasperReport"/>
-  <parameter name="ProductsBostonDS" class="net.sf.jasperreports.engine.JRDataSource" />
-  <parameter name="AddressBoston" class="net.sf.jasperreports.engine.JasperReport"/>
-  <parameter name="AddressBostonDS" class="net.sf.jasperreports.engine.JRDataSource" />-->
+	<!-- MAPPING JasperReports & JRDataSources TO PARAMETERS -->
+	<parameter name="Products" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="ProductsDS" class="net.sf.jasperreports.engine.JRDataSource" />
+	<parameter name="Address" class="net.sf.jasperreports.engine.JasperReport"/>
+  <parameter name="AddressDS" class="net.sf.jasperreports.engine.JRDataSource" />
+  <parameter name="Address2" class="net.sf.jasperreports.engine.JasperReport"/>
+  <parameter name="Address2DS" class="net.sf.jasperreports.engine.JRDataSource" />
 
   <!-- OTHER OPTIONAL PAREMETERS -->
   <parameter name="City" class="java.lang.String" />
@@ -57,12 +53,12 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="50">
+		<band height="100">
 			<textField>
 				<reportElement style="Sans_Bold" x="5" y="5" width="100" height="16" isPrintWhenDetailOverflows="true" uuid="2c343d22-1686-4fe6-be91-a83597306aeb">
 					<property name="net.sf.jasperreports.export.json.path" value="City"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{City}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{City}+$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<!--<textField evaluationTime="Band">
 				<reportElement style="Sans_Bold" x="110" y="5" width="200" height="16" uuid="21652d16-0d77-498a-afb5-f73dc2380e83"/>
@@ -76,7 +72,7 @@
 				<reportElement x="0" y="20" width="515" height="1" isPrintWhenDetailOverflows="true" uuid="ca93b725-a867-40c7-88d4-be117c8deec1"/>
 			</line>
 
-			<!-- SUBREPORTS FOR BERNE -->
+			<!-- SUBREPORTS -->
 			<subreport>
 				<reportElement isPrintRepeatedValues="false" x="5" y="25" width="325" height="20" isRemoveLineWhenBlank="true" backcolor="#FFCC99" uuid="92506c7a-e250-4f4b-826c-693b1df74d11"/>
 				<!--<subreportParameter name="City">
@@ -85,38 +81,27 @@
 				<subreportParameter name="City">
           <subreportParameterExpression><![CDATA[$P{City}]]></subreportParameterExpression>
         </subreportParameter>
-				<dataSourceExpression><![CDATA[$P{ProductsBerneDS}]]></dataSourceExpression>
+				<dataSourceExpression><![CDATA[$P{ProductsDS}]]></dataSourceExpression>
 				<!--<returnValue subreportVariable="PriceSum" toVariable="ProductTotalPrice" calculation="Sum"/>-->
-				<subreportExpression><![CDATA[$P{ProductsBerne}]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{Products}]]></subreportExpression>
 			</subreport>
 			<subreport>
 				<reportElement positionType="Float" x="335" y="25" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF" uuid="c4b1c60e-3998-4024-b169-fe0bf12a94f4"/>
 				<subreportParameter name="City">
 					<subreportParameterExpression><![CDATA[$F{City}]]></subreportParameterExpression>
 				</subreportParameter>
-				<dataSourceExpression><![CDATA[$P{AddressBerneDS}]]></dataSourceExpression>
+				<dataSourceExpression><![CDATA[$P{AddressDS}]]></dataSourceExpression>
 				<!--<returnValue subreportVariable="REPORT_COUNT" toVariable="CityAddressCount"/>-->
-				<subreportExpression><![CDATA[$P{AddressBerne}]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{Address}]]></subreportExpression>
 			</subreport>
-
-
-			<!-- SUBREPORTS FOR BOSTON
-			<subreport>
-        <reportElement isPrintRepeatedValues="false" x="5" y="25" width="325" height="20" isRemoveLineWhenBlank="true" backcolor="#FFCC99" uuid="92506c7a-e250-4f4b-826c-693b1df74d11"/>
-        <subreportParameter name="City">
-          <subreportParameterExpression><![CDATA[$F{City}]]></subreportParameterExpression>
-        </subreportParameter>
-        <dataSourceExpression><![CDATA[$P{ProductsBostonDS}]]></dataSourceExpression>
-        <subreportExpression><![CDATA[$P{ProductsBoston}]]></subreportExpression>
-      </subreport>
       <subreport>
-        <reportElement positionType="Float" x="335" y="25" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF" uuid="c4b1c60e-3998-4024-b169-fe0bf12a94f4"/>
+        <reportElement positionType="Float" x="335" y="49" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#FFCCFF" uuid="c4b1c60e-3998-4024-b169-fe0bf12a94f4"/>
         <subreportParameter name="City">
           <subreportParameterExpression><![CDATA[$F{City}]]></subreportParameterExpression>
         </subreportParameter>
-        <dataSourceExpression><![CDATA[$P{AddressBostonDS}]]></dataSourceExpression>
-        <subreportExpression><![CDATA[$P{AddressBoston}]]></subreportExpression>
-      </subreport>-->
+        <dataSourceExpression><![CDATA[$P{Address2DS}]]></dataSourceExpression>
+        <subreportExpression><![CDATA[$P{Address2}]]></subreportExpression>
+      </subreport>
 
 		</band>
 	</detail>
