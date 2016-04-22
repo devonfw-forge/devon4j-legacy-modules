@@ -48,4 +48,6 @@ public interface Reporting<T> {
   void generateSubreport(Report masterReport, List<Report> reports, File file, ReportFormat format);
 
   void generateSubreport(Report masterReport, List<Report> reports, OutputStream stream, ReportFormat format);
+
+  void concatenateReports(List<Report> reports, File file, ReportFormat format);
 }

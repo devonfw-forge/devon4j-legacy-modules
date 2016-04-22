@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,8 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
   private static final Log log = LogFactory.getLog(ReportingJasperImpl.class);
 
   private JRDataSource dataSource = null;
+
+  public static String PAGES_INIT_NUM = "PAGES_INIT_NUM";
 
   @Override
   public void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, File file,
@@ -184,6 +187,50 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
     } catch (ReportingException | JRException e) {
       log.error("An error occurred while trying to create the subreport. " + e.getMessage());
       throw new ReportingException(e);
+    }
+
+  }
+
+  @Override
+  public void concatenateReports(List<Report> reports, File file, ReportFormat format) {
+
+    FileOutputStream stream = null;
+    List<JasperPrint> printList = new ArrayList();
+    try {
+      JRAbstractExporter exporter = this.utils.getExporter(format);
+
+      int numPages = 0;
+
+      for (Report report : reports) {
+        HashMap<String, Object> params = new HashMap();
+        params.put(PAGES_INIT_NUM, numPages);
+        params.putAll(report.getParams());
+        report.setParams(params);
+        JasperDesign design = JRXmlLoader.load(report.getTemplatePath());
+        JasperReport jasperReport = JasperCompileManager.compileReport(design);
+        JasperPrint jasperPrint =
+            JasperFillManager.fillReport(jasperReport, report.getParams(), this.utils.getDataSource(report.getData()));
+        printList.add(jasperPrint);
+
+        numPages += jasperPrint.getPages().size();
+      }
+
+      stream = new FileOutputStream(file);
+      this.utils.configureExporter(exporter, printList, stream, format);
+      exporter.exportReport();
+
+    } catch (Exception e) {
+      log.error("An error occurred while trying to create the concatenated report: " + e.getMessage(), e);
+      throw new ReportingException(e);
+    } finally {
+      try {
+        if (stream != null)
+          stream.close();
+      } catch (IOException ioex) {
+        throw new ReportingException(
+            "The stream associated to the temp file for the concatenated report could not be closed. "
+                + ioex.getMessage());
+      }
     }
 
   }
