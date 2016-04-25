@@ -1,8 +1,13 @@
 package com.capgemini.devonfw.module.winauth.common.impl.security;
 
+import java.util.Properties;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,6 +46,11 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   private String userSearchBase = "";
 
   private String userDn = "";
+
+  @Value("${devon.winauth.keyPass}")
+  private String keyPass;
+
+  private StandardPBEStringEncryptor encryptor;
 
   /**
    * @return userDn
@@ -140,12 +150,34 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   @Bean
   public DefaultSpringSecurityContextSource contextSource() {
 
+    this.encryptor = new StandardPBEStringEncryptor();
+    this.encryptor.setPassword(this.keyPass);
+
+    Properties props = new EncryptableProperties(this.encryptor);
+    props.setProperty("password", this.password);
+
     DefaultSpringSecurityContextSource defaultSpringSecurityContextSource =
         new DefaultSpringSecurityContextSource(this.url);
     defaultSpringSecurityContextSource.setUserDn(this.userDn);
-    defaultSpringSecurityContextSource.setPassword(this.password);
+    defaultSpringSecurityContextSource.setPassword(props.getProperty("password"));
     return defaultSpringSecurityContextSource;
 
+  }
+
+  /**
+   * @return keyPass
+   */
+  public String getKeyPass() {
+
+    return this.keyPass;
+  }
+
+  /**
+   * @param keyPass new value of {@link #getkeyPass}.
+   */
+  public void setKeyPass(String keyPass) {
+
+    this.keyPass = keyPass;
   }
 
   /**

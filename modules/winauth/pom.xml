@@ -13,7 +13,16 @@
   <description>Active Directory base authentication.</description>
 
   <dependencies>
-    <!-- LDAP dependencies -->
+    <!-- Encrypt dependency -->
+    <dependency>
+      <groupId>org.jasypt</groupId>
+      <artifactId>jasypt</artifactId>
+      <version>1.9.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- END Encrypt dependency -->
+
+    <!-- LDAP and AD dependencies -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-ldap</artifactId>
@@ -45,7 +54,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator-annotation-processor</artifactId>
-      <version>4.1.0.Final</version><!--$NO-MVN-MAN-VER$-->
+      <version>4.1.0.Final</version><!--$NO-MVN-MAN-VER$ -->
     </dependency>
     <!-- END Note -->
 
