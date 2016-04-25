@@ -1,13 +1,18 @@
 package com.capgemini.devonfw.module.winauth.common.impl.security;
 
+import java.util.Properties;
+
 import javax.inject.Named;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchResult;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer;
@@ -57,6 +62,11 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
 
   private String url = "";
 
+  private StandardPBEStringEncryptor encryptor;
+
+  @Value("${devon.winauth.keyPass}")
+  private String keyPass;
+
   /**
    * @return searchBy
    */
@@ -91,8 +101,14 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
     LdapAuthenticationProviderConfigurer<AuthenticationManagerBuilder> ldap =
         new LdapAuthenticationProviderConfigurer<>();
 
+    this.encryptor = new StandardPBEStringEncryptor();
+    this.encryptor.setPassword(this.keyPass);
+
+    Properties props = new EncryptableProperties(this.encryptor);
+    props.setProperty("password", this.password);
+
     ldap.userSearchBase(this.userSearchBase).userSearchFilter(this.userSearchFilter).rolePrefix(this.rolePrefix)
-        .contextSource().managerDn(this.username).managerPassword(this.password).url(this.url);
+        .contextSource().managerDn(this.username).managerPassword(props.getProperty("password")).url(this.url);
 
     return ldap;
   };
@@ -118,7 +134,13 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
 
     NamingEnumeration<SearchResult> result;
     try {
-      this.activeDirectory.connect(this.username, this.password, this.domain);
+      this.encryptor = new StandardPBEStringEncryptor();
+      this.encryptor.setPassword(this.keyPass);
+
+      Properties props = new EncryptableProperties(this.encryptor);
+      props.setProperty("password", this.password);
+
+      this.activeDirectory.connect(this.username, props.getProperty("password"), this.domain);
 
       result = this.activeDirectory.searchUser(searchValue, this.searchBy, this.domain);
     } finally {
@@ -162,9 +184,8 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param username new value of {@link #getusername}.
+   * @param username new value of username.
    */
-  @SuppressWarnings("javadoc")
   @Override
   public void setUsername(String username) {
 
@@ -181,9 +202,8 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param password new value of {@link #getpassword}.
+   * @param password new value of password.
    */
-  @SuppressWarnings("javadoc")
   @Override
   public void setPassword(String password) {
 
@@ -200,9 +220,8 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param domain new value of {@link #getdomain}.
+   * @param domain new value of domain.
    */
-  @SuppressWarnings("javadoc")
   @Override
   public void setDomain(String domain) {
 

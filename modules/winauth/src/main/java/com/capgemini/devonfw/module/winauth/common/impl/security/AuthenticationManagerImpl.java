@@ -173,7 +173,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   }
 
   /**
-   * @param keyPass new value of {@link #getkeyPass}.
+   * @param keyPass new value of keyPass.
    */
   public void setKeyPass(String keyPass) {
 
