@@ -88,6 +88,9 @@ public class ConcatenatedReportingTest {
   @Test
   public void generateConcatenatedXlsReport() throws IOException {
 
+    File file = File.createTempFile("concReports_", ".xls");
+    this.reportManager.concatenateReports(this.reports, file, ReportFormat.Excel);
+    assertTrue(file.length() > 0);
   }
 
   @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
@@ -109,4 +112,5 @@ public class ConcatenatedReportingTest {
     map.put("Rating", rating);
     return map;
   }
+
 }
