@@ -34,21 +34,21 @@ public class AuthenticationSourceADImplTest extends ComponentTest {
   public void testSearchUserByUsername() {
 
     // Given
-    // assertThat(this.authenticationSource).isNotNull();
+    assertThat(this.authenticationSource).isNotNull();
 
-    // When
+    // // When
     // String searchValue = "jhcore";
-
-    // Then
+    //
+    // // Then
     // Attributes attributes = this.authenticationSource.searchUserByUsername(searchValue);
-
+    //
     // assertThat(attributes).isNotNull();
-
+    //
     // String cn = attributes.get("cn").toString().substring(4);// Username
     // String givenname = attributes.get("givenname").toString().substring(11); // FirstName
     // String sn = attributes.get("sn").toString().substring(4);// LastName
     // String memberOf = attributes.get("memberof").toString().substring(10); // Groups
-
+    //
     // assertThat(cn).isEqualTo("jhcore");
     // assertThat(givenname).isEqualTo("Jhonatan Ariel");
     // assertThat(sn).isEqualTo("Core");

@@ -21,32 +21,63 @@ import com.capgemini.devonfw.module.winauth.common.api.AuthenticationManagerAD;
  */
 @Named
 @Configuration
-@ConfigurationProperties(prefix = "devon.winauth")
+@ConfigurationProperties(prefix = "devon.winauth.ldap")
 public class AuthenticationManagerImpl implements AuthenticationManagerAD {
 
   // private static final Logger LOG = LoggerFactory.getLogger(AuthenticationManagerImpl.class);
 
   /**
-   * User name of the server authentication
-   */
-  private String username;
-
-  /**
    * Password of the server authentication
    */
-  private String password;
+  private String password = "";
 
   /**
    * Server domain
    */
-  private String url;
+  private String url = "ldap://domain.com";
 
   private String userSearchFilter = "(uid={0})";
 
-  private String userSearchBase;
+  private String userSearchBase = "";
+
+  private String userDn = "";
+
+  /**
+   * @return userDn
+   */
+  public String getUserDn() {
+
+    return this.userDn;
+  }
+
+  /**
+   * @param userDn new value of userDn.
+   */
+  public void setUserDn(String userDn) {
+
+    this.userDn = userDn;
+  }
 
   @Inject
   private UserDetailsContextMapper userDetailsContextMapper;
+
+  private String[] patterns = {};
+
+  /**
+   * @return patterns
+   */
+  public String[] getPatterns() {
+
+    return this.patterns;
+  }
+
+  /**
+   * @param patterns new value of patterns.
+   */
+  public void setPatterns(String[] patterns) {
+
+    this.patterns = patterns;
+  }
 
   @Override
   @Bean
@@ -95,6 +126,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
 
     BindAuthenticator bindAuthenticator = new BindAuthenticator(contextSource());
     bindAuthenticator.setUserSearch(userSearch());
+    bindAuthenticator.setUserDnPatterns(this.patterns);
     return bindAuthenticator;
 
   }
@@ -110,7 +142,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
 
     DefaultSpringSecurityContextSource defaultSpringSecurityContextSource =
         new DefaultSpringSecurityContextSource(this.url);
-    defaultSpringSecurityContextSource.setUserDn(this.username);
+    defaultSpringSecurityContextSource.setUserDn(this.userDn);
     defaultSpringSecurityContextSource.setPassword(this.password);
     return defaultSpringSecurityContextSource;
 
@@ -127,22 +159,6 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
     FilterBasedLdapUserSearch filterBasedLdapUserSearch =
         new FilterBasedLdapUserSearch(this.userSearchBase, this.userSearchFilter, contextSource());
     return filterBasedLdapUserSearch;
-  }
-
-  /**
-   * @return username
-   */
-  public String getUsername() {
-
-    return this.username;
-  }
-
-  /**
-   * @param username new value of username.
-   */
-  public void setUsername(String username) {
-
-    this.username = username;
   }
 
   /**

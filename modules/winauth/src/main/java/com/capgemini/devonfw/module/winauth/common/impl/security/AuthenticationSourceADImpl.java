@@ -21,7 +21,7 @@ import com.capgemini.devonfw.module.winauth.common.api.accesscontrol.ActiveDirec
  *
  * @author jhcore
  */
-@ConfigurationProperties(prefix = "devon.winauth")
+@ConfigurationProperties(prefix = "devon.winauth.ad")
 @Named
 public class AuthenticationSourceADImpl implements AuthenticationSource {
 
@@ -35,27 +35,27 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   /**
    * User name of the server authentication
    */
-  private String username;
+  private String username = "";
 
   /**
    * Password of the server authentication
    */
-  private String password;
+  private String password = "";
 
   /**
    * Server domain
    */
-  private String domain;
+  private String domain = "";
 
   private String userSearchFilter = "(uid={0})";
 
-  private String userSearchBase;
+  private String userSearchBase = "";
 
-  private String searchBy;
+  private String searchBy = "";
 
-  private String rolePrefix;
+  private String rolePrefix = "";
 
-  private String url;
+  private String url = "";
 
   /**
    * @return searchBy

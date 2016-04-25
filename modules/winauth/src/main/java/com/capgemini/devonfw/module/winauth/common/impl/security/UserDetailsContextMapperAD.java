@@ -23,6 +23,7 @@ import com.capgemini.devonfw.module.winauth.common.api.UserData;
  *
  * @author jhcore
  */
+// @Configuration
 public class UserDetailsContextMapperAD implements UserDetailsContextMapper {
 
   private static final Logger LOG = LoggerFactory.getLogger(AuthenticationManagerImpl.class);
@@ -96,7 +97,6 @@ public class UserDetailsContextMapperAD implements UserDetailsContextMapper {
           + username + exception);
       throw exception;
     }
-
     return user;
   }
 

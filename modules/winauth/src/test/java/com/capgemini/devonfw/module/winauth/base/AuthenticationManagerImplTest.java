@@ -9,11 +9,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.winauth.SpringBootApp;
 import com.capgemini.devonfw.module.winauth.common.api.AuthenticationManagerAD;
+import com.capgemini.devonfw.module.winauth.common.impl.security.AuthenticationManagerImpl;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
- * TODO jhcore This type ...
+ * This is the test-case for {@link AuthenticationManagerImpl}.
  *
  * @author jhcore
  * @since 1.1
