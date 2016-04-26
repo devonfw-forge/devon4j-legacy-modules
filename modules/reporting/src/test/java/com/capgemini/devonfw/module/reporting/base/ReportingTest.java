@@ -42,12 +42,13 @@ public class ReportingTest extends ComponentTest {
   @Qualifier("properties")
   private Properties props;
 
+  final String REPORTINGTEST = "../../../../../../ReportingTest/reportingtest.jrxml";
+
   @SuppressWarnings("rawtypes")
   @Inject
   private Reporting<HashMap> reportManager;
 
-  private String templatePath = this.getClass().getResource("../../../../../../ReportingTest/reportingtest.jrxml")
-      .getPath();
+  private String templatePath = this.getClass().getResource(this.REPORTINGTEST).getPath();
 
   private HashMap<String, Object> params = new HashMap<>();
 
@@ -229,7 +230,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportStream() {
 
     this.stream = new ByteArrayOutputStream();
-    this.templatePath = this.getClass().getResource("/reportingtest.jrxml").getPath();
+    this.templatePath = this.getClass().getResource(this.REPORTINGTEST).getPath();
     this.params = new HashMap<>();
     this.params.put("ReportTitle", "Test");
     this.params.put("ReportDescription", "This is a Test Stream Report");
