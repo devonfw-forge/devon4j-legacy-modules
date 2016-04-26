@@ -18,6 +18,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.reporting.common.SpringBootApp;
@@ -50,8 +52,14 @@ public class SubreportingTest extends ComponentTest {
 
   private OutputStream stream = null;
 
+  private Resource masterTemplate = new ClassPathResource("MasterReport.jrxml");
+
+  private Resource productTemplate = new ClassPathResource("ProductReport.jrxml");
+
+  private Resource addressTemplate = new ClassPathResource("AddressReport.jrxml");
+
   @Before
-  public void init() {
+  public void init() throws IOException {
 
     this.masterReport = new Report();
     this.subreports = new ArrayList<Report>();
@@ -65,7 +73,7 @@ public class SubreportingTest extends ComponentTest {
     products.setName("Products");
     products.setDataSourceName("ProductsDS");
     products.setData(getProductsAsMapList());
-    products.setTemplatePath(this.getClass().getResource("/ProductReport.jrxml").getPath());
+    products.setTemplatePath(this.productTemplate.getURI().getPath());
     this.subreports.add(products);
 
     // subreport Address
@@ -73,7 +81,7 @@ public class SubreportingTest extends ComponentTest {
     address.setName("Address");
     address.setDataSourceName("AddressDS");
     address.setData(getAddressAsMapList());
-    address.setTemplatePath(this.getClass().getResource("/AddressReport.jrxml").getPath());
+    address.setTemplatePath(this.addressTemplate.getURI().getPath());
     this.subreports.add(address);
 
     // subreport Address2
@@ -81,14 +89,14 @@ public class SubreportingTest extends ComponentTest {
     address2.setName("Address2");
     address2.setDataSourceName("Address2DS");
     address2.setData(getAddress2AsMapList());
-    address2.setTemplatePath(this.getClass().getResource("/AddressReport.jrxml").getPath());
+    address2.setTemplatePath(this.addressTemplate.getURI().getPath());
     this.subreports.add(address2);
 
     // master report
     this.masterReport.setParams(allParams);
     this.masterReport.setName("MasterTest");
     this.masterReport.setData(getCitiesAsMapList(new String[] { this.CITY }));
-    this.masterReport.setTemplatePath(this.getClass().getResource("/MasterReport.jrxml").getPath());
+    this.masterReport.setTemplatePath(this.masterTemplate.getURI().getPath());
   }
 
   @Test

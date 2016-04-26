@@ -16,6 +16,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.reporting.common.SpringBootApp;
@@ -35,7 +37,7 @@ public class ConcatenatedReportingTest {
   @Inject
   Reporting<HashMap> reportManager;
 
-  private String templatePath = this.getClass().getResource("/reportingtest.jrxml").getPath();
+  private Resource template = new ClassPathResource("reportingtest.jrxml");
 
   private static Random rnd = new Random();
 
@@ -44,7 +46,7 @@ public class ConcatenatedReportingTest {
   private HashMap<String, Object> params = null;
 
   @Before
-  public void init() {
+  public void init() throws IOException {
 
     this.reports = new ArrayList<>();
 
@@ -53,7 +55,7 @@ public class ConcatenatedReportingTest {
     this.params.put("ReportTitle", "Report 1");
     this.params.put("ReportDescription", "First concatenated report.");
     report1.setData(createList());
-    report1.setTemplatePath(this.templatePath);
+    report1.setTemplatePath(this.template.getURI().getPath());
     report1.setParams(this.params);
 
     Report report2 = new Report();
@@ -61,7 +63,7 @@ public class ConcatenatedReportingTest {
     this.params.put("ReportTitle", "Report 2");
     this.params.put("ReportDescription", "Second concatenated report.");
     report2.setData(createList());
-    report2.setTemplatePath(this.templatePath);
+    report2.setTemplatePath(this.template.getURI().getPath());
     report2.setParams(this.params);
 
     Report report3 = new Report();
@@ -69,7 +71,7 @@ public class ConcatenatedReportingTest {
     this.params.put("ReportTitle", "Report 3");
     this.params.put("ReportDescription", "Third concatenated report.");
     report3.setData(createList());
-    report3.setTemplatePath(this.templatePath);
+    report3.setTemplatePath(this.template.getURI().getPath());
     report3.setParams(this.params);
 
     this.reports.add(report1);
