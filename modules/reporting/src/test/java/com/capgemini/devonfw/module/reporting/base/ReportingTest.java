@@ -1,6 +1,7 @@
 package com.capgemini.devonfw.module.reporting.base;
 
 import static org.junit.Assert.assertTrue;
+import io.oasp.module.test.common.base.ComponentTest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -27,8 +28,6 @@ import com.capgemini.devonfw.module.reporting.common.api.Properties;
 import com.capgemini.devonfw.module.reporting.common.api.Reporting;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 
-import io.oasp.module.test.common.base.ComponentTest;
-
 /**
  * TODO pparrado This type ...
  *
@@ -47,7 +46,8 @@ public class ReportingTest extends ComponentTest {
   @Inject
   private Reporting<HashMap> reportManager;
 
-  private String templatePath = this.getClass().getResource("/reportingtest.jrxml").getPath();
+  private String templatePath = this.getClass().getResource("../../../../../../ReportingTest/reportingtest.jrxml")
+      .getPath();
 
   private HashMap<String, Object> params = new HashMap<>();
 
@@ -98,8 +98,8 @@ public class ReportingTest extends ComponentTest {
   public void generateReportXlsxFile() throws IOException {
 
     File excel_xlsx = File.createTempFile("tst", ".xlsx");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, excel_xlsx,
-        ReportFormat.Excel_xlsx);
+    this.reportManager
+        .generateReport(createList(), this.templatePath, this.params, excel_xlsx, ReportFormat.Excel_xlsx);
     assertTrue(excel_xlsx.length() > 0);
   }
 
@@ -125,8 +125,8 @@ public class ReportingTest extends ComponentTest {
   public void generateReportOdsFile() throws IOException {
 
     File ods = File.createTempFile("tst", ".ods");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, ods,
-        ReportFormat.OpenDocumentSheet);
+    this.reportManager
+        .generateReport(createList(), this.templatePath, this.params, ods, ReportFormat.OpenDocumentSheet);
     assertTrue(ods.length() > 0);
   }
 
