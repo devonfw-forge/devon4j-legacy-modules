@@ -1,7 +1,6 @@
 package com.capgemini.devonfw.module.reporting.base;
 
 import static org.junit.Assert.assertTrue;
-import io.oasp.module.test.common.base.ComponentTest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -21,12 +20,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.reporting.common.SpringBootApp;
 import com.capgemini.devonfw.module.reporting.common.api.Properties;
 import com.capgemini.devonfw.module.reporting.common.api.Reporting;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
+
+import io.oasp.module.test.common.base.ComponentTest;
 
 /**
  * TODO pparrado This type ...
@@ -42,13 +45,13 @@ public class ReportingTest extends ComponentTest {
   @Qualifier("properties")
   private Properties props;
 
-  final String REPORTINGTEST = "../../../../../../ReportingTest/reportingtest.jrxml";
+  private Resource template = new ClassPathResource("reportingtest.jrxml");
+
+  private String templatePath = null;
 
   @SuppressWarnings("rawtypes")
   @Inject
   private Reporting<HashMap> reportManager;
-
-  private String templatePath = this.getClass().getResource(this.REPORTINGTEST).getPath();
 
   private HashMap<String, Object> params = new HashMap<>();
 
@@ -58,8 +61,9 @@ public class ReportingTest extends ComponentTest {
 
   @SuppressWarnings("javadoc")
   @Before
-  public void init() {
+  public void init() throws IOException {
 
+    this.templatePath = this.template.getURI().getPath();
     this.params.put("ReportTitle", "Test");
     this.params.put("ReportDescription", "This is a Test File Report");
   }
@@ -99,8 +103,8 @@ public class ReportingTest extends ComponentTest {
   public void generateReportXlsxFile() throws IOException {
 
     File excel_xlsx = File.createTempFile("tst", ".xlsx");
-    this.reportManager
-        .generateReport(createList(), this.templatePath, this.params, excel_xlsx, ReportFormat.Excel_xlsx);
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, excel_xlsx,
+        ReportFormat.Excel_xlsx);
     assertTrue(excel_xlsx.length() > 0);
   }
 
@@ -126,8 +130,8 @@ public class ReportingTest extends ComponentTest {
   public void generateReportOdsFile() throws IOException {
 
     File ods = File.createTempFile("tst", ".ods");
-    this.reportManager
-        .generateReport(createList(), this.templatePath, this.params, ods, ReportFormat.OpenDocumentSheet);
+    this.reportManager.generateReport(createList(), this.templatePath, this.params, ods,
+        ReportFormat.OpenDocumentSheet);
     assertTrue(ods.length() > 0);
   }
 
@@ -225,12 +229,12 @@ public class ReportingTest extends ComponentTest {
   /**
    * Test that checks the creation of a report stream in pdf format.
    *
+   *
    */
   @Test
   public void generateReportStream() {
 
     this.stream = new ByteArrayOutputStream();
-    this.templatePath = this.getClass().getResource(this.REPORTINGTEST).getPath();
     this.params = new HashMap<>();
     this.params.put("ReportTitle", "Test");
     this.params.put("ReportDescription", "This is a Test Stream Report");
