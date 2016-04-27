@@ -30,7 +30,7 @@ import com.capgemini.devonfw.module.reporting.common.api.entity.Report;
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
- * TODO pparrado This type ...
+ * Test class to test the subreports functionality
  *
  * @author pparrado
  * @since 1.1
@@ -39,16 +39,17 @@ import io.oasp.module.test.common.base.ComponentTest;
 @SpringApplicationConfiguration(classes = SpringBootApp.class)
 public class SubreportingTest extends ComponentTest {
 
+  @SuppressWarnings("rawtypes")
   @Inject
   Reporting<HashMap> reportManager;
 
+  @SuppressWarnings("rawtypes")
   Report masterReport = null;
 
+  @SuppressWarnings("rawtypes")
   List<Report> subreports = null;
 
   private final String CITY = "Valencia";
-
-  private String templatePath = null;
 
   private OutputStream stream = null;
 
@@ -58,11 +59,12 @@ public class SubreportingTest extends ComponentTest {
 
   private Resource addressTemplate = new ClassPathResource("AddressReport.jrxml");
 
+  @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
   @Before
   public void init() throws IOException {
 
     this.masterReport = new Report();
-    this.subreports = new ArrayList<Report>();
+    this.subreports = new ArrayList<>();
     HashMap<String, Object> allParams = new HashMap<>();
 
     // subreport Products
@@ -99,6 +101,11 @@ public class SubreportingTest extends ComponentTest {
     this.masterReport.setTemplatePath(this.masterTemplate.getURI().getPath());
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with pdf format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportPdfFile() throws IOException {
 
@@ -107,6 +114,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with xls format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportExcelFile() throws IOException {
 
@@ -115,6 +127,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with xlsx format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportXlsxFile() throws IOException {
 
@@ -123,6 +140,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with html format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportHtmlFile() throws IOException {
 
@@ -131,6 +153,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with ods format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportOdsFile() throws IOException {
 
@@ -139,6 +166,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with odt format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportOdtFile() throws IOException {
 
@@ -147,6 +179,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with doc format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportDocFile() throws IOException {
 
@@ -155,6 +192,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with docx format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportDocxFile() throws IOException {
 
@@ -163,6 +205,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with pptx format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportPptxFile() throws IOException {
 
@@ -171,6 +218,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with rtf format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportRtfFile() throws IOException {
 
@@ -179,6 +231,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with csv format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportCsvFile() throws IOException {
 
@@ -187,6 +244,11 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with txt format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateSubreportTxtFile() throws IOException {
 
@@ -195,14 +257,19 @@ public class SubreportingTest extends ComponentTest {
     assertTrue(file.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a stream.
+   *
+   */
   @Test
-  public void generateSubrerportStream() throws IOException {
+  public void generateSubrerportStream() {
 
     this.stream = new ByteArrayOutputStream();
     this.reportManager.generateSubreport(this.masterReport, this.subreports, this.stream, ReportFormat.Pdf);
     assertTrue(((ByteArrayOutputStream) this.stream).size() > 0);
   }
 
+  @SuppressWarnings("javadoc")
   @After
   public void end() throws IOException {
 
@@ -210,6 +277,7 @@ public class SubreportingTest extends ComponentTest {
       this.stream.close();
   }
 
+  @SuppressWarnings("rawtypes")
   private List<HashMap> getCitiesAsMapList(String[] cities) {
 
     List<HashMap> citiesList = new ArrayList<>();
@@ -226,6 +294,7 @@ public class SubreportingTest extends ComponentTest {
     return cityItem;
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   private static List<HashMap> getProductsAsMapList() {
 
     List productsList = new ArrayList();
@@ -252,7 +321,6 @@ public class SubreportingTest extends ComponentTest {
     productsList.add(createProductItem(41, "Clock Ice Tea", 10f, 30.90f));
     productsList.add(createProductItem(48, "Clock Clock", 4f, 31.50f));
     productsList.add(createProductItem(49, "Iron Iron", 23f, 3.30f));
-    // productsList.add(createProductItem(, "", f, f));
     productsList.add(createProductItem(0, "Iron Iron", 3f, 8.10f));
     productsList.add(createProductItem(1, "Chair Shoe", 4f, 37.20f));
     productsList.add(createProductItem(4, "Ice Tea Shoe", 48f, 57.60f));
@@ -326,6 +394,7 @@ public class SubreportingTest extends ComponentTest {
     return productsList;
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   private static Object createProductItem(int id, String name, float quantity, float price) {
 
     Map map = new HashMap();
@@ -336,6 +405,7 @@ public class SubreportingTest extends ComponentTest {
     return map;
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   private static List<HashMap> getAddressAsMapList() {
 
     List addressList = new ArrayList();
@@ -344,6 +414,7 @@ public class SubreportingTest extends ComponentTest {
     return addressList;
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   private static List<HashMap> getAddress2AsMapList() {
 
     List addressList = new ArrayList();
@@ -353,6 +424,7 @@ public class SubreportingTest extends ComponentTest {
     return addressList;
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   private static Object createAddressItem(int id, String firstName, String lastName, String street) {
 
     Map map = new HashMap();

@@ -25,15 +25,18 @@ import com.capgemini.devonfw.module.reporting.common.api.Reporting;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 import com.capgemini.devonfw.module.reporting.common.api.entity.Report;
 
+import io.oasp.module.test.common.base.ComponentTest;
+
 /**
- * TODO pparrado This type ...
+ * Test class to test the concatenated reports functionality
  *
  * @author pparrado
  * @since 1.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SpringBootApp.class)
-public class ConcatenatedReportingTest {
+public class ConcatenatedReportingTest extends ComponentTest {
+  @SuppressWarnings("rawtypes")
   @Inject
   Reporting<HashMap> reportManager;
 
@@ -41,14 +44,23 @@ public class ConcatenatedReportingTest {
 
   private static Random rnd = new Random();
 
+  @SuppressWarnings("rawtypes")
   List<Report> reports = null;
 
+  /**
+   * @throws IOException if the template for the report can not be found.
+   */
   @Before
   public void init() throws IOException {
 
     this.reports = getReportsList();
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with pdf format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedPdfReport() throws IOException {
 
@@ -57,6 +69,11 @@ public class ConcatenatedReportingTest {
     assertTrue(pdf.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with xls format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedXlsReport() throws IOException {
 
@@ -65,6 +82,11 @@ public class ConcatenatedReportingTest {
     assertTrue(excel.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with xlsx format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedXlsxReport() throws IOException {
 
@@ -73,6 +95,11 @@ public class ConcatenatedReportingTest {
     assertTrue(excel_xlsx.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with html format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedHtmlReport() throws IOException {
 
@@ -81,6 +108,11 @@ public class ConcatenatedReportingTest {
     assertTrue(html.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with ods format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedOdsReport() throws IOException {
 
@@ -89,6 +121,11 @@ public class ConcatenatedReportingTest {
     assertTrue(ods.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with odt format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedOdtReport() throws IOException {
 
@@ -97,6 +134,11 @@ public class ConcatenatedReportingTest {
     assertTrue(odt.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with doc format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedDocReport() throws IOException {
 
@@ -105,6 +147,11 @@ public class ConcatenatedReportingTest {
     assertTrue(doc.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with docx format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedDocxReport() throws IOException {
 
@@ -113,6 +160,11 @@ public class ConcatenatedReportingTest {
     assertTrue(docx.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with pptx format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedPptxReport() throws IOException {
 
@@ -121,6 +173,11 @@ public class ConcatenatedReportingTest {
     assertTrue(pptx.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with rtf format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedRtfReport() throws IOException {
 
@@ -129,6 +186,11 @@ public class ConcatenatedReportingTest {
     assertTrue(rtf.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with csv format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedCsvReport() throws IOException {
 
@@ -137,6 +199,11 @@ public class ConcatenatedReportingTest {
     assertTrue(csv.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a file with txt format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
   @Test
   public void generateConcatenatedTxtReport() throws IOException {
 
@@ -165,6 +232,7 @@ public class ConcatenatedReportingTest {
     return map;
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked", "javadoc" })
   public List<Report> getReportsList() throws IOException {
 
     HashMap<String, Object> params = null;
@@ -198,7 +266,7 @@ public class ConcatenatedReportingTest {
     reportsList.add(report2);
     reportsList.add(report3);
 
-    return (reportsList);
+    return reportsList;
   }
 
 }
