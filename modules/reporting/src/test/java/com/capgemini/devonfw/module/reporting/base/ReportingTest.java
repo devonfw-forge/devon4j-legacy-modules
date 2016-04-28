@@ -45,7 +45,12 @@ public class ReportingTest extends ComponentTest {
   @Qualifier("properties")
   private Properties props;
 
-  private Resource template = new ClassPathResource("reportingtest.jrxml");
+  // KO
+  // private Resource template = new ClassPathResource("../../../../../../ReportingTest/reportingtest.jrxml");
+  // private Resource template = new ClassPathResource("reportingtest.jrxml");
+
+  // OK
+  private Resource template = new ClassPathResource("ReportingTest/reportingtest.jrxml");
 
   private String templatePath = null;
 
