@@ -2,9 +2,9 @@ package com.capgemini.devonfw.module.reporting.common.impl;
 
 import java.io.OutputStream;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import net.sf.jasperreports.engine.JRAbstractExporter;
@@ -35,9 +35,8 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import com.capgemini.devonfw.module.reporting.common.api.Properties;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 import com.capgemini.devonfw.module.reporting.common.exception.ReportingException;
 
@@ -45,16 +44,31 @@ import com.capgemini.devonfw.module.reporting.common.exception.ReportingExceptio
  * This is the implementation of several basic functionalities associated to Jasper Reports Library.
  *
  * @author pparrado
- * @since 1.1
  */
 @Named
+@ConfigurationProperties(prefix = "devon.reporting")
 public class JasperUtils {
 
-  @Inject
-  @Qualifier("properties")
-  private Properties props;
+  private HashMap<String, String> txtConfig;
 
   private static final Log log = LogFactory.getLog(JasperUtils.class);
+
+  /**
+   * @return txtConfig
+   */
+
+  public HashMap<String, String> getTxtConfig() {
+
+    return this.txtConfig;
+  }
+
+  /**
+   * @param txtConfig collection of properties
+   */
+  public void setTxtConfig(HashMap<String, String> txtConfig) {
+
+    this.txtConfig = txtConfig;
+  }
 
   /**
    * Returns the data provided as JRDataSource type in order to fill the report.
@@ -83,26 +97,26 @@ public class JasperUtils {
 
     switch (format) {
 
-    case Excel:
+    case EXCEL:
       return new JRXlsExporter();
-    case Pdf:
+    case PDF:
       return new JRPdfExporter();
-    case Csv:
+    case CSV:
       return new JRCsvExporter();
-    case Word:
-    case Rtf:
+    case WORD:
+    case RTF:
       return new JRRtfExporter();
-    case Word_docx:
+    case WORD_DOCX:
       return new JRDocxExporter();
-    case Excel_xlsx:
+    case EXCEL_XLSX:
       return new JRXlsxExporter();
-    case Html:
+    case HTML:
       return new HtmlExporter();
-    case OpenDocumentText:
+    case OPEN_DOCUMENT_TEXT:
       return new JROdtExporter();
-    case OpenDocumentSheet:
+    case OPEN_DOCUMENT_SHEET:
       return new JROdsExporter();
-    case Pptx:
+    case PPTX:
       return new JRPptxExporter();
     default:
       return new JRTextExporter();
@@ -128,24 +142,24 @@ public class JasperUtils {
     ExporterOutput exporterOutput = null;
 
     switch (format) {
-    case Excel:
+    case EXCEL:
       exporterOutput = new SimpleOutputStreamExporterOutput(stream);
       exporter.setConfiguration(getXlsConfiguration());
       break;
-    case Csv:
-    case Word:
-    case Rtf:
+    case CSV:
+    case WORD:
+    case RTF:
       exporterOutput = new SimpleWriterExporterOutput(stream);
       break;
-    case Text:
+    case TEXT:
       exporterOutput = new SimpleWriterExporterOutput(stream);
       exporter.setConfiguration(getTxtConfiguration());
       break;
-    case Excel_xlsx:
+    case EXCEL_XLSX:
       exporterOutput = new SimpleOutputStreamExporterOutput(stream);
       exporter.setConfiguration(getXlsxConfiguration());
       break;
-    case Html:
+    case HTML:
       exporterOutput = new SimpleHtmlExporterOutput(stream);
       break;
     default:
@@ -161,10 +175,10 @@ public class JasperUtils {
 
     SimpleTextReportConfiguration txtConfiguration = new SimpleTextReportConfiguration();
     try {
-      txtConfiguration.setCharWidth(Float.parseFloat(this.props.txtConfig().get("CharWidth")));
-      txtConfiguration.setCharHeight(Float.parseFloat(this.props.txtConfig().get("CharHeight")));
-      txtConfiguration.setPageWidthInChars(Integer.parseInt(this.props.txtConfig().get("PageWidthInChars")));
-      txtConfiguration.setPageHeightInChars(Integer.parseInt(this.props.txtConfig().get("PageHeightInChars")));
+      txtConfiguration.setCharWidth(Float.parseFloat(this.txtConfig.get("CharWidth")));
+      txtConfiguration.setCharHeight(Float.parseFloat(this.txtConfig.get("CharHeight")));
+      txtConfiguration.setPageWidthInChars(Integer.parseInt(this.txtConfig.get("PageWidthInChars")));
+      txtConfiguration.setPageHeightInChars(Integer.parseInt(this.txtConfig.get("PageHeightInChars")));
       return txtConfiguration;
     } catch (NumberFormatException e) {
       log.error(e.getMessage(), e);

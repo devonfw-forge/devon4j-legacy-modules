@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,7 +33,6 @@ import com.capgemini.devonfw.module.reporting.common.exception.ReportingExceptio
  *
  * @author pparrado
  * @param <T> type of the data that is provided to be included in the report.
- * @since 1.1
  */
 @Named
 public class ReportingJasperImpl<T> implements Reporting<T> {
@@ -46,7 +45,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
   private JRDataSource dataSource = null;
 
   @Override
-  public void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, File file,
+  public void generateReport(List<T> data, String templatePath, Map<String, Object> params, File file,
       ReportFormat format) {
 
     FileOutputStream stream = null;
@@ -80,7 +79,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
   }
 
   @Override
-  public void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, OutputStream stream,
+  public void generateReport(List<T> data, String templatePath, Map<String, Object> params, OutputStream stream,
       ReportFormat format) {
 
     try {

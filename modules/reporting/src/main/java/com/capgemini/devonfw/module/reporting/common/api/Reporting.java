@@ -2,8 +2,8 @@ package com.capgemini.devonfw.module.reporting.common.api;
 
 import java.io.File;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 import com.capgemini.devonfw.module.reporting.common.exception.ReportingException;
@@ -13,7 +13,6 @@ import com.capgemini.devonfw.module.reporting.common.exception.ReportingExceptio
  *
  * @author pparrado
  * @param <T> type of the data that is provided to be included in the report.
- * @since 1.1
  */
 public interface Reporting<T> {
 
@@ -28,8 +27,7 @@ public interface Reporting<T> {
    * @param format the {@link ReportFormat} of the report file.
    * @throws ReportingException
    */
-  void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, File file,
-      ReportFormat format);
+  void generateReport(List<T> data, String templatePath, Map<String, Object> params, File file, ReportFormat format);
 
   /**
    * Generates a report stream with the given data, the template located in the templatePath and the type of file.
@@ -41,7 +39,7 @@ public interface Reporting<T> {
    * @param format the {@link ReportFormat} of the report stream.
    * @throws ReportingException
    */
-  void generateReport(List<T> data, String templatePath, HashMap<String, Object> params, OutputStream stream,
+  void generateReport(List<T> data, String templatePath, Map<String, Object> params, OutputStream stream,
       ReportFormat format);
 
 }

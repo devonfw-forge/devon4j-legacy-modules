@@ -7,10 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * This is the entry point for unit tests.
  *
  * @author pparrado
- * @since 1.1
  */
 @SpringBootApplication
-public class SpringBootApp {
+public class ReportingModuleApp {
   /**
    * Entry point for spring-boot based app
    *
@@ -18,6 +17,6 @@ public class SpringBootApp {
    */
   public static void main(String[] args) {
 
-    SpringApplication.run(SpringBootApp.class, args);
+    SpringApplication.run(ReportingModuleApp.class, args);
   }
 }
