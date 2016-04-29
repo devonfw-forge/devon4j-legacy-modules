@@ -182,7 +182,7 @@ public class JasperUtils {
       return txtConfiguration;
     } catch (NumberFormatException e) {
       log.error(e.getMessage(), e);
-      throw new ReportingException("Some txtConfig parameter in application.properties may have an invalid value.");
+      throw new ReportingException(e, "Some txtConfig parameter in application.properties may have an invalid value.");
     }
   }
 

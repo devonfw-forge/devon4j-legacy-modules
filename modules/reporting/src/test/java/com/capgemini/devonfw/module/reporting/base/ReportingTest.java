@@ -69,7 +69,6 @@ public class ReportingTest extends ComponentTest {
 
     File pdf = File.createTempFile("tst", ".pdf");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, pdf, ReportFormat.PDF);
-    // assertTrue(pdf.length() > 0);
     assertThat(pdf.length()).isGreaterThan(0);
   }
 
@@ -83,7 +82,7 @@ public class ReportingTest extends ComponentTest {
 
     File excel = File.createTempFile("tst", ".xls");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, excel, ReportFormat.EXCEL);
-    // assertTrue(excel.length() > 0);
+    assertThat(excel.length()).isGreaterThan(0);
   }
 
   /**
@@ -97,7 +96,7 @@ public class ReportingTest extends ComponentTest {
     File excel_xlsx = File.createTempFile("tst", ".xlsx");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, excel_xlsx,
         ReportFormat.EXCEL_XLSX);
-    // assertTrue(excel_xlsx.length() > 0);
+    assertThat(excel_xlsx.length()).isGreaterThan(0);
   }
 
   /**
@@ -110,7 +109,7 @@ public class ReportingTest extends ComponentTest {
 
     File html = File.createTempFile("tst", ".html");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, html, ReportFormat.HTML);
-    // assertTrue(html.length() > 0);
+    assertThat(html.length()).isGreaterThan(0);
   }
 
   /**
@@ -124,7 +123,7 @@ public class ReportingTest extends ComponentTest {
     File ods = File.createTempFile("tst", ".ods");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, ods,
         ReportFormat.OPEN_DOCUMENT_SHEET);
-    // assertTrue(ods.length() > 0);
+    assertThat(ods.length()).isGreaterThan(0);
   }
 
   /**
@@ -138,7 +137,7 @@ public class ReportingTest extends ComponentTest {
     File odt = File.createTempFile("tst", ".odt");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, odt,
         ReportFormat.OPEN_DOCUMENT_TEXT);
-    // assertTrue(odt.length() > 0);
+    assertThat(odt.length()).isGreaterThan(0);
   }
 
   /**
@@ -151,7 +150,7 @@ public class ReportingTest extends ComponentTest {
 
     File doc = File.createTempFile("tst", ".doc");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, doc, ReportFormat.WORD);
-    // assertTrue(doc.length() > 0);
+    assertThat(doc.length()).isGreaterThan(0);
   }
 
   /**
@@ -164,7 +163,7 @@ public class ReportingTest extends ComponentTest {
 
     File docx = File.createTempFile("tst", ".docx");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, docx, ReportFormat.WORD_DOCX);
-    // assertTrue(docx.length() > 0);
+    assertThat(docx.length()).isGreaterThan(0);
   }
 
   /**
@@ -177,7 +176,7 @@ public class ReportingTest extends ComponentTest {
 
     File pptx = File.createTempFile("tst", ".pptx");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, pptx, ReportFormat.PPTX);
-    // assertTrue(pptx.length() > 0);
+    assertThat(pptx.length()).isGreaterThan(0);
   }
 
   /**
@@ -190,7 +189,7 @@ public class ReportingTest extends ComponentTest {
 
     File rtf = File.createTempFile("tst", ".rtf");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, rtf, ReportFormat.RTF);
-    // assertTrue(rtf.length() > 0);
+    assertThat(rtf.length()).isGreaterThan(0);
   }
 
   /**
@@ -203,7 +202,7 @@ public class ReportingTest extends ComponentTest {
 
     File csv = File.createTempFile("tst", ".csv");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, csv, ReportFormat.CSV);
-    // assertTrue(csv.length() > 0);
+    assertThat(csv.length()).isGreaterThan(0);
   }
 
   /**
@@ -216,7 +215,7 @@ public class ReportingTest extends ComponentTest {
 
     File txt = File.createTempFile("tst", ".txt");
     this.reportManager.generateReport(createList(), this.templatePath, this.params, txt, ReportFormat.TEXT);
-    // assertTrue(txt.length() > 0);
+    assertThat(txt.length()).isGreaterThan(0);
   }
 
   /**
@@ -234,7 +233,7 @@ public class ReportingTest extends ComponentTest {
 
     this.reportManager.generateReport(createList(), this.templatePath, this.params, this.stream, ReportFormat.PDF);
 
-    // assertTrue(((ByteArrayOutputStream) this.stream).size() > 0);
+    assertThat(((ByteArrayOutputStream) this.stream).size()).isGreaterThan(0);
   }
 
   @SuppressWarnings("javadoc")

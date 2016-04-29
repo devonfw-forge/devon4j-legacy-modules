@@ -64,14 +64,14 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
     } catch (ReportingException | JRException | IOException e) {
       log.error("An error occurred while trying to create the report: " + e.getMessage(), e);
-      throw new ReportingException(e);
+      throw new ReportingException(e, e.getMessage());
 
     } finally {
       try {
         if (stream != null)
           stream.close();
       } catch (IOException ioex) {
-        throw new ReportingException(
+        throw new ReportingException(ioex,
             "The stream associated to the temp file could not be closed. " + ioex.getMessage());
       }
     }
@@ -92,7 +92,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       exporter.exportReport();
     } catch (ReportingException | JRException e) {
       log.error("An error occurred while trying to create the report. " + e.getMessage(), e);
-      throw new ReportingException(e);
+      throw new ReportingException(e, e.getMessage());
     }
 
   }

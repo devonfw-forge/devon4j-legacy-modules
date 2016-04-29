@@ -1,40 +1,45 @@
 package com.capgemini.devonfw.module.reporting.common.exception;
 
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
+import net.sf.mmm.util.nls.api.NlsMessage;
+
 /**
  * This is the checked exception for Reporting module.
  *
  * @author pparrado
  */
-public class ReportingException extends RuntimeException {
+public class ReportingException extends NlsRuntimeException {
 
-  /**
-   *
-   */
   private static final long serialVersionUID = 1L;
 
   /**
-   * Constructs an {@code ReportingException} with the specified message and root cause.
+   * The constructor.
+   *
+   * @param message the error {@link #getNlsMessage() message}.
    */
-  public ReportingException() {
-    super();
+  public ReportingException(NlsMessage message) {
+    super(message);
   }
 
   /**
    * Constructs an {@code ReportingException} with the root cause.
    *
-   * @param cause the root cause
+   * @param cause the error {@link #getCause() cause}.
+   * @param message the error {@link #getNlsMessage() message}.
    */
-  public ReportingException(Throwable cause) {
-    super(cause);
+  public ReportingException(Throwable cause, NlsMessage message) {
+    super(cause, message);
   }
 
   /**
-   * Constructs an {@code ReportingException} with the specified message.
+   * The constructor.
    *
-   * @param msg the detail message
+   * @param cause the error {@link #getCause() cause}.
+   * @param message the error message.
    */
-  public ReportingException(String msg) {
-    super(msg);
+  public ReportingException(Throwable cause, String message) {
+
+    super(cause, message);
   }
 
 }
