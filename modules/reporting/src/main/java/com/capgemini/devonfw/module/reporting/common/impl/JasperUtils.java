@@ -116,23 +116,18 @@ public class JasperUtils {
    * object)
    *
    * @param exporter the {@linkplain JRAbstractExporter} to configure
-   * @param jasperPrint the {@link JasperPrint} object to configure as the exporter input.
+   * @param print the {@link JasperPrint} object to configure as the exporter input it can be a list of JasperPrint
+   *        objects.
    * @param stream the {@link OutputStream} to configure as the exporter output.
    * @param format the {@link ReportFormat} according to which the exporter will be configured.
    * @throws ReportingException if the configuration process of the exporter fails.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public void configureExporter(JRAbstractExporter exporter, /* JasperPrint jasperPrint */Object print,
-      OutputStream stream, ReportFormat format) throws ReportingException {
-
-    // if(print instanceof List){
-    // exporterInput = SimpleExporterInput.getInstance((List<JasperPrint>)print);
-    // }else{
-    // exporterInput = new SimpleExporterInput((JasperPrint)print);
-    // }
+  public void configureExporter(JRAbstractExporter exporter, Object print, OutputStream stream, ReportFormat format)
+      throws ReportingException {
 
     if (print instanceof List || print instanceof JasperPrint) {
-      // ExporterInput exporterInput = new SimpleExporterInput(jasperPrint);
+
       ExporterInput exporterInput = print instanceof List ? SimpleExporterInput.getInstance((List<JasperPrint>) print)
           : new SimpleExporterInput((JasperPrint) print);
       ExporterOutput exporterOutput = null;

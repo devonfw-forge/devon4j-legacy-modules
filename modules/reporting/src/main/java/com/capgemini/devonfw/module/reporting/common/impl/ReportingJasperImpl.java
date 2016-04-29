@@ -200,7 +200,6 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       JRAbstractExporter exporter = this.utils.getExporter(format);
 
       int numPages = 0;
-
       for (Report report : reports) {
         HashMap<String, Object> params = new HashMap();
         params.put(PAGES_INIT_NUM, numPages);
