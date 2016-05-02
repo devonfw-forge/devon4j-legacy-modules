@@ -53,11 +53,11 @@ public class SubreportingTest extends ComponentTest {
 
   private OutputStream stream = null;
 
-  private Resource masterTemplate = new ClassPathResource("MasterReport.jrxml");
+  private Resource masterTemplate = new ClassPathResource("SubreportingTest/MasterReport.jrxml");
 
-  private Resource productTemplate = new ClassPathResource("ProductReport.jrxml");
+  private Resource productTemplate = new ClassPathResource("SubreportingTest/ProductReport.jrxml");
 
-  private Resource addressTemplate = new ClassPathResource("AddressReport.jrxml");
+  private Resource addressTemplate = new ClassPathResource("SubreportingTest/AddressReport.jrxml");
 
   @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
   @Before
