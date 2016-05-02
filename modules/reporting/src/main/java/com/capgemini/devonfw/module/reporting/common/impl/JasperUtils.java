@@ -164,13 +164,6 @@ public class JasperUtils {
 
   }
 
-  // public void configureExporter(JRAbstractExporter exporter, List<JasperPrint> printList, OutputStream stream,
-  // ReportFormat format) {
-  //
-  // // SimpleExporterInput sei = new SimpleExporterInput().getInstance(printList);
-  // ExporterInput ei = SimpleExporterInput.getInstance(printList);
-  // }
-
   private SimpleTextReportConfiguration getTxtConfiguration() throws ReportingException {
 
     SimpleTextReportConfiguration txtConfiguration = new SimpleTextReportConfiguration();
