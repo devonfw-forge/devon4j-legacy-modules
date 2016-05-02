@@ -2,8 +2,10 @@ package com.capgemini.devonfw.module.reporting.base;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,6 +49,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
 
   @SuppressWarnings("rawtypes")
   List<Report> reports = null;
+
+  private OutputStream stream = null;
 
   /**
    * @throws IOException if the template for the report can not be found.
@@ -212,128 +217,31 @@ public class ConcatenatedReportingTest extends ComponentTest {
     assertTrue(txt.length() > 0);
   }
 
+  /**
+   * Test that checks the creation of a concatenation of reports in a stream with pdf format.
+   *
+   * @throws IOException if the temporal file can not be created.
+   */
+  @Test
+  public void generateConcatenatedStreamReport() throws IOException {
+
+    this.stream = new ByteArrayOutputStream();
+    this.reportManager.concatenateReports(this.reports, this.stream, ReportFormat.Pdf);
+
+    assertTrue(((ByteArrayOutputStream) this.stream).size() > 0);
+  }
+
+  @After
+  public void end() throws IOException {
+
+    if (this.stream != null)
+      this.stream.close();
+  }
+
   @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
   public static List<HashMap> createList() {
 
     List lst = new ArrayList();
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
-    lst.add(createItem("Tom Waits", 92));
-    lst.add(createItem("Nick Cave", 97));
-    lst.add(createItem("PJ Harvey", 95));
     lst.add(createItem("Tom Waits", 92));
     lst.add(createItem("Nick Cave", 97));
     lst.add(createItem("PJ Harvey", 95));

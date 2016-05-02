@@ -234,4 +234,35 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
   }
 
+  @Override
+  public void concatenateReports(List<Report> reports, OutputStream stream, ReportFormat format) {
+
+    List<JasperPrint> printList = new ArrayList();
+    try {
+      JRAbstractExporter exporter = this.utils.getExporter(format);
+
+      int numPages = 0;
+      for (Report report : reports) {
+        HashMap<String, Object> params = new HashMap();
+        params.put(PAGES_INIT_NUM, numPages);
+        params.putAll(report.getParams());
+        report.setParams(params);
+        JasperDesign design = JRXmlLoader.load(report.getTemplatePath());
+        JasperReport jasperReport = JasperCompileManager.compileReport(design);
+        JasperPrint jasperPrint =
+            JasperFillManager.fillReport(jasperReport, report.getParams(), this.utils.getDataSource(report.getData()));
+        printList.add(jasperPrint);
+
+        numPages += jasperPrint.getPages().size();
+      }
+
+      this.utils.configureExporter(exporter, printList, stream, format);
+      exporter.exportReport();
+
+    } catch (Exception e) {
+      log.error("An error occurred while trying to create the concatenated report: " + e.getMessage(), e);
+      throw new ReportingException(e);
+    }
+  }
+
 }
