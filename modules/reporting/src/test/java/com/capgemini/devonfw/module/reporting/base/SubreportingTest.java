@@ -31,7 +31,6 @@ import io.oasp.module.test.common.base.ComponentTest;
  * Test class to test the subreports functionality
  *
  * @author pparrado
- * @since 1.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ReportingModuleApp.class)

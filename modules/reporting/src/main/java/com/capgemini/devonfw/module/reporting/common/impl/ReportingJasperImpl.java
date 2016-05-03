@@ -47,21 +47,23 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
   private JRDataSource dataSource = null;
 
+  /**
+   * the start index for each report in concatenated reports
+   */
   public static String PAGES_INIT_NUM = "PAGES_INIT_NUM";
 
   @Override
-  public void generateReport(List<T> data, String templatePath, Map<String, Object> params, File file,
-      ReportFormat format) {
+  public void generateReport(Report report, File file, ReportFormat format) {
 
     FileOutputStream stream = null;
 
     try {
 
-      this.dataSource = this.utils.getDataSource(data);
+      this.dataSource = this.utils.getDataSource(report.getData());
       JRAbstractExporter<?, ?, ExporterOutput, ?> exporter = this.utils.getExporter(format);
-      JasperDesign design = JRXmlLoader.load(templatePath);
-      JasperReport report = JasperCompileManager.compileReport(design);
-      JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, this.dataSource);
+      JasperDesign design = JRXmlLoader.load(report.getTemplatePath());
+      JasperReport jreport = JasperCompileManager.compileReport(design);
+      JasperPrint jasperPrint = JasperFillManager.fillReport(jreport, report.getParams(), this.dataSource);
 
       stream = new FileOutputStream(file);
       this.utils.configureExporter(exporter, jasperPrint, stream, format);
@@ -84,15 +86,14 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
   }
 
   @Override
-  public void generateReport(List<T> data, String templatePath, Map<String, Object> params, OutputStream stream,
-      ReportFormat format) {
+  public void generateReport(Report report, OutputStream stream, ReportFormat format) {
 
     try {
-      this.dataSource = this.utils.getDataSource(data);
+      this.dataSource = this.utils.getDataSource(report.getData());
       JRAbstractExporter<?, ?, ExporterOutput, ?> exporter = this.utils.getExporter(format);
-      JasperDesign design = JRXmlLoader.load(templatePath);
-      JasperReport report = JasperCompileManager.compileReport(design);
-      JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, this.dataSource);
+      JasperDesign design = JRXmlLoader.load(report.getTemplatePath());
+      JasperReport jreport = JasperCompileManager.compileReport(design);
+      JasperPrint jasperPrint = JasperFillManager.fillReport(jreport, report.getParams(), this.dataSource);
       this.utils.configureExporter(exporter, jasperPrint, stream, format);
       exporter.exportReport();
     } catch (ReportingException | JRException e) {
@@ -102,6 +103,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
   }
 
+  @SuppressWarnings("rawtypes")
   @Override
   public void generateSubreport(Report master, List<Report> subs, File file, ReportFormat format) {
 
@@ -116,7 +118,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       JasperPrint jasperPrint = null;
       JRDataSource subDataSource = null;
 
-      HashMap<String, Object> masterParams = master.getParams();
+      Map<String, Object> masterParams = master.getParams();
       this.dataSource = this.utils.getDataSource(master.getData());
       JRAbstractExporter exporter = this.utils.getExporter(format);
       JasperDesign masterDesign = JRXmlLoader.load(master.getTemplatePath());
@@ -151,6 +153,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
     }
   }
 
+  @SuppressWarnings("rawtypes")
   @Override
   public void generateSubreport(Report master, List<Report> subs, OutputStream stream, ReportFormat format) {
 
@@ -163,7 +166,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
       JasperPrint jasperPrint = null;
       JRDataSource subDataSource = null;
 
-      HashMap<String, Object> masterParams = master.getParams();
+      Map<String, Object> masterParams = master.getParams();
       this.dataSource = this.utils.getDataSource(master.getData());
       JRAbstractExporter exporter = this.utils.getExporter(format);
       JasperDesign masterDesign = JRXmlLoader.load(master.getTemplatePath());
@@ -190,17 +193,18 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
   }
 
+  @SuppressWarnings("rawtypes")
   @Override
   public void concatenateReports(List<Report> reports, File file, ReportFormat format) {
 
     FileOutputStream stream = null;
-    List<JasperPrint> printList = new ArrayList();
+    List<JasperPrint> printList = new ArrayList<>();
     try {
       JRAbstractExporter exporter = this.utils.getExporter(format);
 
       int numPages = 0;
-      for (Report report : reports) {
-        HashMap<String, Object> params = new HashMap();
+      for (Report<?> report : reports) {
+        HashMap<String, Object> params = new HashMap<>();
         params.put(PAGES_INIT_NUM, numPages);
         params.putAll(report.getParams());
         report.setParams(params);
@@ -233,16 +237,17 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
   }
 
+  @SuppressWarnings("rawtypes")
   @Override
   public void concatenateReports(List<Report> reports, OutputStream stream, ReportFormat format) {
 
-    List<JasperPrint> printList = new ArrayList();
+    List<JasperPrint> printList = new ArrayList<>();
     try {
       JRAbstractExporter exporter = this.utils.getExporter(format);
 
       int numPages = 0;
-      for (Report report : reports) {
-        HashMap<String, Object> params = new HashMap();
+      for (Report<?> report : reports) {
+        HashMap<String, Object> params = new HashMap<>();
         params.put(PAGES_INIT_NUM, numPages);
         params.putAll(report.getParams());
         report.setParams(params);

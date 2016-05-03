@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.capgemini.devonfw.module.reporting.common.ReportingModuleApp;
 import com.capgemini.devonfw.module.reporting.common.api.Reporting;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
+import com.capgemini.devonfw.module.reporting.common.api.entity.Report;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
@@ -38,7 +39,8 @@ public class ReportingTest extends ComponentTest {
 
   private Resource template = new ClassPathResource("ReportingTest/reportingtest.jrxml");
 
-  private String templatePath = null;
+  @SuppressWarnings("rawtypes")
+  private Report report = null;
 
   @SuppressWarnings("rawtypes")
   @Inject
@@ -50,13 +52,20 @@ public class ReportingTest extends ComponentTest {
 
   OutputStream stream = null;
 
-  @SuppressWarnings("javadoc")
+  @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
   @Before
   public void init() throws IOException {
 
-    this.templatePath = this.template.getURI().getPath();
+    this.report = new Report();
+
     this.params.put("ReportTitle", "Test");
     this.params.put("ReportDescription", "This is a Test File Report");
+
+    this.report.setName("Test");
+    this.report.setData(createList());
+    this.report.setParams(this.params);
+    this.report.setTemplatePath(this.template.getURI().getPath());
+
   }
 
   /**
@@ -68,7 +77,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportPdfFile() throws IOException {
 
     File pdf = File.createTempFile("tst", ".pdf");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, pdf, ReportFormat.PDF);
+    this.reportManager.generateReport(this.report, pdf, ReportFormat.PDF);
     assertThat(pdf.length()).isGreaterThan(0);
   }
 
@@ -81,7 +90,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportExcelFile() throws IOException {
 
     File excel = File.createTempFile("tst", ".xls");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, excel, ReportFormat.EXCEL);
+    this.reportManager.generateReport(this.report, excel, ReportFormat.EXCEL);
     assertThat(excel.length()).isGreaterThan(0);
   }
 
@@ -94,8 +103,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportXlsxFile() throws IOException {
 
     File excel_xlsx = File.createTempFile("tst", ".xlsx");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, excel_xlsx,
-        ReportFormat.EXCEL_XLSX);
+    this.reportManager.generateReport(this.report, excel_xlsx, ReportFormat.EXCEL_XLSX);
     assertThat(excel_xlsx.length()).isGreaterThan(0);
   }
 
@@ -108,7 +116,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportHtmlFile() throws IOException {
 
     File html = File.createTempFile("tst", ".html");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, html, ReportFormat.HTML);
+    this.reportManager.generateReport(this.report, html, ReportFormat.HTML);
     assertThat(html.length()).isGreaterThan(0);
   }
 
@@ -121,8 +129,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportOdsFile() throws IOException {
 
     File ods = File.createTempFile("tst", ".ods");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, ods,
-        ReportFormat.OPEN_DOCUMENT_SHEET);
+    this.reportManager.generateReport(this.report, ods, ReportFormat.OPEN_DOCUMENT_SHEET);
     assertThat(ods.length()).isGreaterThan(0);
   }
 
@@ -135,8 +142,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportOdtFile() throws IOException {
 
     File odt = File.createTempFile("tst", ".odt");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, odt,
-        ReportFormat.OPEN_DOCUMENT_TEXT);
+    this.reportManager.generateReport(this.report, odt, ReportFormat.OPEN_DOCUMENT_TEXT);
     assertThat(odt.length()).isGreaterThan(0);
   }
 
@@ -149,7 +155,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportDocFile() throws IOException {
 
     File doc = File.createTempFile("tst", ".doc");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, doc, ReportFormat.WORD);
+    this.reportManager.generateReport(this.report, doc, ReportFormat.WORD);
     assertThat(doc.length()).isGreaterThan(0);
   }
 
@@ -162,7 +168,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportDocxFile() throws IOException {
 
     File docx = File.createTempFile("tst", ".docx");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, docx, ReportFormat.WORD_DOCX);
+    this.reportManager.generateReport(this.report, docx, ReportFormat.WORD_DOCX);
     assertThat(docx.length()).isGreaterThan(0);
   }
 
@@ -175,7 +181,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportPowerpointFile() throws IOException {
 
     File pptx = File.createTempFile("tst", ".pptx");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, pptx, ReportFormat.PPTX);
+    this.reportManager.generateReport(this.report, pptx, ReportFormat.PPTX);
     assertThat(pptx.length()).isGreaterThan(0);
   }
 
@@ -188,7 +194,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportRtfFile() throws IOException {
 
     File rtf = File.createTempFile("tst", ".rtf");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, rtf, ReportFormat.RTF);
+    this.reportManager.generateReport(this.report, rtf, ReportFormat.RTF);
     assertThat(rtf.length()).isGreaterThan(0);
   }
 
@@ -201,7 +207,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportCsvFile() throws IOException {
 
     File csv = File.createTempFile("tst", ".csv");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, csv, ReportFormat.CSV);
+    this.reportManager.generateReport(this.report, csv, ReportFormat.CSV);
     assertThat(csv.length()).isGreaterThan(0);
   }
 
@@ -214,7 +220,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportTextFile() throws IOException {
 
     File txt = File.createTempFile("tst", ".txt");
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, txt, ReportFormat.TEXT);
+    this.reportManager.generateReport(this.report, txt, ReportFormat.TEXT);
     assertThat(txt.length()).isGreaterThan(0);
   }
 
@@ -222,17 +228,13 @@ public class ReportingTest extends ComponentTest {
    * Test that checks the creation of a report stream in pdf format.
    *
    *
+   *
    */
   @Test
   public void generateReportStream() {
 
     this.stream = new ByteArrayOutputStream();
-    this.params = new HashMap<>();
-    this.params.put("ReportTitle", "Test");
-    this.params.put("ReportDescription", "This is a Test Stream Report");
-
-    this.reportManager.generateReport(createList(), this.templatePath, this.params, this.stream, ReportFormat.PDF);
-
+    this.reportManager.generateReport(this.report, this.stream, ReportFormat.PDF);
     assertThat(((ByteArrayOutputStream) this.stream).size()).isGreaterThan(0);
   }
 
@@ -245,7 +247,7 @@ public class ReportingTest extends ComponentTest {
   }
 
   @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
-  public static List<Map> createList() {
+  public static List<HashMap> createList() {
 
     List lst = new ArrayList();
     lst.add(createItem("Tom Waits", 92));

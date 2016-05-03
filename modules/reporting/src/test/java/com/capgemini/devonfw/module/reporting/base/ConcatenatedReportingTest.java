@@ -32,7 +32,6 @@ import io.oasp.module.test.common.base.ComponentTest;
  * Test class to test the concatenated reports functionality
  *
  * @author pparrado
- * @since 1.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ReportingModuleApp.class)
@@ -228,6 +227,7 @@ public class ConcatenatedReportingTest extends ComponentTest {
     assertThat(((ByteArrayOutputStream) this.stream).size()).isGreaterThan(0);
   }
 
+  @SuppressWarnings("javadoc")
   @After
   public void end() throws IOException {
 

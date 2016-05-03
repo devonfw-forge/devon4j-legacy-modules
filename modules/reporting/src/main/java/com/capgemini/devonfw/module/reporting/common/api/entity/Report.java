@@ -2,13 +2,13 @@ package com.capgemini.devonfw.module.reporting.common.api.entity;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * TODO pparrado This type ...
+ * Entity to encapsulate a report
  *
  * @author pparrado
- * @param <T>
- * @since 1.1
+ * @param <T> type of the data that is provided to be included in the report
  */
 public class Report<T> {
   private String name;
@@ -30,7 +30,7 @@ public class Report<T> {
   }
 
   /**
-   * @param name new value of {@link #getname}.
+   * @param name new value of {@link #getName}.
    */
   public void setName(String name) {
 
@@ -46,7 +46,7 @@ public class Report<T> {
   }
 
   /**
-   * @param dataSourceName new value of {@link #getdataSourceName}.
+   * @param dataSourceName new value of {@link #getDataSourceName}.
    */
   public void setDataSourceName(String dataSourceName) {
 
@@ -62,7 +62,7 @@ public class Report<T> {
   }
 
   /**
-   * @param data new value of {@link #getdata}.
+   * @param data new value of {@link #getData}.
    */
   public void setData(List<T> data) {
 
@@ -78,7 +78,7 @@ public class Report<T> {
   }
 
   /**
-   * @param templatePath new value of {@link #gettemplatePath}.
+   * @param templatePath new value of {@link #getTemplatePath}.
    */
   public void setTemplatePath(String templatePath) {
 
@@ -88,13 +88,13 @@ public class Report<T> {
   /**
    * @return params
    */
-  public HashMap<String, Object> getParams() {
+  public Map<String, Object> getParams() {
 
     return this.params;
   }
 
   /**
-   * @param params new value of {@link #getparams}.
+   * @param params new value of {@link #getParams}.
    */
   public void setParams(HashMap<String, Object> params) {
 
