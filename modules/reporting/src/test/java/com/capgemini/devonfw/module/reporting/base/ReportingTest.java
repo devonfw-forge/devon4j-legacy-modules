@@ -227,6 +227,7 @@ public class ReportingTest extends ComponentTest {
   public void generateReportStream() {
 
     this.stream = new ByteArrayOutputStream();
+    this.templatePath = this.getClass().getResource("/reportingtest.jrxml").getPath();
     this.params = new HashMap<>();
     this.params.put("ReportTitle", "Test");
     this.params.put("ReportDescription", "This is a Test Stream Report");

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
+import com.capgemini.devonfw.module.reporting.common.api.entity.Report;
 import com.capgemini.devonfw.module.reporting.common.exception.ReportingException;
 
 /**
@@ -42,4 +43,11 @@ public interface Reporting<T> {
   void generateReport(List<T> data, String templatePath, Map<String, Object> params, OutputStream stream,
       ReportFormat format);
 
+  void generateSubreport(Report masterReport, List<Report> reports, File file, ReportFormat format);
+
+  void generateSubreport(Report masterReport, List<Report> reports, OutputStream stream, ReportFormat format);
+
+  void concatenateReports(List<Report> reports, File file, ReportFormat format);
+
+  void concatenateReports(List<Report> reports, OutputStream stream, ReportFormat format);
 }
