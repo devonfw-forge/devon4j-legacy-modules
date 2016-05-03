@@ -2,8 +2,8 @@ package com.capgemini.devonfw.module.reporting.common.impl;
 
 import java.io.OutputStream;
 import java.util.Collection;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Named;
@@ -140,36 +140,42 @@ public class JasperUtils {
   public void configureExporter(JRAbstractExporter exporter, Object print, OutputStream stream, ReportFormat format)
       throws ReportingException {
 
+    ExporterInput exporterInput = print instanceof List ? SimpleExporterInput.getInstance((List<JasperPrint>) print)
+        : new SimpleExporterInput((JasperPrint) print);
+    ExporterOutput exporterOutput = null;
     if (print instanceof List || print instanceof JasperPrint) {
 
-    switch (format) {
-    case EXCEL:
-      exporterOutput = new SimpleOutputStreamExporterOutput(stream);
-      exporter.setConfiguration(getXlsConfiguration());
-      break;
-    case CSV:
-    case WORD:
-    case RTF:
-      exporterOutput = new SimpleWriterExporterOutput(stream);
-      break;
-    case TEXT:
-      exporterOutput = new SimpleWriterExporterOutput(stream);
-      exporter.setConfiguration(getTxtConfiguration());
-      break;
-    case EXCEL_XLSX:
-      exporterOutput = new SimpleOutputStreamExporterOutput(stream);
-      exporter.setConfiguration(getXlsxConfiguration());
-      break;
-    case HTML:
-      exporterOutput = new SimpleHtmlExporterOutput(stream);
-      break;
-    default:
-      exporterOutput = new SimpleOutputStreamExporterOutput(stream);
+      switch (format) {
+      case EXCEL:
+        exporterOutput = new SimpleOutputStreamExporterOutput(stream);
+        exporter.setConfiguration(getXlsConfiguration());
+        break;
+      case CSV:
+      case WORD:
+      case RTF:
+        exporterOutput = new SimpleWriterExporterOutput(stream);
+        break;
+      case TEXT:
+        exporterOutput = new SimpleWriterExporterOutput(stream);
+        exporter.setConfiguration(getTxtConfiguration());
+        break;
+      case EXCEL_XLSX:
+        exporterOutput = new SimpleOutputStreamExporterOutput(stream);
+        exporter.setConfiguration(getXlsxConfiguration());
+        break;
+      case HTML:
+        exporterOutput = new SimpleHtmlExporterOutput(stream);
+        break;
+      default:
+        exporterOutput = new SimpleOutputStreamExporterOutput(stream);
+      }
+
+      exporter.setExporterInput(exporterInput);
+      exporter.setExporterOutput(exporterOutput);
+    } else {
+      throw new ReportingException(
+          "In order to configure the JRAbstractExporter the object supplied must be of type JasperPrint or a List of JasperPrint objects");
     }
-
-    exporter.setExporterInput(exporterInput);
-    exporter.setExporterOutput(exporterOutput);
-
   }
 
   private SimpleTextReportConfiguration getTxtConfiguration() throws ReportingException {
