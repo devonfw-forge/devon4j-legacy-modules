@@ -139,13 +139,13 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
     } catch (ReportingException | JRException | IOException e) {
       log.error("An error occurred while trying to create the subreport. " + e.getMessage());
-      throw new ReportingException(e);
+      throw new ReportingException(e, e.getMessage());
     } finally {
       try {
         if (stream != null)
           stream.close();
       } catch (IOException ioex) {
-        throw new ReportingException(
+        throw new ReportingException(ioex,
             "The stream associated to the temp file could not be closed. " + ioex.getMessage());
       }
     }
@@ -185,7 +185,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
     } catch (ReportingException | JRException e) {
       log.error("An error occurred while trying to create the subreport. " + e.getMessage());
-      throw new ReportingException(e);
+      throw new ReportingException(e, e.getMessage());
     }
 
   }
@@ -219,13 +219,13 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
     } catch (Exception e) {
       log.error("An error occurred while trying to create the concatenated report: " + e.getMessage(), e);
-      throw new ReportingException(e);
+      throw new ReportingException(e, e.getMessage());
     } finally {
       try {
         if (stream != null)
           stream.close();
       } catch (IOException ioex) {
-        throw new ReportingException(
+        throw new ReportingException(ioex,
             "The stream associated to the temp file for the concatenated report could not be closed. "
                 + ioex.getMessage());
       }
@@ -260,7 +260,7 @@ public class ReportingJasperImpl<T> implements Reporting<T> {
 
     } catch (Exception e) {
       log.error("An error occurred while trying to create the concatenated report: " + e.getMessage(), e);
-      throw new ReportingException(e);
+      throw new ReportingException(e, e.getMessage());
     }
   }
 

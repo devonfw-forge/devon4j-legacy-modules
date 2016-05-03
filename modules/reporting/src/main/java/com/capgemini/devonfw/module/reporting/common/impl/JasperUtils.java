@@ -1,6 +1,7 @@
 package com.capgemini.devonfw.module.reporting.common.impl;
 
 import java.io.OutputStream;
+import java.security.InvalidParameterException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -173,7 +174,7 @@ public class JasperUtils {
       exporter.setExporterInput(exporterInput);
       exporter.setExporterOutput(exporterOutput);
     } else {
-      throw new ReportingException(
+      throw new InvalidParameterException(
           "In order to configure the JRAbstractExporter the object supplied must be of type JasperPrint or a List of JasperPrint objects");
     }
   }

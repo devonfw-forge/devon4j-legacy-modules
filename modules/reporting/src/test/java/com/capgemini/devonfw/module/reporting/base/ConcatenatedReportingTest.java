@@ -1,7 +1,5 @@
 package com.capgemini.devonfw.module.reporting.base;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +21,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.capgemini.devonfw.module.reporting.common.SpringBootApp;
+import com.capgemini.devonfw.module.reporting.common.ReportingModuleApp;
 import com.capgemini.devonfw.module.reporting.common.api.Reporting;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 import com.capgemini.devonfw.module.reporting.common.api.entity.Report;
@@ -37,7 +35,7 @@ import io.oasp.module.test.common.base.ComponentTest;
  * @since 1.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SpringBootApp.class)
+@SpringApplicationConfiguration(classes = ReportingModuleApp.class)
 public class ConcatenatedReportingTest extends ComponentTest {
   @SuppressWarnings("rawtypes")
   @Inject
@@ -70,8 +68,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedPdfReport() throws IOException {
 
     File pdf = File.createTempFile("concReports_", ".pdf");
-    this.reportManager.concatenateReports(this.reports, pdf, ReportFormat.Pdf);
-    assertTrue(pdf.length() > 0);
+    this.reportManager.concatenateReports(this.reports, pdf, ReportFormat.PDF);
+    assertThat(pdf.length()).isGreaterThan(0);
   }
 
   /**
@@ -83,8 +81,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedXlsReport() throws IOException {
 
     File excel = File.createTempFile("concReports_", ".xls");
-    this.reportManager.concatenateReports(this.reports, excel, ReportFormat.Excel);
-    assertTrue(excel.length() > 0);
+    this.reportManager.concatenateReports(this.reports, excel, ReportFormat.EXCEL);
+    assertThat(excel.length()).isGreaterThan(0);
   }
 
   /**
@@ -96,8 +94,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedXlsxReport() throws IOException {
 
     File excel_xlsx = File.createTempFile("concReports_", ".xlsx");
-    this.reportManager.concatenateReports(this.reports, excel_xlsx, ReportFormat.Excel_xlsx);
-    assertTrue(excel_xlsx.length() > 0);
+    this.reportManager.concatenateReports(this.reports, excel_xlsx, ReportFormat.EXCEL_XLSX);
+    assertThat(excel_xlsx.length()).isGreaterThan(0);
   }
 
   /**
@@ -109,8 +107,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedHtmlReport() throws IOException {
 
     File html = File.createTempFile("concReports_", ".html");
-    this.reportManager.concatenateReports(this.reports, html, ReportFormat.Html);
-    assertTrue(html.length() > 0);
+    this.reportManager.concatenateReports(this.reports, html, ReportFormat.HTML);
+    assertThat(html.length()).isGreaterThan(0);
   }
 
   /**
@@ -122,8 +120,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedOdsReport() throws IOException {
 
     File ods = File.createTempFile("concReports_", ".ods");
-    this.reportManager.concatenateReports(this.reports, ods, ReportFormat.OpenDocumentSheet);
-    assertTrue(ods.length() > 0);
+    this.reportManager.concatenateReports(this.reports, ods, ReportFormat.OPEN_DOCUMENT_SHEET);
+    assertThat(ods.length()).isGreaterThan(0);
   }
 
   /**
@@ -135,8 +133,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedOdtReport() throws IOException {
 
     File odt = File.createTempFile("concReports_", ".odt");
-    this.reportManager.concatenateReports(this.reports, odt, ReportFormat.OpenDocumentText);
-    assertTrue(odt.length() > 0);
+    this.reportManager.concatenateReports(this.reports, odt, ReportFormat.OPEN_DOCUMENT_TEXT);
+    assertThat(odt.length()).isGreaterThan(0);
   }
 
   /**
@@ -148,8 +146,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedDocReport() throws IOException {
 
     File doc = File.createTempFile("concReports_", ".doc");
-    this.reportManager.concatenateReports(this.reports, doc, ReportFormat.Word);
-    assertTrue(doc.length() > 0);
+    this.reportManager.concatenateReports(this.reports, doc, ReportFormat.WORD);
+    assertThat(doc.length()).isGreaterThan(0);
   }
 
   /**
@@ -161,8 +159,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedDocxReport() throws IOException {
 
     File docx = File.createTempFile("concReports_", ".docx");
-    this.reportManager.concatenateReports(this.reports, docx, ReportFormat.Word_docx);
-    assertTrue(docx.length() > 0);
+    this.reportManager.concatenateReports(this.reports, docx, ReportFormat.WORD_DOCX);
+    assertThat(docx.length()).isGreaterThan(0);
   }
 
   /**
@@ -174,8 +172,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedPptxReport() throws IOException {
 
     File pptx = File.createTempFile("concReports_", ".pptx");
-    this.reportManager.concatenateReports(this.reports, pptx, ReportFormat.Pptx);
-    assertTrue(pptx.length() > 0);
+    this.reportManager.concatenateReports(this.reports, pptx, ReportFormat.PPTX);
+    assertThat(pptx.length()).isGreaterThan(0);
   }
 
   /**
@@ -187,8 +185,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedRtfReport() throws IOException {
 
     File rtf = File.createTempFile("concReports_", ".rtf");
-    this.reportManager.concatenateReports(this.reports, rtf, ReportFormat.Rtf);
-    assertTrue(rtf.length() > 0);
+    this.reportManager.concatenateReports(this.reports, rtf, ReportFormat.RTF);
+    assertThat(rtf.length()).isGreaterThan(0);
   }
 
   /**
@@ -200,8 +198,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedCsvReport() throws IOException {
 
     File csv = File.createTempFile("concReports_", ".csv");
-    this.reportManager.concatenateReports(this.reports, csv, ReportFormat.Csv);
-    assertTrue(csv.length() > 0);
+    this.reportManager.concatenateReports(this.reports, csv, ReportFormat.CSV);
+    assertThat(csv.length()).isGreaterThan(0);
   }
 
   /**
@@ -213,8 +211,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedTxtReport() throws IOException {
 
     File txt = File.createTempFile("concReports_", ".txt");
-    this.reportManager.concatenateReports(this.reports, txt, ReportFormat.Text);
-    assertTrue(txt.length() > 0);
+    this.reportManager.concatenateReports(this.reports, txt, ReportFormat.TEXT);
+    assertThat(txt.length()).isGreaterThan(0);
   }
 
   /**
@@ -226,9 +224,8 @@ public class ConcatenatedReportingTest extends ComponentTest {
   public void generateConcatenatedStreamReport() throws IOException {
 
     this.stream = new ByteArrayOutputStream();
-    this.reportManager.concatenateReports(this.reports, this.stream, ReportFormat.Pdf);
-
-    assertTrue(((ByteArrayOutputStream) this.stream).size() > 0);
+    this.reportManager.concatenateReports(this.reports, this.stream, ReportFormat.PDF);
+    assertThat(((ByteArrayOutputStream) this.stream).size()).isGreaterThan(0);
   }
 
   @After

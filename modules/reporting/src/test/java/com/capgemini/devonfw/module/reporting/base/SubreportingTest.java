@@ -1,7 +1,5 @@
 package com.capgemini.devonfw.module.reporting.base;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +20,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.capgemini.devonfw.module.reporting.common.SpringBootApp;
+import com.capgemini.devonfw.module.reporting.common.ReportingModuleApp;
 import com.capgemini.devonfw.module.reporting.common.api.Reporting;
 import com.capgemini.devonfw.module.reporting.common.api.dataType.ReportFormat;
 import com.capgemini.devonfw.module.reporting.common.api.entity.Report;
@@ -36,7 +34,7 @@ import io.oasp.module.test.common.base.ComponentTest;
  * @since 1.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SpringBootApp.class)
+@SpringApplicationConfiguration(classes = ReportingModuleApp.class)
 public class SubreportingTest extends ComponentTest {
 
   @SuppressWarnings("rawtypes")
@@ -110,8 +108,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportPdfFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".pdf");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Pdf);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.PDF);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -123,8 +121,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportExcelFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".xls");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Excel);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.EXCEL);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -136,8 +134,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportXlsxFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".xlsx");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Excel_xlsx);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.EXCEL_XLSX);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -149,8 +147,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportHtmlFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".html");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Html);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.HTML);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -162,8 +160,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportOdsFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".ods");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.OpenDocumentSheet);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.OPEN_DOCUMENT_SHEET);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -175,8 +173,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportOdtFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".odt");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.OpenDocumentText);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.OPEN_DOCUMENT_TEXT);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -188,8 +186,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportDocFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".doc");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Word);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.WORD);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -201,8 +199,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportDocxFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".docx");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Word_docx);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.WORD_DOCX);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -214,8 +212,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportPptxFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".pptx");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Pptx);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.PPTX);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -227,8 +225,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportRtfFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".rtf");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Rtf);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.RTF);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -240,8 +238,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportCsvFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".csv");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Csv);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.CSV);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -253,8 +251,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubreportTxtFile() throws IOException {
 
     File file = File.createTempFile("subreport_", ".txt");
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.Text);
-    assertTrue(file.length() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, file, ReportFormat.TEXT);
+    assertThat(file.length()).isGreaterThan(0);
   }
 
   /**
@@ -265,8 +263,8 @@ public class SubreportingTest extends ComponentTest {
   public void generateSubrerportStream() {
 
     this.stream = new ByteArrayOutputStream();
-    this.reportManager.generateSubreport(this.masterReport, this.subreports, this.stream, ReportFormat.Pdf);
-    assertTrue(((ByteArrayOutputStream) this.stream).size() > 0);
+    this.reportManager.generateSubreport(this.masterReport, this.subreports, this.stream, ReportFormat.PDF);
+    assertThat(((ByteArrayOutputStream) this.stream).size()).isGreaterThan(0);
   }
 
   @SuppressWarnings("javadoc")
