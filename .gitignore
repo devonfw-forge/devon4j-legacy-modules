@@ -4,6 +4,7 @@
 *.iml
 .*
 target/
+/.settings/
 jsclient/
 eclipse-target/
 **/src/generated/
