@@ -1,25 +1,32 @@
 package com.capgemini.devonfw.module.winauth.common.impl.security;
 
+import java.util.Properties;
+
 import javax.inject.Named;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchResult;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.capgemini.devonfw.module.winauth.common.api.AuthenticationSource;
 import com.capgemini.devonfw.module.winauth.common.api.accesscontrol.ActiveDirectory;
 
 /**
- * TODO jhcore This type ...
+ * Implementation of {@link AuthenticationSource}
  *
  * @author jhcore
  */
-@ConfigurationProperties(prefix = "devon.winauth")
+@ConfigurationProperties(prefix = "devon.winauth.ad")
 @Named
 public class AuthenticationSourceADImpl implements AuthenticationSource {
 
@@ -28,22 +35,53 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   /**
    * Instance of the ActiveDirectory class. We need it to do the query.
    */
-  public ActiveDirectory activeDirectory;
+  private ActiveDirectory activeDirectory;
 
   /**
    * User name of the server authentication
    */
-  public String username;
+  private String username = "";
 
   /**
    * Password of the server authentication
    */
-  public String password;
+  private String password = "";
 
   /**
    * Server domain
    */
-  public String domain;
+  private String domain = "";
+
+  private String userSearchFilter = "(uid={0})";
+
+  private String userSearchBase = "";
+
+  private String searchBy = "";
+
+  private String rolePrefix = "";
+
+  private String url = "";
+
+  private StandardPBEStringEncryptor encryptor;
+
+  @Value("${devon.winauth.keyPass}")
+  private String keyPass;
+
+  /**
+   * @return searchBy
+   */
+  public String getSearchBy() {
+
+    return this.searchBy;
+  }
+
+  /**
+   * @param searchBy new value of searchBy.
+   */
+  public void setSearchBy(String searchBy) {
+
+    this.searchBy = searchBy;
+  }
 
   /**
    * The constructor.
@@ -51,7 +89,29 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   public AuthenticationSourceADImpl() {
     super();
     this.activeDirectory = new ActiveDirectory();
+    if (this.searchBy == null || this.searchBy.equals("")) {
+      this.searchBy = "samaccountname";
+    }
+
   }
+
+  @Override
+  public LdapAuthenticationProviderConfigurer<AuthenticationManagerBuilder> getLdapAuthenticationProviderConfigurer() {
+
+    LdapAuthenticationProviderConfigurer<AuthenticationManagerBuilder> ldap =
+        new LdapAuthenticationProviderConfigurer<>();
+
+    this.encryptor = new StandardPBEStringEncryptor();
+    this.encryptor.setPassword(this.keyPass);
+
+    Properties props = new EncryptableProperties(this.encryptor);
+    props.setProperty("password", this.password);
+
+    ldap.userSearchBase(this.userSearchBase).userSearchFilter(this.userSearchFilter).rolePrefix(this.rolePrefix)
+        .contextSource().managerDn(this.username).managerPassword(props.getProperty("password")).url(this.url);
+
+    return ldap;
+  };
 
   /**
    * The constructor.
@@ -72,18 +132,28 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   @Override
   public Attributes searchUserByUsername(String searchValue) {
 
-    this.activeDirectory.connect(this.username, this.password, this.domain);
-    NamingEnumeration<SearchResult> result = this.activeDirectory.searchUser(searchValue, "username", this.domain);
+    NamingEnumeration<SearchResult> result;
+    try {
+      this.encryptor = new StandardPBEStringEncryptor();
+      this.encryptor.setPassword(this.keyPass);
 
-    this.activeDirectory.closeLdapConnection();
+      Properties props = new EncryptableProperties(this.encryptor);
+      props.setProperty("password", this.password);
 
+      this.activeDirectory.connect(this.username, props.getProperty("password"), this.domain);
+
+      result = this.activeDirectory.searchUser(searchValue, this.searchBy, this.domain);
+    } finally {
+      this.activeDirectory.closeLdapConnection();
+    }
+    // (&((&(objectCategory=Person)(objectClass=User)))(samaccountname=Servidor Web))
     try {
       Attributes attrs = result.next().getAttributes();
       return attrs;
     } catch (NamingException e) {
       e.printStackTrace();
       UsernameNotFoundException exception = new UsernameNotFoundException("Authentication failed.", e);
-      LOG.warn("Failed to get user {}.", this.username, exception);
+      LOG.error("Failed to get user {}.", this.username, exception);
       throw exception;
     }
   }
@@ -114,9 +184,8 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param username new value of {@link #getusername}.
+   * @param username new value of username.
    */
-  @SuppressWarnings("javadoc")
   @Override
   public void setUsername(String username) {
 
@@ -133,9 +202,8 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param password new value of {@link #getpassword}.
+   * @param password new value of password.
    */
-  @SuppressWarnings("javadoc")
   @Override
   public void setPassword(String password) {
 
@@ -152,12 +220,83 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param domain new value of {@link #getdomain}.
+   * @param domain new value of domain.
    */
-  @SuppressWarnings("javadoc")
   @Override
   public void setDomain(String domain) {
 
     this.domain = domain;
+  }
+
+  /**
+   * @return userSearchFilter
+   */
+  @Override
+  public String getUserSearchFilter() {
+
+    return this.userSearchFilter;
+  }
+
+  /**
+   * @param userSearchFiler new value of userSearchFilter.
+   */
+  @Override
+  public void setUserSearchFilter(String userSearchFiler) {
+
+    this.userSearchFilter = userSearchFiler;
+  }
+
+  /**
+   * @return userSearchBase
+   */
+  @Override
+  public String getUserSearchBase() {
+
+    return this.userSearchBase;
+  }
+
+  /**
+   * @param userSearchBase new value of userSearchBase.
+   */
+  @Override
+  public void setUserSearchBase(String userSearchBase) {
+
+    this.userSearchBase = userSearchBase;
+  }
+
+  /**
+   * @return rolePrefix
+   */
+  @Override
+  public String getRolePrefix() {
+
+    return this.rolePrefix;
+  }
+
+  /**
+   * @param rolePrefix new value of rolePrefix.
+   */
+  @Override
+  public void setRolePrefix(String rolePrefix) {
+
+    this.rolePrefix = rolePrefix;
+  }
+
+  /**
+   * @return url
+   */
+  @Override
+  public String getUrl() {
+
+    return this.url;
+  }
+
+  /**
+   * @param url new value of url.
+   */
+  @Override
+  public void setUrl(String url) {
+
+    this.url = url;
   }
 }
