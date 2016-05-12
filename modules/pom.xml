@@ -16,6 +16,7 @@
   <modules>
     <module>foo</module>
 	<module>reporting</module>
+  <module>winauth</module>
   </modules>
 
   <dependencyManagement>

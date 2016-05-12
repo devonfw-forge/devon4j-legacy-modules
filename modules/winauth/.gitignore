@@ -5,6 +5,7 @@
 .*
 target/
 jsclient/
+bin/
 eclipse-target/
 **/src/generated/
 **/tmp/
