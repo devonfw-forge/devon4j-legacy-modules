@@ -7,7 +7,6 @@ import javax.inject.Named;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.properties.EncryptableProperties;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +33,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   /**
    * Password of the server authentication
    */
-  private String password = "";
+  private String password;
 
   /**
    * Server domain
@@ -47,10 +46,43 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
 
   private String userDn = "";
 
-  @Value("${devon.winauth.keyPass}")
   private String keyPass;
 
   private StandardPBEStringEncryptor encryptor;
+
+  private boolean encrypt = false;
+
+  /**
+   * @return encryptor
+   */
+  public StandardPBEStringEncryptor getEncryptor() {
+
+    return this.encryptor;
+  }
+
+  /**
+   * @param encryptor new value of {@link #getencryptor}.
+   */
+  public void setEncryptor(StandardPBEStringEncryptor encryptor) {
+
+    this.encryptor = encryptor;
+  }
+
+  /**
+   * @return encrypt
+   */
+  public boolean isEncrypt() {
+
+    return this.encrypt;
+  }
+
+  /**
+   * @param encrypt new value of {@link #getencrypt}.
+   */
+  public void setEncrypt(boolean encrypt) {
+
+    this.encrypt = encrypt;
+  }
 
   /**
    * @return userDn
@@ -150,18 +182,22 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   @Bean
   public DefaultSpringSecurityContextSource contextSource() {
 
-    this.encryptor = new StandardPBEStringEncryptor();
-    this.encryptor.setPassword(this.keyPass);
+    String pass = this.password;
 
-    Properties props = new EncryptableProperties(this.encryptor);
-    props.setProperty("password", this.password);
+    if (this.encrypt) {
+      this.encryptor = new StandardPBEStringEncryptor();
+      this.encryptor.setPassword(this.keyPass);
+
+      Properties props = new EncryptableProperties(this.encryptor);
+      props.setProperty("password", this.password);
+      pass = props.getProperty("password");
+    }
 
     DefaultSpringSecurityContextSource defaultSpringSecurityContextSource =
         new DefaultSpringSecurityContextSource(this.url);
     defaultSpringSecurityContextSource.setUserDn(this.userDn);
-    defaultSpringSecurityContextSource.setPassword(props.getProperty("password"));
+    defaultSpringSecurityContextSource.setPassword(pass);
     return defaultSpringSecurityContextSource;
-
   }
 
   /**

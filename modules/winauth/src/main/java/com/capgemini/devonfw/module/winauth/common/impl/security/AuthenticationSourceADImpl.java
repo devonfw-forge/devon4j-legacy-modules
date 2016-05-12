@@ -12,7 +12,6 @@ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.properties.EncryptableProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer;
@@ -45,7 +44,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   /**
    * Password of the server authentication
    */
-  private String password = "";
+  private String password;
 
   /**
    * Server domain
@@ -64,8 +63,9 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
 
   private StandardPBEStringEncryptor encryptor;
 
-  @Value("${devon.winauth.keyPass}")
   private String keyPass;
+
+  private boolean encrypt = false;
 
   /**
    * @return searchBy
@@ -101,17 +101,54 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
     LdapAuthenticationProviderConfigurer<AuthenticationManagerBuilder> ldap =
         new LdapAuthenticationProviderConfigurer<>();
 
-    this.encryptor = new StandardPBEStringEncryptor();
-    this.encryptor.setPassword(this.keyPass);
+    String pass = this.password;
 
-    Properties props = new EncryptableProperties(this.encryptor);
-    props.setProperty("password", this.password);
+    if (this.encrypt) {
+      this.encryptor = new StandardPBEStringEncryptor();
+      this.encryptor.setPassword(this.keyPass);
+
+      Properties props = new EncryptableProperties(this.encryptor);
+      props.setProperty("password", this.password);
+      pass = props.getProperty("password");
+    }
 
     ldap.userSearchBase(this.userSearchBase).userSearchFilter(this.userSearchFilter).rolePrefix(this.rolePrefix)
-        .contextSource().managerDn(this.username).managerPassword(props.getProperty("password")).url(this.url);
+        .contextSource().managerDn(this.username).managerPassword(pass).url(this.url);
 
     return ldap;
   };
+
+  /**
+   * @return keyPass
+   */
+  public String getKeyPass() {
+
+    return this.keyPass;
+  }
+
+  /**
+   * @param keyPass new value of {@link #getkeyPass}.
+   */
+  public void setKeyPass(String keyPass) {
+
+    this.keyPass = keyPass;
+  }
+
+  /**
+   * @return encrypt
+   */
+  public boolean isEncrypt() {
+
+    return this.encrypt;
+  }
+
+  /**
+   * @param encrypt new value of {@link #getencrypt}.
+   */
+  public void setEncrypt(boolean encrypt) {
+
+    this.encrypt = encrypt;
+  }
 
   /**
    * The constructor.
@@ -134,13 +171,16 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
 
     NamingEnumeration<SearchResult> result;
     try {
-      this.encryptor = new StandardPBEStringEncryptor();
-      this.encryptor.setPassword(this.keyPass);
+      String pass = this.password;
+      if (this.encrypt) {
+        this.encryptor = new StandardPBEStringEncryptor();
+        this.encryptor.setPassword(this.keyPass);
 
-      Properties props = new EncryptableProperties(this.encryptor);
-      props.setProperty("password", this.password);
-
-      this.activeDirectory.connect(this.username, props.getProperty("password"), this.domain);
+        Properties props = new EncryptableProperties(this.encryptor);
+        props.setProperty("password", this.password);
+        pass = props.getProperty("password");
+      }
+      this.activeDirectory.connect(this.username, pass, this.domain);
 
       result = this.activeDirectory.searchUser(searchValue, this.searchBy, this.domain);
     } finally {
