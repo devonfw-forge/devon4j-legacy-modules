@@ -14,7 +14,6 @@
   <description>Reusable modules of the Open Application Standard Platform for Java (OASP4J).</description>
 
   <modules>
-    <module>bom</module>
     <module>foo</module>
     <module>reporting</module>
     <module>winauth</module>
@@ -22,6 +21,22 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- BOM of spring-boot -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- BOM of OASP4J -->
+      <dependency>
+        <groupId>io.oasp.java</groupId>
+        <artifactId>oasp4j-bom</artifactId>
+        <version>${oasp4j.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <!-- BOM of Devon -->
       <dependency>
         <groupId>com.capgemini.devonfw</groupId>

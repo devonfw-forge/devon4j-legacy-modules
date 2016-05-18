@@ -13,8 +13,7 @@
   <description>Active Directory base authentication.</description>
 
   <dependencies>
-
-  <!-- Waffle dependency -->
+    <!-- Waffle dependency -->
     <dependency>
       <groupId>com.github.dblock.waffle</groupId>
       <artifactId>waffle-spring-security3</artifactId>
@@ -48,7 +47,7 @@
     <dependency>
       <groupId>org.springframework.security.kerberos</groupId>
       <artifactId>spring-security-kerberos-core</artifactId>
-      </dependency>
+    </dependency>
     <dependency>
       <groupId>org.springframework.security.kerberos</groupId>
       <artifactId>spring-security-kerberos-web</artifactId>
