@@ -28,8 +28,6 @@ import com.capgemini.devonfw.module.winauth.common.api.AuthenticationManagerAD;
 @ConfigurationProperties(prefix = "devon.winauth.ldap")
 public class AuthenticationManagerImpl implements AuthenticationManagerAD {
 
-  // private static final Logger LOG = LoggerFactory.getLogger(AuthenticationManagerImpl.class);
-
   /**
    * Password of the server authentication
    */
@@ -61,7 +59,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   }
 
   /**
-   * @param encryptor new value of {@link #getencryptor}.
+   * @param encryptor new value of encryptor.
    */
   public void setEncryptor(StandardPBEStringEncryptor encryptor) {
 
@@ -77,7 +75,7 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
   }
 
   /**
-   * @param encrypt new value of {@link #getencrypt}.
+   * @param encrypt new value of encrypt.
    */
   public void setEncrypt(boolean encrypt) {
 

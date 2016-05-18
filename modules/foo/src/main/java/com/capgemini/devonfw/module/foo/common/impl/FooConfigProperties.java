@@ -31,6 +31,9 @@ public class FooConfigProperties {
     return this.bar;
   }
 
+  /**
+   * @param bar as a collection of name-value pairs
+   */
   public void setBar(HashMap<String, String> bar) {
 
     this.bar = bar;
@@ -45,7 +48,7 @@ public class FooConfigProperties {
   }
 
   /**
-   * @param baz new value of {@link #getbaz}.
+   * @param baz new value of getbaz.
    */
   public void setBaz(String baz) {
 

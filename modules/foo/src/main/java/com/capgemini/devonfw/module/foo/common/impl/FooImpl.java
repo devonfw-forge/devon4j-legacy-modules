@@ -31,7 +31,7 @@ public class FooImpl implements Foo {
   }
 
   /**
-   * @param props new value of {@link #getprops}.
+   * @param props new value of props.
    */
   public void setProps(FooConfigProperties props) {
 

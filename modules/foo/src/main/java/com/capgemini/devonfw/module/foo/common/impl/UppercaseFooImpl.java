@@ -30,7 +30,7 @@ public class UppercaseFooImpl implements Foo {
   }
 
   /**
-   * @param props new value of {@link #getprops}.
+   * @param props new value of props.
    */
   public void setProps(FooConfigProperties props) {
 
@@ -47,7 +47,7 @@ public class UppercaseFooImpl implements Foo {
   public Map<String, String> bar() {
 
     Map<String, String> map = this.props.getBar();
-    Map<String, String> newmap = new HashMap<String, String>();
+    Map<String, String> newmap = new HashMap<>();
 
     for (Map.Entry<String, String> entry : map.entrySet()) {
       newmap.put(entry.getKey(), entry.getValue().toUpperCase());
