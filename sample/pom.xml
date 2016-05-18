@@ -29,19 +29,11 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- BOM of spring-boot -->
+      <!-- BOM of Devon -->
       <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring.boot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <!-- BOM of OASP4J -->
-      <dependency>
-        <groupId>io.oasp.java</groupId>
-        <artifactId>oasp4j-bom</artifactId>
-        <version>2.0.0</version>
+        <groupId>com.capgemini.devonfw</groupId>
+        <artifactId>devonfw-bom</artifactId>
+        <version>${devonfw.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

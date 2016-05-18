@@ -6,12 +6,10 @@ import java.util.Collection;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.ext.Provider;
-import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.transport.servlet.CXFServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +24,15 @@ import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
-
 import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
 import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
 
+/**
+ * TODO jhcore This type ...
+ *
+ * @author jhcore
+ * @since 1.1
+ */
 @Configuration
 @EnableWs
 @ImportResource({ "classpath:META-INF/cxf/cxf.xml" /* , "classpath:META-INF/cxf/cxf-servlet.xml" */ })
@@ -38,14 +41,29 @@ public class ServiceConfiguration extends WsConfigurerAdapter {
   /** Logger instance. */
   private static final Logger LOG = LoggerFactory.getLogger(ServiceConfiguration.class);
 
+  /**
+   *
+   */
   public static final String URL_PATH_SERVICES = "/services";
 
+  /**
+   *
+   */
   public static final String URL_FOLDER_REST = "/rest";
 
+  /**
+   *
+   */
   public static final String URL_FOLDER_WEB_SERVICES = "/ws";
 
+  /**
+   *
+   */
   public static final String URL_PATH_REST_SERVICES = URL_PATH_SERVICES + URL_FOLDER_REST;
 
+  /**
+   *
+   */
   public static final String URL_PATH_WEB_SERVICES = URL_PATH_SERVICES + URL_FOLDER_WEB_SERVICES;
 
   @Value("${security.expose.error.details}")
@@ -57,18 +75,27 @@ public class ServiceConfiguration extends WsConfigurerAdapter {
   @Inject
   private ObjectMapperFactory objectMapperFactory;
 
+  /**
+   * @return return SpringBus
+   */
   @Bean(name = "cxf")
   public SpringBus springBus() {
 
     return new SpringBus();
   }
 
+  /**
+   * @return returns JacksonJsonProvider
+   */
   @Bean
   public JacksonJsonProvider jacksonJsonProvider() {
 
     return new JacksonJsonProvider(this.objectMapperFactory.createInstance());
   }
 
+  /**
+   * @return returns ServletRegistrationBean
+   */
   @Bean
   public ServletRegistrationBean servletRegistrationBean() {
 
@@ -77,6 +104,9 @@ public class ServiceConfiguration extends WsConfigurerAdapter {
     return servletRegistration;
   }
 
+  /**
+   * @return the server
+   */
   @Bean
   public Server jaxRsServer() {
 
@@ -104,6 +134,9 @@ public class ServiceConfiguration extends WsConfigurerAdapter {
     return this.applicationContext.getBeansWithAnnotation(Path.class).values();
   }
 
+  /**
+   * @return the RestServiceExceptionFacade
+   */
   @Bean
   public RestServiceExceptionFacade restServiceExceptionFacade() {
 
@@ -112,5 +145,4 @@ public class ServiceConfiguration extends WsConfigurerAdapter {
     return exceptionFacade;
   }
 
-  
 }
