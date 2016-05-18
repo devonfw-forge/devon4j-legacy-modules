@@ -14,6 +14,7 @@
   <description>Reusable modules of the Open Application Standard Platform for Java (OASP4J).</description>
 
   <modules>
+    <module>bom</module>
     <module>foo</module>
     <module>reporting</module>
     <module>winauth</module>

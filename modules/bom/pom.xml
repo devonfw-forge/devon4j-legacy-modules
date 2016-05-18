@@ -11,9 +11,10 @@
 
   <groupId>com.capgemini.devonfw</groupId>
   <artifactId>devonfw-bom</artifactId>
+  <version>${devonfw.version}</version>
+  <name>${project.artifactId}</name>
 
   <packaging>pom</packaging>
-  <name>${project.artifactId}</name>
   <description>Dependencies (BOM) of the Devon Framework based on OASP4J.</description>
 
   <url>?</url>
@@ -28,10 +29,6 @@
   </scm>
 
   <properties>
-    <oasp4j.version>2.0.0</oasp4j.version>
-    <devonfw.version>1.1-SNAPSHOT</devonfw.version>
-    <port.range>81</port.range>
-    <java.version>1.7</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <cxf.version>3.1.6</cxf.version>
