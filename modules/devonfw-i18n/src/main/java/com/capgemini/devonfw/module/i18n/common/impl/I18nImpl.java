@@ -15,7 +15,7 @@ import com.capgemini.devonfw.module.i18n.common.api.I18n;
  * @author Kunal
  *
  */
-@Named("internat")
+@Named
 public class I18nImpl implements I18n {
 
   /**
