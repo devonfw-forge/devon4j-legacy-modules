@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.capgemini.devonfw.module.i18n.common.api.I18n;
-import com.capgemini.devonfw.module.i18n.common.api.I18nWeb;
+import com.capgemini.devonfw.module.i18n.common.api.I18nRest;
 
 /**
  * TODO kugawand This type ...
@@ -19,9 +19,9 @@ import com.capgemini.devonfw.module.i18n.common.api.I18nWeb;
  */
 
 @Named
-public class I18nWebImpl implements I18nWeb {
+public class I18nRestImpl implements I18nRest {
 
-  private static final Logger LOG = LoggerFactory.getLogger(I18nWebImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(I18nRestImpl.class);
 
   private I18n I18n;
 
@@ -35,7 +35,7 @@ public class I18nWebImpl implements I18nWeb {
   }
 
   @Override
-  public HashMap<String, String> findPropFiles(String langCulture) {
+  public HashMap<String, String> getlocale(String langCulture) {
 
     LOG.debug("Find Property file based on locale value :", langCulture);
     return this.I18n.getLocale(langCulture);

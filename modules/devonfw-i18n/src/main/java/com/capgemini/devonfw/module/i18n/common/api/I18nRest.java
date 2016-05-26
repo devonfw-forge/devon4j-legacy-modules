@@ -8,8 +8,12 @@ import java.util.HashMap;
  * @author kunal
  * @since 2.0.0
  */
-public interface I18nWeb {
+public interface I18nRest {
 
-  HashMap<String, String> findPropFiles(String langCulture);
+  /**
+   * @param langCulture
+   * @return
+   */
+  HashMap<String, String> getlocale(String langCulture);
 
 }
