@@ -14,34 +14,93 @@
 
   <dependencies>
 
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot</artifactId>
- </dependency>
- <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-autoconfigure</artifactId>
- </dependency>
- <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-configuration-processor</artifactId>
-    <optional>true</optional>
- </dependency>
- <dependency>
-    <groupId>javax.inject</groupId>
-    <artifactId>javax.inject</artifactId>
-  </dependency>
-  <dependency>
+  <!-- Waffle dependency -->
+    <dependency>
+      <groupId>com.github.dblock.waffle</groupId>
+      <artifactId>waffle-spring-security3</artifactId>
+      <version>1.8.1</version>
+    </dependency>
+    <!-- END Waffle dependency -->
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Encrypt dependency -->
+    <dependency>
+      <groupId>org.jasypt</groupId>
+      <artifactId>jasypt</artifactId>
+      <version>1.9.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- END Encrypt dependency -->
+
+    <!-- LDAP and AD dependencies -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-ldap</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.directory.server</groupId>
+      <artifactId>apacheds-server-jndi</artifactId>
+      <version>1.5.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security.kerberos</groupId>
+      <artifactId>spring-security-kerberos-core</artifactId>
+      <version>1.0.1.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security.kerberos</groupId>
+      <artifactId>spring-security-kerberos-web</artifactId>
+      <version>1.0.1.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security.kerberos</groupId>
+      <artifactId>spring-security-kerberos-client</artifactId>
+      <version>1.0.1.RELEASE</version>
+    </dependency>
+    <!-- END LDAP dependencies -->
+
+    <!-- Note: There is a conflict with the version 5.2.2.Final (org.springframework.boot) -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator-annotation-processor</artifactId>
+      <version>4.1.0.Final</version><!--$NO-MVN-MAN-VER$ -->
+    </dependency>
+    <!-- END Note -->
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-  </dependency>
+    </dependency>
 
-  <dependency>
-     <groupId>org.springframework</groupId>
-     <artifactId>spring-test</artifactId>
-     <scope>test</scope>
-  </dependency>
-   <dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-test</artifactId>
       <scope>test</scope>
@@ -62,19 +121,21 @@
       <artifactId>oasp4j-basic</artifactId>
     </dependency>
 
-     <!--
-     <dependency>
+
+    <dependency>
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-rest</artifactId>
-    </dependency>-->
-<dependency>
+    </dependency>
+
+    <dependency>
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-beanmapping</artifactId>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-    </dependency>
+
+    <!-- <dependency> -->
+    <!-- <groupId>javax.servlet</groupId> -->
+    <!-- <artifactId>javax.servlet-api</artifactId> -->
+    <!-- </dependency> -->
 
   </dependencies>
 </project>
