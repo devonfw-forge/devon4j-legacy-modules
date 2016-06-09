@@ -4,8 +4,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 
 import com.capgemini.devonfw.module.winauth.common.api.AuthenticationSource;
@@ -37,9 +35,6 @@ public class NegotiateSecurityFilterSSO extends NegotiateSecurityFilter {
 
     super.setProvider(securityFilterProviderCollection);
   }
-
-  // ** Logger instance. */
-  private static final Logger LOG = LoggerFactory.getLogger(NegotiateSecurityFilterSSO.class);
 
   private AuthenticationSource authenticationSource;
 

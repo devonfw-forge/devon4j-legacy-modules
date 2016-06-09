@@ -127,7 +127,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param keyPass new value of {@link #getkeyPass}.
+   * @param keyPass new value of keyPass.
    */
   public void setKeyPass(String keyPass) {
 
@@ -143,7 +143,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
   }
 
   /**
-   * @param encrypt new value of {@link #getencrypt}.
+   * @param encrypt new value of encrypt.
    */
   public void setEncrypt(boolean encrypt) {
 

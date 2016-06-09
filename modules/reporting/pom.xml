@@ -12,35 +12,36 @@
   <name>${project.artifactId}</name>
   <description>Module for reporting.</description>
 
+
   <dependencies>
- <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot</artifactId>
- </dependency>
- <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-autoconfigure</artifactId>
- </dependency>
- <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-configuration-processor</artifactId>
-    <optional>true</optional>
- </dependency>
- <dependency>
-    <groupId>javax.inject</groupId>
-    <artifactId>javax.inject</artifactId>
-  </dependency>
-  <dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-  </dependency>
+    </dependency>
 
-  <dependency>
-     <groupId>org.springframework</groupId>
-     <artifactId>spring-test</artifactId>
-     <scope>test</scope>
-  </dependency>
-   <dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-test</artifactId>
       <scope>test</scope>
@@ -55,13 +56,11 @@
     <dependency>
       <groupId>net.sf.jasperreports</groupId>
       <artifactId>jasperreports</artifactId>
-      <version>6.2.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi</artifactId>
-      <version>3.14</version>
     </dependency>
 
     <dependency>

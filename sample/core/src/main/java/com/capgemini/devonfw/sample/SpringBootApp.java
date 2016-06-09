@@ -9,6 +9,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
 
 //@SpringBootApplication(exclude = { SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class })
+/**
+ * TODO jhcore This type ...
+ *
+ * @author jhcore
+ * @since 1.1
+ */
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
 @EntityScan(basePackages = { "com.capgemini.devonfw.sample" }, basePackageClasses = { AdvancedRevisionEntity.class })
 @EnableGlobalMethodSecurity(jsr250Enabled = true)

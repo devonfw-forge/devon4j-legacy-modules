@@ -20,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.capgemini.devonfw.sample.general.common.api.security.UserData;
 import com.capgemini.devonfw.sample.general.dataaccess.base.DatabaseMigrator;
+
 import io.oasp.module.security.common.api.accesscontrol.AccessControlPermission;
 import io.oasp.module.security.common.base.accesscontrol.AccessControlGrantedAuthority;
 import io.oasp.module.test.common.base.ComponentTest;
@@ -39,10 +40,15 @@ public abstract class AbstractSpringBatchIntegrationTest extends ComponentTest {
   /** scripts for all tests db setup */
   private static final String ALL_TESTS_DB_SETUP_DIR = "classpath:AllTests/setup/db";
 
+  /**
+   * @param login of the user
+   * @param password of the user
+   * @param permissions of the user
+   */
   protected static void login(String login, String password, String... permissions) {
-  
+
     Set<String> groups = new HashSet<>(Arrays.asList(permissions));
-  
+
     Set<GrantedAuthority> authorities = new HashSet<>();
     for (String permission : groups) {
       authorities.add(new AccessControlGrantedAuthority(new AccessControlPermission(permission)));
@@ -51,8 +57,11 @@ public abstract class AbstractSpringBatchIntegrationTest extends ComponentTest {
         new UsernamePasswordAuthenticationToken(new UserData(login, password, authorities), password));
   }
 
+  /**
+   *
+   */
   public static void logout() {
-  
+
     SecurityContextHolder.getContext().setAuthentication(null);
   }
 

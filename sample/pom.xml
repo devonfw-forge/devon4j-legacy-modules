@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>devonfw</artifactId>
@@ -41,7 +42,15 @@
       <dependency>
         <groupId>io.oasp.java</groupId>
         <artifactId>oasp4j-bom</artifactId>
-        <version>2.0.0</version>
+        <version>${oasp4j.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- BOM of Devon -->
+      <dependency>
+        <groupId>com.capgemini.devonfw</groupId>
+        <artifactId>devonfw-bom</artifactId>
+        <version>${devonfw.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -66,7 +75,7 @@
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
           <artifactId>lifecycle-mapping</artifactId>
-            <version>1.0.0</version>
+          <version>1.0.0</version>
           <configuration>
             <lifecycleMappingMetadata>
               <pluginExecutions>
@@ -81,7 +90,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -95,7 +104,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -108,7 +117,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -121,7 +130,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
               </pluginExecutions>

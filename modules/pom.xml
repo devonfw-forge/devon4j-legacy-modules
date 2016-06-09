@@ -8,15 +8,15 @@
     <version>dev-SNAPSHOT</version>
   </parent>
   <artifactId>devonfw-modules</artifactId>
-  <version>dev-SNAPSHOT</version> <!-- This POM will never be released -->
+
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>Reusable modules of the Open Application Standard Platform for Java (OASP4J).</description>
 
   <modules>
     <module>foo</module>
-	<module>reporting</module>
-  <module>winauth</module>
+    <module>reporting</module>
+    <module>winauth</module>
   </modules>
 
   <dependencyManagement>
@@ -37,6 +37,14 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <!-- BOM of Devon -->
+      <dependency>
+        <groupId>com.capgemini.devonfw</groupId>
+        <artifactId>devonfw-bom</artifactId>
+        <version>${devonfw.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -53,13 +61,13 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
-          <!--<notree>true</notree>-->
+          <!--<notree>true</notree> -->
           <show>private</show>
           <encoding>${project.reporting.outputEncoding}</encoding>
           <charset>${project.build.sourceEncoding}</charset>
           <docfilessubdirs>true</docfilessubdirs>
           <stylesheetfile>${user.dir}/src/main/javadoc/stylesheet.css</stylesheetfile>
-          <!--<additionalparam>-Xdoclint:none -source ${java.version}</additionalparam>-->
+          <!--<additionalparam>-Xdoclint:none -source ${java.version}</additionalparam> -->
           <links>
             <link>http://docs.oracle.com/javase/7/docs/api/</link>
             <link>http://oasp.github.io/oasp4j/maven/apidocs/</link>

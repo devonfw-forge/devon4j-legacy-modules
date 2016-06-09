@@ -1,15 +1,14 @@
 package com.capgemini.devonfw.sample.general.configuration;
 
-import com.capgemini.devonfw.sample.general.dataaccess.base.DatabaseMigrator;
-
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.capgemini.devonfw.sample.general.dataaccess.base.DatabaseMigrator;
 
 /**
  * Java configuration for JPA
@@ -20,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 // @EnableTransactionManagement
 public class BeansJpaConfiguration {
 
-  private @Autowired EntityManagerFactory entityManagerFactory;
+  // private @Autowired EntityManagerFac tory entityManagerFactory;
 
   private @Autowired DataSource appDataSource;
 
@@ -33,6 +32,9 @@ public class BeansJpaConfiguration {
   @Value("${database.migration.clean}")
   private Boolean clean;
 
+  /**
+   * @return DatabaseMigrator
+   */
   @Bean
   public DatabaseMigrator getFlyway() {
 
@@ -45,6 +47,9 @@ public class BeansJpaConfiguration {
 
   }
 
+  /**
+   *
+   */
   @PostConstruct
   public void migrate() {
 
