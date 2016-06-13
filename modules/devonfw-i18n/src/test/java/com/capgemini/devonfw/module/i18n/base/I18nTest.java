@@ -2,17 +2,19 @@ package com.capgemini.devonfw.module.i18n.base;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
-import java.util.HashMap;
-
 import javax.inject.Inject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.i18n.common.I18nTestApp;
 import com.capgemini.devonfw.module.i18n.common.api.I18n;
+import com.capgemini.devonfw.module.i18n.common.configuration.JsonCreator;
+import com.capgemini.devonfw.module.i18n.common.impl.I18nImpl;
+import com.google.gson.JsonParser;
 
 /**
  * Test class to test {@link I18n}.
@@ -24,6 +26,7 @@ import com.capgemini.devonfw.module.i18n.common.api.I18n;
 public class I18nTest extends ComponentTest {
 
   @Inject
+  @Qualifier("internat")
   private I18n internat;
 
   /**
@@ -31,49 +34,57 @@ public class I18nTest extends ComponentTest {
    */
 
   @Test
-  public void testGetLocale() {
+  public void testlanguageFiles() {
 
     // assertThat(this.internat).isNotNull();
 
-    HashMap<String, String> usenglish = this.internat.getLocale("en_US");
-    HashMap<String, String> german = this.internat.getLocale("de_DE");
-    assertThat(this.internat).isNotNull();
-    assertThat(usenglish).isNotNull();
-    assertThat(german).isNotNull();
-    assertThat(usenglish.get("helloworld")).isEqualTo("Hello World");
-    assertThat(german.get("helloworld")).isEqualTo("Hello Welt");
+    I18nImpl i18nImpl = new I18nImpl();
+    JsonCreator jsCreate = new JsonCreator();
+    boolean mmmEnabled = true;
+    String mmmdefault = "nl";
+    JsonParser parser = new JsonParser();
+    String strVal1 = "";
+    String strVal2 = "";
+    String strVal3 = "";
+    String strVal4 = "";
+
+    // given
+    assertThat(i18nImpl).isNotNull();
+    assertThat(jsCreate).isNotNull();
+
+    // Test case For locale en_US with mmm integration
+    strVal1 = i18nImpl.getMmmProperty("", "en_US", "getLocale", parser, mmmdefault);
+    // when
+    assertThat(strVal1).isNotNull();
+    // then
+    assertThat(strVal1).isEqualTo(
+        "TODO(en):i18n. This Module is related to internationalization NlsBundleI18nEn_en.Properties");
+
+    // Test case For locale de_DE with mmm integration
+    strVal2 = i18nImpl.getMmmProperty("", "de_DE", "getLocale", parser, mmmdefault);
+    // when
+    assertThat(strVal2).isNotNull();
+    // then
+    assertThat(strVal2).isEqualTo(
+        "TODO(en):i18n. This Module is related to internationalization NlsBundleI18nEn_en.Properties");
+
+    // create json files respect to locales
+    // LocaleToJson obj = jsCreate.localeToJson();
+
+    // Test case For locale de_DE without mmm integration
+    strVal3 = i18nImpl.getProperty("", "en_US", "helloworld", parser);
+    // when
+    assertThat(strVal3).isNotNull();
+    // then
+    assertThat(strVal3).isEqualTo("{\"helloworld\":\"Hello World\"}");
+
+    // Test case For locale de_DE without mmm integration
+    strVal4 = i18nImpl.getProperty("", "de_DE", "helloworld", parser);
+    // when
+    assertThat(strVal4).isNotNull();
+    // then
+    assertThat(strVal4).isEqualTo("{\"helloworld\":\"Hello Welt\"}");
 
   }
-
-  /*
-   * @Test public void testHashMapNotNull() {
-   * 
-   * // when assertThat(this.internat).isNotNull();
-   * 
-   * // then assertThat(this.usenglish).isNotNull(); assertThat(this.german).isNotNull(); } }
-   * 
-   * @Test public void testPropertiesValue() {
-   * 
-   * // given assertThat(this.internat).isNotNull();
-   * 
-   * // when assertThat(this.usenglish).isNotNull(); assertThat(this.german).isNotNull();
-   * 
-   * // then assertThat(this.usenglish.get("helloworld")).isEqualTo("Hello World");
-   * assertThat(this.german.get("helloworld")).isEqualTo("Hello Welt"); }
-   */
-
-  /**
-   *
-   */
-  /*
-   * @Test public void testGetLocale() {
-   * 
-   * HashMap<String, String> usenglish = this.internat.getLocale("en_US"); HashMap<String, String> german =
-   * this.internat.getLocale("de_DE"); assertThat(this.internat).isNotNull(); assertThat(usenglish).isNotNull();
-   * assertThat(german).isNotNull(); assertThat(usenglish.get("helloworld")).isEqualTo("Hello World");
-   * assertThat(german.get("helloworld")).isEqualTo("Hello Welt");
-   * 
-   * }
-   */
 
 };

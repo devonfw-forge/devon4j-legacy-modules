@@ -1,15 +1,17 @@
 package com.capgemini.devonfw.module.i18n.common.impl;
 
-import java.util.HashMap;
+import com.capgemini.devonfw.module.i18n.common.api.exception.UnknownLocaleException;
+import com.capgemini.devonfw.module.i18n.common.api.exception.UnknownLocaleExceptionMMM;
+import com.capgemini.devonfw.module.i18n.common.api.I18n;
+import com.capgemini.devonfw.module.i18n.common.api.I18nRest;
+
+import java.io.FileNotFoundException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.capgemini.devonfw.module.i18n.common.api.I18n;
-import com.capgemini.devonfw.module.i18n.common.api.I18nRest;
 
 /**
  * TODO kugawand This type ...
@@ -35,10 +37,11 @@ public class I18nRestImpl implements I18nRest {
   }
 
   @Override
-  public HashMap<String, String> getlocale(String langCulture) {
+  public String getlocale(String langCulture, String Param) throws UnknownLocaleException, FileNotFoundException,
+      UnknownLocaleExceptionMMM {
 
     LOG.debug("Find Property file based on locale value :", langCulture);
-    return this.I18n.getLocale(langCulture);
+    return this.I18n.getLocale(langCulture, Param);
 
   }
 }

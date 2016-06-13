@@ -1,6 +1,8 @@
 package com.capgemini.devonfw.module.i18n.common.api;
 
-import java.util.HashMap;
+import java.io.FileNotFoundException;
+
+import com.capgemini.devonfw.module.i18n.common.api.exception.UnknownLocaleException;
 
 /**
  * @author Kunal
@@ -16,6 +18,7 @@ public interface I18n {
    * @param LanguageCultureName
    * @return The key value pairs (HashMap) from the properties files based on the LanguageCultureName.
    */
-  HashMap<String, String> getLocale(String LanguageCultureName);
+
+  String getLocale(String LanguageCultureName, String Param) throws FileNotFoundException, UnknownLocaleException;
 
 }
