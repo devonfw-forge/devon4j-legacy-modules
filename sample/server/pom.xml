@@ -112,9 +112,89 @@
         </plugins>
       </build>
     </profile>
-  </profiles>
+        <profile>
+      <id>docker</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.14.1</version>
+            <configuration>
+              <mainClass>io.oasp.gastronomy.restaurant.SpringBootApp</mainClass>
+              <images>
+                <image>
+                  <alias>service</alias>
+                  <name>fabric8/${project.artifactId}-fabric8:${project.version}</name>
 
-  <build>
+                  <!-- ....................................... -->
+                  <!-- Build configuration for creating images -->
+                  <!-- ....................................... -->
+                  <build>
+                    <from>java:openjdk-7-jre</from>
+                    <assembly>
+                      <mode>dir</mode>
+                      <basedir>/maven</basedir>
+                      <descriptor>assembly.xml</descriptor>
+                    </assembly>
+                    <!-- Expose ports -->
+                    <ports>
+                      <port>8080</port>
+                    </ports>
+                    <!-- Default command for the build image -->
+                    <cmd>java -Djava.security.egd=file:/dev/./urandom -jar /maven/devon-sample-server.war</cmd>
+                  </build>
+
+                  <!-- ............................................................... -->
+                  <!-- Runtime configuration for starting/stopping/linking containers -->
+                  <!-- ............................................................... -->
+                  <run>
+                    <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
+                    <ports>
+                      <port>tomcat.port:8080</port>
+                    </ports>
+                    <wait>
+                      <http>
+                        <!-- Check for this URL to return a 200 return code .... -->
+                        <url>http://${docker.host.address}:${tomcat.port}/login</url>
+                        <method>GET</method>
+                      </http>
+                      <!-- ... but at max 60 seconds, this is usually enough to start the application -->
+                      <time>60000</time>
+                    </wait>
+                    <log>
+                      <prefix>TC</prefix>
+                      <color>cyan</color>
+                    </log>
+                  </run>
+                </image>
+              </images>
+
+
+            </configuration>
+            <executions>
+              <execution>
+                <id>start</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>build</goal>
+                  <goal>start</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>stop</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>stop</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+ <build>
     <resources>
       <resource>
         <directory>${project.basedir}/src/main/resources</directory>
@@ -128,14 +208,18 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <mainClass>io.oasp.gastronomy.devonfw-sample.SpringBootApp</mainClass>
-          <classifier>bootified</classifier>
-          <finalName>${project.artifactId}</finalName>
-          <layout>WAR</layout>
-        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <mainClass>com.capgemini.devonfw.sample.SpringBootApp</mainClass>
+              <finalName>${project.artifactId}</finalName>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
-
 </project>
