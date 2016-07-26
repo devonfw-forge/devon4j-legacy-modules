@@ -13,7 +13,7 @@
   <description>Server for the devonfw-sample application - a simple example using the Open Application Standard Platform for Java (OASP4J).</description>
 
   <properties>
-      <java.version>1.7</java.version>
+    <java.version>1.7</java.version>
   </properties>
 
   <dependencies>
@@ -22,13 +22,13 @@
       <artifactId>devonfw-sample-core</artifactId>
       <version>${project.version}</version>
     </dependency>
- </dependencies>
+  </dependencies>
 
   <profiles>
     <profile>
       <id>jsclient</id>
       <activation>
-        <!--<activeByDefault>true</activeByDefault>-->
+        <!--<activeByDefault>true</activeByDefault> -->
         <activeByDefault>false</activeByDefault>
       </activation>
       <build>
@@ -112,7 +112,7 @@
         </plugins>
       </build>
     </profile>
-        <profile>
+    <profile>
       <id>docker</id>
       <build>
         <plugins>
@@ -126,7 +126,6 @@
                 <image>
                   <alias>service</alias>
                   <name>fabric8/${project.artifactId}-fabric8:${project.version}</name>
-
                   <!-- ....................................... -->
                   <!-- Build configuration for creating images -->
                   <!-- ....................................... -->
@@ -144,7 +143,6 @@
                     <!-- Default command for the build image -->
                     <cmd>java -Djava.security.egd=file:/dev/./urandom -jar /maven/devon-sample-server.war</cmd>
                   </build>
-
                   <!-- ............................................................... -->
                   <!-- Runtime configuration for starting/stopping/linking containers -->
                   <!-- ............................................................... -->
@@ -169,8 +167,6 @@
                   </run>
                 </image>
               </images>
-
-
             </configuration>
             <executions>
               <execution>
@@ -194,7 +190,7 @@
       </build>
     </profile>
   </profiles>
- <build>
+  <build>
     <resources>
       <resource>
         <directory>${project.basedir}/src/main/resources</directory>
