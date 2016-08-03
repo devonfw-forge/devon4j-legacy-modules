@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.capgemini.devonfw.module.i18n.service.api.rest.I18nRestService;
+import com.capgemini.devonfw.module.i18n.logic.api.I18n;
 
 /**
  * TODO kunal This type ...
@@ -25,16 +25,16 @@ import com.capgemini.devonfw.module.i18n.service.api.rest.I18nRestService;
 @Transactional
 public class I18nRestServiceImpl {
 
-  private I18nRestService I18nRest;
-
   /**
-   * @param i18nRest is the reference to I18nRestImpl
+   * @param i18n the i18n to set
    */
   @Inject
-  public void setI18nRest(I18nRestService i18nRest) {
+  public void setI18n(I18n i18n) {
 
-    this.I18nRest = i18nRest;
+    this.i18n = i18n;
   }
+
+  private I18n i18n;
 
   /**
    * @param locale received from service call
@@ -42,12 +42,12 @@ public class I18nRestServiceImpl {
    * @return resources for a locale as string
    * @throws Throwable thrown by getResourcesForLocale
    */
-  @GET
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/locales/{locale}")
+  @GET
+  @Path("/locales/{locale}/")
   public String getResourcesForLocale(@PathParam("locale") String locale, @QueryParam("filter") String filter)
       throws Throwable {
 
-    return this.I18nRest.getResourcesAsJSONStringForLocale(locale, filter);
+    return this.i18n.getResourcesAsJSONStringForLocale(locale, filter);
   }
 }

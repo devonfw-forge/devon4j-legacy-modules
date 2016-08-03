@@ -25,10 +25,10 @@ public class I18nImpl implements I18n {
   private static final Logger LOGGER = LoggerFactory.getLogger(I18nImpl.class);
 
   @Value("${i18n.mmm.enabled}")
-  private boolean mmmEnabled;
+  Boolean mmmEnabled;
 
   @Value("${i18n.mmm.default}")
-  private String mmmDefault;
+  String mmmDefault;
 
   /**
    * @param locale passed from the service
