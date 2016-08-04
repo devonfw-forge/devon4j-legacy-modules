@@ -7,9 +7,11 @@ import org.apache.commons.lang.LocaleUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Import;
 
 import com.capgemini.devonfw.module.i18n.common.I18nConstants;
 import com.capgemini.devonfw.module.i18n.common.api.exception.DevonfwUnknownLocaleException;
+import com.capgemini.devonfw.module.i18n.common.configuration.PropertySourceHolder;
 import com.capgemini.devonfw.module.i18n.common.util.I18nUtils;
 import com.capgemini.devonfw.module.i18n.logic.api.I18n;
 
@@ -20,15 +22,16 @@ import com.capgemini.devonfw.module.i18n.logic.api.I18n;
  *
  */
 
+@Import(PropertySourceHolder.class)
 public class I18nImpl implements I18n {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(I18nImpl.class);
 
   @Value("${i18n.mmm.enabled}")
-  Boolean mmmEnabled;
+  private boolean mmmEnabled;
 
   @Value("${i18n.mmm.default}")
-  String mmmDefault;
+  private String mmmDefault;
 
   /**
    * @param locale passed from the service
