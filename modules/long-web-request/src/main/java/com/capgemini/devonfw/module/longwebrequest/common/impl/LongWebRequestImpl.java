@@ -3,6 +3,8 @@ package com.capgemini.devonfw.module.longwebrequest.common.impl;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
+import javax.inject.Named;
+
 import org.apache.cxf.continuations.Continuation;
 import org.apache.cxf.continuations.ContinuationProvider;
 import org.apache.cxf.jaxrs.ext.MessageContext;
@@ -17,6 +19,7 @@ import com.capgemini.devonfw.module.longwebrequest.common.api.LongWebRequest;
  *
  * @author pparrado
  */
+@Named
 public class LongWebRequestImpl implements LongWebRequest {
 
   private int timeOut;

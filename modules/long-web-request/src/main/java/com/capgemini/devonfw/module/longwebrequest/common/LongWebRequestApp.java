@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * TODO jhcore This type ...
  *
- * @author jhcore
- * @since 1.1
+ * @author pparrado
  */
 @SpringBootApplication
 public class LongWebRequestApp {
