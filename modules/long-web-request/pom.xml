@@ -107,52 +107,5 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Jetty -->
-<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlet -->
-<dependency>
-    <groupId>org.eclipse.jetty</groupId>
-    <artifactId>jetty-servlet</artifactId>
-    <version>9.2.0.RC0</version>
-</dependency>
-
-
-<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
-<dependency>
-    <groupId>org.eclipse.jetty</groupId>
-    <artifactId>jetty-server</artifactId>
-    <version>9.2.0.RC0</version>
-</dependency>
-
-
-<dependency>
-     <groupId>org.glassfish.jersey.core</groupId>
-     <artifactId>jersey-server</artifactId>
-     <version>2.7</version>
- </dependency>
-
-
-<dependency>
-     <groupId>org.glassfish.jersey.containers</groupId>
-     <artifactId>jersey-container-servlet-core</artifactId>
-     <version>2.7</version>
- </dependency>
-
-
-<dependency>
- <groupId>org.glassfish.jersey.containers</groupId>
-     <artifactId>jersey-container-jetty-http</artifactId>
-     <version>2.7</version>
- </dependency>
-
- <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-<dependency>
-    <groupId>org.apache.httpcomponents</groupId>
-    <artifactId>httpclient</artifactId>
-    <version>4.5.2</version>
-</dependency>
-
-
-
-
   </dependencies>
 </project>
