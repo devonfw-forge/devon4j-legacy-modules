@@ -8,5 +8,10 @@ import org.apache.cxf.jaxrs.ext.MessageContext;
  * @author pparrado
  */
 public interface LongWebRequest {
+  /**
+   * @param context {@link MessageContext} of the process
+   * @param lt class that implements the {@link LongTask} interface
+   * @return the response object
+   */
   Object execute(MessageContext context, LongTask lt);
 }

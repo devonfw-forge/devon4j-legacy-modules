@@ -6,5 +6,9 @@ package com.capgemini.devonfw.module.longwebrequest.common.api;
  * @author pparrado
  */
 public interface LongTask {
+  /**
+   *
+   * @return the response object
+   */
   Object run();
 }

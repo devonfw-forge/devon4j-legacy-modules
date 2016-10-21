@@ -28,18 +28,33 @@ public class LongWebRequestImpl implements LongWebRequest {
 
   private int maxPoolSize;
 
+  /**
+   * The constructor.
+   */
   public LongWebRequestImpl() {
     this.timeOut = 0;
     this.corePoolSize = 5;
     this.maxPoolSize = 5;
   }
 
+  /**
+   * The constructor.
+   *
+   * @param timeOut for the process
+   */
   public LongWebRequestImpl(int timeOut) {
     this.timeOut = timeOut;
     this.corePoolSize = 5;
     this.maxPoolSize = 5;
   }
 
+  /**
+   * The constructor.
+   *
+   * @param timeOut for the process
+   * @param corePoolSize size of core pool
+   * @param maxPoolSize max pool size
+   */
   public LongWebRequestImpl(int timeOut, int corePoolSize, int maxPoolSize) {
     this.timeOut = timeOut;
     this.corePoolSize = corePoolSize;
@@ -52,6 +67,7 @@ public class LongWebRequestImpl implements LongWebRequest {
   @Override
   public Object execute(MessageContext context, final LongTask lt) {
 
+    showExecutionInfo();
     ContinuationProvider provider = (ContinuationProvider) context.get(ContinuationProvider.class.getName());
     final Continuation continuation = provider.getContinuation();
     TaskExecutor executor = getTaskExecutor(this.corePoolSize, this.maxPoolSize);
@@ -75,6 +91,7 @@ public class LongWebRequestImpl implements LongWebRequest {
         return null;
       } else {
 
+        @SuppressWarnings("unchecked")
         FutureTask<Object> futureTask = (FutureTask<Object>) continuation.getObject();
         if (futureTask.isDone()) {
           try {
@@ -92,13 +109,20 @@ public class LongWebRequestImpl implements LongWebRequest {
     }
   }
 
-  private TaskExecutor getTaskExecutor(int corePoolSize, int maxPoolSize) {
+  private TaskExecutor getTaskExecutor(int _corePoolSize, int _maxPoolSize) {
 
     ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-    taskExecutor.setCorePoolSize(corePoolSize);
-    taskExecutor.setMaxPoolSize(maxPoolSize);
+    taskExecutor.setCorePoolSize(_corePoolSize);
+    taskExecutor.setMaxPoolSize(_maxPoolSize);
     taskExecutor.initialize();
     return taskExecutor;
+  }
+
+  private void showExecutionInfo() {
+
+    System.out.println("Long Web Request TimeOut: " + this.timeOut);
+    System.out.println("Long Web Request Core Pool Size: " + this.corePoolSize);
+    System.out.println("Long Web Request Max Pool Size: " + this.maxPoolSize);
   }
 
 }
