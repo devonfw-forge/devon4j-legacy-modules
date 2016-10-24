@@ -15,7 +15,7 @@ import com.capgemini.devonfw.module.longwebrequest.common.api.LongTask;
 import com.capgemini.devonfw.module.longwebrequest.common.api.LongWebRequest;
 
 /**
- * TODO pparrado This type ...
+ * Implementation of {@link LongWebRequest} to manage the Long Web Request
  *
  * @author pparrado
  */

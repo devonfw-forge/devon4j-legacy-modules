@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * TODO jhcore This type ...
+ * Module's main class to be used as entry point of unit tests.
  *
  * @author pparrado
  */
