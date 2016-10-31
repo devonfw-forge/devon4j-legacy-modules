@@ -1,7 +1,5 @@
 package com.capgemini.devonfw.sample.general.common;
 
-import io.oasp.module.test.common.base.ModuleTest;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +16,8 @@ import javax.xml.validation.Validator;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import io.oasp.module.test.common.base.ModuleTest;
 
 /**
  * Class for XML Validation Tests.
@@ -39,7 +39,7 @@ public class AccessControlSchemaXmlValidationTest extends ModuleTest {
 
     // parse an XML document into a DOM tree
     DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-    String xmlPath = getClass().getResource("/config/app/security/access-control-schema.xml").getPath();
+    String xmlPath = getClass().getResource("/config/app/devon_security/access-control-schema.xml").getPath();
     Document document = parser.parse(new File(xmlPath));
 
     // create a SchemaFactory capable of understanding WXS schemas

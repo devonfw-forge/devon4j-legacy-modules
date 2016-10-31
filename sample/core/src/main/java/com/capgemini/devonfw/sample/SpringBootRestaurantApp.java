@@ -8,27 +8,23 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
 
-//@SpringBootApplication(exclude = { SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class })
 /**
- * TODO jhcore This type ...
+ * TODO pparrado This type ...
  *
- * @author jhcore
- * @since 1.1
+ * @author pparrado
  */
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
-@EntityScan(basePackages = {
-/* "com.capgemini.devonfw.sample", */ "io.oasp.gastronomy.restaurant" }, basePackageClasses = {
-AdvancedRevisionEntity.class })
+@EntityScan(basePackages = { "io.oasp.gastronomy.restaurant" }, basePackageClasses = { AdvancedRevisionEntity.class })
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
-public class SpringBootApp {
+public class SpringBootRestaurantApp {
 
   /**
-   * Entry point for spring-boot based app
+   * Entry point for spring-boot restaurant based app
    *
    * @param args - arguments
    */
   public static void main(String[] args) {
 
-    SpringApplication.run(SpringBootApp.class, args);
+    SpringApplication.run(io.oasp.gastronomy.restaurant.SpringBootApp.class, args);
   }
 }
