@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(basePackages = { "io.oasp.module.beanmapping" })
-public class BeansDozerConfiguration {
+public class _BeansDozerConfiguration {
 
   private static final String DOZER_MAPPING_XML = "config/app/common/dozer-mapping.xml";
 

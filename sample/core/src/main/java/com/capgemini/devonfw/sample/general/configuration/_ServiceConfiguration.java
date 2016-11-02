@@ -36,10 +36,10 @@ import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
 @Configuration
 @EnableWs
 @ImportResource({ "classpath:META-INF/cxf/cxf.xml" /* , "classpath:META-INF/cxf/cxf-servlet.xml" */ })
-public class ServiceConfiguration extends WsConfigurerAdapter {
+public class _ServiceConfiguration extends WsConfigurerAdapter {
 
   /** Logger instance. */
-  private static final Logger LOG = LoggerFactory.getLogger(ServiceConfiguration.class);
+  private static final Logger LOG = LoggerFactory.getLogger(_ServiceConfiguration.class);
 
   /**
    *

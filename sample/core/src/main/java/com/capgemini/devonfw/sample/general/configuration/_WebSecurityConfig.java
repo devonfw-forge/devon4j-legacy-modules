@@ -6,10 +6,8 @@ import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -41,9 +39,9 @@ import io.oasp.module.security.common.impl.rest.LogoutSuccessHandlerReturningOkH
  *
  * @author hohwille, marcorose
  */
-@Configuration
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+// @Configuration
+// @EnableWebSecurity
+public class _WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Value("${security.cors.enabled}")
   boolean corsEnabled = false;

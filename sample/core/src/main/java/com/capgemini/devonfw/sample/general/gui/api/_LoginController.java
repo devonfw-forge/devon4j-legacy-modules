@@ -2,7 +2,6 @@ package com.capgemini.devonfw.sample.general.gui.api;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author mbrunnli
  */
-@Controller
-public class LoginController {
+// @Controller
+public class _LoginController {
 
   /**
    * Default URL to redirect to after successfully login.

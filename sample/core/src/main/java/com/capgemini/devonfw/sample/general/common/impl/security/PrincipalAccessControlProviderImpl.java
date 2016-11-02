@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.inject.Named;
 
 import com.capgemini.devonfw.sample.general.common.api.UserProfile;
+
 import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;
 
 /**
@@ -18,7 +19,7 @@ import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlPr
  *
  * @author hohwille
  */
-@Named
+@Named("_PrincipalAccessControlProvider")
 public class PrincipalAccessControlProviderImpl implements PrincipalAccessControlProvider<UserProfile> {
 
   /**
