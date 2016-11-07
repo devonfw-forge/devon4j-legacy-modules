@@ -154,12 +154,14 @@ public class I18nUtils {
         resBundle = ResourceBundle.getBundle(
             I18nConstants.NLS_BUNDLE_INTF_QUAL_NAME + I18nConstants.UNDER_SCORE + new Locale(locale.getLanguage()),
             locale, ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
-      } else if (language.equals(I18nConstants.en)) {
-        resBundle = ResourceBundle.getBundle(
-            I18nConstants.NLS_BUNDLE_INTF_QUAL_NAME + I18nConstants.UNDER_SCORE + I18nConstants.en,
-            new Locale(locale.getLanguage()), ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
+      } /*
+         * else if (language.equals(I18nConstants.en)) { resBundle = ResourceBundle.getBundle(
+         * I18nConstants.NLS_BUNDLE_INTF_QUAL_NAME + I18nConstants.UNDER_SCORE + I18nConstants.en, new
+         * Locale(locale.getLanguage()), ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE); }
+         */else {
+        resBundle = ResourceBundle.getBundle(I18nConstants.NLS_BUNDLE_INTF_QUAL_NAME,
+            ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
       }
-
       resourceMap = (HashMap<String, String>) I18nUtils.convertResourceBundleToMap(resBundle);
     } catch (Throwable t) {
       LOGGER.error("Exception in getResourcesGeneratedFromMMMAsMap ", t);

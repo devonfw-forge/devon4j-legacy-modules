@@ -30,8 +30,9 @@ public class I18nImpl implements I18n {
   @Value("${i18n.mmm.enabled}")
   private boolean mmmEnabled;
 
-  @Value("${i18n.mmm.default}")
-  private String mmmDefault;
+  /*
+   * @Value("${i18n.mmm.default}") private String mmmDefault;
+   */
 
   /**
    * @param locale passed from the service
@@ -48,9 +49,9 @@ public class I18nImpl implements I18n {
     String jsonString = null;
 
     if (this.mmmEnabled == true) {
-      if (locale == null || locale.isEmpty()) {
-        locale = this.mmmDefault;
-      }
+      /*
+       * if (locale == null || locale.isEmpty()) { locale = this.mmmDefault; }
+       */
       jsonString = getResourcesAsJSONStringUsingMMMImpl(locale, filter);
     } else
       jsonString = getResourcesAsJSONStringUsingDefaultImpl(locale, filter);
