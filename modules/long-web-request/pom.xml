@@ -54,13 +54,6 @@
 
 
     <!-- Springboot -->
-
-    <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
-</dependency>
-
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot</artifactId>
@@ -78,12 +71,7 @@
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-    </dependency>
-
-    <dependency>
+     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <scope>test</scope>
@@ -91,11 +79,6 @@
     <dependency>
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-configuration</artifactId>
       <scope>test</scope>
     </dependency>
 
@@ -107,10 +90,39 @@
       <scope>test</scope>
     </dependency>
 
+
+    <!-- Jersey -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-configuration-processor</artifactId>
-      <optional>true</optional>
+         <groupId>org.glassfish.jersey.core</groupId>
+         <artifactId>jersey-server</artifactId>
+         <version>2.24</version>
+     </dependency>
+
+
+    <dependency>
+         <groupId>org.glassfish.jersey.containers</groupId>
+         <artifactId>jersey-container-servlet-core</artifactId>
+         <version>2.24</version>
+     </dependency>
+
+
+    <dependency>
+     <groupId>org.glassfish.jersey.containers</groupId>
+         <artifactId>jersey-container-jetty-http</artifactId>
+         <version>2.24</version>
+     </dependency>
+
+    <dependency>
+        <groupId>org.glassfish.jersey.containers</groupId>
+        <artifactId>jersey-container-servlet</artifactId>
+        <version>2.24</version>
+    </dependency>
+
+
+    <dependency>
+        <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+        <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+        <version>2.24</version>
     </dependency>
 
   </dependencies>

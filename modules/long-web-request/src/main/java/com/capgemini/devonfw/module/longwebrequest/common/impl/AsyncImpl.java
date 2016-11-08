@@ -7,8 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.container.AsyncResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -22,33 +20,41 @@ import com.capgemini.devonfw.module.longwebrequest.common.utils.AsyncUtils;
  *
  * @author pparrado
  */
+
 @Configuration
 @PropertySource("classpath:devonfw-async.properties")
 @Named
 public class AsyncImpl implements Async {
 
   @Inject
-  Executor executor;
-
-  @Inject
   private AsyncUtils utils;
 
-  private static final Log logger = LogFactory.getLog(AsyncImpl.class);
-
+  // Configuration Properties
   @Value("${devonfw.async.corePoolSize}")
-  private int corePoolSize;
+  private String corePoolSize;
 
   @Value("${devonfw.async.timeout.milliseconds}")
-  private int timeout;
+  private String timeout;
 
   @Value("${devonfw.async.timeout.responseContent}")
   private String timeoutResponseContent;
 
   @Value("${devonfw.async.timeout.status}")
-  private int timeoutStatus;
+  private String timeoutStatus;
 
   @Value("${devonfw.async.timeout.mediatype}")
   private String timeoutMediaType;
+
+  // Default Configuration Properties
+  final int DEF_CORE_POOL_SIZE = 10;
+
+  final int DEF_TIMEOUT = 7000;
+
+  final int DEF_TIMEOUT_STATUS = 503;
+
+  final String DEF_TIMEOUT_RESPONSE_CONTENT = "Timeout";
+
+  final String DEF_MEDIA_TYPE = "text/plain";
 
   /**
    * {@inheritDoc}
@@ -56,14 +62,28 @@ public class AsyncImpl implements Async {
   @Override
   public void execute(final AsyncResponse asyncResponse, final AsyncTask task) {
 
-    asyncResponse.setTimeout(this.timeout, TimeUnit.MILLISECONDS);
-    asyncResponse.setTimeoutHandler(this.utils.getTimeoutHandler(asyncResponse,
-        this.utils.getStatus(this.timeoutStatus), this.timeoutMediaType, this.timeoutResponseContent));
-    Executor e = this.corePoolSize == 10 ? this.executor : this.utils.getCustomExecutor(this.corePoolSize);
+    // defaults
+    int corePoolSizeInt = this.corePoolSize == null || this.corePoolSize.isEmpty() ? this.DEF_CORE_POOL_SIZE
+        : Integer.parseInt(this.corePoolSize);
+    int timeoutInt = this.timeout == null || this.timeout.isEmpty() ? this.DEF_TIMEOUT : Integer.parseInt(this.timeout);
+    int timeoutStatusInt = this.timeoutStatus == null || this.timeoutStatus.isEmpty() ? this.DEF_TIMEOUT_STATUS
+        : Integer.parseInt(this.timeoutStatus);
+    this.timeoutResponseContent = this.timeoutResponseContent == null || this.timeoutResponseContent.isEmpty()
+        ? this.DEF_TIMEOUT_RESPONSE_CONTENT : this.timeoutResponseContent;
+    this.timeoutMediaType =
+        this.timeoutMediaType == null || this.timeoutMediaType.isEmpty() ? this.DEF_MEDIA_TYPE : this.timeoutMediaType;
 
-    this.utils.logInfo(this.corePoolSize, this.timeout, this.timeoutStatus, this.timeoutMediaType,
+    // Configuration
+    asyncResponse.setTimeout(timeoutInt, TimeUnit.MILLISECONDS);
+    asyncResponse.setTimeoutHandler(this.utils.getTimeoutHandler(asyncResponse, this.utils.getStatus(timeoutStatusInt),
+        this.timeoutMediaType, this.timeoutResponseContent));
+    Executor e =
+        corePoolSizeInt == 10 ? this.utils.getCustomExecutor(10) : this.utils.getCustomExecutor(corePoolSizeInt);
+
+    this.utils.logInfo(corePoolSizeInt, timeoutInt, timeoutStatusInt, this.timeoutMediaType,
         this.timeoutResponseContent);
 
+    // Execution
     e.execute(new Runnable() {
 
       @Override
@@ -71,7 +91,6 @@ public class AsyncImpl implements Async {
 
         Object result = task.run();
         asyncResponse.resume(result);
-
       }
 
     });

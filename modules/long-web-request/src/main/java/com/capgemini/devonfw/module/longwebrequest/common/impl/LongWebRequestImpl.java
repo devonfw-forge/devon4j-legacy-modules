@@ -8,6 +8,8 @@ import javax.inject.Named;
 import org.apache.cxf.continuations.Continuation;
 import org.apache.cxf.continuations.ContinuationProvider;
 import org.apache.cxf.jaxrs.ext.MessageContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -27,6 +29,8 @@ public class LongWebRequestImpl implements LongWebRequest {
   private int corePoolSize;
 
   private int maxPoolSize;
+
+  private static final Logger LOG = LoggerFactory.getLogger(LongWebRequestImpl.class);
 
   /**
    * The constructor.
@@ -99,7 +103,7 @@ public class LongWebRequestImpl implements LongWebRequest {
             return futureTask.get();
 
           } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
+            LOG.error(e.getMessage());
             return null;
           }
 
