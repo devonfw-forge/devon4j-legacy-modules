@@ -7,8 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.container.AsyncResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -27,13 +25,8 @@ import com.capgemini.devonfw.module.longwebrequest.common.utils.AsyncUtils;
 @Named
 public class AsyncImpl implements Async {
 
-  // @Inject
-  // Executor executor;
-
   @Inject
   private AsyncUtils utils;
-
-  private static final Log logger = LogFactory.getLog(AsyncImpl.class);
 
   @Value("${devonfw.async.corePoolSize}")
   private int corePoolSize;
@@ -59,7 +52,7 @@ public class AsyncImpl implements Async {
     asyncResponse.setTimeout(this.timeout, TimeUnit.MILLISECONDS);
     asyncResponse.setTimeoutHandler(this.utils.getTimeoutHandler(asyncResponse,
         this.utils.getStatus(this.timeoutStatus), this.timeoutMediaType, this.timeoutResponseContent));
-    Executor e = /* this.corePoolSize == 10 ? this.executor : */ this.utils.getCustomExecutor(this.corePoolSize);
+    Executor e = this.utils.getCustomExecutor(this.corePoolSize);
 
     this.utils.logInfo(this.corePoolSize, this.timeout, this.timeoutStatus, this.timeoutMediaType,
         this.timeoutResponseContent);

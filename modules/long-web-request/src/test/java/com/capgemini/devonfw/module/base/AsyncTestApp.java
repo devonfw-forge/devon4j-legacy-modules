@@ -4,18 +4,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.capgemini.devonfw.module.base.service.MockRestService;
-
 /**
  * Spring Boot App class for Tests
  *
  * @author pparrado
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {
-"com.capgemini.devonfw.module.longwebrequest.common"/*
-                                                     * , "com.capgemini.devonfw.module.base.service"
-                                                     */ }, basePackageClasses = MockRestService.class)
+@ComponentScan(basePackages = { "com.capgemini.devonfw.module.base.service",
+"com.capgemini.devonfw.module.longwebrequest.common" }/*
+                                                       * , basePackageClasses = { AsyncImpl.class, Async.class,
+                                                       * AsyncUtils.class, MockRestService.class }
+                                                       */)
 public class AsyncTestApp {
   /**
    * Entry point for spring-boot based app

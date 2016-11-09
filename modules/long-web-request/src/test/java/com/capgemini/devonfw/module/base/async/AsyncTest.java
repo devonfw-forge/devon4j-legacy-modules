@@ -1,5 +1,6 @@
-package com.capgemini.devonfw.module.base;
+package com.capgemini.devonfw.module.base.async;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
+
+import com.capgemini.devonfw.module.base.AsyncTestApp;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
@@ -23,17 +26,31 @@ public class AsyncTest extends ComponentTest {
   int port;
 
   private static final Logger LOG = LoggerFactory.getLogger(AsyncTest.class);
-  // @Autowired
-  // private TestRestTemplate restTemplate;
 
-  private RestTemplate restT = new TestRestTemplate();
+  private RestTemplate restTemplate;
+
+  @Before
+  public void init() {
+
+    this.restTemplate = new TestRestTemplate();
+  }
 
   @Test
-  public void exampleTest() {
+  public void simpleGetTest() {
 
-    String url = "http://localhost:" + this.port + "/mockRestService/say_hello";
-    LOG.info(url);
-    String body = this.restT.getForObject(url, String.class);
-    assertThat(body).isEqualTo("hello");
+    String url = "http://localhost:" + this.port + "/test/get";
+    LOG.info("Test Request: " + url);
+    String body = this.restTemplate.getForObject(url, String.class);
+    assertThat(body).isEqualTo("success");
+  }
+
+  @Test
+  public void timeoutTest() {
+
+    String url = "http://localhost:" + this.port + "/test/timeout";
+    LOG.info("Test Request: " + url);
+    String response = this.restTemplate.getForObject(url, String.class);
+    assertThat(response).isEqualTo("Timeout");
+
   }
 }

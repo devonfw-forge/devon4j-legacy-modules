@@ -50,15 +50,12 @@
     </dependency>
 
 
-
-
-
     <!-- Springboot -->
 
     <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
-</dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -116,6 +113,15 @@
       <artifactId>spring-boot-configuration-processor</artifactId>
       <optional>true</optional>
     </dependency>
+
+        <!-- Jersey -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jersey -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jersey</artifactId>
+        <version>1.4.1.RELEASE</version>
+    </dependency>
+
 
   </dependencies>
 </project>

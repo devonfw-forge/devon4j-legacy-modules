@@ -1,15 +1,15 @@
 package com.capgemini.devonfw.module.base.service;
 
 import javax.inject.Inject;
-import javax.jws.WebService;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
+import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.capgemini.devonfw.module.base.async.MyAsyncTask;
 import com.capgemini.devonfw.module.longwebrequest.common.api.Async;
@@ -19,25 +19,17 @@ import com.capgemini.devonfw.module.longwebrequest.common.api.Async;
  *
  * @author pparrado
  */
-@WebService
-@Service("mockRestService")
-@Path("/mockRestService")
-public class MockRestService {
+
+@Component
+@Path("/test")
+public class TestService extends Application {
 
   @Inject
   private Async async;
 
-  @GET
-  @Path("/say_hello")
-  @Produces(MediaType.TEXT_PLAIN)
-  public String sayHello() {
-
-    return "hello";
-  }
-
   @SuppressWarnings("javadoc")
   @GET
-  @Path("/asyncget")
+  @Path("/get")
   @Produces(MediaType.TEXT_PLAIN)
   public String asyncGet(@Suspended final AsyncResponse response) {
 
@@ -47,7 +39,7 @@ public class MockRestService {
 
   @SuppressWarnings("javadoc")
   @GET
-  @Path("/asynctimeout")
+  @Path("/timeout")
   @Produces(MediaType.TEXT_PLAIN)
   public void asyncTimeout(@Suspended final AsyncResponse response) {
 
