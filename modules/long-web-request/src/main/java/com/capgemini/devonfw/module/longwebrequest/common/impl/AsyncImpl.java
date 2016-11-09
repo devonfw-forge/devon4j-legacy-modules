@@ -27,8 +27,8 @@ import com.capgemini.devonfw.module.longwebrequest.common.utils.AsyncUtils;
 @Named
 public class AsyncImpl implements Async {
 
-  @Inject
-  Executor executor;
+  // @Inject
+  // Executor executor;
 
   @Inject
   private AsyncUtils utils;
@@ -59,7 +59,7 @@ public class AsyncImpl implements Async {
     asyncResponse.setTimeout(this.timeout, TimeUnit.MILLISECONDS);
     asyncResponse.setTimeoutHandler(this.utils.getTimeoutHandler(asyncResponse,
         this.utils.getStatus(this.timeoutStatus), this.timeoutMediaType, this.timeoutResponseContent));
-    Executor e = this.corePoolSize == 10 ? this.executor : this.utils.getCustomExecutor(this.corePoolSize);
+    Executor e = /* this.corePoolSize == 10 ? this.executor : */ this.utils.getCustomExecutor(this.corePoolSize);
 
     this.utils.logInfo(this.corePoolSize, this.timeout, this.timeoutStatus, this.timeoutMediaType,
         this.timeoutResponseContent);
