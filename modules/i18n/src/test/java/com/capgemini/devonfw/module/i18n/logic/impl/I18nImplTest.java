@@ -20,9 +20,9 @@ public class I18nImplTest extends ComponentTest {
   @Value("${i18n.mmm.enabled}")
   private boolean mmmEnabled;
 
-  @Value("${i18n.mmm.default}")
-  private String mmmDefault;
-
+  /*
+   * @Value("${i18n.mmm.default}") private String mmmDefault;
+   */
   /**
    * @throws Throwable thrown by testlanguageFiles
    */
@@ -69,17 +69,5 @@ public class I18nImplTest extends ComponentTest {
       String strMmmdisable = i18nImpl.getResourcesAsJSONStringUsingDefaultImpl("en_US", "");
       assertThat(strMmmdisable).isNotNull();
     }
-
-    // Tests for exceptions
-    String strException = i18nImpl.getResourcesAsJSONStringUsingDefaultImpl(null, "");
-    String strMmmException = i18nImpl.getResourcesAsJSONStringUsingMMMImpl(null, "");
-
-    // test case not working if the locale properties file is not generated. Its not returning the default lang
-    // properties file based on the default flag. i18n.mmm.default=ES
-    /*
-     * String strMmmWholeFile_de = i18nImpl.getResourcesAsJSONStringUsingMMMImpl("de_DE", "");
-     * assertThat(strMmmWholeFile_de).isNotNull();
-     */
-
   }
 };
