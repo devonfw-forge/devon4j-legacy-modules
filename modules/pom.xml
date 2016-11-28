@@ -17,7 +17,7 @@
     <module>foo</module>
     <module>reporting</module>
     <module>winauth</module>
-	<module>long-web-request</module>
+	  <module>async</module>
   </modules>
 
   <dependencyManagement>
