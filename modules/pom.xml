@@ -18,6 +18,7 @@
     <module>reporting</module>
 	<module>i18n</module>
     <module>winauth</module>
+	<module>long-web-request</module>
   </modules>
 
   <dependencyManagement>
