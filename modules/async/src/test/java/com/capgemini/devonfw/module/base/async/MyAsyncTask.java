@@ -1,6 +1,6 @@
 package com.capgemini.devonfw.module.base.async;
 
-import com.capgemini.devonfw.module.longwebrequest.common.api.AsyncTask;
+import com.capgemini.devonfw.module.async.common.api.AsyncTask;
 
 /**
  * Class to wrap the long task

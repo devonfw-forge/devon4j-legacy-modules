@@ -11,8 +11,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Component;
 
+import com.capgemini.devonfw.module.async.common.api.Async;
 import com.capgemini.devonfw.module.base.async.MyAsyncTask;
-import com.capgemini.devonfw.module.longwebrequest.common.api.Async;
 
 /**
  * Mock Rest service with test purposes

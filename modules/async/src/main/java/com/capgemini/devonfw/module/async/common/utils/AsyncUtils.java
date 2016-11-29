@@ -1,4 +1,4 @@
-package com.capgemini.devonfw.module.longwebrequest.common.utils;
+package com.capgemini.devonfw.module.async.common.utils;
 
 import java.util.concurrent.Executor;
 
@@ -9,8 +9,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
@@ -21,7 +21,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @Named
 public class AsyncUtils {
 
-  private static final Log logger = LogFactory.getLog(AsyncUtils.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AsyncUtils.class);
 
   /**
    * @param ar the {@link AsyncResponse} related to the timeout
@@ -70,7 +70,7 @@ public class AsyncUtils {
       break;
     default:
       s = Status.SERVICE_UNAVAILABLE;
-      logger.info(customStatus + " not supported. The timeout status will be " + s.getStatusCode());
+      LOG.info(customStatus + " not supported. The timeout status will be " + s.getStatusCode());
       break;
     }
 
@@ -87,17 +87,17 @@ public class AsyncUtils {
     ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
     taskExecutor.setCorePoolSize(corePoolSize);
     taskExecutor.initialize();
-    logger.info("ASYNC MODULE -- getting custom executor with core pool size of " + corePoolSize);
+    LOG.info("ASYNC MODULE -- getting custom executor with core pool size of " + corePoolSize);
     return taskExecutor;
   }
 
   @SuppressWarnings("javadoc")
   public void logInfo(int corePoolSize, int timeout, int status, String mediaType, String timeoutContent) {
 
-    logger.info("ASYNC MODULE -- EXECUTOR -- core pool size: " + corePoolSize);
-    logger.info("ASYNC MODULE -- TIMEOUT -- milliseconds: " + timeout);
-    logger.info("ASYNC MODULE -- TIMEOUT -- status: " + status);
-    logger.info("ASYNC MODULE -- TIMEOUT -- media type: " + mediaType);
-    logger.info("ASYNC MODULE -- TIMEOUT RESPONSE -- message: " + timeoutContent);
+    LOG.info("ASYNC MODULE -- EXECUTOR -- core pool size: " + corePoolSize);
+    LOG.info("ASYNC MODULE -- TIMEOUT -- milliseconds: " + timeout);
+    LOG.info("ASYNC MODULE -- TIMEOUT -- status: " + status);
+    LOG.info("ASYNC MODULE -- TIMEOUT -- media type: " + mediaType);
+    LOG.info("ASYNC MODULE -- TIMEOUT RESPONSE -- message: " + timeoutContent);
   }
 }

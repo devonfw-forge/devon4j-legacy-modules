@@ -1,4 +1,4 @@
-package com.capgemini.devonfw.module.longwebrequest.common.api;
+package com.capgemini.devonfw.module.async.common.api;
 
 /**
  * Interface to be implemented by the classes in which the async process should be wrapped. The classes only have to

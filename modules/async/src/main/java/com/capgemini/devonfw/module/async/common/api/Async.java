@@ -1,4 +1,4 @@
-package com.capgemini.devonfw.module.longwebrequest.common.api;
+package com.capgemini.devonfw.module.async.common.api;
 
 import javax.ws.rs.container.AsyncResponse;
 

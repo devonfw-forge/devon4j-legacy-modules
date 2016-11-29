@@ -11,10 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.capgemini.devonfw.module.base.service",
-"com.capgemini.devonfw.module.longwebrequest.common" }/*
-                                                       * , basePackageClasses = { AsyncImpl.class, Async.class,
-                                                       * AsyncUtils.class, MockRestService.class }
-                                                       */)
+"com.capgemini.devonfw.module.async.common" })
 public class AsyncTestApp {
   /**
    * Entry point for spring-boot based app

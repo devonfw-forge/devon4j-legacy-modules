@@ -1,4 +1,4 @@
-package com.capgemini.devonfw.module.longwebrequest.common.impl;
+package com.capgemini.devonfw.module.async.common.impl;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import com.capgemini.devonfw.module.longwebrequest.common.api.Async;
-import com.capgemini.devonfw.module.longwebrequest.common.api.AsyncTask;
-import com.capgemini.devonfw.module.longwebrequest.common.utils.AsyncUtils;
+import com.capgemini.devonfw.module.async.common.api.Async;
+import com.capgemini.devonfw.module.async.common.api.AsyncTask;
+import com.capgemini.devonfw.module.async.common.utils.AsyncUtils;
 
 /**
  * Implementation of {@link Async} to manage the Long Web Request
