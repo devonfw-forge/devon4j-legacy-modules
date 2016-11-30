@@ -21,7 +21,8 @@ import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
 @EntityScan(basePackages = { "com.capgemini.devonfw.sample" }, basePackageClasses = { AdvancedRevisionEntity.class })
 @ComponentScan(basePackages = { "com.capgemini.devonfw.sample",
-"io.oasp.gastronomy.restaurant" }, excludeFilters = @Filter(type = FilterType.REGEX, pattern = "io\\.oasp\\.gastronomy\\.restaurant\\.general\\.configuration.\\Web.*"))
+"io.oasp.gastronomy.restaurant" }, excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, value = {
+io.oasp.gastronomy.restaurant.SpringBootApp.class }))
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class SpringBootApp {
 

@@ -28,12 +28,12 @@ import com.capgemini.devonfw.sample.general.common.api.to.UserDetailsClientTo;
  * @author <a href="malte.brunnlieb@capgemini.com">Malte Brunnlieb</a>
  */
 @Path("/devonsecurity/v1")
-@Named("_SecurityRestService")
+@Named("devonSecurityRestService")
 @Transactional
-public class _SecurityRestServiceImpl {
+public class DevonSecurityRestServiceImpl {
 
   /** Logger instance. */
-  private static final Logger LOG = LoggerFactory.getLogger(_SecurityRestServiceImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DevonSecurityRestServiceImpl.class);
 
   /**
    * Use {@link CsrfTokenRepository} for CSRF protection.

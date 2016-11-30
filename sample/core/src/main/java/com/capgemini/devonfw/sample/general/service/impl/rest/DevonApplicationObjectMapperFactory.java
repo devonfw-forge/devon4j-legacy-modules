@@ -9,13 +9,13 @@ import com.fasterxml.jackson.databind.jsontype.NamedType;
  *
  * @author agreul
  */
-@Named("_ApplicationObjectMapperFactory")
-public class _ApplicationObjectMapperFactory /* extends ObjectMapperFactory */ {
+@Named("devonApplicationObjectMapperFactory")
+public class DevonApplicationObjectMapperFactory /* extends ObjectMapperFactory */ {
 
   /**
    * The constructor.
    */
-  public _ApplicationObjectMapperFactory() {
+  public DevonApplicationObjectMapperFactory() {
 
     super();
     // register polymorphic base classes

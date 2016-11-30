@@ -26,7 +26,7 @@ import org.springframework.transaction.PlatformTransactionManager;
  * This class contains configuration of batch beans.
  */
 @Configuration
-public class _BeansBatchConfig {
+public class DevonBeansBatchConfig {
 
   /**
    * JobRepository configuration

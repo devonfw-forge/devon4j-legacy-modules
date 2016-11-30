@@ -15,7 +15,7 @@ import com.capgemini.devonfw.sample.general.common.api.BinaryObject;
  */
 @Entity
 @Table(name = "BinaryObject")
-public class _BinaryObjectEntity extends ApplicationPersistenceEntity implements BinaryObject {
+public class DevonBinaryObjectEntity extends ApplicationPersistenceEntity implements BinaryObject {
 
   private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class _BinaryObjectEntity extends ApplicationPersistenceEntity implements
   /**
    * The constructor.
    */
-  public _BinaryObjectEntity() {
+  public DevonBinaryObjectEntity() {
 
     super();
   }

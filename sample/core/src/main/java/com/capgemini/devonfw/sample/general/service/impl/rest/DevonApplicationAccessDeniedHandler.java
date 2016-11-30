@@ -18,8 +18,8 @@ import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
  *
  * @author agreul
  */
-@Named("_ApplicationAccessDeniedHandler")
-public class _ApplicationAccessDeniedHandler implements AccessDeniedHandler {
+@Named("devonApplicationAccessDeniedHandler")
+public class DevonApplicationAccessDeniedHandler implements AccessDeniedHandler {
 
   private RestServiceExceptionFacade exceptionFacade;
 

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author mbrunnli
  */
 // @Controller
-public class _LoginController {
+public class DevonLoginController {
 
   /**
    * Default URL to redirect to after successfully login.

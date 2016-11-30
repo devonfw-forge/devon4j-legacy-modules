@@ -23,7 +23,7 @@ public class UsermanagementDummyImpl extends AbstractBeanMapperSupport implement
     // this is only a dummy - please replace with a real implementation
     UserDetailsClientTo profile = new UserDetailsClientTo();
     profile.setName(login);
-    profile.setFirstName("Pedro");
+    profile.setFirstName("Peter");
     profile.setLastName(login);
     profile.setRole(Role.CHIEF);
     return profile;
