@@ -5,8 +5,6 @@ import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
@@ -20,9 +18,7 @@ import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
  */
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
 @EntityScan(basePackages = { "com.capgemini.devonfw.sample" }, basePackageClasses = { AdvancedRevisionEntity.class })
-@ComponentScan(basePackages = { "com.capgemini.devonfw.sample",
-"io.oasp.gastronomy.restaurant" }, excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, value = {
-io.oasp.gastronomy.restaurant.SpringBootApp.class }))
+@ComponentScan(basePackages = { "com.capgemini.devonfw.sample", "io.oasp.gastronomy.restaurant" })
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class SpringBootApp {
 
