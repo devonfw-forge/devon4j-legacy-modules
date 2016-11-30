@@ -18,11 +18,20 @@
 
   <dependencies>
 
+    <!-- OASP4J sample app  -->
     <dependency>
       <groupId>io.oasp.java.samples</groupId>
       <artifactId>oasp4j-sample-core</artifactId>
       <version>dev-SNAPSHOT</version>
     </dependency>
+
+<!-- <dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.8.9</version>
+</dependency> -->
+
+
 
     <dependency>
       <groupId>io.oasp.java.modules</groupId>

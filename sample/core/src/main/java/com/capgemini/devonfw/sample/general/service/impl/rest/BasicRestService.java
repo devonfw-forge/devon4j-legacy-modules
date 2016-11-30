@@ -12,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.context.annotation.Profile;
+
 import io.oasp.gastronomy.restaurant.general.common.base.AbstractBeanMapperSupport;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.Offermanagement;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.OfferEto;
@@ -21,6 +23,7 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.OfferEto;
  *
  * @author pparrado
  */
+@Profile("devon")
 @Path("/basic/v1")
 @Named("BasicRestService")
 @Transactional

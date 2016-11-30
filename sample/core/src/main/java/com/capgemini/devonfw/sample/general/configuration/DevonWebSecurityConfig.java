@@ -5,7 +5,8 @@ import javax.inject.Inject;
 import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,8 +16,6 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -25,10 +24,6 @@ import org.springframework.web.filter.CorsFilter;
 import com.capgemini.devonfw.sample.general.common.impl.security.ApplicationAuthenticationProvider;
 import com.capgemini.devonfw.sample.general.common.impl.security.CsrfRequestMatcher;
 
-import io.oasp.module.security.common.api.accesscontrol.AccessControlProvider;
-import io.oasp.module.security.common.base.accesscontrol.AccessControlSchemaProvider;
-import io.oasp.module.security.common.impl.accesscontrol.AccessControlProviderImpl;
-import io.oasp.module.security.common.impl.accesscontrol.AccessControlSchemaProviderImpl;
 import io.oasp.module.security.common.impl.rest.AuthenticationSuccessHandlerSendingOkHttpStatusCode;
 import io.oasp.module.security.common.impl.rest.JsonUsernamePasswordAuthenticationFilter;
 import io.oasp.module.security.common.impl.rest.LogoutSuccessHandlerReturningOkHttpStatusCode;
@@ -39,9 +34,12 @@ import io.oasp.module.security.common.impl.rest.LogoutSuccessHandlerReturningOkH
  *
  * @author hohwille, marcorose
  */
-// @Configuration
+
+@Order(1)
+// @Profile("devon")
+@Configuration
 // @EnableWebSecurity
-public class _WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class DevonWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Value("${security.cors.enabled}")
   boolean corsEnabled = false;
@@ -52,43 +50,43 @@ public class _WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Inject
   private ApplicationAuthenticationProvider authenticationProvider;
 
-  /**
-   * @return returns AccessControlProvider
-   */
-  @Bean
-  public AccessControlProvider accessControlProvider() {
-
-    return new AccessControlProviderImpl();
-  }
-
-  /**
-   * @return returns AccessControlSchemaProvider
-   */
-  @Bean
-  public AccessControlSchemaProvider accessControlSchemaProvider() {
-
-    return new AccessControlSchemaProviderImpl();
-  }
-
-  /**
-   * @return returns csrfTokenRepository
-   */
-  @Bean
-  public CsrfTokenRepository csrfTokenRepository() {
-
-    return new HttpSessionCsrfTokenRepository();
-  }
-
-  /**
-   * @return returns DefaultRolesPrefixPostProcessor
-   */
-  @Bean
-  public static DefaultRolesPrefixPostProcessor defaultRolesPrefixPostProcessor() {
-
-    // By default Spring-Security is setting the prefix "ROLE_" for all permissions/authorities.
-    // We disable this undesired behavior here...
-    return new DefaultRolesPrefixPostProcessor("");
-  }
+  // /**
+  // * @return returns AccessControlProvider
+  // */
+  // @Bean
+  // public AccessControlProvider accessControlProvider() {
+  //
+  // return new AccessControlProviderImpl();
+  // }
+  //
+  // /**
+  // * @return returns AccessControlSchemaProvider
+  // */
+  // @Bean
+  // public AccessControlSchemaProvider accessControlSchemaProvider() {
+  //
+  // return new AccessControlSchemaProviderImpl();
+  // }
+  //
+  // /**
+  // * @return returns csrfTokenRepository
+  // */
+  // @Bean
+  // public CsrfTokenRepository csrfTokenRepository() {
+  //
+  // return new HttpSessionCsrfTokenRepository();
+  // }
+  //
+  // /**
+  // * @return returns DefaultRolesPrefixPostProcessor
+  // */
+  // @Bean
+  // public static DefaultRolesPrefixPostProcessor defaultRolesPrefixPostProcessor() {
+  //
+  // // By default Spring-Security is setting the prefix "ROLE_" for all permissions/authorities.
+  // // We disable this undesired behavior here...
+  // return new DefaultRolesPrefixPostProcessor("");
+  // }
 
   private CorsFilter getCorsFilter() {
 
@@ -189,10 +187,11 @@ public class _WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public void init() throws Exception {
 
     this.authenticationManagerBuilder.inMemoryAuthentication() //
-        .withUser("waiter").password("waiter").roles("Waiter").and() //
-        .withUser("cook").password("cook").roles("Cook").and() //
-        .withUser("barkeeper").password("barkeeper").roles("Barkeeeper") //
-        .and().withUser("chief").password("chief").roles("Chief");
+        // .withUser("waiter").password("waiter").roles("Waiter").and() //
+        // .withUser("cook").password("cook").roles("Cook").and() //
+        // .withUser("barkeeper").password("barkeeper").roles("Barkeeeper").and() //
+        // .withUser("chief").password("chief").roles("Chief").and() //
+        .withUser("devon2").password("devon").roles("Chief");
 
     // add our own authenticatonProvider that has add on functionality compared to spring security
     this.authenticationManagerBuilder.authenticationProvider(this.authenticationProvider);

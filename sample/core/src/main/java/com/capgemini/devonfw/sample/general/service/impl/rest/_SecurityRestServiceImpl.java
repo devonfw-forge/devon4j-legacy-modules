@@ -27,7 +27,7 @@ import com.capgemini.devonfw.sample.general.common.api.to.UserDetailsClientTo;
  *
  * @author <a href="malte.brunnlieb@capgemini.com">Malte Brunnlieb</a>
  */
-@Path("/security/v1")
+@Path("/devonsecurity/v1")
 @Named("_SecurityRestService")
 @Transactional
 public class _SecurityRestServiceImpl {

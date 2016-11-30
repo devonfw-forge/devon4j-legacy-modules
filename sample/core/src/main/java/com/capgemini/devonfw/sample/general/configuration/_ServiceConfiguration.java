@@ -33,6 +33,7 @@ import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
  * @author jhcore
  * @since 1.1
  */
+
 @Configuration
 @EnableWs
 @ImportResource({ "classpath:META-INF/cxf/cxf.xml" /* , "classpath:META-INF/cxf/cxf-servlet.xml" */ })

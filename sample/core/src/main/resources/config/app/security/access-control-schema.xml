@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<access-control-schema>
+  <group id="ReadMasterData" type="group">
+    <permissions>
+      <!-- offermanagement -->
+      <permission id="SaveOffer"/>
+      <permission id="DeleteOffer"/>
+      <permission id="SaveProduct"/>
+      <permission id="DeleteProduct"/>
+      <permission id="SaveProductPicture"/>
+      <permission id="DeleteProductPicture"/>
+      <permission id="FindOffer"/>
+      <permission id="FindProduct"/>
+      <permission id="FindProductPicture"/>
+      <!-- staffmanagement -->
+      <permission id="FindStaffMember"/>
+      <permission id="SaveStaffMember"/>
+      <permission id="DeleteStaffMember"/>
+      <permission id="DeleteOrderPosition"/>
+      <!-- tablemanagement -->
+      <permission id="FindTable"/>
+      <permission id="SaveTable"/>
+      <permission id="DeleteTable"/>
+    </permissions>
+  </group>
+
+  <group id="Chief" type="role">
+    <inherits>
+      <group-ref>ReadMasterData</group-ref>
+    </inherits>
+    <permissions>
+
+    </permissions>
+  </group>
+
+</access-control-schema>

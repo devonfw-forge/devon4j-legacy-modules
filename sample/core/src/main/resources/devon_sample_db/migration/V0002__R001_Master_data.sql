@@ -19,7 +19,7 @@ INSERT INTO PRODUCT (id, modificationCounter, dtype, description, alcoholic) VAL
 INSERT INTO PRODUCT (id, modificationCounter, dtype, description, alcoholic) VALUES (11, 1, 'Drink', 'Bier', false);
 INSERT INTO PRODUCT (id, modificationCounter, dtype, description, alcoholic) VALUES (12, 1, 'Drink', 'Wein / Apfelwein', false);
 
-INSERT INTO OFFER (id, modificationCounter, name, description, state, meal_id, sidedish_id, drink_id, price) VALUES (1, 1, 'Schnitzel-Menü', 'Description of Schnitzel-Menü', 0, 1, 5, 10, 6.99);
+INSERT INTO OFFER (id, modificationCounter, name, description, state, meal_id, sidedish_id, drink_id, price) VALUES (1, 1, 'Schnitzel-Menü', 'Description of Schnitzel-Menü', 0, 1, 5, 10, 8.88);
 INSERT INTO OFFER (id, modificationCounter, name, description, state, meal_id, sidedish_id, drink_id, price) VALUES (2, 1, 'Goulasch-Menü', 'Description of Goulasch-Menü', 0, 2, 6, 11, 7.99);
 INSERT INTO OFFER (id, modificationCounter, name, description, state, meal_id, sidedish_id, drink_id, price) VALUES (3, 1, 'Pfifferlinge-Menü', 'Description of Pfifferlinge-Menü', 0, 3, 8, 12, 8.99);
 INSERT INTO OFFER (id, modificationCounter, name, description, state, meal_id, sidedish_id, drink_id, price) VALUES (4, 1, 'Salat-Menü', 'Description of Salat-Menü', 0, 4, 7, 9, 5.99);
@@ -41,7 +41,8 @@ INSERT INTO BILL (id, modificationCounter, payed, total,tip) VALUES (2, 1, true,
 INSERT INTO BILL_ORDERPOSITION (bill_id, orderpositions_id) VALUES (2,3);
 INSERT INTO BILL_ORDERPOSITION (bill_id, orderpositions_id) VALUES (2,4);
 
-INSERT INTO STAFFMEMBER (id, login, role, firstname, lastname, modificationCounter) VALUES (0, 'chief', 3, 'Charles', 'Chief', 0);
-INSERT INTO STAFFMEMBER (id, login, role, firstname, lastname, modificationCounter) VALUES (1, 'cook', 0, 'Carl', 'Cook', 0);
-INSERT INTO STAFFMEMBER (id, login, role, firstname, lastname, modificationCounter) VALUES (2, 'waiter', 1, 'Willy', 'Waiter', 0);
-INSERT INTO STAFFMEMBER (id, login, role, firstname, lastname, modificationCounter) VALUES (3, 'barkeeper', 2, 'Bianca', 'Barkeeper', 0);
+--INSERT INTO STAFFMEMBER (id, login, role, firstname, lastname, modificationCounter) VALUES (0, 'chief', 3, 'Charles', 'Chief', 0);
+--INSERT INTO STAFFMEMBER (id, login, role, firstname, lastname, modificationCounter) VALUES (1, 'cook', 0, 'Carl', 'Cook', 0);
+--INSERT INTO STAFFMEMBER (id, login, role, firstname, lastname, modificationCounter) VALUES (2, 'waiter', 1, 'Willy', 'Waiter', 0);
+--INSERT INTO STAFFMEMBER (id, login, role, firstname, lastname, modificationCounter) VALUES (3, 'barkeeper', 2, 'Bianca', 'Barkeeper', 0);
+INSERT INTO STAFFMEMBER (id, login, role, firstname, lastname, modificationCounter) VALUES (4, 'devon', 3, 'Devon', 'Fw', 0);
