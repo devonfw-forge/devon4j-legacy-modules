@@ -16,7 +16,7 @@ import com.capgemini.devonfw.module.async.common.api.AsyncTask;
 import com.capgemini.devonfw.module.async.common.utils.AsyncUtils;
 
 /**
- * Implementation of {@link Async} to manage the Long Web Request
+ * Implementation of {@link Async} to manage the asynchronous process
  *
  * @author pparrado
  */

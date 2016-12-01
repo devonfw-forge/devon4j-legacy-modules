@@ -9,7 +9,7 @@
   <artifactId>devonfw-async</artifactId>
   <version>${devonfw.version}</version>
   <name>${project.artifactId}</name>
-  <description>Module for long web requests implemented with JAX-RS</description>
+  <description>Module for asynchronous processing with JAX-RS</description>
 
   <dependencies>
 
