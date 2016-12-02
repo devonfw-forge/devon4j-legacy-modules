@@ -5,7 +5,7 @@
   <groupId>${groupId}</groupId>
   <version>${version}</version> <!-- This POM will never be released -->
   <name>${project.artifactId}</name>
-  <description>Application based on the Open Application Standard Platform for Java (OASP4J).</description>
+  <description>Devon Module template created to serve as an example for new module.</description>
 
  
   <properties>

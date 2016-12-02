@@ -28,5 +28,5 @@
     </pluginManagement>
   </build>
 
-  <description>Application based on the Open Application Standard Platform for Java (OASP4J).</description>
+  <description>Devon Module template created to serve as an example for new module.</description>
 </project>
