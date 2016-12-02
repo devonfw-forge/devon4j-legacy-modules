@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.capgemini.devonfw.dev</groupId>
+    <artifactId>devonfw-modules</artifactId>
+    <version>dev-SNAPSHOT</version>
+  </parent>
+  <groupId>com.capgemini.devonfw.modules</groupId>
+  <artifactId>devonfw-async</artifactId>
+  <version>${devonfw.version}</version>
+  <name>${project.artifactId}</name>
+  <description>Module for asynchronous processing with JAX-RS</description>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>io.oasp.java.modules</groupId>
+      <artifactId>oasp4j-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Jersey -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jersey -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+
+  </dependencies>
+</project>
