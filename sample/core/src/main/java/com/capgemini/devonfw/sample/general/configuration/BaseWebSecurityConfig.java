@@ -5,12 +5,8 @@ import javax.inject.Inject;
 import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -31,17 +27,11 @@ import io.oasp.module.security.common.impl.rest.JsonUsernamePasswordAuthenticati
 import io.oasp.module.security.common.impl.rest.LogoutSuccessHandlerReturningOkHttpStatusCode;
 
 /**
- * Security configuration based on {@link WebSecurityConfigurerAdapter}. This configuration is by purpose designed most
- * simple for two channels of authentication: simple login form and rest-url.
+ * TODO pparrado This type ...
  *
- * @author hohwille, marcorose
+ * @author pparrado
  */
-
-@Order(1)
-@Profile("devon")
-@Configuration
-@EnableWebSecurity
-public class DevonWebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Value("${security.cors.enabled}")
   boolean corsEnabled = false;
@@ -51,44 +41,6 @@ public class DevonWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Inject
   private ApplicationAuthenticationProvider authenticationProvider;
-
-  // /**
-  // * @return returns AccessControlProvider
-  // */
-  // @Bean
-  // public AccessControlProvider accessControlProvider() {
-  //
-  // return new AccessControlProviderImpl();
-  // }
-  //
-  // /**
-  // * @return returns AccessControlSchemaProvider
-  // */
-  // @Bean
-  // public AccessControlSchemaProvider accessControlSchemaProvider() {
-  //
-  // return new AccessControlSchemaProviderImpl();
-  // }
-  //
-  // /**
-  // * @return returns csrfTokenRepository
-  // */
-  // @Bean
-  // public CsrfTokenRepository csrfTokenRepository() {
-  //
-  // return new HttpSessionCsrfTokenRepository();
-  // }
-  //
-  // /**
-  // * @return returns DefaultRolesPrefixPostProcessor
-  // */
-  // @Bean
-  // public static DefaultRolesPrefixPostProcessor defaultRolesPrefixPostProcessor() {
-  //
-  // // By default Spring-Security is setting the prefix "ROLE_" for all permissions/authorities.
-  // // We disable this undesired behavior here...
-  // return new DefaultRolesPrefixPostProcessor("");
-  // }
 
   private CorsFilter getCorsFilter() {
 
@@ -193,7 +145,7 @@ public class DevonWebSecurityConfig extends WebSecurityConfigurerAdapter {
         // .withUser("cook").password("cook").roles("Cook").and() //
         // .withUser("barkeeper").password("barkeeper").roles("Barkeeeper").and() //
         // .withUser("chief").password("chief").roles("Chief").and() //
-        .withUser("devon2").password("devon").roles("Chief");
+        .withUser("devon").password("devon").roles("Chief");
 
     // add our own authenticatonProvider that has add on functionality compared to spring security
     this.authenticationManagerBuilder.authenticationProvider(this.authenticationProvider);

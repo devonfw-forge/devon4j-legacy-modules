@@ -39,7 +39,7 @@ public class AccessControlSchemaXmlValidationTest extends ModuleTest {
 
     // parse an XML document into a DOM tree
     DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-    String xmlPath = getClass().getResource("/config/app/devon_security/access-control-schema.xml").getPath();
+    String xmlPath = getClass().getResource("/config/app/security/access-control-schema.xml").getPath();
     Document document = parser.parse(new File(xmlPath));
 
     // create a SchemaFactory capable of understanding WXS schemas

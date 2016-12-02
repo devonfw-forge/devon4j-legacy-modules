@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
  * @author rose
  */
 @Configuration
-public class DevonWebConfig {
+public class WebConfig {
 
   private @Autowired AutowireCapableBeanFactory beanFactory;
 

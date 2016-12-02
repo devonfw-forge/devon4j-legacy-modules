@@ -38,7 +38,7 @@ public class BasicRestService extends AbstractBeanMapperSupport {
   @PermitAll
   public String sayHello(@Context HttpServletRequest request) {
 
-    return "HELLO FROM SERVER";
+    return "HELLO FROM DEVON SERVER";
   }
 
   @Produces(MediaType.APPLICATION_JSON)

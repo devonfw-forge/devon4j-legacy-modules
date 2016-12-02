@@ -16,7 +16,7 @@ import io.oasp.module.security.common.impl.accesscontrol.AccessControlSchemaProv
  * @author jmolinar
  */
 @Configuration
-public class DevonWebSecurityBeansConfig {
+public class WebSecurityBeansConfig {
 
   /**
    * This method provides a new instance of {@code AccessControlProvider}

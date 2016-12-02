@@ -33,4 +33,11 @@
     </permissions>
   </group>
 
+    <group id="Visitor" type="role">
+    <inherits>
+    </inherits>
+    <permissions>
+    </permissions>
+  </group>
+
 </access-control-schema>
