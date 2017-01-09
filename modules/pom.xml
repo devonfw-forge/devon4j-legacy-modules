@@ -17,7 +17,7 @@
     <module>foo</module>
     <module>reporting</module>
 	  <module>i18n</module>
-    <module>winauth</module>
+    <module>winauth-ad</module>
     <module>winauth-sso</module>
 	  <module>async</module>
   </modules>
