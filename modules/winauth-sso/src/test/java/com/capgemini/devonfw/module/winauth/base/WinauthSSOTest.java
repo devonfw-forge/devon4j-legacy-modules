@@ -12,7 +12,6 @@ import com.capgemini.devonfw.module.winauthsso.SpringBootApp;
 import com.capgemini.devonfw.module.winauthsso.common.api.WinauthSSO;
 import com.capgemini.devonfw.module.winauthsso.common.impl.security.NegotiateSecurityFilterSSO;
 import com.capgemini.devonfw.module.winauthsso.common.impl.security.WinauthSSOImpl;
-import com.capgemini.devonfw.module.winauthsso.common.impl.security.WinauthSSO_OLD;
 
 import io.oasp.module.test.common.base.ComponentTest;
 

@@ -9,14 +9,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import com.capgemini.devonfw.module.winauthsso.common.api.PrincipalProfile;
-import com.capgemini.devonfw.module.winauthsso.common.api.to.UserDetailsClientToAD;
+//import com.capgemini.devonfw.module.winauthsso.common.api.to.UserDetailsClientToAD;
 
 /**
  * Container class for the profile of a user.
  *
  * @author hohwille, jhcore
  */
-public class UserDataAD extends User implements Principal {
+public class UserData extends User implements Principal {
 
   private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class UserDataAD extends User implements Principal {
    * @param accountNonLocked check if user account is not locked
    * @param authorities the authorities/permissions the user has
    */
-  public UserDataAD(String username, String password, boolean enabled, boolean accountNonExpired,
+  public UserData(String username, String password, boolean enabled, boolean accountNonExpired,
       boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
 
     super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
@@ -46,7 +46,7 @@ public class UserDataAD extends User implements Principal {
    * @param password sets the password
    * @param authorities the authorities/permissions the user has
    */
-  public UserDataAD(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+  public UserData(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 
     super(username, password, authorities);
   }
@@ -57,20 +57,21 @@ public class UserDataAD extends User implements Principal {
     return getUsername();
   }
 
-  /**
-   * @return an instance of {@link UserDetailsClientToAD} with the client side representation of this {@link UserDataAD}
-   *         instance.
-   */
-  public UserDetailsClientToAD toClientTo() {
-
-    UserDetailsClientToAD clientTo = new UserDetailsClientToAD();
-    clientTo.setId(this.userProfile.getId());
-    clientTo.setName(this.userProfile.getName());
-    clientTo.setFirstName(this.userProfile.getFirstName());
-    clientTo.setLastName(this.userProfile.getLastName());
-    clientTo.setGroups(this.userProfile.getGroups());
-    return clientTo;
-  }
+  // /**
+  // * @return an instance of {@link UserDetailsClientToAD} with the client side representation of this {@link
+  // UserDataAD}
+  // * instance.
+  // */
+  // public UserDetailsClientToAD toClientTo() {
+  //
+  // UserDetailsClientToAD clientTo = new UserDetailsClientToAD();
+  // clientTo.setId(this.userProfile.getId());
+  // clientTo.setName(this.userProfile.getName());
+  // clientTo.setFirstName(this.userProfile.getFirstName());
+  // clientTo.setLastName(this.userProfile.getLastName());
+  // clientTo.setGroups(this.userProfile.getGroups());
+  // return clientTo;
+  // }
 
   @Override
   public String toString() {
@@ -95,9 +96,9 @@ public class UserDataAD extends User implements Principal {
   }
 
   /**
-   * @return the {@link UserDataAD} of the user currently logged in.
+   * @return the {@link UserData} of the user currently logged in.
    */
-  public static UserDataAD get() {
+  public static UserData get() {
 
     return get(SecurityContextHolder.getContext().getAuthentication());
   }
@@ -105,9 +106,9 @@ public class UserDataAD extends User implements Principal {
   /**
    * @param authentication is the {@link Authentication} where com.capgemini.devonfw.module.winauth.common.api.to
    *        retrieve the user from.
-   * @return the {@link UserDataAD} of the logged in user from the given {@link Authentication}.
+   * @return the {@link UserData} of the logged in user from the given {@link Authentication}.
    */
-  public static UserDataAD get(Authentication authentication) {
+  public static UserData get(Authentication authentication) {
 
     if (authentication == null) {
       throw new IllegalStateException("Authentication not available!");
@@ -117,7 +118,7 @@ public class UserDataAD extends User implements Principal {
       throw new IllegalStateException("Principal not available!");
     }
     try {
-      return (UserDataAD) principal;
+      return (UserData) principal;
     } catch (ClassCastException e) {
       throw new IllegalStateException("Principal (" + principal + ") is not an instance of UserDataAD!", e);
     }
