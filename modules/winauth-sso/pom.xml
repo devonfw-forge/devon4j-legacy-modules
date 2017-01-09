@@ -26,38 +26,6 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Encrypt dependency -->
-    <dependency>
-      <groupId>org.jasypt</groupId>
-      <artifactId>jasypt</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <!-- END Encrypt dependency -->
-
-    <!-- LDAP and AD dependencies -->
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-ldap</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.directory.server</groupId>
-      <artifactId>apacheds-server-jndi</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.security.kerberos</groupId>
-      <artifactId>spring-security-kerberos-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security.kerberos</groupId>
-      <artifactId>spring-security-kerberos-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security.kerberos</groupId>
-      <artifactId>spring-security-kerberos-client</artifactId>
-    </dependency>
-    <!-- END LDAP dependencies -->
-
     <!-- Note: There is a conflict with the version 5.2.2.Final (org.springframework.boot) -->
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -124,11 +92,6 @@
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-beanmapping</artifactId>
     </dependency>
-
-    <!-- <dependency> -->
-    <!-- <groupId>javax.servlet</groupId> -->
-    <!-- <artifactId>javax.servlet-api</artifactId> -->
-    <!-- </dependency> -->
 
   </dependencies>
 </project>
