@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SuppressWarnings("javadoc")
 @SpringBootApplication
-// @EntityScan(basePackages = { "devonfw.winauthSample" })
 public class SpringBootApp {
   /**
    * Entry point for spring-boot based app

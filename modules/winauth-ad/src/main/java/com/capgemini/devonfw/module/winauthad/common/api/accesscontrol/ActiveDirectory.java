@@ -174,10 +174,7 @@ public class ActiveDirectory {
 
     String filter = this.baseFilter;
     filter += "(" + searchBy + "=" + searchValue + "))";
-    /*
-     * if (searchBy.equals("email")) { filter += "(mail=" + searchValue + "))"; } else if (searchBy.equals("username"))
-     * { filter += "(samaccountname=" + searchValue + "))"; }
-     */
+
     return filter;
   }
 

@@ -149,12 +149,6 @@ public class AuthenticationManagerImpl implements AuthenticationManagerAD {
     this.userDetailsContextMapper = userDetailsContextMapper;
   }
 
-  // @Bean
-  // public UserDetailsContextMapper UserDetailsContextMapper() {
-  //
-  // return new UserDetailsContextMapperAD();
-  // }
-
   /**
    * The class BindAuthenticator in the package {@link org.springframework.security.ldap.authentication} implements the
    * bind authentication strategy. It simply attempts to bind as the user.
