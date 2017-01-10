@@ -1,4 +1,4 @@
-package com.capgemini.devonfw.module.winauth.base;
+package com.capgemini.devonfw.module.winauthsso.base;
 
 import javax.inject.Inject;
 

@@ -13,12 +13,6 @@
   <description>Active Directory base authentication.</description>
 
   <dependencies>
-    <!-- Waffle dependency -->
-    <dependency>
-      <groupId>com.github.dblock.waffle</groupId>
-      <artifactId>waffle-spring-security3</artifactId>
-    </dependency>
-    <!-- END Waffle dependency -->
 
     <dependency>
       <groupId>javax.servlet</groupId>
