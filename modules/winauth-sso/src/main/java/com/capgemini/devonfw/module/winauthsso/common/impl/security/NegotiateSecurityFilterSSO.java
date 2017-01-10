@@ -33,44 +33,6 @@ public class NegotiateSecurityFilterSSO extends NegotiateSecurityFilter {
     super.setProvider(securityFilterProviderCollection);
   }
 
-  // private AuthenticationSource authenticationSource;
-  //
-  // private GroupMapperAD groupMapperAD;
-  //
-  // /**
-  // * @return authenticationSource
-  // */
-  // public AuthenticationSource getAuthenticationSource() {
-  //
-  // return this.authenticationSource;
-  // }
-  //
-  // /**
-  // * @param authenticationSource new value of authenticationSource.
-  // */
-  // @Inject
-  // public void setAuthenticationSource(AuthenticationSource authenticationSource) {
-  //
-  // this.authenticationSource = authenticationSource;
-  // }
-  //
-  // /**
-  // * @return groupMapperAD
-  // */
-  // public GroupMapperAD getGroupMapperAD() {
-  //
-  // return this.groupMapperAD;
-  // }
-  //
-  // /**
-  // * @param groupMapperAD new value of groupMapperAD.
-  // */
-  // @Inject
-  // public void setGroupMapperAD(GroupMapperAD groupMapperAD) {
-  //
-  // this.groupMapperAD = groupMapperAD;
-  // }
-
   @Override
   protected boolean setAuthentication(final HttpServletRequest request, final HttpServletResponse response,
       final Authentication authentication) {

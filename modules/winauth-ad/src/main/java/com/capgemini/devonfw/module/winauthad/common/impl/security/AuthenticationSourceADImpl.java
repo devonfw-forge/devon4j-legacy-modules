@@ -186,7 +186,7 @@ public class AuthenticationSourceADImpl implements AuthenticationSource {
     } finally {
       this.activeDirectory.closeLdapConnection();
     }
-    // (&((&(objectCategory=Person)(objectClass=User)))(samaccountname=Servidor Web))
+
     try {
       Attributes attrs = result.next().getAttributes();
       return attrs;

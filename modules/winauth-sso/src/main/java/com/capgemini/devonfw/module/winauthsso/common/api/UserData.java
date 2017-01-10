@@ -70,21 +70,6 @@ public class UserData extends User implements Principal {
     return getUsername();
   }
 
-  // /**
-  // * @return an instance of {@link UserDetailsClientToAD} with the client side representation of this {@link UserData}
-  // * instance.
-  // */
-  // public UserDetailsClientToAD toClientTo() {
-  //
-  // UserDetailsClientToAD clientTo = new UserDetailsClientToAD();
-  // clientTo.setId(this.userProfile.getId());
-  // clientTo.setName(this.userProfile.getName());
-  // clientTo.setFirstName(this.userProfile.getFirstName());
-  // clientTo.setLastName(this.userProfile.getLastName());
-  // clientTo.setGroups((this.userProfile.getGroups()));
-  // return clientTo;
-  // }
-
   @Override
   public String toString() {
 

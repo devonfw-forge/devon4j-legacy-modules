@@ -22,14 +22,6 @@ import waffle.windows.auth.impl.WindowsAuthProviderImpl;
 @Named
 public class WinauthSSOImpl implements WinauthSSO {
 
-  // @Override
-  // public NegotiateSecurityFilterEntryPoint getNegotiateSecurityFilterEntryPoint() {
-  //
-  // // TODO Auto-generated method stub
-  // return null;
-  // }
-  //
-
   private WindowsAuthenticationProvider waffleWindowsAuthProvider;
 
   private NegotiateSecurityFilterProvider negotiateSecurityFilterProvider;

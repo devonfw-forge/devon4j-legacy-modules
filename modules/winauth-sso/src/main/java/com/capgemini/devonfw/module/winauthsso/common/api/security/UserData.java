@@ -9,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import com.capgemini.devonfw.module.winauthsso.common.api.PrincipalProfile;
-//import com.capgemini.devonfw.module.winauthsso.common.api.to.UserDetailsClientToAD;
 
 /**
  * Container class for the profile of a user.
@@ -56,22 +55,6 @@ public class UserData extends User implements Principal {
 
     return getUsername();
   }
-
-  // /**
-  // * @return an instance of {@link UserDetailsClientToAD} with the client side representation of this {@link
-  // UserDataAD}
-  // * instance.
-  // */
-  // public UserDetailsClientToAD toClientTo() {
-  //
-  // UserDetailsClientToAD clientTo = new UserDetailsClientToAD();
-  // clientTo.setId(this.userProfile.getId());
-  // clientTo.setName(this.userProfile.getName());
-  // clientTo.setFirstName(this.userProfile.getFirstName());
-  // clientTo.setLastName(this.userProfile.getLastName());
-  // clientTo.setGroups(this.userProfile.getGroups());
-  // return clientTo;
-  // }
 
   @Override
   public String toString() {
