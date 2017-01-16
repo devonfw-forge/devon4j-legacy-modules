@@ -27,7 +27,7 @@ import io.oasp.module.security.common.base.accesscontrol.AbstractAccessControlBa
  * @author hohwille
  * @author agreul
  */
-@Named("DevonApplicationAuthenticationProvider")
+@Named("ApplicationAuthenticationProvider")
 public class ApplicationAuthenticationProvider
     extends AbstractAccessControlBasedAuthenticationProvider<UserData, UserProfile> {
 

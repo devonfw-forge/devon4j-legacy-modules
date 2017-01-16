@@ -25,9 +25,9 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.OfferEto;
  */
 @Profile("devon")
 @Path("/basic/v1")
-@Named("BasicRestService")
+@Named("BasicRestServiceImpl")
 @Transactional
-public class BasicRestService extends AbstractBeanMapperSupport {
+public class BasicRestServiceImpl extends AbstractBeanMapperSupport {
 
   @Inject
   private Offermanagement offermanagement;
