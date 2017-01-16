@@ -16,7 +16,8 @@ import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
  * @since 1.1
  */
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
-@EntityScan(basePackages = { "com.capgemini.devonfw.sample" }, basePackageClasses = { AdvancedRevisionEntity.class })
+@EntityScan(basePackages = { "com.capgemini.devonfw.sample", "io.oasp.gastronomy.restaurant" }, basePackageClasses = {
+AdvancedRevisionEntity.class })
 @ComponentScan(basePackages = { "com.capgemini.devonfw.sample", "io.oasp.gastronomy.restaurant.offermanagement",
 "io.oasp.gastronomy.restaurant.salesmanagement", "io.oasp.gastronomy.restaurant.staffmanagement",
 "io.oasp.gastronomy.restaurant.tablemanagement", "io.oasp.gastronomy.restaurant.general.dataaccess",
