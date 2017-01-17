@@ -1,10 +1,12 @@
-package com.capgemini.devonfw.module.winauthsso;
+package com.capgemini.devonfw.module.winauthad.base;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SuppressWarnings("javadoc")
 @SpringBootApplication
+@ComponentScan(basePackages = { "com.capgemini.devonfw.module.winauthad" })
 public class SpringBootApp {
   /**
    * Entry point for spring-boot based app

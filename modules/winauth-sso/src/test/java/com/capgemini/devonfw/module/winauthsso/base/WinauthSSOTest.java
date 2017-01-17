@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.capgemini.devonfw.module.winauthsso.SpringBootApp;
 import com.capgemini.devonfw.module.winauthsso.common.api.WinauthSSO;
 import com.capgemini.devonfw.module.winauthsso.common.impl.security.NegotiateSecurityFilterSSO;
 import com.capgemini.devonfw.module.winauthsso.common.impl.security.WinauthSSOImpl;
@@ -16,18 +15,17 @@ import com.capgemini.devonfw.module.winauthsso.common.impl.security.WinauthSSOIm
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
- * This is the test-case for {@link WinauthSSO_OLD}.
+ * This is the test-case for {@link WinauthSSO}.
  *
  * @author jhcore
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SpringBootApp.class)
-
 public class WinauthSSOTest extends ComponentTest {
 
   private WinauthSSOImpl ssoDefault = new WinauthSSOImpl();
 
-  private WinauthSSOImpl ssoAuthenticationCustomized = new WinauthSSOImpl(/* new NegotiateSecurityFilterSSO() */);
+  private WinauthSSOImpl ssoAuthenticationCustomized = new WinauthSSOImpl();
 
   @Inject
   private WinauthSSO sso;
@@ -35,6 +33,7 @@ public class WinauthSSOTest extends ComponentTest {
   @Inject
   private WinauthSSO ssoCustom;
 
+  @SuppressWarnings("javadoc")
   @Before
   public void init() {
 

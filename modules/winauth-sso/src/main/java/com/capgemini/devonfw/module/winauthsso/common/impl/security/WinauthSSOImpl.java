@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Named;
 
+import org.springframework.stereotype.Component;
+
 import com.capgemini.devonfw.module.winauthsso.common.api.WinauthSSO;
 
 import waffle.servlet.spi.NegotiateSecurityFilterProvider;
@@ -19,6 +21,7 @@ import waffle.windows.auth.impl.WindowsAuthProviderImpl;
  * @author pparrado
  *
  */
+@Component
 @Named
 public class WinauthSSOImpl implements WinauthSSO {
 

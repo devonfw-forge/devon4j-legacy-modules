@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.capgemini.devonfw.module.winauthad.SpringBootApp;
 import com.capgemini.devonfw.module.winauthad.common.impl.security.UserDetailsContextMapperAD;
 
 import io.oasp.module.test.common.base.ComponentTest;
