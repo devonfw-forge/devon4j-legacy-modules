@@ -28,7 +28,7 @@ public interface Integration {
   public IntegrationChannel createChannel(ConfigurableApplicationContext ctx, String name, String queueName);
 
   public IntegrationChannel createRequestReplyChannel(ConfigurableApplicationContext ctx, String channelName,
-      String queueName);
+      String queueName, MessageHandler h);
 
   void subscribeTo(ConfigurableApplicationContext ctx, String channel, String queue, MessageHandler messageHandler);
 
