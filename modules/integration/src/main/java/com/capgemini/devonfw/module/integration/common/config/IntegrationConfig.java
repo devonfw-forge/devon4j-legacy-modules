@@ -21,6 +21,7 @@ import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.core.Pollers;
 import org.springframework.integration.dsl.jms.Jms;
 import org.springframework.integration.dsl.support.GenericHandler;
+import org.springframework.messaging.support.GenericMessage;
 
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
 
@@ -51,13 +52,14 @@ public class IntegrationConfig {
   @MessagingGateway
   public interface OneDirectionGateway {
     @Gateway(requestChannel = "1d.Channel")
-    void send(String message);
+    // Boolean send(String message);
+    Boolean send(GenericMessage<?> message);
   }
 
   @MessagingGateway
   public interface RequestReplyGateway {
     @Gateway(requestChannel = "rr.Channel")
-    String echo(String message);
+    String echo(GenericMessage<?> message);
   }
 
   // PRECONFIGURED FLOWS - - - - - - - - - - - - - - - - - - - - - - - -
