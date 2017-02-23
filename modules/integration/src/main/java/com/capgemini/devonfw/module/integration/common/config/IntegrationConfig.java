@@ -21,6 +21,7 @@ import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.core.Pollers;
 import org.springframework.integration.dsl.jms.Jms;
 import org.springframework.integration.dsl.support.GenericHandler;
+import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.support.GenericMessage;
 
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
@@ -38,13 +39,13 @@ public class IntegrationConfig {
   @Inject
   private ConnectionFactory connectionFactory;
 
-  @Value("${integration.one-direction.queue}")
+  @Value("${integration.one-direction.queuename}")
   private String queue_1d;
 
-  @Value("${integration.request-reply.queue}")
+  @Value("${integration.request-reply.queuename}")
   private String queue_rr;
 
-  @Value("${integration.poller.rate}")
+  @Value("${integration.one-direction.poller.rate}")
   private int rate;
 
   // PRECONFIGURED GATEWAYS - - - - - - - - - - - - - - - - - - - - - -
@@ -90,12 +91,12 @@ public class IntegrationConfig {
   @Bean
   @Profile("1d")
   @ConditionalOnProperty(prefix = "integration.listener", name = "enabled", havingValue = "true")
-  public IntegrationFlow inFlow(IntegrationHandler handler) throws Exception {
+  public IntegrationFlow inFlow(MessageHandler handler) throws Exception {
 
     return IntegrationFlows.from(Jms.inboundAdapter(this.connectionFactory).destination(this.queue_1d),
         c -> c.poller(Pollers.fixedRate(this.rate, TimeUnit.MILLISECONDS))).handle(m -> {
           try {
-            handler.handleMessage(m.getPayload());
+            handler.handleMessage(m);
           } catch (Exception e) {
             LOG.error(e.getMessage());
           }
