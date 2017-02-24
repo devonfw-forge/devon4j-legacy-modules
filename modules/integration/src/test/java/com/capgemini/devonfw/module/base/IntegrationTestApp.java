@@ -10,7 +10,8 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
  *
  */
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.capgemini.devonfw.module.integration.common" })
+@ComponentScan(basePackages = { "com.capgemini.devonfw.module.integration.common",
+"com.capgemini.devonfw.module.base.integration.handlers" })
 @IntegrationComponentScan(basePackages = { "com.capgemini.devonfw.module.integration.common" })
 public class IntegrationTestApp {
 

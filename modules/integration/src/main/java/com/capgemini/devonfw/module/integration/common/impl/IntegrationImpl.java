@@ -60,10 +60,10 @@ public class IntegrationImpl implements Integration {
   private IntegrationConfig integrationConfig;
 
   @Override
-  public Boolean send(ConfigurableApplicationContext ctx, String message) {
+  public void send(ConfigurableApplicationContext ctx, String message) {
 
     OneDirectionGateway oneDirectionGateway = ctx.getBean(OneDirectionGateway.class);
-    return oneDirectionGateway.send(new GenericMessage<>(message));
+    oneDirectionGateway.send(new GenericMessage<>(message));
   }
 
   @Override

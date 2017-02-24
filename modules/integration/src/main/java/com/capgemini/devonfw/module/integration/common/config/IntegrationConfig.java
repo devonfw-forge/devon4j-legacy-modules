@@ -53,8 +53,7 @@ public class IntegrationConfig {
   @MessagingGateway
   public interface OneDirectionGateway {
     @Gateway(requestChannel = "1d.Channel")
-    // Boolean send(String message);
-    Boolean send(GenericMessage<?> message);
+    void send(GenericMessage<?> message);
   }
 
   @MessagingGateway
@@ -68,7 +67,7 @@ public class IntegrationConfig {
   // out
 
   @Bean
-  @Profile("1d")
+  @Profile("onedirection")
   @ConditionalOnProperty(prefix = "integration.emitter", name = "enabled", havingValue = "true")
   IntegrationFlow outFlow() {
 
@@ -78,7 +77,7 @@ public class IntegrationConfig {
   }
 
   @Bean
-  @Profile("rr")
+  @Profile("requestreply")
   @ConditionalOnProperty(prefix = "integration.emitter", name = "enabled", havingValue = "true")
   public IntegrationFlow outAndInFlow() {
 
@@ -89,7 +88,7 @@ public class IntegrationConfig {
   // in
 
   @Bean
-  @Profile("1d")
+  @Profile("onedirection")
   @ConditionalOnProperty(prefix = "integration.listener", name = "enabled", havingValue = "true")
   public IntegrationFlow inFlow(MessageHandler handler) throws Exception {
 
@@ -104,7 +103,7 @@ public class IntegrationConfig {
   }
 
   @Bean
-  @Profile("rr")
+  @Profile("requestreply")
   @ConditionalOnProperty(prefix = "integration.listener", name = "enabled", havingValue = "true")
   public IntegrationFlow inAndOutFlow(IntegrationHandler h) {
 
@@ -121,9 +120,7 @@ public class IntegrationConfig {
               return null;
             }
           }
-        }
-
-        ).get();
+        }).get();
   }
 
 }

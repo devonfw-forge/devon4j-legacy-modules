@@ -28,9 +28,9 @@ import io.oasp.module.test.common.base.ComponentTest;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = IntegrationTestApp.class)
-public class IntegrationTest extends ComponentTest {
+public class NewChannelsTest extends ComponentTest {
 
-  private static final Logger LOG = LoggerFactory.getLogger(IntegrationTest.class);
+  private static final Logger LOG = LoggerFactory.getLogger(NewChannelsTest.class);
 
   @Inject
   private Integration integration;
@@ -43,6 +43,8 @@ public class IntegrationTest extends ComponentTest {
 
   IntegrationChannel test_new_rr_channel;
 
+  private final String abcd = "abcd";
+
   @Before
   public void init() {
 
@@ -52,25 +54,25 @@ public class IntegrationTest extends ComponentTest {
   }
 
   @Test
-  public void sendMessageThroughSimpleChannel() throws InterruptedException {
+  public void sendMessageThroughNewSimpleChannel() throws InterruptedException {
 
     this.integration.subscribeTo(this.ctx, "channel.1d.test", "queue.1d.test", new SimpleMessageHandler());
-    Boolean r = this.test_new_1d_channel.send("abcd");
+    Boolean r = this.test_new_1d_channel.send(this.abcd);
     assertThat(r).isTrue();
 
     // the default poller rate property is set to 1000 so we wait enough to get the response through system property
     Thread.sleep(3000);
-    assertThat(System.getProperty("test.message")).isEqualTo("abcd");
+    assertThat(System.getProperty("test.message")).isEqualTo(this.abcd);
   }
 
   @Test
-  public void sendMessageThroughRequestReplyChannel() throws InterruptedException {
+  public void sendMessageThroughNewRequestReplyChannel() throws InterruptedException {
 
     this.integration.subscribeAndReplyTo(this.ctx, "channel.rr.test", "queue.rr.test", new UpperIntegrationHandler());
-    Boolean r = this.test_new_rr_channel.send("abcd");
+    Boolean r = this.test_new_rr_channel.send(this.abcd);
     assertThat(r).isTrue();
     Thread.sleep(5000);
-    assertThat(System.getProperty("test.reply")).isEqualTo("ABCD");
+    assertThat(System.getProperty("test.reply")).isEqualTo(this.abcd.toUpperCase());
   }
 
   @After

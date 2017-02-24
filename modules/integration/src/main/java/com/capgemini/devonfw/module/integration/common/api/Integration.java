@@ -9,7 +9,7 @@ import org.springframework.messaging.MessageHandler;
  */
 public interface Integration {
 
-  Boolean send(ConfigurableApplicationContext ctx, String message);
+  void send(ConfigurableApplicationContext ctx, String message);
 
   String sendAndReceive(ConfigurableApplicationContext ctx, String message);
 

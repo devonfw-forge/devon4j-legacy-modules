@@ -19,9 +19,9 @@ public class IntegrationHandlerImpl implements IntegrationHandler {
   public Object handleMessage(Object payload) {
 
     // Default implementation for inFlow IntegrationHandler parameter
-    LOG.info(
-        "Default IntegrationHandler implementation launched. Message handled: {0}. Create your own Handler in the receiver application implementing 'IntegrationHandler' interface in order to manage the received messages.",
-        payload.toString());
+    LOG.info(String.format(
+        "Default IntegrationHandler implementation launched. Message handled: %s. Create your own Handler in the receiver application implementing 'IntegrationHandler' interface in order to manage the received messages.",
+        payload.toString()));
     return null;
   }
 

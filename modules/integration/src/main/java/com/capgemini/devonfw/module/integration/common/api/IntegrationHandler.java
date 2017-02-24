@@ -9,4 +9,5 @@ public interface IntegrationHandler {
   // TODO add Headers as parameter
   Object handleMessage(Object payload);
 
+  // Message<?> handleMessage(Message<?> m);
 }
