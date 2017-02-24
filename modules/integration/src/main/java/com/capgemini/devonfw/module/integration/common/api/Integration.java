@@ -1,6 +1,5 @@
 package com.capgemini.devonfw.module.integration.common.api;
 
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.messaging.MessageHandler;
 
 /**
@@ -9,9 +8,9 @@ import org.springframework.messaging.MessageHandler;
  */
 public interface Integration {
 
-  void send(ConfigurableApplicationContext ctx, String message);
+  void send(String message);
 
-  String sendAndReceive(ConfigurableApplicationContext ctx, String message);
+  String sendAndReceive(String message);
 
   // Implementation for out-of-the-box Channels
 
@@ -29,21 +28,18 @@ public interface Integration {
 
   // Implementation for new Channels
 
-  void subscribeTo(ConfigurableApplicationContext ctx, String channelName, String queueName, MessageHandler handler);
+  void subscribeTo(String channelName, String queueName, MessageHandler handler);
 
-  void subscribeTo(ConfigurableApplicationContext ctx, String channelName, String queueName,
-      MessageHandler messageHandler, long pollRate);
+  void subscribeTo(String channelName, String queueName, MessageHandler messageHandler, long pollRate);
 
-  void subscribeAndReplyTo(ConfigurableApplicationContext ctx, String channelName, String queueName,
-      IntegrationHandler handler);
+  void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler handler);
 
-  IntegrationChannel createChannel(ConfigurableApplicationContext ctx, String name, String queueName);
+  IntegrationChannel createChannel(String name, String queueName);
 
-  IntegrationChannel createRequestReplyChannel(ConfigurableApplicationContext ctx, String channelName, String queueName,
-      MessageHandler h);
+  IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler h);
 
-  IntegrationChannel createRequestReplyChannel(ConfigurableApplicationContext ctx, String channelName, String queueName,
-      MessageHandler h, long receivetimeout);
+  IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler h,
+      long receivetimeout);
 
   // void subscribeTo(ConfigurableApplicationContext ctx, String channel, String queue, MessageHandler messageHandler);
 

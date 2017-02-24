@@ -37,7 +37,7 @@ public class DefaultRequestReplyFlowTest extends ComponentTest {
   public void sendMessageThroughDefaultSimpleChannel() throws InterruptedException {
 
     this.integration.subscribeAndReply(new UpperIntegrationHandler());
-    String response = this.integration.sendAndReceive(this.ctx, this.qwerty);
+    String response = this.integration.sendAndReceive(this.qwerty);
     assertThat(response).isEqualTo(this.qwerty.toUpperCase());
   }
 

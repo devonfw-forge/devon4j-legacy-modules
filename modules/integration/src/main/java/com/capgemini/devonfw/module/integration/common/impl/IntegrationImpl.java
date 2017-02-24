@@ -9,6 +9,7 @@ import javax.jms.ConnectionFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -59,17 +60,20 @@ public class IntegrationImpl implements Integration {
   @Inject
   private IntegrationConfig integrationConfig;
 
-  @Override
-  public void send(ConfigurableApplicationContext ctx, String message) {
+  @Autowired
+  ConfigurableApplicationContext ctx;
 
-    OneDirectionGateway oneDirectionGateway = ctx.getBean(OneDirectionGateway.class);
+  @Override
+  public void send(String message) {
+
+    OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
     oneDirectionGateway.send(new GenericMessage<>(message));
   }
 
   @Override
-  public String sendAndReceive(ConfigurableApplicationContext ctx, String message) {
+  public String sendAndReceive(String message) {
 
-    RequestReplyGateway rrGateway = ctx.getBean(RequestReplyGateway.class);
+    RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
     return rrGateway.echo(new GenericMessage<>(message));
   }
 
@@ -113,37 +117,34 @@ public class IntegrationImpl implements Integration {
   }
 
   @Override
-  public void subscribeTo(ConfigurableApplicationContext ctx, String channelName, String queueName,
-      MessageHandler messageHandler) {
+  public void subscribeTo(String channelName, String queueName, MessageHandler messageHandler) {
 
-    SubscribableChannel channel = createSubscribableChannel(ctx, channelName, queueName, messageHandler);
-
-    channel.subscribe(messageHandler);
-
-  }
-
-  @Override
-  public void subscribeTo(ConfigurableApplicationContext ctx, String channelName, String queueName,
-      MessageHandler messageHandler, long pollRate) {
-
-    SubscribableChannel channel = createSubscribableChannel(ctx, channelName, queueName, messageHandler, pollRate);
+    SubscribableChannel channel = createSubscribableChannel(channelName, queueName, messageHandler);
 
     channel.subscribe(messageHandler);
 
   }
 
   @Override
-  public void subscribeAndReplyTo(ConfigurableApplicationContext ctx, String channelName, String queueName,
-      IntegrationHandler messageHandler) {
+  public void subscribeTo(String channelName, String queueName, MessageHandler messageHandler, long pollRate) {
 
-    SubscribableChannel channel = createSubscribableRequestReplyChannel(ctx, channelName, queueName, messageHandler);
+    SubscribableChannel channel = createSubscribableChannel(channelName, queueName, messageHandler, pollRate);
+
+    channel.subscribe(messageHandler);
+
+  }
+
+  @Override
+  public void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler messageHandler) {
+
+    SubscribableChannel channel = createSubscribableRequestReplyChannel(channelName, queueName, messageHandler);
 
     channel.subscribe(new MessageHandlerImpl());
 
   }
 
   @Override
-  public IntegrationChannel createChannel(ConfigurableApplicationContext ctx, String channelName, String queueName) {
+  public IntegrationChannel createChannel(String channelName, String queueName) {
 
     // TODO get rid of ctx as parameter passed through all elements, can it be obtained from here?
     // AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(RootConfiguration.class);
@@ -151,20 +152,20 @@ public class IntegrationImpl implements Integration {
     // TODO centralize the connection factory in one single place
     // ConfigUtils utils = new ConfigUtils();
     LOG.info("Creating channel " + channelName);
-    ConfigurableListableBeanFactory beanFactory = ctx.getBeanFactory();
+    ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
 
     SubscribableChannel channel;
 
-    if (!ctx.containsBean(channelName)) {
+    if (!this.ctx.containsBean(channelName)) {
       channel = createInputChannel(beanFactory, channelName);
       beanFactory.registerSingleton(channelName, channel);
       beanFactory.initializeBean(channel, channelName);
     } else {
       LOG.info(String.format("Channel %s already exists.", channelName));
-      channel = (SubscribableChannel) ctx.getBean(channelName);
+      channel = (SubscribableChannel) this.ctx.getBean(channelName);
     }
 
-    if (!ctx.containsBean(channelName + this.OUTBOUNDFLOW)) {
+    if (!this.ctx.containsBean(channelName + this.OUTBOUNDFLOW)) {
       IntegrationFlow flow = IntegrationFlows.from(channelName)
           .handle(Jms.outboundAdapter(this.connectionFactory).destination(queueName)).get();
       beanFactory.registerSingleton(channelName + this.OUTBOUNDFLOW, flow);
@@ -173,30 +174,29 @@ public class IntegrationImpl implements Integration {
       LOG.info(String.format("OutboundAdapter for queue %s already exists.", queueName));
     }
 
-    ctx.start();
+    this.ctx.start();
 
     return new IntegrationChannelImpl(channel);
   }
 
   @Override
-  public IntegrationChannel createRequestReplyChannel(ConfigurableApplicationContext ctx, String channelName,
-      String queueName, MessageHandler h) {
+  public IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler h) {
 
     LOG.info("Creating channel " + channelName);
-    ConfigurableListableBeanFactory beanFactory = ctx.getBeanFactory();
+    ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
 
     SubscribableChannel channel;
 
-    if (!ctx.containsBean(channelName)) {
+    if (!this.ctx.containsBean(channelName)) {
       channel = createRequestReplyChannel(beanFactory, channelName);
       beanFactory.registerSingleton(channelName, channel);
       beanFactory.initializeBean(channel, channelName);
     } else {
       LOG.info(String.format("Channel %s already exists.", channelName));
-      channel = (SubscribableChannel) ctx.getBean(channelName);
+      channel = (SubscribableChannel) this.ctx.getBean(channelName);
     }
 
-    if (!ctx.containsBean(channelName + this.OUTBOUNDFLOW)) {
+    if (!this.ctx.containsBean(channelName + this.OUTBOUNDFLOW)) {
       IntegrationFlow flow = IntegrationFlows.from(channelName).handle(Jms.outboundGateway(this.connectionFactory)
           .requestDestination(queueName).receiveTimeout(Long.parseLong(this.defaultReceiveTimeout))).handle(m -> {
             h.handleMessage(m);
@@ -208,16 +208,16 @@ public class IntegrationImpl implements Integration {
       LOG.info(String.format("OutboundGateway for queue %s already exists.", queueName));
     }
 
-    ctx.start();
+    this.ctx.start();
 
     return new IntegrationChannelImpl(channel);
   }
 
   @Override
-  public IntegrationChannel createRequestReplyChannel(ConfigurableApplicationContext ctx, String channelName,
-      String queueName, MessageHandler h, long receivetimeout) {
+  public IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler h,
+      long receivetimeout) {
 
-    ConfigurableListableBeanFactory beanFactory = ctx.getBeanFactory();
+    ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
 
     SubscribableChannel channel = createRequestReplyChannel(beanFactory, channelName);
 
@@ -233,7 +233,7 @@ public class IntegrationImpl implements Integration {
 
     beanFactory.registerSingleton(channelName + this.OUTBOUNDFLOW, flow);
     beanFactory.initializeBean(flow, channelName + this.OUTBOUNDFLOW);
-    ctx.start();
+    this.ctx.start();
 
     return new IntegrationChannelImpl(channel);
   }
@@ -241,29 +241,29 @@ public class IntegrationImpl implements Integration {
   ////////////////////////////
   ///////// UTILS ?? /////////
   ////////////////////////////
-  private SubscribableChannel createSubscribableChannel(ConfigurableApplicationContext ctx, String channelName,
-      String queueName, MessageHandler messageHandler) {
+  private SubscribableChannel createSubscribableChannel(String channelName, String queueName,
+      MessageHandler messageHandler) {
 
     // AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(RootConfiguration.class);
 
     // ConfigUtils utils = new ConfigUtils();
     LOG.info("Creating channel " + channelName);
 
-    ConfigurableListableBeanFactory beanFactory = ctx.getBeanFactory();
+    ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
 
     SubscribableChannel channel;
 
-    if (!ctx.containsBean(channelName)) {
+    if (!this.ctx.containsBean(channelName)) {
       channel = createInputChannel(beanFactory, channelName);
       beanFactory.registerSingleton(channelName, channel);
       beanFactory.initializeBean(channel, channelName);
     } else {
       System.out.println("Channel " + channelName + " already exists.");
       LOG.info(String.format("Channel %s already exists.", channelName));
-      channel = (SubscribableChannel) ctx.getBean(channelName);
+      channel = (SubscribableChannel) this.ctx.getBean(channelName);
     }
 
-    if (!ctx.containsBean(channelName + this.INBOUNDFLOW)) {
+    if (!this.ctx.containsBean(channelName + this.INBOUNDFLOW)) {
       IntegrationFlow flow = IntegrationFlows
           .from(Jms.inboundAdapter(this.connectionFactory).destination(queueName),
               c -> c.poller(Pollers.fixedRate(Long.parseLong(this.defaultPollerRate), TimeUnit.MILLISECONDS)))
@@ -282,33 +282,33 @@ public class IntegrationImpl implements Integration {
       LOG.info(String.format("InboundAdapter for queue %s already exists.", queueName));
     }
 
-    ctx.start();
+    this.ctx.start();
 
     return channel;
 
   }
 
-  private SubscribableChannel createSubscribableChannel(ConfigurableApplicationContext ctx, String channelName,
-      String queueName, MessageHandler messageHandler, long pollRate) {
+  private SubscribableChannel createSubscribableChannel(String channelName, String queueName,
+      MessageHandler messageHandler, long pollRate) {
 
     // AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(RootConfiguration.class);
 
     // ConfigUtils utils = new ConfigUtils();
     LOG.info("Creating channel " + channelName);
-    ConfigurableListableBeanFactory beanFactory = ctx.getBeanFactory();
+    ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
 
     SubscribableChannel channel;
 
-    if (!ctx.containsBean(channelName)) {
+    if (!this.ctx.containsBean(channelName)) {
       channel = createInputChannel(beanFactory, channelName);
       beanFactory.registerSingleton(channelName, channel);
       beanFactory.initializeBean(channel, channelName);
     } else {
       LOG.info(String.format("Channel %s already exists.", channelName));
-      channel = (SubscribableChannel) ctx.getBean(channelName);
+      channel = (SubscribableChannel) this.ctx.getBean(channelName);
     }
 
-    if (!ctx.containsBean(channelName + this.INBOUNDFLOW)) {
+    if (!this.ctx.containsBean(channelName + this.INBOUNDFLOW)) {
       IntegrationFlow flow = IntegrationFlows.from(Jms.inboundAdapter(this.connectionFactory).destination(queueName),
           c -> c.poller(Pollers.fixedRate(pollRate, TimeUnit.MILLISECONDS))).handle(m -> {
             try {
@@ -323,30 +323,30 @@ public class IntegrationImpl implements Integration {
       LOG.info(String.format("InboundAdapter for queue %s already exists.", queueName));
     }
 
-    ctx.start();
+    this.ctx.start();
 
     return channel;
 
   }
 
-  private SubscribableChannel createSubscribableRequestReplyChannel(ConfigurableApplicationContext ctx,
-      String channelName, String queueName, IntegrationHandler messageHandler) {
+  private SubscribableChannel createSubscribableRequestReplyChannel(String channelName, String queueName,
+      IntegrationHandler messageHandler) {
 
     LOG.info("Creating channel " + channelName);
-    ConfigurableListableBeanFactory beanFactory = ctx.getBeanFactory();
+    ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
 
     SubscribableChannel channel;
 
-    if (!ctx.containsBean(channelName)) {
+    if (!this.ctx.containsBean(channelName)) {
       channel = createRequestReplyChannel(beanFactory, channelName);
       beanFactory.registerSingleton(channelName, channel);
       beanFactory.initializeBean(channel, channelName);
     } else {
       LOG.info(String.format("Channel %s already exists.", channelName));
-      channel = (SubscribableChannel) ctx.getBean(channelName);
+      channel = (SubscribableChannel) this.ctx.getBean(channelName);
     }
 
-    if (!ctx.containsBean(channelName + this.INBOUNDFLOW)) {
+    if (!this.ctx.containsBean(channelName + this.INBOUNDFLOW)) {
       IntegrationFlow flow = IntegrationFlows.from(Jms.inboundGateway(this.connectionFactory).destination(queueName))
           .wireTap(f -> f.handle(System.out::println))
 
@@ -369,7 +369,7 @@ public class IntegrationImpl implements Integration {
       LOG.info(String.format("InboundGateway for queue %s already exists.", queueName));
     }
 
-    ctx.start();
+    this.ctx.start();
 
     return channel;
   }

@@ -48,15 +48,15 @@ public class NewChannelsTest extends ComponentTest {
   @Before
   public void init() {
 
-    this.test_new_1d_channel = this.integration.createChannel(this.ctx, "channel.1d.test", "queue.1d.test");
-    this.test_new_rr_channel = this.integration.createRequestReplyChannel(this.ctx, "channel.rr.test", "queue.rr.test",
-        new ReplyMessageHandler());
+    this.test_new_1d_channel = this.integration.createChannel("channel.1d.test", "queue.1d.test");
+    this.test_new_rr_channel =
+        this.integration.createRequestReplyChannel("channel.rr.test", "queue.rr.test", new ReplyMessageHandler());
   }
 
   @Test
   public void sendMessageThroughNewSimpleChannel() throws InterruptedException {
 
-    this.integration.subscribeTo(this.ctx, "channel.1d.test", "queue.1d.test", new SimpleMessageHandler());
+    this.integration.subscribeTo("channel.1d.test", "queue.1d.test", new SimpleMessageHandler());
     Boolean r = this.test_new_1d_channel.send(this.abcd);
     assertThat(r).isTrue();
 
@@ -68,7 +68,7 @@ public class NewChannelsTest extends ComponentTest {
   @Test
   public void sendMessageThroughNewRequestReplyChannel() throws InterruptedException {
 
-    this.integration.subscribeAndReplyTo(this.ctx, "channel.rr.test", "queue.rr.test", new UpperIntegrationHandler());
+    this.integration.subscribeAndReplyTo("channel.rr.test", "queue.rr.test", new UpperIntegrationHandler());
     Boolean r = this.test_new_rr_channel.send(this.abcd);
     assertThat(r).isTrue();
     Thread.sleep(5000);

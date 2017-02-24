@@ -38,7 +38,7 @@ public class DefaultOneDirectionFlowTest extends ComponentTest {
   public void sendMessageThroughDefaultSimpleChannel() throws InterruptedException {
 
     this.integration.subscribe(new SimpleMessageHandler());
-    this.integration.send(this.ctx, this.qwerty);
+    this.integration.send(this.qwerty);
     Thread.sleep(3000);
     assertThat(System.getProperty("test.message")).isEqualTo(this.qwerty);
   }
