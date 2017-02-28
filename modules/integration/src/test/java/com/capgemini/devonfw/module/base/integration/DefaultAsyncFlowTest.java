@@ -1,9 +1,14 @@
 package com.capgemini.devonfw.module.base.integration;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -11,7 +16,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
-import com.capgemini.devonfw.module.base.integration.handlers.UpperIntegrationHandler;
+import com.capgemini.devonfw.module.base.integration.handlers.LongIntegrationHandler;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
 
 import io.oasp.module.test.common.base.ComponentTest;
@@ -22,8 +27,10 @@ import io.oasp.module.test.common.base.ComponentTest;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = IntegrationTestApp.class)
-@TestPropertySource(locations = "classpath:requestreplytest.properties")
-public class DefaultRequestReplyFlowTest extends ComponentTest {
+@TestPropertySource(locations = "classpath:asynctest.properties")
+public class DefaultAsyncFlowTest extends ComponentTest {
+
+  private static final Logger LOG = LoggerFactory.getLogger(DefaultAsyncFlowTest.class);
 
   @Inject
   private Integration integration;
@@ -31,14 +38,12 @@ public class DefaultRequestReplyFlowTest extends ComponentTest {
   @Autowired
   ConfigurableApplicationContext ctx;
 
-  private final String qwerty = "qwerty";
-
   @Test
-  public void sendMessageThroughDefaultRequestReplyChannel() throws InterruptedException {
+  public void sendMessageThroughDefaultAsyncRequestReplyChannel() throws InterruptedException, ExecutionException {
 
-    this.integration.subscribeAndReply(new UpperIntegrationHandler());
-    String response = this.integration.sendAndReceive(this.qwerty);
-    assertThat(response).isEqualTo(this.qwerty.toUpperCase());
+    this.integration.subscribeAsync(new LongIntegrationHandler());
+    Future<String> response = this.integration.sendAndReceiveAsync("test");
+    LOG.info("Executed in parallel...");
+    assertThat(response.get()).isEqualTo("TEST");
   }
-
 }

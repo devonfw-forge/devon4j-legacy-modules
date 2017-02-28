@@ -1,6 +1,8 @@
 package com.capgemini.devonfw.module.integration.common.impl;
 
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.channel.ExecutorChannel;
 import org.springframework.integration.channel.PublishSubscribeChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
@@ -24,11 +27,13 @@ import org.springframework.integration.dsl.support.GenericHandler;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.GenericMessage;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import com.capgemini.devonfw.module.integration.common.api.Integration;
 import com.capgemini.devonfw.module.integration.common.api.IntegrationChannel;
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
 import com.capgemini.devonfw.module.integration.common.config.IntegrationConfig;
+import com.capgemini.devonfw.module.integration.common.config.IntegrationConfig.AsyncGateway;
 import com.capgemini.devonfw.module.integration.common.config.IntegrationConfig.OneDirectionGateway;
 import com.capgemini.devonfw.module.integration.common.config.IntegrationConfig.RequestReplyGateway;
 
@@ -54,6 +59,9 @@ public class IntegrationImpl implements Integration {
   @Value("${integration.default.receivetimeout}")
   private String defaultReceiveTimeout;
 
+  @Value("${integration.default.poolsize}")
+  private int defaultPoolSize;
+
   @Inject
   private ConnectionFactory connectionFactory;
 
@@ -75,6 +83,13 @@ public class IntegrationImpl implements Integration {
 
     RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
     return rrGateway.echo(new GenericMessage<>(message));
+  }
+
+  @Override
+  public Future<String> sendAndReceiveAsync(String message) {
+
+    AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
+    return asyncGateway.sendAsync(new GenericMessage<>(message));
   }
 
   // TODO allow sending POJOs
@@ -101,9 +116,18 @@ public class IntegrationImpl implements Integration {
     try {
       this.integrationConfig.inFlow(handler);
     } catch (Exception e) {
-      LOG.error("Subscribing to the integration flow throw an error: {0} ", e.getMessage(), e);
+      LOG.error(String.format("Subscribing to the integration flow threw an error: %s ", e.getMessage()), e);
     }
+  }
 
+  @Override
+  public void subscribeAsync(IntegrationHandler h) {
+
+    try {
+      this.integrationConfig.asyncInAndOutFlow(h);
+    } catch (Exception e) {
+      LOG.error(String.format("Subscribing to the integration flow threw an error: %s ", e.getMessage()), e);
+    }
   }
 
   @Override
@@ -112,7 +136,7 @@ public class IntegrationImpl implements Integration {
     try {
       this.integrationConfig.inAndOutFlow(handler);
     } catch (Exception e) {
-      LOG.error("Subscribing to the integration flow throw an error: {0} ", e.getMessage(), e);
+      LOG.error(String.format("Subscribing to the integration flow threw an error: %s ", e.getMessage()), e);
     }
   }
 
@@ -135,12 +159,19 @@ public class IntegrationImpl implements Integration {
   }
 
   @Override
-  public void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler messageHandler) {
+  public void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler h) {
 
-    SubscribableChannel channel = createSubscribableRequestReplyChannel(channelName, queueName, messageHandler);
+    SubscribableChannel channel = createSubscribableRequestReplyChannel(channelName, queueName, h);
 
     channel.subscribe(new MessageHandlerImpl());
 
+  }
+
+  @Override
+  public void subscribeAndReplyAsyncTo(String channelName, String queueName, IntegrationHandler h) {
+
+    SubscribableChannel channel = createSubscribableAsyncRequestReplyChannel(channelName, queueName, h);
+    channel.subscribe(new MessageHandlerImpl());
   }
 
   @Override
@@ -233,6 +264,77 @@ public class IntegrationImpl implements Integration {
 
     beanFactory.registerSingleton(channelName + this.OUTBOUNDFLOW, flow);
     beanFactory.initializeBean(flow, channelName + this.OUTBOUNDFLOW);
+    this.ctx.start();
+
+    return new IntegrationChannelImpl(channel);
+  }
+
+  @Override
+  public IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler h) {
+
+    LOG.info("Creating channel " + channelName);
+    ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
+
+    SubscribableChannel channel;
+
+    if (!this.ctx.containsBean(channelName)) {
+      channel = createAsyncChannel(beanFactory, channelName, this.defaultPoolSize);
+      beanFactory.registerSingleton(channelName, channel);
+      beanFactory.initializeBean(channel, channelName);
+    } else {
+      LOG.info(String.format("Channel %s already exists.", channelName));
+      channel = (SubscribableChannel) this.ctx.getBean(channelName);
+    }
+
+    if (!this.ctx.containsBean(channelName + this.OUTBOUNDFLOW)) {
+      IntegrationFlow flow = IntegrationFlows.from(channelName).handle(Jms.outboundGateway(this.connectionFactory)
+          .requestDestination(queueName).receiveTimeout(Long.parseLong(this.defaultReceiveTimeout))).handle(m -> {
+            h.handleMessage(m);
+          }).get();
+
+      beanFactory.registerSingleton(channelName + this.OUTBOUNDFLOW, flow);
+      beanFactory.initializeBean(flow, channelName + this.OUTBOUNDFLOW);
+    } else {
+      LOG.info(String.format("OutboundGateway for queue %s already exists.", queueName));
+    }
+
+    this.ctx.start();
+
+    return new IntegrationChannelImpl(channel);
+  }
+
+  @Override
+  public IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler h,
+      int poolSize, long receiveTimeout) {
+
+    LOG.info("Creating channel " + channelName);
+    ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
+
+    SubscribableChannel channel;
+
+    if (!this.ctx.containsBean(channelName)) {
+      channel = createAsyncChannel(beanFactory, channelName, poolSize);
+      beanFactory.registerSingleton(channelName, channel);
+      beanFactory.initializeBean(channel, channelName);
+    } else {
+      LOG.info(String.format("Channel %s already exists.", channelName));
+      channel = (SubscribableChannel) this.ctx.getBean(channelName);
+    }
+
+    if (!this.ctx.containsBean(channelName + this.OUTBOUNDFLOW)) {
+      IntegrationFlow flow = IntegrationFlows.from(channelName)
+          .handle(
+              Jms.outboundGateway(this.connectionFactory).requestDestination(queueName).receiveTimeout(receiveTimeout))
+          .handle(m -> {
+            h.handleMessage(m);
+          }).get();
+
+      beanFactory.registerSingleton(channelName + this.OUTBOUNDFLOW, flow);
+      beanFactory.initializeBean(flow, channelName + this.OUTBOUNDFLOW);
+    } else {
+      LOG.info(String.format("OutboundGateway for queue %s already exists.", queueName));
+    }
+
     this.ctx.start();
 
     return new IntegrationChannelImpl(channel);
@@ -374,6 +476,51 @@ public class IntegrationImpl implements Integration {
     return channel;
   }
 
+  private SubscribableChannel createSubscribableAsyncRequestReplyChannel(String channelName, String queueName,
+      IntegrationHandler messageHandler) {
+
+    LOG.info("Creating channel " + channelName);
+    ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
+
+    SubscribableChannel channel;
+
+    if (!this.ctx.containsBean(channelName)) {
+      channel = createAsyncChannel(beanFactory, channelName, this.defaultPoolSize);
+      beanFactory.registerSingleton(channelName, channel);
+      beanFactory.initializeBean(channel, channelName);
+    } else {
+      LOG.info(String.format("Channel %s already exists.", channelName));
+      channel = (SubscribableChannel) this.ctx.getBean(channelName);
+    }
+
+    if (!this.ctx.containsBean(channelName + this.INBOUNDFLOW)) {
+      IntegrationFlow flow = IntegrationFlows.from(Jms.inboundGateway(this.connectionFactory).destination(queueName))
+          .wireTap(f -> f.handle(System.out::println))
+
+          .handle(new GenericHandler<String>() {
+
+            @Override
+            public Object handle(String payload, Map<String, Object> headers) {
+
+              try {
+                return messageHandler.handleMessage(payload);
+              } catch (Exception e) {
+                LOG.error(String.format(IntegrationImpl.this.ERROR_IN_HANDLER, payload, e.getMessage()), e);
+                return null;
+              }
+            }
+          }).get();
+      beanFactory.registerSingleton(channelName + this.INBOUNDFLOW, flow);
+      beanFactory.initializeBean(flow, channelName + this.INBOUNDFLOW);
+    } else {
+      LOG.info(String.format("InboundGateway for queue %s already exists.", queueName));
+    }
+
+    this.ctx.start();
+
+    return channel;
+  }
+
   private SubscribableChannel createInputChannel(ConfigurableListableBeanFactory beanFactory, String inputChannelName) {
 
     PublishSubscribeChannel channel = new PublishSubscribeChannel();
@@ -390,6 +537,24 @@ public class IntegrationImpl implements Integration {
     dch.setBeanFactory(beanFactory);
     return dch;
 
+  }
+
+  private ExecutorChannel createAsyncChannel(ConfigurableListableBeanFactory beanFactory, String inputChannelName,
+      int poolSize) {
+
+    Executor ex = getCustomExecutor(poolSize);
+    ExecutorChannel exCh = new ExecutorChannel(ex);
+    return exCh;
+
+  }
+
+  private Executor getCustomExecutor(int corePoolSize) {
+
+    ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+    taskExecutor.setCorePoolSize(corePoolSize);
+    taskExecutor.initialize();
+    LOG.info("Creating custom executor with core pool size of " + corePoolSize);
+    return taskExecutor;
   }
 
 }

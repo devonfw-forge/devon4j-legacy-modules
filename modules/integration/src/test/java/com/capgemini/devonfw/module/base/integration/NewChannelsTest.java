@@ -14,6 +14,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
+import com.capgemini.devonfw.module.base.integration.handlers.LongIntegrationHandler;
 import com.capgemini.devonfw.module.base.integration.handlers.ReplyMessageHandler;
 import com.capgemini.devonfw.module.base.integration.handlers.SimpleMessageHandler;
 import com.capgemini.devonfw.module.base.integration.handlers.UpperIntegrationHandler;
@@ -43,20 +44,38 @@ public class NewChannelsTest extends ComponentTest {
 
   IntegrationChannel test_new_rr_channel;
 
+  IntegrationChannel test_new_async_channel;
+
   private final String abcd = "abcd";
+
+  private final String qwerty = "qwerty";
+
+  private final String CH_1D_TEST = "channel.1d.test";
+
+  private final String QU_1D_TEST = "queue.1d.test";
+
+  private final String CH_RR_TEST = "channel.rr.test";
+
+  private final String QU_RR_TEST = "queue.rr.test";
+
+  private final String CH_RRA_TEST = "channel.rrasync.test";
+
+  private final String QU_RRA_TEST = "queue.rrasync.test";
 
   @Before
   public void init() {
 
-    this.test_new_1d_channel = this.integration.createChannel("channel.1d.test", "queue.1d.test");
+    this.test_new_1d_channel = this.integration.createChannel(this.CH_1D_TEST, this.QU_1D_TEST);
     this.test_new_rr_channel =
-        this.integration.createRequestReplyChannel("channel.rr.test", "queue.rr.test", new ReplyMessageHandler());
+        this.integration.createRequestReplyChannel(this.CH_RR_TEST, this.QU_RR_TEST, new ReplyMessageHandler());
+    this.test_new_async_channel =
+        this.integration.createAsyncRequestReplyChannel(this.CH_RRA_TEST, this.QU_RRA_TEST, new ReplyMessageHandler());
   }
 
   @Test
   public void sendMessageThroughNewSimpleChannel() throws InterruptedException {
 
-    this.integration.subscribeTo("channel.1d.test", "queue.1d.test", new SimpleMessageHandler());
+    this.integration.subscribeTo(this.CH_1D_TEST, this.QU_1D_TEST, new SimpleMessageHandler());
     Boolean r = this.test_new_1d_channel.send(this.abcd);
     assertThat(r).isTrue();
 
@@ -68,11 +87,22 @@ public class NewChannelsTest extends ComponentTest {
   @Test
   public void sendMessageThroughNewRequestReplyChannel() throws InterruptedException {
 
-    this.integration.subscribeAndReplyTo("channel.rr.test", "queue.rr.test", new UpperIntegrationHandler());
+    this.integration.subscribeAndReplyTo(this.CH_RR_TEST, this.QU_RR_TEST, new UpperIntegrationHandler());
     Boolean r = this.test_new_rr_channel.send(this.abcd);
     assertThat(r).isTrue();
     Thread.sleep(5000);
     assertThat(System.getProperty("test.reply")).isEqualTo(this.abcd.toUpperCase());
+  }
+
+  @Test
+  public void sendMessageThroughNewAsyncRequestReplyChannel() throws InterruptedException {
+
+    this.integration.subscribeAndReplyAsyncTo(this.CH_RRA_TEST, this.QU_RRA_TEST, new LongIntegrationHandler());
+    Boolean r = this.test_new_async_channel.send(this.qwerty);
+    assertThat(r).isTrue();
+    Thread.sleep(5000);
+    LOG.info("This is executed in parallel");
+    assertThat(System.getProperty("test.reply")).isEqualTo(this.qwerty.toUpperCase());
   }
 
   @After
