@@ -1,13 +1,13 @@
 package com.capgemini.devonfw.module.integration.common.api;
 
+import org.springframework.messaging.Message;
+
 /**
  * @author pparrado
  *
  */
 public interface IntegrationHandler {
 
-  // TODO add Headers as parameter
-  Object handleMessage(Object payload);
+  Object handleMessage(Message<?> m);
 
-  // Message<?> handleMessage(Message<?> m);
 }

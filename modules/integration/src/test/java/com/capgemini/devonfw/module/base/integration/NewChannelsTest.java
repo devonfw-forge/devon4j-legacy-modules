@@ -1,5 +1,8 @@
 package com.capgemini.devonfw.module.base.integration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.junit.After;
@@ -15,9 +18,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
 import com.capgemini.devonfw.module.base.integration.handlers.LongIntegrationHandler;
+import com.capgemini.devonfw.module.base.integration.handlers.LongReplyMessageHandler;
 import com.capgemini.devonfw.module.base.integration.handlers.ReplyMessageHandler;
 import com.capgemini.devonfw.module.base.integration.handlers.SimpleMessageHandler;
-import com.capgemini.devonfw.module.base.integration.handlers.UpperIntegrationHandler;
+import com.capgemini.devonfw.module.base.integration.handlers.UpperHeadersIntegrationHandler;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
 import com.capgemini.devonfw.module.integration.common.api.IntegrationChannel;
 
@@ -38,7 +42,6 @@ public class NewChannelsTest extends ComponentTest {
 
   @Autowired
   ConfigurableApplicationContext ctx;
-  // ApplicationContext context;
 
   IntegrationChannel test_new_1d_channel;
 
@@ -68,8 +71,8 @@ public class NewChannelsTest extends ComponentTest {
     this.test_new_1d_channel = this.integration.createChannel(this.CH_1D_TEST, this.QU_1D_TEST);
     this.test_new_rr_channel =
         this.integration.createRequestReplyChannel(this.CH_RR_TEST, this.QU_RR_TEST, new ReplyMessageHandler());
-    this.test_new_async_channel =
-        this.integration.createAsyncRequestReplyChannel(this.CH_RRA_TEST, this.QU_RRA_TEST, new ReplyMessageHandler());
+    this.test_new_async_channel = this.integration.createAsyncRequestReplyChannel(this.CH_RRA_TEST, this.QU_RRA_TEST,
+        new LongReplyMessageHandler());
   }
 
   @Test
@@ -78,20 +81,23 @@ public class NewChannelsTest extends ComponentTest {
     this.integration.subscribeTo(this.CH_1D_TEST, this.QU_1D_TEST, new SimpleMessageHandler());
     Boolean r = this.test_new_1d_channel.send(this.abcd);
     assertThat(r).isTrue();
-
-    // the default poller rate property is set to 1000 so we wait enough to get the response through system property
-    Thread.sleep(3000);
     assertThat(System.getProperty("test.message")).isEqualTo(this.abcd);
   }
 
   @Test
-  public void sendMessageThroughNewRequestReplyChannel() throws InterruptedException {
+  public void sendMessageAndHeadersThroughNewRequestReplyChannel() throws InterruptedException {
 
-    this.integration.subscribeAndReplyTo(this.CH_RR_TEST, this.QU_RR_TEST, new UpperIntegrationHandler());
-    Boolean r = this.test_new_rr_channel.send(this.abcd);
+    this.integration.subscribeAndReplyTo(this.CH_RR_TEST, this.QU_RR_TEST, new UpperHeadersIntegrationHandler());
+
+    Map headers = new HashMap();
+    headers.put("header1", "value1");
+    headers.put("header2", "value2");
+
+    Boolean r = this.test_new_rr_channel.send(this.abcd, headers);
     assertThat(r).isTrue();
-    Thread.sleep(5000);
     assertThat(System.getProperty("test.reply")).isEqualTo(this.abcd.toUpperCase());
+    assertThat(System.getProperty("test.header1")).isEqualTo("VALUE1");
+    assertThat(System.getProperty("test.header2")).isEqualTo("VALUE2");
   }
 
   @Test
@@ -102,15 +108,31 @@ public class NewChannelsTest extends ComponentTest {
     assertThat(r).isTrue();
     Thread.sleep(5000);
     LOG.info("This is executed in parallel");
-    assertThat(System.getProperty("test.reply")).isEqualTo(this.qwerty.toUpperCase());
+    assertThat(System.getProperty("test.longreply")).isEqualTo(this.qwerty.toUpperCase());
   }
 
   @After
   public void end() {
 
-    if (System.getProperty("test.message") != null)
+    if (System.getProperty("test.message") != null) {
       System.clearProperty("test.message");
-    if (System.getProperty("test.reply") != null)
+    }
+
+    if (System.getProperty("test.reply") != null) {
       System.clearProperty("test.reply");
+    }
+
+    if (System.getProperty("test.longreply") != null) {
+      System.clearProperty("test.longreply");
+    }
+
+    if (System.getProperty("test.header1") != null) {
+      System.clearProperty("test.header1");
+    }
+
+    if (System.getProperty("test.header2") != null) {
+      System.clearProperty("test.header2");
+    }
+
   }
 }

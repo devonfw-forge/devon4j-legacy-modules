@@ -1,5 +1,8 @@
 package com.capgemini.devonfw.module.base.integration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.junit.After;
@@ -43,11 +46,36 @@ public class DefaultOneDirectionFlowTest extends ComponentTest {
     assertThat(System.getProperty("test.message")).isEqualTo(this.qwerty);
   }
 
+  @Test
+  public void sendMessageAndHeadersThroughDefaultSimpleChannel() throws InterruptedException {
+
+    this.integration.subscribe(new SimpleMessageHandler());
+
+    Map headers = new HashMap();
+    headers.put("header1", "value1");
+    headers.put("header2", "value2");
+
+    this.integration.send(this.qwerty, headers);
+    Thread.sleep(3000);
+    assertThat(System.getProperty("test.message")).isEqualTo(this.qwerty);
+    assertThat(System.getProperty("test.header1")).isEqualTo("value1");
+    assertThat(System.getProperty("test.header2")).isEqualTo("value2");
+  }
+
   @After
   public void end() {
 
-    if (System.getProperty("test.message") != null)
+    if (System.getProperty("test.message") != null) {
       System.clearProperty("test.message");
+    }
+
+    if (System.getProperty("test.header1") != null) {
+      System.clearProperty("test.header1");
+    }
+
+    if (System.getProperty("test.header2") != null) {
+      System.clearProperty("test.header2");
+    }
   }
 
 }

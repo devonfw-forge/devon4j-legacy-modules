@@ -1,7 +1,11 @@
 package com.capgemini.devonfw.module.base.integration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +43,32 @@ public class DefaultRequestReplyFlowTest extends ComponentTest {
     this.integration.subscribeAndReply(new UpperIntegrationHandler());
     String response = this.integration.sendAndReceive(this.qwerty);
     assertThat(response).isEqualTo(this.qwerty.toUpperCase());
+  }
+
+  @Test
+  public void sendMessageAndHeadersThroughDefaultRequestReplyChannel() throws InterruptedException {
+
+    Map headers = new HashMap();
+    headers.put("header1", "value1");
+    headers.put("header2", "value2");
+
+    this.integration.subscribeAndReply(new UpperIntegrationHandler());
+    String response = this.integration.sendAndReceive(this.qwerty, headers);
+    assertThat(response).isEqualTo(this.qwerty.toUpperCase());
+    assertThat(System.getProperty("test.header1")).isEqualTo("value1");
+    assertThat(System.getProperty("test.header2")).isEqualTo("value2");
+  }
+
+  @After
+  public void end() {
+
+    if (System.getProperty("test.header1") != null) {
+      System.clearProperty("test.header1");
+    }
+
+    if (System.getProperty("test.header2") != null) {
+      System.clearProperty("test.header2");
+    }
   }
 
 }

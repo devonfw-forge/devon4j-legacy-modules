@@ -1,11 +1,15 @@
 package com.capgemini.devonfw.module.integration.common.api;
 
+import java.util.Map;
+
 /**
  * @author pparrado
  *
  */
 public interface IntegrationChannel {
-  // void send(String m);
 
-  Boolean send(String m);
+  Boolean send(String message);
+
+  Boolean send(String message, Map headers);
+
 }

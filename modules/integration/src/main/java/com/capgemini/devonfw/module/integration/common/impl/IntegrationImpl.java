@@ -79,10 +79,24 @@ public class IntegrationImpl implements Integration {
   }
 
   @Override
+  public void send(String message, Map headers) {
+
+    OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
+    oneDirectionGateway.send(new GenericMessage<>(message, headers));
+  }
+
+  @Override
   public String sendAndReceive(String message) {
 
     RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
     return rrGateway.echo(new GenericMessage<>(message));
+  }
+
+  @Override
+  public String sendAndReceive(String message, Map headers) {
+
+    RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
+    return rrGateway.echo(new GenericMessage<>(message, headers));
   }
 
   @Override
@@ -92,23 +106,12 @@ public class IntegrationImpl implements Integration {
     return asyncGateway.sendAsync(new GenericMessage<>(message));
   }
 
-  // TODO allow sending POJOs
-  // @Override
-  // public Boolean send(ConfigurableApplicationContext ctx, Object message) {
-  //
-  // OneDirectionGateway oneDirectionGateway = ctx.getBean(OneDirectionGateway.class);
-  // return oneDirectionGateway.send(message);
-  //
-  // }
+  @Override
+  public Future<String> sendAndReceiveAsync(String message, Map headers) {
 
-  // @Override
-  // public Object send(ConfigurableApplicationContext ctx, Object object) {
-  //
-  // String xml = XmlManager.convertObjectToXml(object);
-  // RequestReplyGateway rrGateway = ctx.getBean(RequestReplyGateway.class);
-  // String xmlResponse = rrGateway.echo(xml);
-  // return XmlManager.convertXmlToObject(xmlResponse);
-  // }
+    AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
+    return asyncGateway.sendAsync(new GenericMessage<>(message, headers));
+  }
 
   @Override
   public void subscribe(MessageHandler handler) {
@@ -177,11 +180,6 @@ public class IntegrationImpl implements Integration {
   @Override
   public IntegrationChannel createChannel(String channelName, String queueName) {
 
-    // TODO get rid of ctx as parameter passed through all elements, can it be obtained from here?
-    // AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(RootConfiguration.class);
-
-    // TODO centralize the connection factory in one single place
-    // ConfigUtils utils = new ConfigUtils();
     LOG.info("Creating channel " + channelName);
     ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
 
@@ -346,9 +344,6 @@ public class IntegrationImpl implements Integration {
   private SubscribableChannel createSubscribableChannel(String channelName, String queueName,
       MessageHandler messageHandler) {
 
-    // AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(RootConfiguration.class);
-
-    // ConfigUtils utils = new ConfigUtils();
     LOG.info("Creating channel " + channelName);
 
     ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
@@ -393,9 +388,6 @@ public class IntegrationImpl implements Integration {
   private SubscribableChannel createSubscribableChannel(String channelName, String queueName,
       MessageHandler messageHandler, long pollRate) {
 
-    // AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(RootConfiguration.class);
-
-    // ConfigUtils utils = new ConfigUtils();
     LOG.info("Creating channel " + channelName);
     ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
 
@@ -458,7 +450,7 @@ public class IntegrationImpl implements Integration {
             public Object handle(String payload, Map<String, Object> headers) {
 
               try {
-                return messageHandler.handleMessage(payload);
+                return messageHandler.handleMessage(new GenericMessage<>(payload, headers));
               } catch (Exception e) {
                 LOG.error(String.format(IntegrationImpl.this.ERROR_IN_HANDLER, payload, e.getMessage()), e);
                 return null;
@@ -503,7 +495,7 @@ public class IntegrationImpl implements Integration {
             public Object handle(String payload, Map<String, Object> headers) {
 
               try {
-                return messageHandler.handleMessage(payload);
+                return messageHandler.handleMessage(new GenericMessage<>(payload, headers));
               } catch (Exception e) {
                 LOG.error(String.format(IntegrationImpl.this.ERROR_IN_HANDLER, payload, e.getMessage()), e);
                 return null;

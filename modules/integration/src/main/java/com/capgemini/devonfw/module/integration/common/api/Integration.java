@@ -1,5 +1,6 @@
 package com.capgemini.devonfw.module.integration.common.api;
 
+import java.util.Map;
 import java.util.concurrent.Future;
 
 import org.springframework.messaging.MessageHandler;
@@ -10,27 +11,25 @@ import org.springframework.messaging.MessageHandler;
  */
 public interface Integration {
 
+  // Implementation for out-of-the-box Channels
+
   void send(String message);
+
+  void send(String message, Map headers);
 
   String sendAndReceive(String message);
 
+  String sendAndReceive(String message, Map headers);
+
   Future<String> sendAndReceiveAsync(String message);
 
-  // Implementation for out-of-the-box Channels
-
-  // TODO implement sending POJOs (JAXB?)
-  // Boolean send(ConfigurableApplicationContext ctx, Object object);
-  // Boolean sendAndReceive(ConfigurableApplicationContext ctx, Object object);
+  Future<String> sendAndReceiveAsync(String message, Map headers);
 
   void subscribe(MessageHandler mh);
 
   void subscribeAsync(IntegrationHandler h);
 
   void subscribeAndReply(IntegrationHandler h);
-
-  // public void sendAsXml(ConfigurableApplicationContext ctx, Object object);
-  //
-  // public void sendAsJson(ConfigurableApplicationContext ctx, Object object);
 
   // Implementation for new Channels
 
@@ -53,6 +52,5 @@ public interface Integration {
 
   IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler mh,
       int poolSize, long receiveTimeout);
-  // void subscribeTo(ConfigurableApplicationContext ctx, String channel, String queue, MessageHandler messageHandler);
 
 }

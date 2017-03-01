@@ -91,8 +91,7 @@ public class IntegrationConfig {
   // out
 
   @Bean
-  // @ConditionalOnProperty(prefix = "integration.emitter", name = "enabled", havingValue = "true")
-  @ConditionalOnProperty(prefix = "integration.one-direction", name = "emmiter", havingValue = "true")
+  @ConditionalOnProperty(prefix = "integration.one-direction", name = "emitter", havingValue = "true")
   IntegrationFlow outFlow() {
 
     return IntegrationFlows.from(this.channel_1d)
@@ -101,9 +100,7 @@ public class IntegrationConfig {
   }
 
   @Bean
-  // @Profile("requestreply")
-  // @ConditionalOnProperty(prefix = "integration.emitter", name = "enabled", havingValue = "true")
-  @ConditionalOnProperty(prefix = "integration.request-reply", name = "emmiter", havingValue = "true")
+  @ConditionalOnProperty(prefix = "integration.request-reply", name = "emitter", havingValue = "true")
   public IntegrationFlow outAndInFlow() {
 
     return IntegrationFlows.from(this.channel_rr).handle(
@@ -112,7 +109,7 @@ public class IntegrationConfig {
   }
 
   @Bean
-  @ConditionalOnProperty(prefix = "integration.request-reply-async", name = "emmiter", havingValue = "true")
+  @ConditionalOnProperty(prefix = "integration.request-reply-async", name = "emitter", havingValue = "true")
   public IntegrationFlow asyncOutboundFlow() {
 
     return IntegrationFlows.from(this.channel_async).handle(Jms.outboundGateway(this.connectionFactory)
@@ -122,8 +119,6 @@ public class IntegrationConfig {
   // in
 
   @Bean
-  // @Profile("onedirection")
-  // @ConditionalOnProperty(prefix = "integration.listener", name = "enabled", havingValue = "true")
   @ConditionalOnProperty(prefix = "integration.one-direction", name = "listener", havingValue = "true")
   public IntegrationFlow inFlow(MessageHandler handler) throws Exception {
 
@@ -138,8 +133,6 @@ public class IntegrationConfig {
   }
 
   @Bean
-  // @Profile("requestreply")
-  // @ConditionalOnProperty(prefix = "integration.listener", name = "enabled", havingValue = "true")
   @ConditionalOnProperty(prefix = "integration.request-reply", name = "listener", havingValue = "true")
   public IntegrationFlow inAndOutFlow(IntegrationHandler h) {
 
@@ -150,7 +143,7 @@ public class IntegrationConfig {
           public Object handle(String payload, Map<String, Object> headers) {
 
             try {
-              return h.handleMessage(payload);
+              return h.handleMessage(new GenericMessage<>(payload, headers));
             } catch (Exception e) {
               LOG.error(String.format("IntegrationHandler threw an error: %s", e.getMessage()), e);
               return null;
@@ -169,7 +162,7 @@ public class IntegrationConfig {
           public Object handle(String payload, Map<String, Object> headers) {
 
             try {
-              return h.handleMessage(payload);
+              return h.handleMessage(new GenericMessage<>(payload, headers));
             } catch (Exception e) {
               LOG.error(String.format("IntegrationHandler threw an error: %s", e.getMessage()), e);
               return null;
