@@ -20,4 +20,12 @@ public interface I18n {
 
   public String getResourcesAsJSONStringForLocale(String locale, String filter) throws Throwable;
 
+  /**
+   * @param locale
+   * @param filter
+   * @return
+   * @throws Throwable
+   */
+  String getResourceObject(String locale, String filter) throws Throwable;
+
 }
