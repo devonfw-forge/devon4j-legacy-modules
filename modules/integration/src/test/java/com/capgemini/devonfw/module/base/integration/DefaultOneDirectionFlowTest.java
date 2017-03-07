@@ -21,7 +21,7 @@ import com.capgemini.devonfw.module.integration.common.api.Integration;
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
- * @author pparrado
+ * Tests the out-of-the-box simple communication channel
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,6 +37,7 @@ public class DefaultOneDirectionFlowTest extends ComponentTest {
 
   private final String qwerty = "qwerty";
 
+  @SuppressWarnings("javadoc")
   @Test
   public void sendMessageThroughDefaultSimpleChannel() throws InterruptedException {
 
@@ -46,11 +47,13 @@ public class DefaultOneDirectionFlowTest extends ComponentTest {
     assertThat(System.getProperty("test.message")).isEqualTo(this.qwerty);
   }
 
+  @SuppressWarnings({ "javadoc", "unchecked" })
   @Test
   public void sendMessageAndHeadersThroughDefaultSimpleChannel() throws InterruptedException {
 
     this.integration.subscribe(new SimpleMessageHandler());
 
+    @SuppressWarnings("rawtypes")
     Map headers = new HashMap();
     headers.put("header1", "value1");
     headers.put("header2", "value2");
@@ -62,6 +65,7 @@ public class DefaultOneDirectionFlowTest extends ComponentTest {
     assertThat(System.getProperty("test.header2")).isEqualTo("value2");
   }
 
+  @SuppressWarnings("javadoc")
   @After
   public void end() {
 

@@ -22,7 +22,7 @@ import com.capgemini.devonfw.module.integration.common.api.Integration;
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
- * @author pparrado
+ * Tests the out-of-the-box asynchronous request-reply communication channel
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,6 +38,7 @@ public class DefaultAsyncFlowTest extends ComponentTest {
   @Autowired
   ConfigurableApplicationContext ctx;
 
+  @SuppressWarnings("javadoc")
   @Test
   public void sendMessageThroughDefaultAsyncRequestReplyChannel() throws InterruptedException, ExecutionException {
 

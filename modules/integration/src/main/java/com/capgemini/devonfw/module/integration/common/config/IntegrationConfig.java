@@ -68,20 +68,50 @@ public class IntegrationConfig {
 
   // PRECONFIGURED GATEWAYS - - - - - - - - - - - - - - - - - - - - - -
 
+  /**
+   * Default gateway for out-of-the-box simple communication channel. One direction flow. Only sending not expecting for
+   * response.
+   *
+   */
   @MessagingGateway
   public interface OneDirectionGateway {
+    /**
+     * Sends a {@link GenericMessage} with the received content.
+     *
+     * @param message the content to be included in the message.
+     */
     @Gateway(requestChannel = "1d.Channel")
     void send(GenericMessage<?> message);
   }
 
+  /**
+   * Default gateway for out-of-the-box request-reply communication channel.
+   *
+   */
   @MessagingGateway
   public interface RequestReplyGateway {
+    /**
+     * Sends a {@link GenericMessage} with the received content.
+     *
+     * @param message the content to be included in the message.
+     * @return the response received.
+     */
     @Gateway(requestChannel = "rr.Channel")
     String echo(GenericMessage<?> message);
   }
 
+  /**
+   * Default gateway for out-out-the-box asynchronous request-reply communication channel.
+   *
+   */
   @MessagingGateway
   public interface AsyncGateway {
+    /**
+     * Sends a {@link GenericMessage} with the received content.
+     *
+     * @param message the content to be included in the message.
+     * @return the response received.
+     */
     @Gateway(requestChannel = "async.Channel")
     Future<String> sendAsync(GenericMessage<?> message);
   }
@@ -90,6 +120,12 @@ public class IntegrationConfig {
 
   // out
 
+  /**
+   * If the property "integration.one-direction.emitter" has value "true" this Bean will be loaded and will create a
+   * simple flow, only for sending messages, no response expected.
+   *
+   * @return the created {@link IntegrationFlow}
+   */
   @Bean
   @ConditionalOnProperty(prefix = "integration.one-direction", name = "emitter", havingValue = "true")
   IntegrationFlow outFlow() {
@@ -99,6 +135,12 @@ public class IntegrationConfig {
 
   }
 
+  /**
+   * If the property "integration.request-reply.emitter" has value "true" this Bean will be loaded and will create a
+   * request-reply flow.
+   *
+   * @return the created {@link IntegrationFlow}
+   */
   @Bean
   @ConditionalOnProperty(prefix = "integration.request-reply", name = "emitter", havingValue = "true")
   public IntegrationFlow outAndInFlow() {
@@ -108,6 +150,12 @@ public class IntegrationConfig {
         .get();
   }
 
+  /**
+   * If the property "integration.request-reply-async.emitter" has value "true" this Bean will be loaded and will create
+   * a request-reply asynchronous flow for sending messages and receiving responses.
+   *
+   * @return the created {@link IntegrationFlow}
+   */
   @Bean
   @ConditionalOnProperty(prefix = "integration.request-reply-async", name = "emitter", havingValue = "true")
   public IntegrationFlow asyncOutboundFlow() {
@@ -118,9 +166,16 @@ public class IntegrationConfig {
 
   // in
 
+  /**
+   * If the property "integration.one-direction.listener" has value "true" this Bean will be loaded and will create a
+   * simple flow for receiving messages.
+   *
+   * @param handler the {@link MessageHandler} that will manage each message received.
+   * @return the created {@link IntegrationFlow}
+   */
   @Bean
   @ConditionalOnProperty(prefix = "integration.one-direction", name = "listener", havingValue = "true")
-  public IntegrationFlow inFlow(MessageHandler handler) throws Exception {
+  public IntegrationFlow inFlow(MessageHandler handler) {
 
     return IntegrationFlows.from(Jms.inboundAdapter(this.connectionFactory).destination(this.queue_1d),
         c -> c.poller(Pollers.fixedRate(this.rate, TimeUnit.MILLISECONDS))).handle(m -> {
@@ -132,9 +187,16 @@ public class IntegrationConfig {
         }).get();
   }
 
+  /**
+   * If the property "integration.request-reply.listener" has value "true" this Bean will be loaded and will create a
+   * request-reply flow for receiving and replying to messages.
+   *
+   * @param handler the {@link IntegrationHandler} to manage the messages and send back the response
+   * @return the created {@link IntegrationFlow}
+   */
   @Bean
   @ConditionalOnProperty(prefix = "integration.request-reply", name = "listener", havingValue = "true")
-  public IntegrationFlow inAndOutFlow(IntegrationHandler h) {
+  public IntegrationFlow inAndOutFlow(IntegrationHandler handler) {
 
     return IntegrationFlows.from(Jms.inboundGateway(this.connectionFactory).destination(this.queue_rr))
         .wireTap(flow -> flow.handle(System.out::println)).handle(new GenericHandler<String>() {
@@ -143,7 +205,7 @@ public class IntegrationConfig {
           public Object handle(String payload, Map<String, Object> headers) {
 
             try {
-              return h.handleMessage(new GenericMessage<>(payload, headers));
+              return handler.handleMessage(new GenericMessage<>(payload, headers));
             } catch (Exception e) {
               LOG.error(String.format("IntegrationHandler threw an error: %s", e.getMessage()), e);
               return null;
@@ -152,9 +214,16 @@ public class IntegrationConfig {
         }).get();
   }
 
+  /**
+   * If the property "integration.request-reply-async.listener" has value "true" this Bean will be loaded and will
+   * create a request-reply asynchronous flow for sending messages and receiving responses.
+   *
+   * @param handler the {@link IntegrationHandler} to manage the messages and send back the response
+   * @return the created {@link IntegrationFlow}
+   */
   @Bean
   @ConditionalOnProperty(prefix = "integration.request-reply-async", name = "listener", havingValue = "true")
-  public IntegrationFlow asyncInAndOutFlow(IntegrationHandler h) {
+  public IntegrationFlow asyncInAndOutFlow(IntegrationHandler handler) {
 
     return IntegrationFlows.from(Jms.inboundGateway(this.connectionFactory).destination(this.queue_async))
         .wireTap(flow -> flow.handle(System.out::println)).handle(new GenericHandler<String>() {
@@ -162,7 +231,7 @@ public class IntegrationConfig {
           public Object handle(String payload, Map<String, Object> headers) {
 
             try {
-              return h.handleMessage(new GenericMessage<>(payload, headers));
+              return handler.handleMessage(new GenericMessage<>(payload, headers));
             } catch (Exception e) {
               LOG.error(String.format("IntegrationHandler threw an error: %s", e.getMessage()), e);
               return null;

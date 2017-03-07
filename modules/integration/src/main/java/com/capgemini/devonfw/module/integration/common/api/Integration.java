@@ -3,54 +3,198 @@ package com.capgemini.devonfw.module.integration.common.api;
 import java.util.Map;
 import java.util.concurrent.Future;
 
+import org.apache.activemq.broker.region.Queue;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
+import org.springframework.messaging.MessageHeaders;
 
 /**
- * @author pparrado
+ * This is the interface for a simple facade to manage the Integration flow
  *
  */
 public interface Integration {
 
   // Implementation for out-of-the-box Channels
 
+  /**
+   * Sends a message through the default simple channel. The flow is in one direction, no response expected.
+   *
+   * @param message the message to be sent as payload
+   */
   void send(String message);
 
-  void send(String message, Map headers);
+  /**
+   * Sends a message with headers through the default simple channel. The flow is in one direction, no response
+   * expected.
+   *
+   * @param message the message to be sent as payload
+   * @param headers the {@link Map} with {@link MessageHeaders} to be included in the message
+   */
+  void send(String message, Map<?, ?> headers);
 
+  /**
+   * Sends a message through the default request-reply channel and receives the response.
+   *
+   * @param message the message to be sent as payload
+   * @return the response received
+   */
   String sendAndReceive(String message);
 
-  String sendAndReceive(String message, Map headers);
+  /**
+   * Sends a message with headers through the default request-reply channel and receives the response.
+   *
+   * @param message the message to be sent as payload
+   * @param headers the {@link Map} with {@link MessageHeaders} to be included in the message
+   * @return the response received
+   */
+  String sendAndReceive(String message, Map<?, ?> headers);
 
+  /**
+   * Sends a message through the default asynchronous request-reply channel and receives asynchronously the response.
+   * You can configure the timeout for the response with the "integration.request-reply-async.receivetimeout" property.
+   *
+   * @param message the message to be sent as payload
+   * @return the response received
+   */
   Future<String> sendAndReceiveAsync(String message);
 
-  Future<String> sendAndReceiveAsync(String message, Map headers);
+  /**
+   * Sends a message with headers through the default asynchronous request-reply channel and receives asynchronously the
+   * response. You can configure the timeout for the response with the "integration.request-reply-async.receivetimeout"
+   * property.
+   *
+   * @param message the message to be sent as payload
+   * @param headers the {@link Map} with {@link MessageHeaders} to be included in the message
+   * @return the response
+   */
+  Future<String> sendAndReceiveAsync(String message, Map<?, ?> headers);
 
-  void subscribe(MessageHandler mh);
+  /**
+   * Subscribes to the default simple channel. The subscriber will be listening to the channel and polling it for new
+   * messages in an interval of time configured with the property "integration.one-direction.poller.rate"
+   *
+   * @param messageHandler the {@link MessageHandler} in charge of managing each received {@link Message}
+   */
+  void subscribe(MessageHandler messageHandler);
 
-  void subscribeAsync(IntegrationHandler h);
+  /**
+   * Subscribes to the default asynchronous request-reply channel. The subscriber will be listening to the channel and
+   * will generate a response with the {@link IntegrationHandler}.
+   *
+   * @param handler the {@link IntegrationHandler} in charge of managing each received {@link Message} and provide an
+   *        asynchronous response
+   */
+  void subscribeAsync(IntegrationHandler handler);
 
-  void subscribeAndReply(IntegrationHandler h);
+  /**
+   * Subscribes to the default request-reply channel. The subscriber will be listening to the channel and will generate
+   * a response with the {@link IntegrationHandler}.
+   *
+   * @param handler the {@link IntegrationHandler} in charge of managing each received {@link Message} and return a
+   *        response
+   */
+  void subscribeAndReply(IntegrationHandler handler);
 
-  // Implementation for new Channels
+  // Implementation for new created Channels
 
-  void subscribeTo(String channelName, String queueName, MessageHandler mh);
+  /**
+   * Subscribes to a new channel. The subscriber will be listening to the channel and polling it for new messages. The
+   * polling rate can be configured with the property "integration.default.poller.rate"
+   *
+   * @param channelName the {@link IntegrationChannel} to be subscribed to
+   * @param queueName the {@link Queue} to be listening to
+   * @param messageHandler the {@link MessageHandler} handler to manage each received message
+   */
+  void subscribeTo(String channelName, String queueName, MessageHandler messageHandler);
 
-  void subscribeTo(String channelName, String queueName, MessageHandler mh, long pollRate);
+  /**
+   * Subscribes to a new simple channel, no response is sent. The subscriber will be listening to the channel and
+   * polling it for new messages.
+   *
+   * @param channelName the {@link IntegrationChannel} to be subscribed to
+   * @param queueName the {@link Queue} to be listening to
+   * @param messageHandler the {@link MessageHandler} handler to manage each received message
+   * @param pollRate the time interval for making the poll to the message broker to check new messages
+   */
+  void subscribeTo(String channelName, String queueName, MessageHandler messageHandler, long pollRate);
 
-  void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler h);
+  /**
+   * Subscribes to a new request-reply channel. The subscriber will be listening to the channel for new messages and
+   * creating a response for each one with the {@link IntegrationHandler}.
+   *
+   * @param channelName channelName the {@link IntegrationChannel} to be subscribed to
+   * @param queueName queueName the {@link Queue} to be listening to
+   * @param handler the {@link IntegrationHandler} in charge of managing each received {@link Message} and return a
+   *        response
+   */
+  void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler handler);
 
-  void subscribeAndReplyAsyncTo(String channelName, String queueName, IntegrationHandler h);
+  /**
+   * Subscribes to a new asynchronous request-reply channel. The subscriber will be listening to the channel for new
+   * messages and creating a response for each one with the {@link IntegrationHandler}.
+   *
+   * @param channelName channelName the {@link IntegrationChannel} to be subscribed to
+   * @param queueName queueName the {@link Queue} to be listening to
+   * @param handler the {@link IntegrationHandler} in charge of managing each received {@link Message} and return a
+   *        response
+   */
+  void subscribeAndReplyAsyncTo(String channelName, String queueName, IntegrationHandler handler);
 
-  IntegrationChannel createChannel(String name, String queueName);
+  /**
+   * Creates a new simple {@link IntegrationChannel}
+   *
+   * @param channelName name for the new {@link IntegrationChannel}
+   * @param queueName name for the new {@link Queue}
+   * @return the new {@link IntegrationChannel}
+   */
+  IntegrationChannel createChannel(String channelName, String queueName);
 
-  IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler mh);
+  /**
+   * Creates a new request-reply {@link IntegrationChannel}. The timeout for the response is configured with the
+   * property "integration.default.receivetimeout".
+   *
+   * @param channelName name for the new {@link IntegrationChannel}
+   * @param queueName name for the new {@link Queue}
+   * @param messageHandler the {@link MessageHandler} handler to manage each received response
+   * @return the new {@link IntegrationChannel}
+   */
+  IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler messageHandler);
 
-  IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler mh,
-      long receivetimeout);
+  /**
+   * Creates a new request-reply {@link IntegrationChannel}.
+   *
+   * @param channelName name for the new {@link IntegrationChannel}
+   * @param queueName name for the new {@link Queue}
+   * @param messageHandler the {@link MessageHandler} handler to manage each received response
+   * @param receiveTimeout the waiting time for a response after sending a {@link Message}
+   * @return the new {@link IntegrationChannel}
+   */
+  IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler messageHandler,
+      long receiveTimeout);
 
-  IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler mh);
+  /**
+   * Creates a new asynchronous request-reply {@link IntegrationChannel}. The core pool size for the asynchronous task
+   * executor is configured with the property "integration.default.poolsize".
+   * 
+   * @param channelName name for the new {@link IntegrationChannel}
+   * @param queueName name for the new {@link Queue}
+   * @param messageHandler the {@link MessageHandler} handler to manage each received response
+   * @return the new {@link IntegrationChannel}
+   */
+  IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName,
+      MessageHandler messageHandler);
 
-  IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler mh,
+  /**
+   * Creates a new asynchronous request-reply {@link IntegrationChannel}.
+   *
+   * @param channelName name for the new {@link IntegrationChannel}
+   * @param queueName name for the new {@link Queue}
+   * @param messageHandler the {@link MessageHandler} handler to manage each received response
+   * @param poolSize ThreadPoolExecutor's core pool size
+   * @param receiveTimeout the waiting time for a response after sending a {@link Message}
+   * @return the new {@link IntegrationChannel}
+   */
+  IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler messageHandler,
       int poolSize, long receiveTimeout);
 
 }

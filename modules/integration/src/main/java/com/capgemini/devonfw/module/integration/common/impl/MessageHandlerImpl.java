@@ -8,7 +8,7 @@ import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Component;
 
 /**
- * @author pparrado
+ * Implementation for {@link MessageHandler}
  *
  */
 @Component
@@ -16,6 +16,9 @@ public class MessageHandlerImpl implements MessageHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(MessageHandlerImpl.class.getName());
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void handleMessage(Message<?> message) throws MessagingException {
 

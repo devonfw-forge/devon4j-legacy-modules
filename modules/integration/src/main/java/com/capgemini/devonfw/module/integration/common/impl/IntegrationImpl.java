@@ -38,7 +38,7 @@ import com.capgemini.devonfw.module.integration.common.config.IntegrationConfig.
 import com.capgemini.devonfw.module.integration.common.config.IntegrationConfig.RequestReplyGateway;
 
 /**
- * @author pparrado
+ * Implementation of {@link Integration} to manage the Integration flow.
  *
  */
 @Named
@@ -71,6 +71,9 @@ public class IntegrationImpl implements Integration {
   @Autowired
   ConfigurableApplicationContext ctx;
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void send(String message) {
 
@@ -78,6 +81,9 @@ public class IntegrationImpl implements Integration {
     oneDirectionGateway.send(new GenericMessage<>(message));
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void send(String message, Map headers) {
 
@@ -85,6 +91,9 @@ public class IntegrationImpl implements Integration {
     oneDirectionGateway.send(new GenericMessage<>(message, headers));
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public String sendAndReceive(String message) {
 
@@ -92,6 +101,9 @@ public class IntegrationImpl implements Integration {
     return rrGateway.echo(new GenericMessage<>(message));
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public String sendAndReceive(String message, Map headers) {
 
@@ -99,6 +111,9 @@ public class IntegrationImpl implements Integration {
     return rrGateway.echo(new GenericMessage<>(message, headers));
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Future<String> sendAndReceiveAsync(String message) {
 
@@ -106,6 +121,9 @@ public class IntegrationImpl implements Integration {
     return asyncGateway.sendAsync(new GenericMessage<>(message));
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Future<String> sendAndReceiveAsync(String message, Map headers) {
 
@@ -113,6 +131,9 @@ public class IntegrationImpl implements Integration {
     return asyncGateway.sendAsync(new GenericMessage<>(message, headers));
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void subscribe(MessageHandler handler) {
 
@@ -123,6 +144,9 @@ public class IntegrationImpl implements Integration {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void subscribeAsync(IntegrationHandler h) {
 
@@ -133,6 +157,9 @@ public class IntegrationImpl implements Integration {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void subscribeAndReply(IntegrationHandler handler) {
 
@@ -143,6 +170,9 @@ public class IntegrationImpl implements Integration {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void subscribeTo(String channelName, String queueName, MessageHandler messageHandler) {
 
@@ -152,6 +182,9 @@ public class IntegrationImpl implements Integration {
 
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void subscribeTo(String channelName, String queueName, MessageHandler messageHandler, long pollRate) {
 
@@ -161,6 +194,9 @@ public class IntegrationImpl implements Integration {
 
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler h) {
 
@@ -170,6 +206,9 @@ public class IntegrationImpl implements Integration {
 
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void subscribeAndReplyAsyncTo(String channelName, String queueName, IntegrationHandler h) {
 
@@ -177,6 +216,9 @@ public class IntegrationImpl implements Integration {
     channel.subscribe(new MessageHandlerImpl());
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public IntegrationChannel createChannel(String channelName, String queueName) {
 
@@ -208,6 +250,9 @@ public class IntegrationImpl implements Integration {
     return new IntegrationChannelImpl(channel);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler h) {
 
@@ -242,6 +287,9 @@ public class IntegrationImpl implements Integration {
     return new IntegrationChannelImpl(channel);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler h,
       long receivetimeout) {
@@ -267,6 +315,9 @@ public class IntegrationImpl implements Integration {
     return new IntegrationChannelImpl(channel);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler h) {
 
@@ -301,6 +352,9 @@ public class IntegrationImpl implements Integration {
     return new IntegrationChannelImpl(channel);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler h,
       int poolSize, long receiveTimeout) {
@@ -338,9 +392,16 @@ public class IntegrationImpl implements Integration {
     return new IntegrationChannelImpl(channel);
   }
 
-  ////////////////////////////
-  ///////// UTILS ?? /////////
-  ////////////////////////////
+  // UTILS ---------------------------------------------------------------------------------------
+
+  /**
+   * Returns a {@SubscribableChannel}. If the channel exists retrieves the channel, otherwise creates a new one.
+   * 
+   * @param channelName
+   * @param queueName
+   * @param messageHandler
+   * @return a {@SubscribableChannel}
+   */
   private SubscribableChannel createSubscribableChannel(String channelName, String queueName,
       MessageHandler messageHandler) {
 

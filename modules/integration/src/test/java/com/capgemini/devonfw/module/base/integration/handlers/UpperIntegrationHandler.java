@@ -6,10 +6,7 @@ import org.springframework.messaging.support.GenericMessage;
 import com.capgemini.devonfw.module.integration.common.api.Handler;
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
 
-/**
- * @author pparrado
- *
- */
+@SuppressWarnings("javadoc")
 @Handler
 public class UpperIntegrationHandler implements IntegrationHandler {
 

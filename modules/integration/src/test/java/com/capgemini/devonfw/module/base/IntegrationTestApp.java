@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 
 /**
- * @author pparrado
+ * Boot class for test purposes.
  *
  */
 @SpringBootApplication
@@ -16,7 +16,7 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 public class IntegrationTestApp {
 
   /**
-   * Entry point for Integration module test app
+   * Entry point for Integration module test application
    *
    * @param args - arguments
    */

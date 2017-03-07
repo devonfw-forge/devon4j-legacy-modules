@@ -28,7 +28,7 @@ import com.capgemini.devonfw.module.integration.common.api.IntegrationChannel;
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
- * @author pparrado
+ * Tests the new communication channels programmatically created.
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -65,6 +65,7 @@ public class NewChannelsTest extends ComponentTest {
 
   private final String QU_RRA_TEST = "queue.rrasync.test";
 
+  @SuppressWarnings("javadoc")
   @Before
   public void init() {
 
@@ -75,6 +76,7 @@ public class NewChannelsTest extends ComponentTest {
         new LongReplyMessageHandler());
   }
 
+  @SuppressWarnings("javadoc")
   @Test
   public void sendMessageThroughNewSimpleChannel() throws InterruptedException {
 
@@ -84,11 +86,13 @@ public class NewChannelsTest extends ComponentTest {
     assertThat(System.getProperty("test.message")).isEqualTo(this.abcd);
   }
 
+  @SuppressWarnings({ "javadoc", "unchecked" })
   @Test
   public void sendMessageAndHeadersThroughNewRequestReplyChannel() throws InterruptedException {
 
     this.integration.subscribeAndReplyTo(this.CH_RR_TEST, this.QU_RR_TEST, new UpperHeadersIntegrationHandler());
 
+    @SuppressWarnings("rawtypes")
     Map headers = new HashMap();
     headers.put("header1", "value1");
     headers.put("header2", "value2");
@@ -100,6 +104,7 @@ public class NewChannelsTest extends ComponentTest {
     assertThat(System.getProperty("test.header2")).isEqualTo("VALUE2");
   }
 
+  @SuppressWarnings("javadoc")
   @Test
   public void sendMessageThroughNewAsyncRequestReplyChannel() throws InterruptedException {
 
@@ -111,6 +116,7 @@ public class NewChannelsTest extends ComponentTest {
     assertThat(System.getProperty("test.longreply")).isEqualTo(this.qwerty.toUpperCase());
   }
 
+  @SuppressWarnings("javadoc")
   @After
   public void end() {
 

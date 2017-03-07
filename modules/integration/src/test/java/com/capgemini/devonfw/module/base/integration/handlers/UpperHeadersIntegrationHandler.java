@@ -8,15 +8,14 @@ import org.springframework.messaging.support.GenericMessage;
 
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
 
-/**
- * @author pparrado
- *
- */
+@SuppressWarnings("javadoc")
 public class UpperHeadersIntegrationHandler implements IntegrationHandler {
 
+  @SuppressWarnings({ "unchecked" })
   @Override
   public Object handleMessage(Message<?> message) {
 
+    @SuppressWarnings("rawtypes")
     Map upperHeaders = new HashMap();
     if (message.getHeaders().containsKey("header1") && message.getHeaders().containsKey("header2")) {
 

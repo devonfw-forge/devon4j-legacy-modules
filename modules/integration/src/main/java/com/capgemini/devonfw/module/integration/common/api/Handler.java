@@ -6,10 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Primary;
+import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.stereotype.Component;
 
 /**
- * @author pparrado
+ * Annotation to define the handler of a {@link IntegrationFlow}
  *
  */
 @Primary

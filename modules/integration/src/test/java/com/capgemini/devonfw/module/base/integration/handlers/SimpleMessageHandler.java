@@ -6,10 +6,7 @@ import org.springframework.messaging.MessagingException;
 
 import com.capgemini.devonfw.module.integration.common.api.Handler;
 
-/**
- * @author pparrado
- *
- */
+@SuppressWarnings("javadoc")
 @Handler
 public class SimpleMessageHandler implements MessageHandler {
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
 
 /**
- * @author pparrado
+ * Implementation for {@link IntegrationHandler} interface to manage the message that require response
  *
  */
 @Component
@@ -16,6 +16,9 @@ public class IntegrationHandlerImpl implements IntegrationHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(IntegrationHandlerImpl.class.getName());
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Object handleMessage(Message<?> m) {
 

@@ -6,7 +6,7 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.config.EnableIntegration;
 
 /**
- * @author pparrado
+ * Spring Boot auto-configuration for Integration module
  *
  */
 @Configuration

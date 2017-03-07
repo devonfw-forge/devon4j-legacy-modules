@@ -21,7 +21,7 @@ import com.capgemini.devonfw.module.integration.common.api.Integration;
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
- * @author pparrado
+ * Tests the out-of-the-box request-reply communication channel
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,6 +37,7 @@ public class DefaultRequestReplyFlowTest extends ComponentTest {
 
   private final String qwerty = "qwerty";
 
+  @SuppressWarnings("javadoc")
   @Test
   public void sendMessageThroughDefaultRequestReplyChannel() throws InterruptedException {
 
@@ -45,9 +46,11 @@ public class DefaultRequestReplyFlowTest extends ComponentTest {
     assertThat(response).isEqualTo(this.qwerty.toUpperCase());
   }
 
+  @SuppressWarnings({ "javadoc", "unchecked" })
   @Test
   public void sendMessageAndHeadersThroughDefaultRequestReplyChannel() throws InterruptedException {
 
+    @SuppressWarnings("rawtypes")
     Map headers = new HashMap();
     headers.put("header1", "value1");
     headers.put("header2", "value2");
@@ -59,6 +62,7 @@ public class DefaultRequestReplyFlowTest extends ComponentTest {
     assertThat(System.getProperty("test.header2")).isEqualTo("value2");
   }
 
+  @SuppressWarnings("javadoc")
   @After
   public void end() {
 

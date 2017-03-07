@@ -5,10 +5,7 @@ import org.springframework.messaging.support.GenericMessage;
 
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
 
-/**
- * @author pparrado
- *
- */
+@SuppressWarnings("javadoc")
 public class LongIntegrationHandler implements IntegrationHandler {
 
   @Override

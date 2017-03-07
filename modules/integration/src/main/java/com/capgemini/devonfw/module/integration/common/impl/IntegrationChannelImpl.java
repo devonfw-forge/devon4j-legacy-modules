@@ -8,27 +8,42 @@ import org.springframework.messaging.support.GenericMessage;
 import com.capgemini.devonfw.module.integration.common.api.IntegrationChannel;
 
 /**
- * @author pparrado
+ * Implementation for the {@link IntegrationChannel} interface
  *
  */
 public class IntegrationChannelImpl implements IntegrationChannel {
 
-  public SubscribableChannel sc;
+  /**
+   * The {@SubscribableChannel} to be binded
+   *
+   */
+  private SubscribableChannel channel;
 
-  public IntegrationChannelImpl(SubscribableChannel sc) {
-    this.sc = sc;
+  /**
+   * The constructor.
+   * 
+   * @param channel the {@SubscribableChannel} binded to the {@link IntegrationChannel} implementation.
+   */
+  public IntegrationChannelImpl(SubscribableChannel channel) {
+    this.channel = channel;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
-  public Boolean send(String m) {
+  public Boolean send(String message) {
 
-    return this.sc.send(new GenericMessage<>(m));
+    return this.channel.send(new GenericMessage<>(message));
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Boolean send(String message, Map headers) {
 
-    return this.sc.send(new GenericMessage<>(message, headers));
+    return this.channel.send(new GenericMessage<>(message, headers));
   }
 
 }

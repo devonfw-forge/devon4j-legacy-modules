@@ -3,11 +3,17 @@ package com.capgemini.devonfw.module.integration.common.api;
 import org.springframework.messaging.Message;
 
 /**
- * @author pparrado
+ * Interface for the message handlers that provide a response
  *
  */
 public interface IntegrationHandler {
 
-  Object handleMessage(Message<?> m);
+  /**
+   * Handles the message received and sends back a response.
+   *
+   * @param message the {@link Message} received
+   * @return the response
+   */
+  Object handleMessage(Message<?> message);
 
 }
