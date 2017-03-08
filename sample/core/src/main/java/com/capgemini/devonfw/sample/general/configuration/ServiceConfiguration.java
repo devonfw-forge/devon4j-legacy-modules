@@ -26,6 +26,7 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
 import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
+//import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
 
 /**
  * TODO jhcore This type ...
@@ -33,6 +34,7 @@ import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
  * @author jhcore
  * @since 1.1
  */
+
 @Configuration
 @EnableWs
 @ImportResource({ "classpath:META-INF/cxf/cxf.xml" /* , "classpath:META-INF/cxf/cxf-servlet.xml" */ })

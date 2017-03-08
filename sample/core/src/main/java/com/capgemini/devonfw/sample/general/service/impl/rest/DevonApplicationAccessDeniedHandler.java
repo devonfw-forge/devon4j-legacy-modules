@@ -1,7 +1,5 @@
 package com.capgemini.devonfw.sample.general.service.impl.rest;
 
-import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
-
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -14,12 +12,14 @@ import javax.ws.rs.core.Response;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
+import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
+
 /**
  *
  * @author agreul
  */
-@Named("ApplicationAccessDeniedHandler")
-public class ApplicationAccessDeniedHandler implements AccessDeniedHandler {
+@Named("devonApplicationAccessDeniedHandler")
+public class DevonApplicationAccessDeniedHandler implements AccessDeniedHandler {
 
   private RestServiceExceptionFacade exceptionFacade;
 

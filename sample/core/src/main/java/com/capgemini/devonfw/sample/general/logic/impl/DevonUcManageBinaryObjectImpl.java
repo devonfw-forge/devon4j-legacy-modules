@@ -1,15 +1,15 @@
 package com.capgemini.devonfw.sample.general.logic.impl;
 
-import com.capgemini.devonfw.sample.general.dataaccess.api.BinaryObjectEntity;
-import com.capgemini.devonfw.sample.general.dataaccess.api.dao.BinaryObjectDao;
-import com.capgemini.devonfw.sample.general.logic.api.to.BinaryObjectEto;
-import com.capgemini.devonfw.sample.general.logic.base.AbstractUc;
-import com.capgemini.devonfw.sample.general.logic.base.UcManageBinaryObject;
-
 import java.sql.Blob;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import com.capgemini.devonfw.sample.general.dataaccess.api.DevonBinaryObjectEntity;
+import com.capgemini.devonfw.sample.general.dataaccess.api.dao.BinaryObjectDao;
+import com.capgemini.devonfw.sample.general.logic.api.to.BinaryObjectEto;
+import com.capgemini.devonfw.sample.general.logic.base.AbstractUc;
+import com.capgemini.devonfw.sample.general.logic.base.UcManageBinaryObject;
 
 /**
  * Implementation of the {@link UcManageBinaryObject} intreface.
@@ -17,7 +17,7 @@ import javax.inject.Named;
  * @author sspielma
  */
 @Named
-public class UcManageBinaryObjectImpl extends AbstractUc implements UcManageBinaryObject {
+public class DevonUcManageBinaryObjectImpl extends AbstractUc implements UcManageBinaryObject {
 
   /** @see #binaryObjectDao */
   private BinaryObjectDao binaryObjectDao;
@@ -42,7 +42,7 @@ public class UcManageBinaryObjectImpl extends AbstractUc implements UcManageBina
   @Override
   public BinaryObjectEto saveBinaryObject(Blob data, BinaryObjectEto binaryObjectEto) {
 
-    BinaryObjectEntity binaryObjectEntity = getBeanMapper().map(binaryObjectEto, BinaryObjectEntity.class);
+    DevonBinaryObjectEntity binaryObjectEntity = getBeanMapper().map(binaryObjectEto, DevonBinaryObjectEntity.class);
     binaryObjectEntity.setData(data);
     this.binaryObjectDao.save(binaryObjectEntity);
     return getBeanMapper().map(binaryObjectEntity, BinaryObjectEto.class);

@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.capgemini.devonfw.sample.general.common.api.UserProfile;
 import com.capgemini.devonfw.sample.general.common.api.Usermanagement;
 import com.capgemini.devonfw.sample.general.common.api.security.UserData;
+
 import io.oasp.module.security.common.base.accesscontrol.AbstractAccessControlBasedAuthenticationProvider;
 
 /**

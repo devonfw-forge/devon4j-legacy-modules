@@ -1,9 +1,5 @@
 package com.capgemini.devonfw.sample.general.service.impl.rest;
 
-import com.capgemini.devonfw.sample.general.common.api.exception.NoActiveUserException;
-import com.capgemini.devonfw.sample.general.common.api.security.UserData;
-import com.capgemini.devonfw.sample.general.common.api.to.UserDetailsClientTo;
-
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,19 +17,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 
+import com.capgemini.devonfw.sample.general.common.api.exception.NoActiveUserException;
+import com.capgemini.devonfw.sample.general.common.api.security.UserData;
+import com.capgemini.devonfw.sample.general.common.api.to.UserDetailsClientTo;
+
 /**
  * The security REST service provides access to the csrf token, the authenticated user's meta-data. Furthermore, it
  * provides functionality to check permissions and roles of the authenticated user.
  *
  * @author <a href="malte.brunnlieb@capgemini.com">Malte Brunnlieb</a>
  */
-@Path("/security/v1")
-@Named("SecurityRestService")
+@Path("/devonsecurity/v1")
+@Named("devonSecurityRestService")
 @Transactional
-public class SecurityRestServiceImpl {
+public class DevonSecurityRestServiceImpl {
 
   /** Logger instance. */
-  private static final Logger LOG = LoggerFactory.getLogger(SecurityRestServiceImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DevonSecurityRestServiceImpl.class);
 
   /**
    * Use {@link CsrfTokenRepository} for CSRF protection.

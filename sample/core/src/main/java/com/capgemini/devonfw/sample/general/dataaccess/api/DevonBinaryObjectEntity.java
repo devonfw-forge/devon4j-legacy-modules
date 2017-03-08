@@ -1,12 +1,12 @@
 package com.capgemini.devonfw.sample.general.dataaccess.api;
 
-import com.capgemini.devonfw.sample.general.common.api.BinaryObject;
-
 import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import com.capgemini.devonfw.sample.general.common.api.BinaryObject;
 
 /**
  * {@link ApplicationPersistenceEntity Entity} for {@link BinaryObject}. Contains the actual {@link Blob}.
@@ -15,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "BinaryObject")
-public class BinaryObjectEntity extends ApplicationPersistenceEntity implements BinaryObject {
+public class DevonBinaryObjectEntity extends ApplicationPersistenceEntity implements BinaryObject {
 
   private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class BinaryObjectEntity extends ApplicationPersistenceEntity implements 
   /**
    * The constructor.
    */
-  public BinaryObjectEntity() {
+  public DevonBinaryObjectEntity() {
 
     super();
   }

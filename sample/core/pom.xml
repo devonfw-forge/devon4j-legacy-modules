@@ -17,6 +17,14 @@
   </properties>
 
   <dependencies>
+
+    <!-- OASP4J sample app  -->
+    <dependency>
+      <groupId>io.oasp.java.samples</groupId>
+      <artifactId>oasp4j-sample-core</artifactId>
+      <version>dev-SNAPSHOT</version>
+    </dependency>
+
     <dependency>
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-batch</artifactId>
@@ -94,8 +102,8 @@
     </dependency>
 
     <!-- Spring Security -->
-    <!--
-      <dependency>
+
+<!--       <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
       </dependency>
@@ -103,8 +111,8 @@
       <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
-      </dependency>
-    -->
+      </dependency> -->
+
 
     <!-- for Object Relational Mapping (JPA/Hibernate) -->
     <dependency>

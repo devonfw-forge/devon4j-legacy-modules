@@ -13,6 +13,11 @@ public enum Role implements Principal {
   /**
    *
    */
+  VISITOR("Visitor"),
+
+  /**
+   *
+   */
   CHIEF("Chief");
 
   private final String name;

@@ -1,14 +1,14 @@
 package com.capgemini.devonfw.sample.general.logic.impl;
 
+import javax.inject.Named;
+
+import org.springframework.stereotype.Component;
+
 import com.capgemini.devonfw.sample.general.common.api.UserProfile;
 import com.capgemini.devonfw.sample.general.common.api.Usermanagement;
 import com.capgemini.devonfw.sample.general.common.api.datatype.Role;
 import com.capgemini.devonfw.sample.general.common.api.to.UserDetailsClientTo;
 import com.capgemini.devonfw.sample.general.common.base.AbstractBeanMapperSupport;
-
-import javax.inject.Named;
-
-import org.springframework.stereotype.Component;
 
 /**
  * Implementation of {@link Usermanagement}.
@@ -19,6 +19,7 @@ public class UsermanagementDummyImpl extends AbstractBeanMapperSupport implement
 
   @Override
   public UserProfile findUserProfileByLogin(String login) {
+
     // this is only a dummy - please replace with a real implementation
     UserDetailsClientTo profile = new UserDetailsClientTo();
     profile.setName(login);

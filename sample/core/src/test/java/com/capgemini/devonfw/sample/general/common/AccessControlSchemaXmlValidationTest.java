@@ -1,7 +1,5 @@
 package com.capgemini.devonfw.sample.general.common;
 
-import io.oasp.module.test.common.base.ModuleTest;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +16,8 @@ import javax.xml.validation.Validator;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import io.oasp.module.test.common.base.ModuleTest;
 
 /**
  * Class for XML Validation Tests.
