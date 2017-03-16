@@ -86,7 +86,6 @@ public class IntegrationImpl implements Integration {
   @Override
   public void send(String message) {
 
-    // OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
     this.oneDirectionGateway.send(new GenericMessage<>(message));
   }
 
@@ -96,7 +95,6 @@ public class IntegrationImpl implements Integration {
   @Override
   public void send(String message, Map headers) {
 
-    // OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
     this.oneDirectionGateway.send(new GenericMessage<>(message, headers));
   }
 
@@ -106,7 +104,6 @@ public class IntegrationImpl implements Integration {
   @Override
   public String sendAndReceive(String message) {
 
-    // RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
     return this.rrGateway.echo(new GenericMessage<>(message));
   }
 
@@ -116,7 +113,6 @@ public class IntegrationImpl implements Integration {
   @Override
   public String sendAndReceive(String message, Map headers) {
 
-    // RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
     return this.rrGateway.echo(new GenericMessage<>(message, headers));
   }
 
@@ -126,7 +122,6 @@ public class IntegrationImpl implements Integration {
   @Override
   public Future<String> sendAndReceiveAsync(String message) {
 
-    // AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
     return this.asyncGateway.sendAsync(new GenericMessage<>(message));
   }
 
@@ -136,7 +131,6 @@ public class IntegrationImpl implements Integration {
   @Override
   public Future<String> sendAndReceiveAsync(String message, Map headers) {
 
-    // AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
     return this.asyncGateway.sendAsync(new GenericMessage<>(message, headers));
   }
 
@@ -209,9 +203,7 @@ public class IntegrationImpl implements Integration {
   @Override
   public void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler h) {
 
-    /* SubscribableChannel channel = */createSubscribableRequestReplyChannel(channelName, queueName, h);
-
-    // channel.subscribe(/* new MessageHandlerImpl() */this.messageHandler);
+    createSubscribableRequestReplyChannel(channelName, queueName, h);
 
   }
 
@@ -221,8 +213,7 @@ public class IntegrationImpl implements Integration {
   @Override
   public void subscribeAndReplyAsyncTo(String channelName, String queueName, IntegrationHandler h) {
 
-    /* SubscribableChannel channel = */createSubscribableAsyncRequestReplyChannel(channelName, queueName, h);
-    // channel.subscribe(/* new MessageHandlerImpl() */this.messageHandler);
+    createSubscribableAsyncRequestReplyChannel(channelName, queueName, h);
   }
 
   /**
