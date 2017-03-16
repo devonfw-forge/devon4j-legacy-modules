@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.TestPropertySource;
@@ -18,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
 import com.capgemini.devonfw.module.base.integration.handlers.LongIntegrationHandler;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
+import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
@@ -34,6 +36,10 @@ public class DefaultAsyncFlowTest extends ComponentTest {
 
   @Inject
   private Integration integration;
+
+  @Inject
+  @Qualifier("long-integration-handler")
+  private IntegrationHandler longHandler;
 
   @Autowired
   ConfigurableApplicationContext ctx;

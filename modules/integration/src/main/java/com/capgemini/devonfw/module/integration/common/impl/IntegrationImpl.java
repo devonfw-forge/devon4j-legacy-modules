@@ -53,13 +53,13 @@ public class IntegrationImpl implements Integration {
 
   private final String ERROR_IN_HANDLER = "Exception while handling message: %s. %d";
 
-  @Value("${integration.default.poller.rate}")
+  @Value("${devonfw.integration.default.poller.rate}")
   private String defaultPollerRate;
 
-  @Value("${integration.default.receivetimeout}")
+  @Value("${devonfw.integration.default.receivetimeout}")
   private String defaultReceiveTimeout;
 
-  @Value("${integration.default.poolsize}")
+  @Value("${devonfw.integration.default.poolsize}")
   private int defaultPoolSize;
 
   @Inject
@@ -67,6 +67,15 @@ public class IntegrationImpl implements Integration {
 
   @Inject
   private IntegrationConfig integrationConfig;
+
+  @Inject
+  private OneDirectionGateway oneDirectionGateway;
+
+  @Inject
+  private RequestReplyGateway rrGateway;
+
+  @Inject
+  private AsyncGateway asyncGateway;
 
   @Autowired
   ConfigurableApplicationContext ctx;
@@ -77,8 +86,8 @@ public class IntegrationImpl implements Integration {
   @Override
   public void send(String message) {
 
-    OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
-    oneDirectionGateway.send(new GenericMessage<>(message));
+    // OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
+    this.oneDirectionGateway.send(new GenericMessage<>(message));
   }
 
   /**
@@ -87,8 +96,8 @@ public class IntegrationImpl implements Integration {
   @Override
   public void send(String message, Map headers) {
 
-    OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
-    oneDirectionGateway.send(new GenericMessage<>(message, headers));
+    // OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
+    this.oneDirectionGateway.send(new GenericMessage<>(message, headers));
   }
 
   /**
@@ -97,8 +106,8 @@ public class IntegrationImpl implements Integration {
   @Override
   public String sendAndReceive(String message) {
 
-    RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
-    return rrGateway.echo(new GenericMessage<>(message));
+    // RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
+    return this.rrGateway.echo(new GenericMessage<>(message));
   }
 
   /**
@@ -107,8 +116,8 @@ public class IntegrationImpl implements Integration {
   @Override
   public String sendAndReceive(String message, Map headers) {
 
-    RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
-    return rrGateway.echo(new GenericMessage<>(message, headers));
+    // RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
+    return this.rrGateway.echo(new GenericMessage<>(message, headers));
   }
 
   /**
@@ -117,8 +126,8 @@ public class IntegrationImpl implements Integration {
   @Override
   public Future<String> sendAndReceiveAsync(String message) {
 
-    AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
-    return asyncGateway.sendAsync(new GenericMessage<>(message));
+    // AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
+    return this.asyncGateway.sendAsync(new GenericMessage<>(message));
   }
 
   /**
@@ -127,8 +136,8 @@ public class IntegrationImpl implements Integration {
   @Override
   public Future<String> sendAndReceiveAsync(String message, Map headers) {
 
-    AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
-    return asyncGateway.sendAsync(new GenericMessage<>(message, headers));
+    // AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
+    return this.asyncGateway.sendAsync(new GenericMessage<>(message, headers));
   }
 
   /**
@@ -200,9 +209,9 @@ public class IntegrationImpl implements Integration {
   @Override
   public void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler h) {
 
-    SubscribableChannel channel = createSubscribableRequestReplyChannel(channelName, queueName, h);
+    /* SubscribableChannel channel = */createSubscribableRequestReplyChannel(channelName, queueName, h);
 
-    channel.subscribe(new MessageHandlerImpl());
+    // channel.subscribe(/* new MessageHandlerImpl() */this.messageHandler);
 
   }
 
@@ -212,8 +221,8 @@ public class IntegrationImpl implements Integration {
   @Override
   public void subscribeAndReplyAsyncTo(String channelName, String queueName, IntegrationHandler h) {
 
-    SubscribableChannel channel = createSubscribableAsyncRequestReplyChannel(channelName, queueName, h);
-    channel.subscribe(new MessageHandlerImpl());
+    /* SubscribableChannel channel = */createSubscribableAsyncRequestReplyChannel(channelName, queueName, h);
+    // channel.subscribe(/* new MessageHandlerImpl() */this.messageHandler);
   }
 
   /**
@@ -396,7 +405,7 @@ public class IntegrationImpl implements Integration {
 
   /**
    * Returns a {@SubscribableChannel}. If the channel exists retrieves the channel, otherwise creates a new one.
-   * 
+   *
    * @param channelName
    * @param queueName
    * @param messageHandler

@@ -18,8 +18,6 @@ public class SimpleMessageHandler implements MessageHandler {
       System.setProperty("test.header2", message.getHeaders().get("header2").toString());
     }
 
-    System.out.println("in SimpleMessageHandler. Setting system property to " + message.getPayload().toString());
-
     System.setProperty("test.message", message.getPayload().toString());
   }
 

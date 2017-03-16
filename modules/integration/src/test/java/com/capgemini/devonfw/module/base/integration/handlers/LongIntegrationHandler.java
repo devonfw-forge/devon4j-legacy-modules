@@ -1,11 +1,16 @@
 package com.capgemini.devonfw.module.base.integration.handlers;
 
+import javax.inject.Named;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
 
 @SuppressWarnings("javadoc")
+@ConditionalOnProperty(prefix = "devonfw.integration.request-reply-async", name = "listener", havingValue = "true")
+@Named("long-integration-handler")
 public class LongIntegrationHandler implements IntegrationHandler {
 
   @Override

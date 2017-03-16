@@ -39,31 +39,31 @@ public class IntegrationConfig {
   @Inject
   private ConnectionFactory connectionFactory;
 
-  @Value("${integration.one-direction.channelname}")
+  @Value("${devonfw.integration.one-direction.channelname}")
   private String channel_1d;
 
-  @Value("${integration.one-direction.queuename}")
+  @Value("${devonfw.integration.one-direction.queuename}")
   private String queue_1d;
 
-  @Value("${integration.request-reply.channelname}")
+  @Value("${devonfw.integration.request-reply.channelname}")
   private String channel_rr;
 
-  @Value("${integration.request-reply.queuename}")
+  @Value("${devonfw.integration.request-reply.queuename}")
   private String queue_rr;
 
-  @Value("${integration.request-reply-async.channelname}")
+  @Value("${devonfw.integration.request-reply-async.channelname}")
   private String channel_async;
 
-  @Value("${integration.request-reply-async.queuename}")
+  @Value("${devonfw.integration.request-reply-async.queuename}")
   private String queue_async;
 
-  @Value("${integration.one-direction.poller.rate}")
+  @Value("${devonfw.integration.one-direction.poller.rate}")
   private int rate;
 
-  @Value("${integration.request-reply.receivetimeout}")
+  @Value("${devonfw.integration.request-reply.receivetimeout}")
   private long rr_timeout;
 
-  @Value("${integration.request-reply-async.receivetimeout}")
+  @Value("${devonfw.integration.request-reply-async.receivetimeout}")
   private long rra_timeout;
 
   // PRECONFIGURED GATEWAYS - - - - - - - - - - - - - - - - - - - - - -
@@ -127,7 +127,7 @@ public class IntegrationConfig {
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.one-direction", name = "emitter", havingValue = "true")
+  @ConditionalOnProperty(prefix = "devonfw.integration.one-direction", name = "emitter", havingValue = "true")
   IntegrationFlow outFlow() {
 
     return IntegrationFlows.from(this.channel_1d)
@@ -142,7 +142,7 @@ public class IntegrationConfig {
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.request-reply", name = "emitter", havingValue = "true")
+  @ConditionalOnProperty(prefix = "devonfw.integration.request-reply", name = "emitter", havingValue = "true")
   public IntegrationFlow outAndInFlow() {
 
     return IntegrationFlows.from(this.channel_rr).handle(
@@ -157,7 +157,7 @@ public class IntegrationConfig {
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.request-reply-async", name = "emitter", havingValue = "true")
+  @ConditionalOnProperty(prefix = "devonfw.integration.request-reply-async", name = "emitter", havingValue = "true")
   public IntegrationFlow asyncOutboundFlow() {
 
     return IntegrationFlows.from(this.channel_async).handle(Jms.outboundGateway(this.connectionFactory)
@@ -174,7 +174,7 @@ public class IntegrationConfig {
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.one-direction", name = "listener", havingValue = "true")
+  @ConditionalOnProperty(prefix = "devonfw.integration.one-direction", name = "listener", havingValue = "true")
   public IntegrationFlow inFlow(MessageHandler handler) {
 
     return IntegrationFlows.from(Jms.inboundAdapter(this.connectionFactory).destination(this.queue_1d),
@@ -195,7 +195,7 @@ public class IntegrationConfig {
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.request-reply", name = "listener", havingValue = "true")
+  @ConditionalOnProperty(prefix = "devonfw.integration.request-reply", name = "listener", havingValue = "true")
   public IntegrationFlow inAndOutFlow(IntegrationHandler handler) {
 
     return IntegrationFlows.from(Jms.inboundGateway(this.connectionFactory).destination(this.queue_rr))
@@ -222,7 +222,7 @@ public class IntegrationConfig {
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.request-reply-async", name = "listener", havingValue = "true")
+  @ConditionalOnProperty(prefix = "devonfw.integration.request-reply-async", name = "listener", havingValue = "true")
   public IntegrationFlow asyncInAndOutFlow(IntegrationHandler handler) {
 
     return IntegrationFlows.from(Jms.inboundGateway(this.connectionFactory).destination(this.queue_async))
