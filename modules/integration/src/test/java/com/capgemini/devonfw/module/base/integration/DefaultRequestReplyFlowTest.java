@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.junit.After;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
-import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestHandler;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
@@ -32,8 +33,9 @@ public class DefaultRequestReplyFlowTest extends ComponentTest {
   @Inject
   private Integration integration;
 
-  @Autowired
-  private IntegrationHandler upperHandler;
+  @Inject
+  @Named("upper-handler")
+  private RequestHandler upperHandler;
 
   @Autowired
   ConfigurableApplicationContext ctx;

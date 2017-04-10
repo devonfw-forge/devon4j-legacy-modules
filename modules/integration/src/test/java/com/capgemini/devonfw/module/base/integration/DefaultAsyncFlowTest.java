@@ -17,9 +17,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
-import com.capgemini.devonfw.module.base.integration.handlers.LongIntegrationHandler;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
-import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestAsyncHandler;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
@@ -39,7 +38,7 @@ public class DefaultAsyncFlowTest extends ComponentTest {
 
   @Inject
   @Qualifier("long-integration-handler")
-  private IntegrationHandler longHandler;
+  private RequestAsyncHandler asyncHandler;
 
   @Autowired
   ConfigurableApplicationContext ctx;
@@ -48,7 +47,7 @@ public class DefaultAsyncFlowTest extends ComponentTest {
   @Test
   public void sendMessageThroughDefaultAsyncRequestReplyChannel() throws InterruptedException, ExecutionException {
 
-    this.integration.subscribeAsync(new LongIntegrationHandler());
+    this.integration.subscribeAsync(this.asyncHandler);
     Future<String> response = this.integration.sendAndReceiveAsync("test");
     LOG.info("Executed in parallel...");
     assertThat(response.get()).isEqualTo("TEST");

@@ -1,14 +1,15 @@
 package com.capgemini.devonfw.module.base.integration.handlers;
 
+import javax.inject.Named;
+
 import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 
-import com.capgemini.devonfw.module.integration.common.api.Handler;
+import com.capgemini.devonfw.module.integration.common.api.SubscriptionHandler;
 
 @SuppressWarnings("javadoc")
-@Handler
-public class SimpleMessageHandler implements MessageHandler {
+@Named
+public class SubscriptionHandlerImpl implements SubscriptionHandler {
 
   @Override
   public void handleMessage(Message<?> message) throws MessagingException {

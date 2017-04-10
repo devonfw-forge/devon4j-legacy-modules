@@ -1,11 +1,15 @@
 package com.capgemini.devonfw.module.base.integration.handlers;
 
+import javax.inject.Named;
+
 import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 
+import com.capgemini.devonfw.module.integration.common.api.ResponseHandler;
+
 @SuppressWarnings("javadoc")
-public class ReplyMessageHandler implements MessageHandler {
+@Named
+public class ResponseHandlerImpl implements ResponseHandler {
 
   @Override
   public void handleMessage(Message<?> message) throws MessagingException {

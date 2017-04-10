@@ -6,13 +6,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 
-import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestHandler;
 
 @SuppressWarnings("javadoc")
-// @Handler
-@ConditionalOnProperty(prefix = "devonfw.integration.request-reply", name = "listener", havingValue = "true")
+@ConditionalOnProperty(prefix = "devonfw.integration.request-reply", name = "subscriber", havingValue = "true")
 @Named("upper-handler")
-public class UpperIntegrationHandler implements IntegrationHandler {
+public class UpperHandler implements RequestHandler {
 
   @Override
   public Object handleMessage(Message<?> message) {

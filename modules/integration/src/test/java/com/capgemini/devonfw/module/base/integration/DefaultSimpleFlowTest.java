@@ -8,12 +8,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.messaging.MessageHandler;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
+import com.capgemini.devonfw.module.integration.common.api.SubscriptionHandler;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
@@ -30,7 +30,7 @@ public class DefaultSimpleFlowTest extends ComponentTest {
   private Integration integration;
 
   @Inject
-  private MessageHandler simpleMessageHandler;
+  private SubscriptionHandler simpleMessageHandler;
 
   @Autowired
   ConfigurableApplicationContext ctx;
