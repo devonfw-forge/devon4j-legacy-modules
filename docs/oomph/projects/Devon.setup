@@ -39,11 +39,11 @@
         storageURI="scope://Workspace"
         label="devon remote uri">
       <choice
-          value="ssh://git@github.com:${github.fork.name}/devon.git"
-          label="SSH"/>
-      <choice
           value="https://github.com/${github.fork.name}/devon.git"
           label="HTTPS"/>
+      <choice
+          value="ssh://git@github.com/${github.fork.name}/devon.git"
+          label="SSH"/>
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
