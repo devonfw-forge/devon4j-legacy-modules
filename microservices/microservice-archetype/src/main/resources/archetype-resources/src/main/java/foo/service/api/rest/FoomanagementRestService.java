@@ -31,4 +31,11 @@ public interface FoomanagementRestService extends RestService {
   @GET
   @Path("/foo")
   FooMessageTo foo();
+  
+  /**
+   * Make a call to a remote service
+   */
+  @GET
+  @Path("/fooRemote")
+  FooMessageTo fooRemote();
 }
