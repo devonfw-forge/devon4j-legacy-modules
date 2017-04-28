@@ -28,7 +28,12 @@ public class WebSecurityConfig extends JsonWebTokenSecurityConfig {
   @Override
   protected void setupAuthorization(HttpSecurity http) throws Exception {
 
+  //Unsecure resources (triggers for actuator and more)
+    String[] unsecuredResources = new String[] { "/health", "/info", "/metrics", "/trace", "/refresh" };
+
     http.authorizeRequests()
+        // authenticate all other requests
+        .antMatchers(unsecuredResources).permitAll()
         // authenticate all other requests
         .anyRequest().authenticated();
   }

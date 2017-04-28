@@ -16,5 +16,7 @@
       - service-eureka: Is a service discovery, clients can be registered and can discover the instances of other clients
       - service-zuul: Is a router and server side load balancer
       - service-auth: Is an authentication/authorization service. Log in user and generates a json web token
+      - service-configserver: Is a cloud config server. Contains the common properties of all microservices
+      
    -->
 </project>
