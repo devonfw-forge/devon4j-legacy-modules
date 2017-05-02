@@ -67,6 +67,6 @@
       label="Internationalization"/>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
-      href="index:/org.eclipse.setup#//@projectCatalogs[name='com.github']"/>
+      href="http://devonfw.github.io/devon-ide/oomph/projects/catalog_devonfw.setup#/"/>
   <description>Server reference implementation (integrates IP components on OASP4j)</description>
 </setup:Project>
