@@ -1,4 +1,4 @@
-package com.capgemini.sampleapp1.foo.service.api.rest;
+package ${package}.foo.service.api.rest;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
