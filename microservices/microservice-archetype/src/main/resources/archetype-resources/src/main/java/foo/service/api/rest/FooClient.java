@@ -4,7 +4,7 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.capgemini.sampleapp1.foo.service.api.FooMessageTo;
+import ${package}.foo.service.api.FooMessageTo;
 
 @FeignClient(value = "${artifactId}")
 public interface FooClient {
