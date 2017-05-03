@@ -9,9 +9,9 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.capgemini.sampleapp1.foo.service.api.FooMessageTo;
-import com.capgemini.sampleapp1.foo.service.api.rest.FooClient;
-import com.capgemini.sampleapp1.foo.service.api.rest.FoomanagementRestService;
+import ${package}.foo.service.api.FooMessageTo;
+import ${package}.foo.service.api.rest.FooClient;
+import ${package}.foo.service.api.rest.FoomanagementRestService;
 
 
 /**
