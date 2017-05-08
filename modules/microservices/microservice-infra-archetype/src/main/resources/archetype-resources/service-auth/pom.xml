@@ -59,6 +59,12 @@
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-rest</artifactId>
     </dependency>
+    
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
+    
   </dependencies>
 
 

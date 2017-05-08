@@ -21,6 +21,7 @@
 	<module>winauth-sso</module>
 	<module>async</module>
 	<module>integration</module>
+  <module>microservices</module>
   </modules>
 
   <dependencyManagement>

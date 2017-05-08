@@ -15,6 +15,12 @@
   <name>microservices-archetype</name>
 
   <build>
+   <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources/</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <extensions>
       <extension>
         <groupId>org.apache.maven.archetype</groupId>
@@ -31,6 +37,28 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <delimiters>
+            <delimiter>^*^</delimiter>
+          </delimiters>
+          <useDefaultDelimiters>false</useDefaultDelimiters>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-archetype-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <!--<settingsFile>${project.build.testResources[0].directory}/settings.xml</settingsFile>-->
+        </configuration>
+      </plugin>
+
+    </plugins>
+    
   </build>
 
   <description>Archetype for foo microservice project of Devonfw</description>

@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.capgemini.devonfw.dev</groupId>
-    <artifactId>devonfw</artifactId>
+    <artifactId>devonfw-modules</artifactId>
     <version>dev-SNAPSHOT</version>
   </parent>
   <artifactId>devonfw-microservices</artifactId>
@@ -14,8 +14,6 @@
   <description>Devonfw microservices archetypes</description>
 
   <properties>
-     <spring.boot.version>1.3.3.RELEASE</spring.boot.version>
-     <oasp4j.version>2.2.0</oasp4j.version>
   </properties>
 
   <modules>
