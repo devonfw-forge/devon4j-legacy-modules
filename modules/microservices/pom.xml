@@ -11,9 +11,10 @@
 
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
-  <description>Devonfw microservices archetypes</description>
+  <description>Devonfw microservices archetypes and module</description>
 
   <properties>
+    <spring.cloud.boot.version>Brixton.SR7</spring.cloud.boot.version>
   </properties>
 
   <modules>

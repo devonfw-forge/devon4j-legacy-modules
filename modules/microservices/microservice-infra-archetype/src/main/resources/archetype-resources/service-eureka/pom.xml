@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.4.0.RELEASE</version>
+    <version>^spring.boot.version^</version>
   </parent>
   
 	<artifactId>${artifactId}</artifactId>
@@ -19,6 +19,8 @@
 
 	<properties>
 		<start-class>${package}.eureka.EurekaBootApp</start-class>
+    <spring.boot.version>^spring.boot.version^</spring.boot.version>
+    <oasp4j.version>^oasp4j.version^</oasp4j.version>
 	</properties>
   
   
@@ -27,7 +29,7 @@
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-starter-parent</artifactId>
-        <version>Camden.SR4</version>
+        <version>^spring.cloud.boot.version^</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
