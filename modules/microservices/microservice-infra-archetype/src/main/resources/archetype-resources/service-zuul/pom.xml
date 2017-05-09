@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
   <!-- Inherit defaults from Spring Boot -->
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.4.0.RELEASE</version>
+    <version>^spring.boot.version^</version>
   </parent>
-  
-	<artifactId>${artifactId}</artifactId>
-	<packaging>jar</packaging>
+
+  <artifactId>${artifactId}</artifactId>
+  <packaging>jar</packaging>
   <groupId>${groupId}</groupId>
   <version>${version}</version>
 
-	<name>microservices_infra-${artifactId}</name>
-	<description>An eureka service of microservices ${artifactId}</description>
+  <name>microservices_infra-${artifactId}</name>
+  <description>A zuul service of microservices ${artifactId}</description>
 
-	<properties>
-		<start-class>${package}.eureka.EurekaBootApp</start-class>
-	</properties>
-  
+  <properties>
+    <start-class>${package}.zuul.ZuulBootApp</start-class>
+    <spring.boot.version>^spring.boot.version^</spring.boot.version>
+    <oasp4j.version>^oasp4j.version^</oasp4j.version>
+  </properties>
   
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-starter-parent</artifactId>
-        <version>Camden.SR4</version>
+        <version>^spring.cloud.boot.version^</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -37,7 +38,11 @@
    <dependencies>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-eureka-server</artifactId>
+      <artifactId>spring-cloud-starter-eureka</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-zuul</artifactId>
     </dependency>
   </dependencies>
 
@@ -81,5 +86,5 @@
     </plugins>
   </build>
   
-  
+
 </project>
