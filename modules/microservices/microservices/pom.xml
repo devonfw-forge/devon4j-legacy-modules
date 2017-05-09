@@ -36,6 +36,13 @@
 
 
   <dependencies>
+  
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-feign</artifactId>
@@ -109,9 +116,6 @@
 
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <excludedGroups>${oasp.test.excluded.groups}</excludedGroups>
-        </configuration>
       </plugin>
     </plugins>
   </build>
