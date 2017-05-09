@@ -32,6 +32,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
 import com.capgemini.devonfw.module.integration.common.api.IntegrationChannel;
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestAsyncHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestHandler;
+import com.capgemini.devonfw.module.integration.common.api.ResponseHandler;
+import com.capgemini.devonfw.module.integration.common.api.SubscriptionHandler;
 import com.capgemini.devonfw.module.integration.common.config.IntegrationConfig;
 import com.capgemini.devonfw.module.integration.common.config.IntegrationConfig.AsyncGateway;
 import com.capgemini.devonfw.module.integration.common.config.IntegrationConfig.OneDirectionGateway;
@@ -53,13 +57,13 @@ public class IntegrationImpl implements Integration {
 
   private final String ERROR_IN_HANDLER = "Exception while handling message: %s. %d";
 
-  @Value("${integration.default.poller.rate}")
+  @Value("${devonfw.integration.default.poller.rate}")
   private String defaultPollerRate;
 
-  @Value("${integration.default.receivetimeout}")
+  @Value("${devonfw.integration.default.receivetimeout}")
   private String defaultReceiveTimeout;
 
-  @Value("${integration.default.poolsize}")
+  @Value("${devonfw.integration.default.poolsize}")
   private int defaultPoolSize;
 
   @Inject
@@ -67,6 +71,15 @@ public class IntegrationImpl implements Integration {
 
   @Inject
   private IntegrationConfig integrationConfig;
+
+  @Inject
+  private OneDirectionGateway oneDirectionGateway;
+
+  @Inject
+  private RequestReplyGateway rrGateway;
+
+  @Inject
+  private AsyncGateway asyncGateway;
 
   @Autowired
   ConfigurableApplicationContext ctx;
@@ -77,8 +90,7 @@ public class IntegrationImpl implements Integration {
   @Override
   public void send(String message) {
 
-    OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
-    oneDirectionGateway.send(new GenericMessage<>(message));
+    this.oneDirectionGateway.send(new GenericMessage<>(message));
   }
 
   /**
@@ -87,8 +99,7 @@ public class IntegrationImpl implements Integration {
   @Override
   public void send(String message, Map headers) {
 
-    OneDirectionGateway oneDirectionGateway = this.ctx.getBean(OneDirectionGateway.class);
-    oneDirectionGateway.send(new GenericMessage<>(message, headers));
+    this.oneDirectionGateway.send(new GenericMessage<>(message, headers));
   }
 
   /**
@@ -97,8 +108,7 @@ public class IntegrationImpl implements Integration {
   @Override
   public String sendAndReceive(String message) {
 
-    RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
-    return rrGateway.echo(new GenericMessage<>(message));
+    return this.rrGateway.echo(new GenericMessage<>(message));
   }
 
   /**
@@ -107,8 +117,7 @@ public class IntegrationImpl implements Integration {
   @Override
   public String sendAndReceive(String message, Map headers) {
 
-    RequestReplyGateway rrGateway = this.ctx.getBean(RequestReplyGateway.class);
-    return rrGateway.echo(new GenericMessage<>(message, headers));
+    return this.rrGateway.echo(new GenericMessage<>(message, headers));
   }
 
   /**
@@ -117,8 +126,7 @@ public class IntegrationImpl implements Integration {
   @Override
   public Future<String> sendAndReceiveAsync(String message) {
 
-    AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
-    return asyncGateway.sendAsync(new GenericMessage<>(message));
+    return this.asyncGateway.sendAsync(new GenericMessage<>(message));
   }
 
   /**
@@ -127,15 +135,14 @@ public class IntegrationImpl implements Integration {
   @Override
   public Future<String> sendAndReceiveAsync(String message, Map headers) {
 
-    AsyncGateway asyncGateway = this.ctx.getBean(AsyncGateway.class);
-    return asyncGateway.sendAsync(new GenericMessage<>(message, headers));
+    return this.asyncGateway.sendAsync(new GenericMessage<>(message, headers));
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void subscribe(MessageHandler handler) {
+  public void subscribe(SubscriptionHandler handler) {
 
     try {
       this.integrationConfig.inFlow(handler);
@@ -148,7 +155,7 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public void subscribeAsync(IntegrationHandler h) {
+  public void subscribeAsync(RequestAsyncHandler h) {
 
     try {
       this.integrationConfig.asyncInAndOutFlow(h);
@@ -161,7 +168,7 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public void subscribeAndReply(IntegrationHandler handler) {
+  public void subscribeAndReply(RequestHandler handler) {
 
     try {
       this.integrationConfig.inAndOutFlow(handler);
@@ -174,7 +181,7 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public void subscribeTo(String channelName, String queueName, MessageHandler messageHandler) {
+  public void subscribeTo(String channelName, String queueName, SubscriptionHandler messageHandler) {
 
     SubscribableChannel channel = createSubscribableChannel(channelName, queueName, messageHandler);
 
@@ -186,7 +193,7 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public void subscribeTo(String channelName, String queueName, MessageHandler messageHandler, long pollRate) {
+  public void subscribeTo(String channelName, String queueName, SubscriptionHandler messageHandler, long pollRate) {
 
     SubscribableChannel channel = createSubscribableChannel(channelName, queueName, messageHandler, pollRate);
 
@@ -198,11 +205,9 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public void subscribeAndReplyTo(String channelName, String queueName, IntegrationHandler h) {
+  public void subscribeAndReplyTo(String channelName, String queueName, RequestHandler h) {
 
-    SubscribableChannel channel = createSubscribableRequestReplyChannel(channelName, queueName, h);
-
-    channel.subscribe(new MessageHandlerImpl());
+    createSubscribableRequestReplyChannel(channelName, queueName, h);
 
   }
 
@@ -210,10 +215,9 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public void subscribeAndReplyAsyncTo(String channelName, String queueName, IntegrationHandler h) {
+  public void subscribeAndReplyAsyncTo(String channelName, String queueName, RequestAsyncHandler h) {
 
-    SubscribableChannel channel = createSubscribableAsyncRequestReplyChannel(channelName, queueName, h);
-    channel.subscribe(new MessageHandlerImpl());
+    createSubscribableAsyncRequestReplyChannel(channelName, queueName, h);
   }
 
   /**
@@ -254,7 +258,7 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler h) {
+  public IntegrationChannel createRequestReplyChannel(String channelName, String queueName, ResponseHandler h) {
 
     LOG.info("Creating channel " + channelName);
     ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
@@ -291,7 +295,7 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public IntegrationChannel createRequestReplyChannel(String channelName, String queueName, MessageHandler h,
+  public IntegrationChannel createRequestReplyChannel(String channelName, String queueName, ResponseHandler h,
       long receivetimeout) {
 
     ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
@@ -319,7 +323,7 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler h) {
+  public IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, ResponseHandler h) {
 
     LOG.info("Creating channel " + channelName);
     ConfigurableListableBeanFactory beanFactory = this.ctx.getBeanFactory();
@@ -356,7 +360,7 @@ public class IntegrationImpl implements Integration {
    * {@inheritDoc}
    */
   @Override
-  public IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, MessageHandler h,
+  public IntegrationChannel createAsyncRequestReplyChannel(String channelName, String queueName, ResponseHandler h,
       int poolSize, long receiveTimeout) {
 
     LOG.info("Creating channel " + channelName);
@@ -396,7 +400,7 @@ public class IntegrationImpl implements Integration {
 
   /**
    * Returns a {@SubscribableChannel}. If the channel exists retrieves the channel, otherwise creates a new one.
-   * 
+   *
    * @param channelName
    * @param queueName
    * @param messageHandler

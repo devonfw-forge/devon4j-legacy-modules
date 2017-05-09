@@ -1,14 +1,17 @@
 package com.capgemini.devonfw.module.base.integration.handlers;
 
+import javax.inject.Named;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 
-import com.capgemini.devonfw.module.integration.common.api.Handler;
-import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestHandler;
 
 @SuppressWarnings("javadoc")
-@Handler
-public class UpperIntegrationHandler implements IntegrationHandler {
+@ConditionalOnProperty(prefix = "devonfw.integration.request-reply", name = "subscriber", havingValue = "true")
+@Named("upper-handler")
+public class UpperHandler implements RequestHandler {
 
   @Override
   public Object handleMessage(Message<?> message) {

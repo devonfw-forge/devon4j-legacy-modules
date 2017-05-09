@@ -25,6 +25,9 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.support.GenericMessage;
 
 import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestAsyncHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestHandler;
+import com.capgemini.devonfw.module.integration.common.api.SubscriptionHandler;
 
 /**
  * @author pparrado
@@ -39,31 +42,31 @@ public class IntegrationConfig {
   @Inject
   private ConnectionFactory connectionFactory;
 
-  @Value("${integration.one-direction.channelname}")
+  @Value("${devonfw.integration.one-direction.channelname}")
   private String channel_1d;
 
-  @Value("${integration.one-direction.queuename}")
+  @Value("${devonfw.integration.one-direction.queuename}")
   private String queue_1d;
 
-  @Value("${integration.request-reply.channelname}")
+  @Value("${devonfw.integration.request-reply.channelname}")
   private String channel_rr;
 
-  @Value("${integration.request-reply.queuename}")
+  @Value("${devonfw.integration.request-reply.queuename}")
   private String queue_rr;
 
-  @Value("${integration.request-reply-async.channelname}")
+  @Value("${devonfw.integration.request-reply-async.channelname}")
   private String channel_async;
 
-  @Value("${integration.request-reply-async.queuename}")
+  @Value("${devonfw.integration.request-reply-async.queuename}")
   private String queue_async;
 
-  @Value("${integration.one-direction.poller.rate}")
+  @Value("${devonfw.integration.one-direction.poller.rate}")
   private int rate;
 
-  @Value("${integration.request-reply.receivetimeout}")
+  @Value("${devonfw.integration.request-reply.receivetimeout}")
   private long rr_timeout;
 
-  @Value("${integration.request-reply-async.receivetimeout}")
+  @Value("${devonfw.integration.request-reply-async.receivetimeout}")
   private long rra_timeout;
 
   // PRECONFIGURED GATEWAYS - - - - - - - - - - - - - - - - - - - - - -
@@ -127,7 +130,7 @@ public class IntegrationConfig {
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.one-direction", name = "emitter", havingValue = "true")
+  @ConditionalOnProperty(prefix = "devonfw.integration.one-direction", name = "emitter", havingValue = "true")
   IntegrationFlow outFlow() {
 
     return IntegrationFlows.from(this.channel_1d)
@@ -142,7 +145,7 @@ public class IntegrationConfig {
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.request-reply", name = "emitter", havingValue = "true")
+  @ConditionalOnProperty(prefix = "devonfw.integration.request-reply", name = "emitter", havingValue = "true")
   public IntegrationFlow outAndInFlow() {
 
     return IntegrationFlows.from(this.channel_rr).handle(
@@ -157,7 +160,7 @@ public class IntegrationConfig {
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.request-reply-async", name = "emitter", havingValue = "true")
+  @ConditionalOnProperty(prefix = "devonfw.integration.request-reply-async", name = "emitter", havingValue = "true")
   public IntegrationFlow asyncOutboundFlow() {
 
     return IntegrationFlows.from(this.channel_async).handle(Jms.outboundGateway(this.connectionFactory)
@@ -167,39 +170,39 @@ public class IntegrationConfig {
   // in
 
   /**
-   * If the property "integration.one-direction.listener" has value "true" this Bean will be loaded and will create a
+   * If the property "integration.one-direction.subscriber" has value "true" this Bean will be loaded and will create a
    * simple flow for receiving messages.
    *
    * @param handler the {@link MessageHandler} that will manage each message received.
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.one-direction", name = "listener", havingValue = "true")
-  public IntegrationFlow inFlow(MessageHandler handler) {
+  @ConditionalOnProperty(prefix = "devonfw.integration.one-direction", name = "subscriber", havingValue = "true")
+  public IntegrationFlow inFlow(SubscriptionHandler handler) {
 
     return IntegrationFlows.from(Jms.inboundAdapter(this.connectionFactory).destination(this.queue_1d),
         c -> c.poller(Pollers.fixedRate(this.rate, TimeUnit.MILLISECONDS))).handle(m -> {
           try {
             handler.handleMessage(m);
           } catch (Exception e) {
-            LOG.error(String.format("MessageHandler threw an error: %s", e.getMessage()), e);
+            LOG.error(String.format("SubscriptionHandler threw an error: %s", e.getMessage()), e);
           }
         }).get();
   }
 
   /**
-   * If the property "integration.request-reply.listener" has value "true" this Bean will be loaded and will create a
+   * If the property "integration.request-reply.subscriber" has value "true" this Bean will be loaded and will create a
    * request-reply flow for receiving and replying to messages.
    *
    * @param handler the {@link IntegrationHandler} to manage the messages and send back the response
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.request-reply", name = "listener", havingValue = "true")
-  public IntegrationFlow inAndOutFlow(IntegrationHandler handler) {
+  @ConditionalOnProperty(prefix = "devonfw.integration.request-reply", name = "subscriber", havingValue = "true")
+  public IntegrationFlow inAndOutFlow(RequestHandler handler) {
 
     return IntegrationFlows.from(Jms.inboundGateway(this.connectionFactory).destination(this.queue_rr))
-        .wireTap(flow -> flow.handle(System.out::println)).handle(new GenericHandler<String>() {
+        .wireTap(flow -> flow.handle(m -> LOG.info(m.getPayload().toString()))).handle(new GenericHandler<String>() {
 
           @Override
           public Object handle(String payload, Map<String, Object> headers) {
@@ -207,7 +210,7 @@ public class IntegrationConfig {
             try {
               return handler.handleMessage(new GenericMessage<>(payload, headers));
             } catch (Exception e) {
-              LOG.error(String.format("IntegrationHandler threw an error: %s", e.getMessage()), e);
+              LOG.error(String.format("RequestHandler threw an error: %s", e.getMessage()), e);
               return null;
             }
           }
@@ -215,15 +218,15 @@ public class IntegrationConfig {
   }
 
   /**
-   * If the property "integration.request-reply-async.listener" has value "true" this Bean will be loaded and will
+   * If the property "integration.request-reply-async.subscriber" has value "true" this Bean will be loaded and will
    * create a request-reply asynchronous flow for sending messages and receiving responses.
    *
    * @param handler the {@link IntegrationHandler} to manage the messages and send back the response
    * @return the created {@link IntegrationFlow}
    */
   @Bean
-  @ConditionalOnProperty(prefix = "integration.request-reply-async", name = "listener", havingValue = "true")
-  public IntegrationFlow asyncInAndOutFlow(IntegrationHandler handler) {
+  @ConditionalOnProperty(prefix = "devonfw.integration.request-reply-async", name = "subscriber", havingValue = "true")
+  public IntegrationFlow asyncInAndOutFlow(RequestAsyncHandler handler) {
 
     return IntegrationFlows.from(Jms.inboundGateway(this.connectionFactory).destination(this.queue_async))
         .wireTap(flow -> flow.handle(System.out::println)).handle(new GenericHandler<String>() {
@@ -233,7 +236,7 @@ public class IntegrationConfig {
             try {
               return handler.handleMessage(new GenericMessage<>(payload, headers));
             } catch (Exception e) {
-              LOG.error(String.format("IntegrationHandler threw an error: %s", e.getMessage()), e);
+              LOG.error(String.format("RequestAsyncHandler threw an error: %s", e.getMessage()), e);
               return null;
             }
           }

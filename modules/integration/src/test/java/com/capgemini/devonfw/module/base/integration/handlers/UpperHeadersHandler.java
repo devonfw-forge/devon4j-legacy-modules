@@ -3,13 +3,18 @@ package com.capgemini.devonfw.module.base.integration.handlers;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Named;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 
-import com.capgemini.devonfw.module.integration.common.api.IntegrationHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestHandler;
 
 @SuppressWarnings("javadoc")
-public class UpperHeadersIntegrationHandler implements IntegrationHandler {
+@ConditionalOnProperty(prefix = "devonfw.integration.request-reply", name = "subscriber", havingValue = "false")
+@Named("upper-headers-handler")
+public class UpperHeadersHandler implements RequestHandler {
 
   @SuppressWarnings({ "unchecked" })
   @Override

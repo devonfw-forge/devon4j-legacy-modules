@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,16 +15,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
-import com.capgemini.devonfw.module.base.integration.handlers.LongIntegrationHandler;
-import com.capgemini.devonfw.module.base.integration.handlers.LongReplyMessageHandler;
-import com.capgemini.devonfw.module.base.integration.handlers.ReplyMessageHandler;
-import com.capgemini.devonfw.module.base.integration.handlers.SimpleMessageHandler;
-import com.capgemini.devonfw.module.base.integration.handlers.UpperHeadersIntegrationHandler;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
 import com.capgemini.devonfw.module.integration.common.api.IntegrationChannel;
+import com.capgemini.devonfw.module.integration.common.api.RequestAsyncHandler;
+import com.capgemini.devonfw.module.integration.common.api.RequestHandler;
+import com.capgemini.devonfw.module.integration.common.api.ResponseHandler;
+import com.capgemini.devonfw.module.integration.common.api.SubscriptionHandler;
 
 import io.oasp.module.test.common.base.ComponentTest;
 
@@ -33,12 +34,26 @@ import io.oasp.module.test.common.base.ComponentTest;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = IntegrationTestApp.class)
+@TestPropertySource(locations = "classpath:integration.properties")
 public class NewChannelsTest extends ComponentTest {
 
   private static final Logger LOG = LoggerFactory.getLogger(NewChannelsTest.class);
 
   @Inject
   private Integration integration;
+
+  @Inject
+  @Named("upper-headers-handler")
+  private RequestHandler upperHandler;
+
+  @Inject
+  private ResponseHandler responseHandler;
+
+  @Inject
+  private SubscriptionHandler simpleHandler;
+
+  @Inject
+  private RequestAsyncHandler asyncHandler;
 
   @Autowired
   ConfigurableApplicationContext ctx;
@@ -71,16 +86,16 @@ public class NewChannelsTest extends ComponentTest {
 
     this.test_new_1d_channel = this.integration.createChannel(this.CH_1D_TEST, this.QU_1D_TEST);
     this.test_new_rr_channel =
-        this.integration.createRequestReplyChannel(this.CH_RR_TEST, this.QU_RR_TEST, new ReplyMessageHandler());
-    this.test_new_async_channel = this.integration.createAsyncRequestReplyChannel(this.CH_RRA_TEST, this.QU_RRA_TEST,
-        new LongReplyMessageHandler());
+        this.integration.createRequestReplyChannel(this.CH_RR_TEST, this.QU_RR_TEST, this.responseHandler);
+    this.test_new_async_channel =
+        this.integration.createAsyncRequestReplyChannel(this.CH_RRA_TEST, this.QU_RRA_TEST, this.responseHandler);
   }
 
   @SuppressWarnings("javadoc")
   @Test
   public void sendMessageThroughNewSimpleChannel() throws InterruptedException {
 
-    this.integration.subscribeTo(this.CH_1D_TEST, this.QU_1D_TEST, new SimpleMessageHandler());
+    this.integration.subscribeTo(this.CH_1D_TEST, this.QU_1D_TEST, this.simpleHandler);
     Boolean r = this.test_new_1d_channel.send(this.abcd);
     assertThat(r).isTrue();
     assertThat(System.getProperty("test.message")).isEqualTo(this.abcd);
@@ -90,7 +105,7 @@ public class NewChannelsTest extends ComponentTest {
   @Test
   public void sendMessageAndHeadersThroughNewRequestReplyChannel() throws InterruptedException {
 
-    this.integration.subscribeAndReplyTo(this.CH_RR_TEST, this.QU_RR_TEST, new UpperHeadersIntegrationHandler());
+    this.integration.subscribeAndReplyTo(this.CH_RR_TEST, this.QU_RR_TEST, this.upperHandler);
 
     @SuppressWarnings("rawtypes")
     Map headers = new HashMap();
@@ -108,12 +123,12 @@ public class NewChannelsTest extends ComponentTest {
   @Test
   public void sendMessageThroughNewAsyncRequestReplyChannel() throws InterruptedException {
 
-    this.integration.subscribeAndReplyAsyncTo(this.CH_RRA_TEST, this.QU_RRA_TEST, new LongIntegrationHandler());
+    this.integration.subscribeAndReplyAsyncTo(this.CH_RRA_TEST, this.QU_RRA_TEST, this.asyncHandler);
     Boolean r = this.test_new_async_channel.send(this.qwerty);
     assertThat(r).isTrue();
     Thread.sleep(5000);
     LOG.info("This is executed in parallel");
-    assertThat(System.getProperty("test.longreply")).isEqualTo(this.qwerty.toUpperCase());
+    assertThat(System.getProperty("test.reply")).isEqualTo(this.qwerty.toUpperCase());
   }
 
   @SuppressWarnings("javadoc")
