@@ -2,16 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>devonfw</artifactId>
+  <artifactId>ipmodule-archetype</artifactId>
   <groupId>com.capgemini.devonfw.dev</groupId>
   <version>dev-SNAPSHOT</version> <!-- This POM will never be released -->
   <name>${project.artifactId}</name>
   <description>Devon Module template created to serve as an example for new module.</description>
+  <parent>
+    <groupId>com.capgemini.devonfw.dev</groupId>
+    <artifactId>devonfw</artifactId>
+    <version>dev-SNAPSHOT</version>
+  </parent>
 
  
   <properties>
     <oasp4j.version>2.1.0</oasp4j.version>
-    <devonfw.version>2.1.0-SNAPSHOT</devonfw.version>
     <spring.boot.version>1.3.3.RELEASE</spring.boot.version>
 	<spring.context.version>4.2.5.RELEASE</spring.context.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,6 +40,13 @@
   </modules> -->
 
   <build>
+   <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources/</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    
     <pluginManagement>
       <plugins>
         <plugin>
@@ -117,6 +128,18 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <delimiters>
+            <delimiter>^*^</delimiter>
+          </delimiters>
+          <useDefaultDelimiters>false</useDefaultDelimiters>
+        </configuration>
+      </plugin>
+      
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
@@ -173,7 +196,7 @@
       <!-- <dependency>
         <groupId>com.capgemini.devonfw</groupId>
         <artifactId>devonfw-bom</artifactId>
-        <version>${devonfw.version}</version>
+        <version>^devonfw.version^</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency> -->
