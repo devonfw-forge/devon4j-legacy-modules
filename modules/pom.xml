@@ -15,11 +15,13 @@
 
   <modules>
     <module>foo</module>
-    <module>reporting</module>
-	  <module>i18n</module>
-    <module>winauth-ad</module>
-    <module>winauth-sso</module>
-	  <module>async</module>
+	<module>reporting</module>
+	<module>i18n</module>
+	<module>winauth-ad</module>
+	<module>winauth-sso</module>
+	<module>async</module>
+	<module>integration</module>
+  <module>microservices</module>
   </modules>
 
   <dependencyManagement>
