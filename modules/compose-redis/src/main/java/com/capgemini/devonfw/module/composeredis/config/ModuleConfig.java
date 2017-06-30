@@ -85,7 +85,7 @@ public class ModuleConfig {
 
     String serviceUri;
     String vcapServices = System.getenv("VCAP_SERVICES");
-    if ((this.uri == null || this.uri.isEmpty()) && vcapServices != null) {
+    if (this.serviceName != null && !this.uri.isEmpty() && vcapServices != null) {
       LOG.info("CLOUD ENVIRONMENT FOUND, CONFIGURING LETTUCE...");
       // CLOUD ENVIROMENT
       serviceUri = getConnectionUriFromCloud(vcapServices);
