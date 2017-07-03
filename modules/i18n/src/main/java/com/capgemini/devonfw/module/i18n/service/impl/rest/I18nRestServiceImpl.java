@@ -48,6 +48,6 @@ public class I18nRestServiceImpl {
   public String getResourcesForLocale(@PathParam("locale") String locale, @QueryParam("filter") String filter)
       throws Throwable {
 
-    return this.i18n.getResourcesAsJSONStringForLocale(locale, filter);
+    return this.i18n.getResourceObject(locale, filter);
   }
 }

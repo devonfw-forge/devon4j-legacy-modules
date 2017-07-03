@@ -28,7 +28,10 @@ public class I18nImpl implements I18n {
   private static final Logger LOGGER = LoggerFactory.getLogger(I18nImpl.class);
 
   @Value("${i18n.mmm.enabled}")
-  private boolean mmmEnabled;
+  private boolean mmmEnabled = true;
+
+  @Value("${i18n.input.name}")
+  private String inputName = "mmm";
 
   /*
    * @Value("${i18n.mmm.default}") private String mmmDefault;
@@ -42,7 +45,7 @@ public class I18nImpl implements I18n {
    * @throws Throwable thrown by getResourcesAsJSONStringForLocale
    *
    */
-
+  @Deprecated
   @Override
   public String getResourcesAsJSONStringForLocale(String locale, String filter) throws Throwable {
 
@@ -55,6 +58,31 @@ public class I18nImpl implements I18n {
       jsonString = getResourcesAsJSONStringUsingMMMImpl(locale, filter);
     } else
       jsonString = getResourcesAsJSONStringUsingDefaultImpl(locale, filter);
+    return jsonString;
+  }
+
+  /**
+   * This methods read input from config.properties file. We need to set value of i18n.input.name in config.properties
+   * file. Default value for it is "standard".
+   */
+  @Override
+  public String getResourceObject(String locale, String filter) throws Throwable {
+
+    String jsonString = null;
+
+    switch (this.inputName.toLowerCase()) {
+    case "mmm":
+      jsonString = getResourcesAsJSONStringUsingMMMImpl(locale, filter);
+      break;
+
+    case "standard":
+      jsonString = getResourcesAsJSONStringUsingDefaultImpl(locale, filter);
+      break;
+
+    case "ownmodule":
+      jsonString = "value: ownModule";
+      break;
+    }
     return jsonString;
   }
 
