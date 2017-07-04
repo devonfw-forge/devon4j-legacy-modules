@@ -92,15 +92,15 @@
 
     <!-- Spring Security -->
 
-      <dependency>
+    <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
-      </dependency>
+    </dependency>
 
-      <dependency>
+    <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
-      </dependency>
+    </dependency>
 
 
     <!-- for Object Relational Mapping (JPA/Hibernate) -->
@@ -246,45 +246,45 @@
       <version>3.7.1</version>
     </dependency>
 
-    <dependency>
+    <!-- <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.6.1</version>
-
-    </dependency>
-
+      </dependency>
+    -->
+    
     <dependency>
-    <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-util-cli</artifactId>
-    <version>7.0.0</version>
+      <groupId>net.sf.m-m-m</groupId>
+      <artifactId>mmm-util-cli</artifactId>
+      <version>7.0.0</version>
     </dependency>
     <dependency>
       <groupId>net.sf.m-m-m</groupId>
       <artifactId>mmm-util-core</artifactId>
     </dependency>
     <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
     </dependency>
     <dependency>
-        <groupId>commons-lang</groupId>
-        <artifactId>commons-lang</artifactId>
-        <version>2.6</version>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
     </dependency>
     <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
     </dependency>
     <dependency>
-        <groupId>org.reflections</groupId>
-        <artifactId>reflections</artifactId>
-        <version>0.9.10</version>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.9.10</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.json/json -->
-<dependency>
-    <groupId>org.json</groupId>
-    <artifactId>json</artifactId>
-</dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+    </dependency>
 
   </dependencies>
 </project>
