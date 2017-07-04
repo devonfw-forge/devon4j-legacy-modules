@@ -8,10 +8,10 @@
   </parent>
   <groupId>com.capgemini.devonfw.modules</groupId>
   <artifactId>devonfw-compose-redis</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${devonfw.version}</version>
+  <name>${project.artifactId}</name>
   <packaging>jar</packaging>
-
-  <name>devonfw-compose-redis</name>
+  
   <description>Compose for Redis client</description>
 
   <properties>
