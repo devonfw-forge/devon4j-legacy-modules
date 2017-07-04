@@ -14,7 +14,7 @@
   <description>Reusable modules of the Open Application Standard Platform for Java (OASP4J).</description>
 
   <modules>
-    <module>foo</module>
+  <module>foo</module>
 	<module>reporting</module>
 	<module>i18n</module>
 	<module>winauth-ad</module>
@@ -22,6 +22,7 @@
 	<module>async</module>
 	<module>integration</module>
   <module>microservices</module>
+  <module>compose-redis</module>
   </modules>
 
   <dependencyManagement>
