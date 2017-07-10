@@ -5,7 +5,7 @@ import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityFilterAutoConfiguration;
-import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import com.capgemini.devonfw.module.i18n.service.impl.rest.I18nRestServiceImpl;
@@ -13,7 +13,7 @@ import com.capgemini.devonfw.module.i18n.service.impl.rest.I18nRestServiceImpl;
 //@SpringBootApplication(exclude = { SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class })
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class, SecurityAutoConfiguration.class,
 SecurityFilterAutoConfiguration.class })
-@EntityScan(basePackages = { "com.capgemini.devonfw.module" }, basePackageClasses = { I18nRestServiceImpl.class })
+@ComponentScan(basePackages = { "com.capgemini.devonfw.module" }, basePackageClasses = { I18nRestServiceImpl.class })
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class I18nModuleApp {
 

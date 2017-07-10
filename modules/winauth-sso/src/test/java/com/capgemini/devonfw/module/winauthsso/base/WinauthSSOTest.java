@@ -4,9 +4,7 @@ import javax.inject.Inject;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capgemini.devonfw.module.winauthsso.common.api.WinauthSSO;
 import com.capgemini.devonfw.module.winauthsso.common.impl.security.NegotiateSecurityFilterSSO;
@@ -19,8 +17,7 @@ import io.oasp.module.test.common.base.ComponentTest;
  *
  * @author jhcore
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SpringBootApp.class)
+@SpringBootTest(classes = SpringBootApp.class)
 public class WinauthSSOTest extends ComponentTest {
 
   private WinauthSSOImpl ssoDefault = new WinauthSSOImpl();

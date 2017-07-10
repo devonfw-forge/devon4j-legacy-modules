@@ -2,7 +2,7 @@ package com.capgemini.devonfw.module.i18n.logic.impl;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capgemini.devonfw.module.i18n.common.I18nTestApp;
 
@@ -14,7 +14,7 @@ import io.oasp.module.test.common.base.ComponentTest;
  * @author kugawand
  * @since 2.0.0
  */
-@SpringApplicationConfiguration(classes = I18nTestApp.class)
+@SpringBootTest(classes = I18nTestApp.class)
 public class I18nImplTest extends ComponentTest {
 
   @Value("${i18n.mmm.enabled}")

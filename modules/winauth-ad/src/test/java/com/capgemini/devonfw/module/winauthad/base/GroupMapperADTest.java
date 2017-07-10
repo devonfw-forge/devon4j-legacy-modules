@@ -6,9 +6,7 @@ import java.util.HashMap;
 import javax.inject.Inject;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capgemini.devonfw.module.winauthad.common.impl.security.GroupMapperAD;
 
@@ -19,8 +17,7 @@ import io.oasp.module.test.common.base.ComponentTest;
  *
  * @author jhcore
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SpringBootApp.class)
+@SpringBootTest(classes = SpringBootApp.class)
 public class GroupMapperADTest extends ComponentTest {
 
   @Inject
