@@ -21,6 +21,9 @@
     <oasp.http.port>${oasp.port.range}81</oasp.http.port>
     <oasp.db.port>${oasp.port.range}43</oasp.db.port>
     <oasp.test.excluded.groups>io.oasp.module.test.common.api.category.CategorySubsystemTest,io.oasp.module.test.common.api.category.CategorySystemTest</oasp.test.excluded.groups>
+    <!-- Importing properties from a BOM does not work within dependencyManagement -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <modules>
