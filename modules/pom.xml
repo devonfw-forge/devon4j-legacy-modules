@@ -23,6 +23,7 @@
 	<module>integration</module>
   <module>microservices</module>
   <module>compose-redis</module>
+  <module>mybatis</module>
   </modules>
 
   <dependencyManagement>
