@@ -23,6 +23,7 @@
 	<module>integration</module>
   <module>microservices</module>
   <module>compose-redis</module>
+  <module>spring-bootadmin-client</module>
   </modules>
 
   <dependencyManagement>
