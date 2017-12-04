@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+ <groupId>com.capgemini.devonfw.starter</groupId>
+ <artifactId>devonfw-starters</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>devonfw-starters</name>
+  <parent>
+    <groupId>com.capgemini.devonfw.dev</groupId>
+    <artifactId>devonfw</artifactId>
+    <version>dev-SNAPSHOT</version>
+  </parent>
+ <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
+  </properties>
+  <modules>
+    <module>devonfw-async-starter</module>
+    <module>devonfw-compose-redis-starter</module>
+    <module>devonfw-i18n-starter</module>
+    <module>devonfw-integration-starter</module>
+    <module>devonfw-reporting-starter</module>
+    <module>devonfw-winauth-ad-starter</module>
+    <module>devonfw-winauth-sso-starter</module>
+    <module>devonfw-microservices-starter</module>
+    <!-- <module>devonfw-springdata-starter</module> Commented as this is an optional module -->
+  </modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+ 
+</project>
