@@ -1,19 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-    <artifactId>devonfw-winauth-sso-starter</artifactId>
-    <groupId>com.capgemini.devonfw.starter</groupId>
+  <artifactId>devonfw-winauth-sso-starter</artifactId>
+  <groupId>com.capgemini.devonfw.starter</groupId>
   <packaging>jar</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${devonfw.version}</version>
   <parent>
     <groupId>com.capgemini.devonfw.starter</groupId>
     <artifactId>devonfw-starters</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${devonfw.version}</version>
   </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-  <dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot</artifactId>
     </dependency>
@@ -39,18 +40,18 @@
       <groupId>com.capgemini.devonfw.starter</groupId>
       <artifactId>devonfw-winauth-sso-autoconfigure</artifactId>
       <version>${project.version}</version>
-    </dependency> -->
+      </dependency> -->
     <dependency>
       <groupId>com.capgemini.devonfw.modules</groupId>
       <artifactId>devonfw-winauth-sso</artifactId>
       <version>${devonfw.version}</version>
     </dependency>
-     <dependency>
+    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
-     <!-- Note: There is a conflict with the version 5.2.2.Final (org.springframework.boot) -->
+    <!-- Note: There is a conflict with the version 5.2.2.Final (org.springframework.boot) -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator-annotation-processor</artifactId>

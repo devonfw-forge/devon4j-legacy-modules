@@ -1,8 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
- <groupId>com.capgemini.devonfw.starter</groupId>
- <artifactId>devonfw-starters</artifactId>
-<version>0.0.1-SNAPSHOT</version>
+  <groupId>com.capgemini.devonfw.starter</groupId>
+  <artifactId>devonfw-starters</artifactId>
+  <version>${devonfw.version}</version>
   <packaging>pom</packaging>
   <name>devonfw-starters</name>
   <parent>
@@ -10,7 +11,7 @@
     <artifactId>devonfw</artifactId>
     <version>dev-SNAPSHOT</version>
   </parent>
- <properties>
+  <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
   </properties>
@@ -36,5 +37,5 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
- 
+
 </project>

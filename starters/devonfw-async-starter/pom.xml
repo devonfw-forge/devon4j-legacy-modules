@@ -4,11 +4,11 @@
   <artifactId>devonfw-async-starter</artifactId>
   <groupId>com.capgemini.devonfw.starter</groupId>
   <packaging>jar</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${devonfw.version}</version>
   <parent>
     <groupId>com.capgemini.devonfw.starter</groupId>
     <artifactId>devonfw-starters</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${devonfw.version}</version>
   </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
