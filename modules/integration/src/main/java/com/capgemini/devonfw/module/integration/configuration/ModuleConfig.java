@@ -9,7 +9,7 @@ import org.springframework.integration.config.EnableIntegration;
  * Spring Boot auto-configuration for Integration module
  *
  */
-@Configuration
+@Configuration("integration")
 @EnableIntegration
 @ComponentScan(basePackages = { "com.capgemini.devonfw.module.integration" })
 @IntegrationComponentScan(basePackages = { "com.capgemini.devonfw.module.integration.common" })

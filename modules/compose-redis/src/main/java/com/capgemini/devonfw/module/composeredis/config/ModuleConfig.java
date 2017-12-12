@@ -22,7 +22,7 @@ import com.lambdaworks.redis.resource.DefaultClientResources;
  *
  */
 
-@Configuration
+@Configuration("composeredis")
 @ComponentScan(basePackages = { "com.capgemini.devonfw.module.composeredis" })
 public class ModuleConfig {
   private static final Logger LOG = LoggerFactory.getLogger(ModuleConfig.class);
