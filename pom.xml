@@ -25,6 +25,7 @@
     <module>bom</module>
     <module>modules</module>
 	  <module>module-archetype</module>
+	  <module>starters</module>
   </modules>
 
   <build>
