@@ -46,12 +46,17 @@
   
   <dependencies>
   
-    <dependency>
+   <!--  <dependency>
       <groupId>com.capgemini.devonfw.microservices</groupId>
       <artifactId>microservices</artifactId>
       <version>^devonfw.version^</version>
+    </dependency> -->
+    <!--  Changed for starter project -->
+    <dependency>
+      <artifactId>devonfw-microservices-starter</artifactId>
+      <groupId>com.capgemini.devonfw.starter</groupId>
+      <version>^devonfw.version^</version>
     </dependency>
-    
     <dependency>
       <groupId>io.oasp.java.modules</groupId>
       <artifactId>oasp4j-batch</artifactId>

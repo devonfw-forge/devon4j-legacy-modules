@@ -14,15 +14,13 @@ import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.lambdaworks.redis.RedisConnection;
 
@@ -33,8 +31,7 @@ import io.oasp.module.test.common.base.ComponentTest;
  *
  * @author mestevee
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = com.capgemini.devonfw.module.composeredis.SpringBootApp.class)
+@SpringBootTest(classes = com.capgemini.devonfw.module.composeredis.SpringBootApp.class)
 public class LettuceManagementImplTest extends ComponentTest {
 
   private static final Logger LOG = LoggerFactory.getLogger(LettuceManagementImplTest.class);

@@ -1,6 +1,7 @@
 package com.capgemini.devonfw.module.composeredis.config;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ import com.lambdaworks.redis.resource.DefaultClientResources;
  *
  */
 
-@Configuration
+@Configuration("composeredis")
 @ComponentScan(basePackages = { "com.capgemini.devonfw.module.composeredis" })
 public class ModuleConfig {
   private static final Logger LOG = LoggerFactory.getLogger(ModuleConfig.class);
@@ -103,27 +104,32 @@ public class ModuleConfig {
    */
   private String getConnectionUriFromCloud(String vcapServices) {
 
-    String serviceUri = "";
-    JSONObject jsonObj = new JSONObject(vcapServices);
-    JSONArray jsonArray;
+    try {
+      String serviceUri = "";
+      JSONObject jsonObj = new JSONObject(vcapServices);
+      JSONArray jsonArray;
 
-    LOG.debug("jsonObj: {}", jsonObj);
+      LOG.debug("jsonObj: {}", jsonObj);
 
-    if (jsonObj.has(this.serviceName)) {
-      jsonArray = jsonObj.getJSONArray(this.serviceName);
-      // Transform the JSONArray to JSONObject because JSONArray can't find by string key
-      jsonObj = jsonArray.toJSONObject(new JSONArray().put(this.serviceName));
-      jsonObj = jsonObj.getJSONObject(this.serviceName);
-      LOG.debug("compose-for-redis: {}", jsonObj);
+      if (jsonObj.has(this.serviceName)) {
+        jsonArray = jsonObj.getJSONArray(this.serviceName);
+        // Transform the JSONArray to JSONObject because JSONArray can't find by string key
+        jsonObj = jsonArray.toJSONObject(new JSONArray().put(this.serviceName));
+        jsonObj = jsonObj.getJSONObject(this.serviceName);
+        LOG.debug("compose-for-redis: {}", jsonObj);
 
-      if (jsonObj.has(CREDENTIALS_KEY)) {
-        JSONObject credentials = jsonObj.getJSONObject(CREDENTIALS_KEY);
-        LOG.debug("credentials: {}", credentials);
-        serviceUri = credentials.getString(URI_KEY);
+        if (jsonObj.has(CREDENTIALS_KEY)) {
+          JSONObject credentials = jsonObj.getJSONObject(CREDENTIALS_KEY);
+          LOG.debug("credentials: {}", credentials);
+          serviceUri = credentials.getString(URI_KEY);
+        }
       }
-    }
 
-    return serviceUri;
+      return serviceUri;
+    } catch (JSONException e) {
+      LOG.error(e.getMessage());
+      return null;
+    }
   }
 
 }

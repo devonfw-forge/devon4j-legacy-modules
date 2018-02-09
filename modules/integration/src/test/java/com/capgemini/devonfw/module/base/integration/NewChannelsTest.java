@@ -9,14 +9,12 @@ import javax.inject.Named;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
@@ -32,8 +30,7 @@ import io.oasp.module.test.common.base.ComponentTest;
  * Tests the new communication channels programmatically created.
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = IntegrationTestApp.class)
+@SpringBootTest(classes = IntegrationTestApp.class)
 @TestPropertySource(locations = "classpath:integration.properties")
 public class NewChannelsTest extends ComponentTest {
 

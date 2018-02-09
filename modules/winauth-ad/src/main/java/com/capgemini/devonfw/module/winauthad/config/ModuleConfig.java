@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @author pparrado
  *
  */
-@Configuration
+@Configuration("winauthad")
 @ComponentScan(basePackages = { "com.capgemini.devonfw.module.winauthad" })
 public class ModuleConfig {
 }

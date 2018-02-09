@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>devonfw-winauth-sso-starter</artifactId>
+  <groupId>com.capgemini.devonfw.starter</groupId>
+  <packaging>jar</packaging>
+  <version>${devonfw.version}</version>
+  <parent>
+    <groupId>com.capgemini.devonfw.starter</groupId>
+    <artifactId>devonfw-starters</artifactId>
+    <version>${devonfw.version}</version>
+  </parent>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <!-- <dependency>
+      <groupId>com.capgemini.devonfw.starter</groupId>
+      <artifactId>devonfw-winauth-sso-autoconfigure</artifactId>
+      <version>${project.version}</version>
+      </dependency> -->
+    <dependency>
+      <groupId>com.capgemini.devonfw.modules</groupId>
+      <artifactId>devonfw-winauth-sso</artifactId>
+      <version>${devonfw.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Note: There is a conflict with the version 5.2.2.Final (org.springframework.boot) -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator-annotation-processor</artifactId>
+      <version>4.1.0.Final</version><!--$NO-MVN-MAN-VER$ -->
+    </dependency>
+    <!-- END Note -->
+    <dependency>
+      <groupId>io.oasp.java.modules</groupId>
+      <artifactId>oasp4j-test</artifactId>
+      <version>${oasp4j.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

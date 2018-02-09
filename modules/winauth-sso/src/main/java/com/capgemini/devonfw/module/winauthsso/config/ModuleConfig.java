@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Spring Boot autoconfiguration for WinauthSSO module
- * 
+ *
  * @author pparrado
  *
  */
-@Configuration
+@Configuration("winauthsso")
 @ComponentScan(basePackages = { "com.capgemini.devonfw.module.winauthsso" })
 public class ModuleConfig {
 }

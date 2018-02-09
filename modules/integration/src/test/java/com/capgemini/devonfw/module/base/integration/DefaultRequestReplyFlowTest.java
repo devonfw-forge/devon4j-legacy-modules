@@ -10,10 +10,10 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.capgemini.devonfw.module.base.IntegrationTestApp;
 import com.capgemini.devonfw.module.integration.common.api.Integration;
@@ -25,8 +25,8 @@ import io.oasp.module.test.common.base.ComponentTest;
  * Tests the out-of-the-box request-reply communication channel
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = IntegrationTestApp.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = IntegrationTestApp.class)
 @TestPropertySource(locations = "classpath:requestreplytest.properties")
 public class DefaultRequestReplyFlowTest extends ComponentTest {
 
