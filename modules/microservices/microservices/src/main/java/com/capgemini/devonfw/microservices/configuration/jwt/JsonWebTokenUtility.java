@@ -3,11 +3,11 @@ package com.capgemini.devonfw.microservices.configuration.jwt;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,7 +98,7 @@ public class JsonWebTokenUtility {
   @Value("${jwt.encodedKey}")
   public final void setEncodedKey(String encodedKey) {
 
-    byte[] decodedKey = Base64.getDecoder().decode(encodedKey);
+    byte[] decodedKey = DatatypeConverter.parseBase64Binary(encodedKey);
     this.secretKey = new SecretKeySpec(decodedKey, SIGNATURE_ALGORITHM.getJcaName());
 
   }
