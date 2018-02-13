@@ -8,7 +8,7 @@ import javax.servlet.Filter;
 import org.apache.catalina.filters.SetCharacterEncodingFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
 import io.oasp.module.logging.common.api.DiagnosticContextFacade;
