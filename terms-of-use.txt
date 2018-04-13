@@ -1,6 +1,3 @@
-#-------------------------------------------------------------------------------
-# //
-#-------------------------------------------------------------------------------
 We provide the computer program of devonfw and OASP (the Open Application Standard Platform), (hereinafter "Software") free of charge to download. 
 Regarding this software the license terms of the Apache License 2.0 apply. The user shall be responsible to provide the required system environment 
 for using the software. In accordance with the license terms of the Apache License 2.0, the user is entitled to use the Software in own / other
