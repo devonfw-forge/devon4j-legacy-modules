@@ -4,11 +4,11 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>devonfw</artifactId>
-    <groupId>com.capgemini.devonfw.dev</groupId>
+    <groupId>com.devonfw.dev</groupId>
     <version>dev-SNAPSHOT</version>
   </parent>
   <artifactId>devonfw-sample</artifactId>
-  <groupId>com.capgemini.devonfw</groupId>
+  <groupId>com.devonfw</groupId>
   <version>${devonfw.version}</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
@@ -51,7 +51,7 @@
       </dependency>
       <!-- BOM of Devon -->
       <dependency>
-        <groupId>com.capgemini.devonfw</groupId>
+        <groupId>com.devonfw</groupId>
         <artifactId>devonfw-bom</artifactId>
         <version>${devonfw.version}</version>
         <type>pom</type>

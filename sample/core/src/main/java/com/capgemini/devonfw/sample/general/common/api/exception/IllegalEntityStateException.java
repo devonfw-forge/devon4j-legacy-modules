@@ -13,12 +13,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.api.exception;
+package com.devonfw.sample.general.common.api.exception;
 
-import com.capgemini.devonfw.sample.general.common.api.NlsBundleApplicationRoot;
+import com.devonfw.sample.general.common.api.NlsBundleApplicationRoot;
 
 /**
- * This exception is thrown if an {@link com.capgemini.devonfw.sample.general.common.api.ApplicationEntity entity} has
+ * This exception is thrown if an {@link com.devonfw.sample.general.common.api.ApplicationEntity entity} has
  * a specific state that is illegal for the current operation and caused it to fail.
  *
  * @author hohwille

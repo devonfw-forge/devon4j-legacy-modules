@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.module.foo.common.api;
+package com.devonfw.module.foo.common.api;
 
 import java.util.Map;
 

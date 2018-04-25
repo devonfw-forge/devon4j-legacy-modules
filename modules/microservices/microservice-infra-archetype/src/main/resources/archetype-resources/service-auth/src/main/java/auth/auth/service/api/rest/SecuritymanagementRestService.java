@@ -26,7 +26,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.capgemini.devonfw.microservices.configuration.jwt.UserDetailsJsonWebTokenAbstract;
+import com.devonfw.microservices.configuration.jwt.UserDetailsJsonWebTokenAbstract;
 import ${package}.auth.auth.service.api.JwtHeaderTo;
 import ${package}.auth.auth.service.api.LoginTo;
 

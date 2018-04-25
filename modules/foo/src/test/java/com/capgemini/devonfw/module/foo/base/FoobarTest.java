@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.module.foo.base;
+package com.devonfw.module.foo.base;
 
 import java.util.Map;
 
@@ -25,8 +25,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.capgemini.devonfw.module.foo.common.FooTestApp;
-import com.capgemini.devonfw.module.foo.common.api.Foo;
+import com.devonfw.module.foo.common.FooTestApp;
+import com.devonfw.module.foo.common.api.Foo;
 
 import io.oasp.module.test.common.base.ComponentTest;
 

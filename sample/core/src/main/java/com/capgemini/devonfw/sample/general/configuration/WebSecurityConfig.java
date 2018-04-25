@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.configuration;
+package com.devonfw.sample.general.configuration;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -39,8 +39,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import com.capgemini.devonfw.sample.general.common.impl.security.ApplicationAuthenticationProvider;
-import com.capgemini.devonfw.sample.general.common.impl.security.CsrfRequestMatcher;
+import com.devonfw.sample.general.common.impl.security.ApplicationAuthenticationProvider;
+import com.devonfw.sample.general.common.impl.security.CsrfRequestMatcher;
 
 import io.oasp.module.security.common.api.accesscontrol.AccessControlProvider;
 import io.oasp.module.security.common.base.accesscontrol.AccessControlSchemaProvider;

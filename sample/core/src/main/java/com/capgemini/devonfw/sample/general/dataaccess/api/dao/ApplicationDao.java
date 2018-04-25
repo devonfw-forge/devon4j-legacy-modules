@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.dataaccess.api.dao;
+package com.devonfw.sample.general.dataaccess.api.dao;
 
 import io.oasp.module.jpa.dataaccess.api.Dao;
 import io.oasp.module.jpa.dataaccess.api.GenericRevisionedDao;

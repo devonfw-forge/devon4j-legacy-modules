@@ -13,9 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.logic.api.to;
+package com.devonfw.sample.general.logic.api.to;
 
-import com.capgemini.devonfw.sample.general.common.api.BinaryObject;
+import com.devonfw.sample.general.common.api.BinaryObject;
 import io.oasp.module.basic.common.api.to.AbstractEto;
 
 /**

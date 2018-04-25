@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample;
+package com.devonfw.sample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration;
@@ -31,7 +31,7 @@ import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
  * @since 1.1
  */
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
-@EntityScan(basePackages = { "com.capgemini.devonfw.sample" }, basePackageClasses = { AdvancedRevisionEntity.class })
+@EntityScan(basePackages = { "com.devonfw.sample" }, basePackageClasses = { AdvancedRevisionEntity.class })
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class SpringBootApp {
 

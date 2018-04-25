@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.api.exception;
+package com.devonfw.sample.general.common.api.exception;
 
 import net.sf.mmm.util.nls.api.NlsMessage;
 

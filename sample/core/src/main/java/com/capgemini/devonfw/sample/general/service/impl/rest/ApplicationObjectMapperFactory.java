@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.service.impl.rest;
+package com.devonfw.sample.general.service.impl.rest;
 
 import javax.inject.Named;
 

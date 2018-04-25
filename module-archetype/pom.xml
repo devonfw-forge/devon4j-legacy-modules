@@ -3,12 +3,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ipmodule-archetype</artifactId>
-  <groupId>com.capgemini.devonfw.dev</groupId>
+  <groupId>com.devonfw.dev</groupId>
   <version>dev-SNAPSHOT</version> <!-- This POM will never be released -->
   <name>${project.artifactId}</name>
   <description>Devon Module template created to serve as an example for new module.</description>
   <parent>
-    <groupId>com.capgemini.devonfw.dev</groupId>
+    <groupId>com.devonfw.dev</groupId>
     <artifactId>devonfw</artifactId>
     <version>dev-SNAPSHOT</version>
   </parent>
@@ -194,7 +194,7 @@
       </dependency>
       <!-- BOM of Devon -->
       <!-- <dependency>
-        <groupId>com.capgemini.devonfw</groupId>
+        <groupId>com.devonfw</groupId>
         <artifactId>devonfw-bom</artifactId>
         <version>^devonfw.version^</version>
         <type>pom</type>

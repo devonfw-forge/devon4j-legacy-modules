@@ -13,11 +13,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.api;
+package com.devonfw.sample.general.common.api;
 
 import java.security.Principal;
 
-import com.capgemini.devonfw.sample.general.common.api.datatype.Role;
+import com.devonfw.sample.general.common.api.datatype.Role;
 
 /**
  * @author agreul

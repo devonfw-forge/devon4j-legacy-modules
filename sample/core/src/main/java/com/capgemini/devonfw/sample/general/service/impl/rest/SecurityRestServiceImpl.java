@@ -13,11 +13,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.service.impl.rest;
+package com.devonfw.sample.general.service.impl.rest;
 
-import com.capgemini.devonfw.sample.general.common.api.exception.NoActiveUserException;
-import com.capgemini.devonfw.sample.general.common.api.security.UserData;
-import com.capgemini.devonfw.sample.general.common.api.to.UserDetailsClientTo;
+import com.devonfw.sample.general.common.api.exception.NoActiveUserException;
+import com.devonfw.sample.general.common.api.security.UserData;
+import com.devonfw.sample.general.common.api.to.UserDetailsClientTo;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;

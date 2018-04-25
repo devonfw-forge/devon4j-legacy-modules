@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.module.foo.common.impl;
+package com.devonfw.module.foo.common.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.capgemini.devonfw.module.foo.common.api.Foo;
+import com.devonfw.module.foo.common.api.Foo;
 
 /**
  * 'Advanced' implementation of the {@link Foo} interface. which changes to uppercase all configured property string

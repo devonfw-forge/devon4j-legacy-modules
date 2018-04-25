@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.base;
+package com.devonfw.sample.general.common.base;
 
 import io.oasp.module.beanmapping.common.api.BeanMapper;
 

@@ -13,9 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.api.exception;
+package com.devonfw.sample.general.common.api.exception;
 
-import com.capgemini.devonfw.sample.general.common.api.NlsBundleApplicationRoot;
+import com.devonfw.sample.general.common.api.NlsBundleApplicationRoot;
 
 /**
  * Thrown when an operation is requested that requires a user to be logged in, but no such user exists.

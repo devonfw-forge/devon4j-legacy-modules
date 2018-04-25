@@ -3,11 +3,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.capgemini.devonfw.dev</groupId>
+    <groupId>com.devonfw.dev</groupId>
     <artifactId>devonfw</artifactId>
     <version>dev-SNAPSHOT</version>
   </parent>
-  <groupId>com.capgemini.devonfw</groupId>
+  <groupId>com.devonfw</groupId>
   <artifactId>devonfw-bom</artifactId>
   <version>${devonfw.version}</version>
   <name>${project.artifactId}</name>
@@ -104,26 +104,26 @@
 
       <!-- Foo module -->
       <dependency>
-        <groupId>com.capgemini.devonfw.modules</groupId>
+        <groupId>com.devonfw.modules</groupId>
         <artifactId>devonfw-foo</artifactId>
         <version>1.1-SNAPSHOT</version>
       </dependency>
 
       <!-- Winauth module -->
       <dependency>
-        <groupId>com.capgemini.devonfw.modules</groupId>
+        <groupId>com.devonfw.modules</groupId>
         <artifactId>devonfw-winauth</artifactId>
         <version>1.1-SNAPSHOT</version>
       </dependency>
 
       <!-- Reporting module -->
       <dependency>
-        <groupId>com.capgemini.devonfw.modules</groupId>
+        <groupId>com.devonfw.modules</groupId>
         <artifactId>devonfw-reporting</artifactId>
         <version>1.1-SNAPSHOT</version>
       </dependency>
 
     </dependencies>
   </dependencyManagement>
-
+  
 </project>

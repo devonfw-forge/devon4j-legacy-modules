@@ -13,10 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.dataaccess.base.dao;
+package com.devonfw.sample.general.dataaccess.base.dao;
 
-import com.capgemini.devonfw.sample.general.dataaccess.api.BinaryObjectEntity;
-import com.capgemini.devonfw.sample.general.dataaccess.api.dao.BinaryObjectDao;
+import com.devonfw.sample.general.dataaccess.api.BinaryObjectEntity;
+import com.devonfw.sample.general.dataaccess.api.dao.BinaryObjectDao;
 
 import javax.inject.Named;
 

@@ -13,9 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.configuration;
+package com.devonfw.sample.general.configuration;
 
-import com.capgemini.devonfw.sample.SpringBootApp;
+import com.devonfw.sample.SpringBootApp;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
