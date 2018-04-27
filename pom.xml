@@ -96,6 +96,11 @@
             </lifecycleMappingMetadata>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.5</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -145,6 +150,35 @@
     </plugins>
   </build>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/devonfw/devon/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/devonfw/devon/tree/develop</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>Apache Software Licenese</name>
+      <url>https://github.com/devonfw/devon/blob/develop/terms-of-use.txt</url>
+      <distribution>repo</distribution>
+      <comments/>
+    </license>
+  </licenses>
+
   <profiles>
     <profile>
       <id>subsystemtest</id>
@@ -157,6 +191,27 @@
       <properties>
         <oasp.test.excluded.groups/>
       </properties>
+    </profile>
+
+    <profile>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
