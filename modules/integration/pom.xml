@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.capgemini.devonfw.dev</groupId>
+    <groupId>com.devonfw.dev</groupId>
     <artifactId>devonfw-modules</artifactId>
     <version>dev-SNAPSHOT</version>
   </parent>
   
-  <groupId>com.capgemini.devonfw.modules</groupId>
+  <groupId>com.devonfw.modules</groupId>
   <artifactId>devonfw-integration</artifactId>
   <version>${devonfw.version}</version>
   <name>${project.artifactId}</name>

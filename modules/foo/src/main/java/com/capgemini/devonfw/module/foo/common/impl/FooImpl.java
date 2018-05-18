@@ -13,14 +13,14 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.module.foo.common.impl;
+package com.devonfw.module.foo.common.impl;
 
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.capgemini.devonfw.module.foo.common.api.Foo;
+import com.devonfw.module.foo.common.api.Foo;
 
 /**
  * Basic implementation of the {@link Foo} interface. returns configured property values without changes

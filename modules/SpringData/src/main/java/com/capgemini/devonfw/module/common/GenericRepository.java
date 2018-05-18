@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.module.common;
+package com.devonfw.module.common;
 
 import java.io.Serializable;
 

@@ -3,7 +3,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>devonfw</artifactId>
-  <groupId>com.capgemini.devonfw.dev</groupId>
+  <groupId>com.devonfw.dev</groupId>
   <version>dev-SNAPSHOT</version> <!-- This POM will never be released -->
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
@@ -11,7 +11,7 @@
 
   <properties>
     <oasp4j.version>2.5.0</oasp4j.version>
-    <devonfw.version>2.3.1</devonfw.version>
+    <devonfw.version>2.4.0-SNAPSHOT</devonfw.version>
     <spring.boot.version>1.5.3.RELEASE</spring.boot.version>
     <java.version>1.7</java.version>
     <oasp.port.range>81</oasp.port.range>
@@ -24,8 +24,8 @@
   <modules>
     <module>bom</module>
     <module>modules</module>
-	  <module>module-archetype</module>
-	  <module>starters</module>
+    <module>module-archetype</module>
+    <module>starters</module>
   </modules>
 
   <build>
@@ -96,6 +96,11 @@
             </lifecycleMappingMetadata>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.5</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -145,6 +150,35 @@
     </plugins>
   </build>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/devonfw/devon/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/devonfw/devon/tree/develop</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>Apache Software Licenese</name>
+      <url>https://github.com/devonfw/devon/blob/develop/terms-of-use.txt</url>
+      <distribution>repo</distribution>
+      <comments/>
+    </license>
+  </licenses>
+
   <profiles>
     <profile>
       <id>subsystemtest</id>
@@ -157,6 +191,27 @@
       <properties>
         <oasp.test.excluded.groups/>
       </properties>
+    </profile>
+
+    <profile>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 

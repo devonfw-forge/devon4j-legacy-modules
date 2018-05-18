@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.api;
+package com.devonfw.sample.general.common.api;
 
 /**
  * This is the interface for a {@link BinaryObject} of the devonfw-sample.

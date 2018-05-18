@@ -13,12 +13,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.starter.springdata;
+package com.devonfw.starter.springdata;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 
-import com.capgemini.devonfw.module.common.GenericRepository;
+import com.devonfw.module.common.GenericRepository;
 
 /**
  * @author vapadwal

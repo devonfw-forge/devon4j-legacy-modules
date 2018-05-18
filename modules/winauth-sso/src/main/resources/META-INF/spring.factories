@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.capgemini.devonfw.module.winauthsso.config.ModuleConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.devonfw.module.winauthsso.config.ModuleConfig

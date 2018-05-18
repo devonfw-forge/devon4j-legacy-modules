@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.impl.security;
+package com.devonfw.sample.general.common.impl.security;
 
 import java.util.regex.Pattern;
 

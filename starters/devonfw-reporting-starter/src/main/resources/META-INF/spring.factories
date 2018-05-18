@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.capgemini.devonfw.starter.reporting.ReportingAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.devonfw.starter.reporting.ReportingAutoConfiguration

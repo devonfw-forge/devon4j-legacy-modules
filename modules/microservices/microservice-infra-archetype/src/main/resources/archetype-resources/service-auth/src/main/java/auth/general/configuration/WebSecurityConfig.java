@@ -25,7 +25,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-import com.capgemini.devonfw.microservices.configuration.jwt.JsonWebTokenUtility;
+import com.devonfw.microservices.configuration.jwt.JsonWebTokenUtility;
 
 import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
 

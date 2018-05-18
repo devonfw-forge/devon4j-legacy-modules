@@ -13,9 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.logic.base;
+package com.devonfw.sample.general.logic.base;
 
-import com.capgemini.devonfw.sample.general.logic.api.to.BinaryObjectEto;
+import com.devonfw.sample.general.logic.api.to.BinaryObjectEto;
 
 import java.sql.Blob;
 

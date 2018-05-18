@@ -45,7 +45,7 @@
   <dependencies>
   
     <dependency>
-      <groupId>com.capgemini.devonfw.microservices</groupId>
+      <groupId>com.devonfw.microservices</groupId>
       <artifactId>microservices</artifactId>
       <version>^devonfw.version^</version>
     </dependency>

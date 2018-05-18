@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common;
+package com.devonfw.sample.general.common;
 
 import java.io.File;
 import java.util.Arrays;
@@ -33,8 +33,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.capgemini.devonfw.sample.general.common.api.security.UserData;
-import com.capgemini.devonfw.sample.general.dataaccess.base.DatabaseMigrator;
+import com.devonfw.sample.general.common.api.security.UserData;
+import com.devonfw.sample.general.dataaccess.base.DatabaseMigrator;
 
 import io.oasp.module.security.common.api.accesscontrol.AccessControlPermission;
 import io.oasp.module.security.common.base.accesscontrol.AccessControlGrantedAuthority;

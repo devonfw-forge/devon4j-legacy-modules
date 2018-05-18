@@ -18,7 +18,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.auth.auth.service.api;
 
-import com.capgemini.devonfw.microservices.configuration.jwt.JsonWebTokenAuthenticationFilter;
+import com.devonfw.microservices.configuration.jwt.JsonWebTokenAuthenticationFilter;
 
 public class JwtHeaderTo {
 

@@ -13,10 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.api.security;
+package com.devonfw.sample.general.common.api.security;
 
-import com.capgemini.devonfw.sample.general.common.api.UserProfile;
-import com.capgemini.devonfw.sample.general.common.api.to.UserDetailsClientTo;
+import com.devonfw.sample.general.common.api.UserProfile;
+import com.devonfw.sample.general.common.api.to.UserDetailsClientTo;
 
 import java.security.Principal;
 import java.util.Collection;

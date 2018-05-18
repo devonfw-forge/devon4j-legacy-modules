@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.api;
+package com.devonfw.sample.general.common.api;
 
 import javax.inject.Named;
 
@@ -29,7 +29,7 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 public interface NlsBundleApplicationRoot extends NlsBundle {
 
   /**
-   * @see com.capgemini.devonfw.sample.general.common.api.exception.IllegalEntityStateException
+   * @see com.devonfw.sample.general.common.api.exception.IllegalEntityStateException
    *
    * @param entity is the entity relevant for the error.
    * @param state is the state of the entity that caused the operation to fail.
@@ -39,7 +39,7 @@ public interface NlsBundleApplicationRoot extends NlsBundle {
   NlsMessage errorIllegalEntityState(@Named("entity") Object entity, @Named("state") Object state);
 
   /**
-   * @see com.capgemini.devonfw.sample.general.common.api.exception.IllegalEntityStateException
+   * @see com.devonfw.sample.general.common.api.exception.IllegalEntityStateException
    *
    * @param entity is the entity relevant for the error.
    * @param currentState is the current state of the entity.
@@ -51,7 +51,7 @@ public interface NlsBundleApplicationRoot extends NlsBundle {
       @Named("newState") Object newState);
 
   /**
-   * @see com.capgemini.devonfw.sample.general.common.api.exception.IllegalEntityStateException
+   * @see com.devonfw.sample.general.common.api.exception.IllegalEntityStateException
    *
    * @param object is the entity relevant for the error.
    * @param property is the property of the entity that can not be changed.
@@ -61,7 +61,7 @@ public interface NlsBundleApplicationRoot extends NlsBundle {
   NlsMessage errorIllegalPropertyChange(@Named("object") Object object, @Named("property") Object property);
 
   /**
-   * @see com.capgemini.devonfw.sample.general.common.api.exception.NoActiveUserException
+   * @see com.devonfw.sample.general.common.api.exception.NoActiveUserException
    *
    * @return the {@link NlsMessage}.
    */

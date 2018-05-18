@@ -13,14 +13,14 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.impl.security;
+package com.devonfw.sample.general.common.impl.security;
 
 import java.util.Arrays;
 import java.util.Collection;
 
 import javax.inject.Named;
 
-import com.capgemini.devonfw.sample.general.common.api.UserProfile;
+import com.devonfw.sample.general.common.api.UserProfile;
 import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;
 
 /**

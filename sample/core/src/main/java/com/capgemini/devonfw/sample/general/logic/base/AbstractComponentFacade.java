@@ -13,10 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.logic.base;
+package com.devonfw.sample.general.logic.base;
 
 
-import com.capgemini.devonfw.sample.general.common.base.AbstractBeanMapperSupport;
+import com.devonfw.sample.general.common.base.AbstractBeanMapperSupport;
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 import java.util.ArrayList;

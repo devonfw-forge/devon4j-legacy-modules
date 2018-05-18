@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.capgemini.devonfw.starter.microservices.MicroservicesAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.devonfw.starter.microservices.MicroservicesAutoConfiguration

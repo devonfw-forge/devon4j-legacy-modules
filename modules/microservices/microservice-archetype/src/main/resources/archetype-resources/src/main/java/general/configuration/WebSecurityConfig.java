@@ -24,8 +24,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.capgemini.devonfw.microservices.configuration.jwt.JsonWebTokenSecurityConfig;
-import com.capgemini.devonfw.microservices.configuration.jwt.JsonWebTokenUtility;
+import com.devonfw.microservices.configuration.jwt.JsonWebTokenSecurityConfig;
+import com.devonfw.microservices.configuration.jwt.JsonWebTokenUtility;
 
 /**
  * Security configuration based on {@link WebSecurityConfigurerAdapter}.

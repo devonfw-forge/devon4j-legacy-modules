@@ -13,10 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.api.to;
+package com.devonfw.sample.general.common.api.to;
 
-import com.capgemini.devonfw.sample.general.common.api.UserProfile;
-import com.capgemini.devonfw.sample.general.common.api.datatype.Role;
+import com.devonfw.sample.general.common.api.UserProfile;
+import com.devonfw.sample.general.common.api.datatype.Role;
 import io.oasp.module.basic.common.api.to.AbstractTo;
 
 /**

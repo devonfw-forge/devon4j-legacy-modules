@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common.impl.security;
+package com.devonfw.sample.general.common.impl.security;
 
 import java.util.Set;
 
@@ -28,9 +28,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.capgemini.devonfw.sample.general.common.api.UserProfile;
-import com.capgemini.devonfw.sample.general.common.api.Usermanagement;
-import com.capgemini.devonfw.sample.general.common.api.security.UserData;
+import com.devonfw.sample.general.common.api.UserProfile;
+import com.devonfw.sample.general.common.api.Usermanagement;
+import com.devonfw.sample.general.common.api.security.UserData;
 import io.oasp.module.security.common.base.accesscontrol.AbstractAccessControlBasedAuthenticationProvider;
 
 /**

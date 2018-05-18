@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.module.foo.common.impl;
+package com.devonfw.module.foo.common.impl;
 
 import java.util.HashMap;
 

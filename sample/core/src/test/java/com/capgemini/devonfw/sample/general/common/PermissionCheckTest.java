@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package com.capgemini.devonfw.sample.general.common;
+package com.devonfw.sample.general.common;
 
 import io.oasp.module.test.common.base.ModuleTest;
 
@@ -46,7 +46,7 @@ public class PermissionCheckTest extends ModuleTest {
   @Test
   public void permissionCheckAnnotationPresent() {
 
-    String packageName = "com.capgemini.devonfw.sample";
+    String packageName = "com.devonfw.sample";
     Filter<String> filter = new Filter<String>() {
 
       @Override

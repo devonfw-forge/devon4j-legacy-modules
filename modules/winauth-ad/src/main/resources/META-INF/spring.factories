@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.capgemini.devonfw.module.winauthad.config.ModuleConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.devonfw.module.winauthad.config.ModuleConfig
