@@ -10,8 +10,8 @@
   <description>Application based on the Open Application Standard Platform for Java (OASP4J).</description>
 
   <properties>
-    <oasp4j.version>2.5.0</oasp4j.version>
-    <devonfw.version>2.4.0-SNAPSHOT</devonfw.version>
+    <oasp4j.version>2.6.0</oasp4j.version>
+    <devonfw.version>2.4.0</devonfw.version>
     <spring.boot.version>1.5.3.RELEASE</spring.boot.version>
     <java.version>1.7</java.version>
     <oasp.port.range>81</oasp.port.range>
