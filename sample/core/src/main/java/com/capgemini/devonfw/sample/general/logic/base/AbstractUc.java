@@ -1,6 +1,21 @@
-package com.capgemini.devonfw.sample.general.logic.base;
+/*******************************************************************************
+ * Copyright 2015-2018 Capgemini SE.
+ * 
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ ******************************************************************************/
+package com.devonfw.sample.general.logic.base;
 
-import com.capgemini.devonfw.sample.general.common.base.AbstractBeanMapperSupport;
+import com.devonfw.sample.general.common.base.AbstractBeanMapperSupport;
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 import java.util.ArrayList;
@@ -16,7 +31,7 @@ import net.sf.mmm.util.transferobject.api.TransferObject;
 
 /**
  * Abstract base class for any <em>use case</em> in this application. Actual implementations need to be annotated with
- * {@link javax.inject.Named} and {@link com.capgemini.devonfw.sample.general.logic.api.UseCase}.
+ * {@link javax.inject.Named} and {@link com.devonfw.sample.general.logic.api.UseCase}.
  *
  * @author jozitz
  */

@@ -18,7 +18,7 @@
     <scala.version>2.10.4</scala.version>
     <querydsl.version>3.4.3</querydsl.version>
     
-    <start-class>com.capgemini.devonfw.microservices.foo.FooBootApp</start-class>
+    <start-class>com.devonfw.microservices.foo.FooBootApp</start-class>
   </properties>
 
 
@@ -47,14 +47,14 @@
   <dependencies>
   
    <!--  <dependency>
-      <groupId>com.capgemini.devonfw.microservices</groupId>
+      <groupId>com.devonfw.microservices</groupId>
       <artifactId>microservices</artifactId>
       <version>^devonfw.version^</version>
     </dependency> -->
     <!--  Changed for starter project -->
     <dependency>
       <artifactId>devonfw-microservices-starter</artifactId>
-      <groupId>com.capgemini.devonfw.starter</groupId>
+      <groupId>com.devonfw.starter</groupId>
       <version>^devonfw.version^</version>
     </dependency>
     <dependency>

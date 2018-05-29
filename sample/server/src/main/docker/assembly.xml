@@ -6,7 +6,7 @@
     <dependencySet>
       <useProjectArtifact>true</useProjectArtifact>
       <includes>
-        <include>com.capgemini.devonfw:devonfw-sample-server</include>
+        <include>com.devonfw:devonfw-sample-server</include>
       </includes>
       <outputDirectory>.</outputDirectory>
       <outputFileNameMapping>devon-sample-server.war</outputFileNameMapping>

@@ -2,11 +2,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>devonfw-compose-redis-starter</artifactId>
-  <groupId>com.capgemini.devonfw.starter</groupId>
+  <groupId>com.devonfw.starter</groupId>
   <packaging>jar</packaging>
   <version>${devonfw.version}</version>
   <parent>
-    <groupId>com.capgemini.devonfw.starter</groupId>
+    <groupId>com.devonfw.starter</groupId>
     <artifactId>devonfw-starters</artifactId>
     <version>${devonfw.version}</version>
   </parent>
@@ -37,12 +37,12 @@
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
     <!-- <dependency>
-      <groupId>com.capgemini.devonfw.starter</groupId>
+      <groupId>com.devonfw.starter</groupId>
       <artifactId>devonfw-compose-redis-autoconfigure</artifactId>
       <version>${project.version}</version>
       </dependency> -->
     <dependency>
-      <groupId>com.capgemini.devonfw.modules</groupId>
+      <groupId>com.devonfw.modules</groupId>
       <artifactId>devonfw-compose-redis</artifactId>
       <version>${devonfw.version}</version>
     </dependency>

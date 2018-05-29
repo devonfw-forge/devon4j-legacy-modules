@@ -1,4 +1,19 @@
-package com.capgemini.devonfw.sample.general.common.api;
+/*******************************************************************************
+ * Copyright 2015-2018 Capgemini SE.
+ * 
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ ******************************************************************************/
+package com.devonfw.sample.general.common.api;
 
 import javax.inject.Named;
 
@@ -14,7 +29,7 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 public interface NlsBundleApplicationRoot extends NlsBundle {
 
   /**
-   * @see com.capgemini.devonfw.sample.general.common.api.exception.IllegalEntityStateException
+   * @see com.devonfw.sample.general.common.api.exception.IllegalEntityStateException
    *
    * @param entity is the entity relevant for the error.
    * @param state is the state of the entity that caused the operation to fail.
@@ -24,7 +39,7 @@ public interface NlsBundleApplicationRoot extends NlsBundle {
   NlsMessage errorIllegalEntityState(@Named("entity") Object entity, @Named("state") Object state);
 
   /**
-   * @see com.capgemini.devonfw.sample.general.common.api.exception.IllegalEntityStateException
+   * @see com.devonfw.sample.general.common.api.exception.IllegalEntityStateException
    *
    * @param entity is the entity relevant for the error.
    * @param currentState is the current state of the entity.
@@ -36,7 +51,7 @@ public interface NlsBundleApplicationRoot extends NlsBundle {
       @Named("newState") Object newState);
 
   /**
-   * @see com.capgemini.devonfw.sample.general.common.api.exception.IllegalEntityStateException
+   * @see com.devonfw.sample.general.common.api.exception.IllegalEntityStateException
    *
    * @param object is the entity relevant for the error.
    * @param property is the property of the entity that can not be changed.
@@ -46,7 +61,7 @@ public interface NlsBundleApplicationRoot extends NlsBundle {
   NlsMessage errorIllegalPropertyChange(@Named("object") Object object, @Named("property") Object property);
 
   /**
-   * @see com.capgemini.devonfw.sample.general.common.api.exception.NoActiveUserException
+   * @see com.devonfw.sample.general.common.api.exception.NoActiveUserException
    *
    * @return the {@link NlsMessage}.
    */

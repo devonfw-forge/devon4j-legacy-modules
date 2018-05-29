@@ -20,14 +20,14 @@
     </property>
     <property name="sql">
       <bean class="io.oasp.module.jpa.dataaccess.base.NamedQueryFactoryBean">
-        <property name="queryName" value="#{T(com.capgemini.devonfw.sample.general.common.api.constants.NamedQueries).GET_ALL_IDS_OF_PAYED_BILLS}"/>
+        <property name="queryName" value="#{T(com.devonfw.sample.general.common.api.constants.NamedQueries).GET_ALL_IDS_OF_PAYED_BILLS}"/>
       </bean>
     </property>
   </bean>
 
-  <bean id="billProcessor" class="com.capgemini.devonfw.sample.salesmanagement.batch.impl.billexport.processor.BillProcessor"/>
+  <bean id="billProcessor" class="com.devonfw.sample.salesmanagement.batch.impl.billexport.processor.BillProcessor"/>
 
-  <bean id="billWriter" class="com.capgemini.devonfw.sample.salesmanagement.batch.impl.billexport.writer.BillCompositeWriter" scope="step">
+  <bean id="billWriter" class="com.devonfw.sample.salesmanagement.batch.impl.billexport.writer.BillCompositeWriter" scope="step">
     <property name="billLineAggregator">
       <bean class="org.springframework.batch.item.file.transform.DelimitedLineAggregator">
         <property name="fieldExtractor">
