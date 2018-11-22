@@ -14,8 +14,8 @@
   <dependencies>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-test</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-test</artifactId>
       <scope>test</scope>
     </dependency>
 

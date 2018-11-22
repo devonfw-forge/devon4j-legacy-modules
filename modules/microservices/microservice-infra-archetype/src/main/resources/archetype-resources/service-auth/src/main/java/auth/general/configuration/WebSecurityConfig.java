@@ -27,7 +27,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 import com.devonfw.microservices.configuration.jwt.JsonWebTokenUtility;
 
-import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
+import com.devonfw.module.rest.service.impl.RestServiceExceptionFacade;
 
 /**
  * Security configuration based on {@link WebSecurityConfigurerAdapter}.

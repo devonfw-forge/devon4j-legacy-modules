@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-@ComponentScan(basePackages = { "io.oasp.module.beanmapping" })
+@ComponentScan(basePackages = { "com.devonfw.module.beanmapping" })
 public class BeansDozerConfig {
 
   private static final String DOZER_MAPPING_XML = "config/app/common/dozer-mapping.xml";

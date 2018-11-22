@@ -17,7 +17,7 @@ package com.devonfw.sample.general.common.api.constants;
 
 /**
  * Contains constants for the keys of all
- * {@link io.oasp.module.security.common.api.accesscontrol.AccessControlPermission}s.
+ * {@link com.devonfw.module.security.common.api.accesscontrol.AccessControlPermission}s.
  *
  * @author jmetzler
  */

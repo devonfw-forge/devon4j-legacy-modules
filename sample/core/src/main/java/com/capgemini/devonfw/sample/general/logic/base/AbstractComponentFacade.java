@@ -17,7 +17,7 @@ package com.devonfw.sample.general.logic.base;
 
 
 import com.devonfw.sample.general.common.base.AbstractBeanMapperSupport;
-import io.oasp.module.jpa.common.api.to.PaginatedListTo;
+import com.devonfw.module.jpa.common.api.to.PaginatedListTo;
 
 import java.util.ArrayList;
 import java.util.Collection;

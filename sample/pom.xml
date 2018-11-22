@@ -12,15 +12,15 @@
   <version>${devonfw.version}</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
-  <description>Application based on the Open Application Standard Platform for Java (OASP4J).</description>
+  <description>Application based on the Open Application Standard Platform for Java (devon4j).</description>
 
   <properties>
-    <spring.boot.version>1.3.0.RELEASE</spring.boot.version>
-    <java.version>1.7</java.version>
-    <oasp.port.range>81</oasp.port.range>
-    <oasp.http.port>${oasp.port.range}81</oasp.http.port>
-    <oasp.db.port>${oasp.port.range}43</oasp.db.port>
-    <oasp.test.excluded.groups>io.oasp.module.test.common.api.category.CategorySubsystemTest,io.oasp.module.test.common.api.category.CategorySystemTest</oasp.test.excluded.groups>
+    <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
+    <java.version>1.8</java.version>
+    <devon.port.range>81</devon.port.range>
+    <devon.http.port>${devon.port.range}81</devon.http.port>
+    <devon.db.port>${devon.port.range}43</devon.db.port>
+    <devon.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySubsystemTest,com.devonfw.module.test.common.api.category.CategorySystemTest</devon.test.excluded.groups>
     <!-- Importing properties from a BOM does not work within dependencyManagement -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -41,11 +41,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- BOM of OASP4J -->
+      <!-- BOM of devon4j -->
       <dependency>
-        <groupId>io.oasp.java</groupId>
-        <artifactId>oasp4j-bom</artifactId>
-        <version>${oasp4j.version}</version>
+        <groupId>com.devonfw.java.boms</groupId>
+        <artifactId>devon4j-bom</artifactId>
+        <version>${devon4j.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -157,7 +157,7 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <excludedGroups>${oasp.test.excluded.groups}</excludedGroups>
+          <excludedGroups>${devon.test.excluded.groups}</excludedGroups>
         </configuration>
       </plugin>
     </plugins>
@@ -167,7 +167,7 @@
     <profile>
       <id>subsystemtest</id>
       <properties>
-        <oasp.test.excluded.groups>io.oasp.module.test.common.api.category.CategorySystemTest</oasp.test.excluded.groups>
+        <devon.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySystemTest</devon.test.excluded.groups>
       </properties>
     </profile>
     <profile>

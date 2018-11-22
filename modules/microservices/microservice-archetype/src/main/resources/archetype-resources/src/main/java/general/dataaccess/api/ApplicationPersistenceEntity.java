@@ -25,14 +25,14 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
-import io.oasp.module.jpa.dataaccess.api.MutablePersistenceEntity;
+import com.devonfw.module.jpa.dataaccess.api.RevisionedPersistenceEntity;
 
 /**
  * Abstract Entity for all Entities with an id and a version field.
  *
  */
 @MappedSuperclass
-public abstract class ApplicationPersistenceEntity implements ApplicationEntity, MutablePersistenceEntity<Long> {
+public abstract class ApplicationPersistenceEntity implements ApplicationEntity, RevisionedPersistenceEntity<Long> {
 
   private static final long serialVersionUID = 1L;
 

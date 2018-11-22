@@ -15,7 +15,7 @@
  ******************************************************************************/
 package com.devonfw.sample.general.common;
 
-import io.oasp.module.test.common.base.ModuleTest;
+import com.devonfw.module.test.common.base.ModuleTest;
 
 import java.lang.reflect.Method;
 import java.util.Set;

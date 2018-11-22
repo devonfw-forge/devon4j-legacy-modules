@@ -30,7 +30,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator-annotation-processor</artifactId>
-      <version>4.1.0.Final</version><!--$NO-MVN-MAN-VER$ -->
+      <version>6.0.13.Final</version><!--$NO-MVN-MAN-VER$ -->
     </dependency>
     <!-- END Note -->
 
@@ -62,35 +62,35 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-test</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-test</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-configuration</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-configuration</artifactId>
       <scope>test</scope>
     </dependency>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-security</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-security</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-basic</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-basic</artifactId>
     </dependency>
 
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-rest</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-rest</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-beanmapping</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-beanmapping</artifactId>
     </dependency>
 
   </dependencies>

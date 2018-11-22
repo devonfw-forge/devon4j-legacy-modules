@@ -28,7 +28,7 @@ import com.devonfw.module.async.common.api.Async;
 import com.devonfw.module.async.common.api.AsyncTask;
 import com.devonfw.module.async.common.impl.AsyncImpl;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * @author vapadwal

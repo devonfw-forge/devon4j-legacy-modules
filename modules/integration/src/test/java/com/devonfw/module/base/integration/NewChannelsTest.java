@@ -39,7 +39,7 @@ import com.devonfw.module.integration.common.api.RequestHandler;
 import com.devonfw.module.integration.common.api.ResponseHandler;
 import com.devonfw.module.integration.common.api.SubscriptionHandler;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * Tests the new communication channels programmatically created.

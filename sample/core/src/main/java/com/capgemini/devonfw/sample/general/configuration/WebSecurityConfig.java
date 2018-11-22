@@ -42,13 +42,13 @@ import org.springframework.web.filter.CorsFilter;
 import com.devonfw.sample.general.common.impl.security.ApplicationAuthenticationProvider;
 import com.devonfw.sample.general.common.impl.security.CsrfRequestMatcher;
 
-import io.oasp.module.security.common.api.accesscontrol.AccessControlProvider;
-import io.oasp.module.security.common.base.accesscontrol.AccessControlSchemaProvider;
-import io.oasp.module.security.common.impl.accesscontrol.AccessControlProviderImpl;
-import io.oasp.module.security.common.impl.accesscontrol.AccessControlSchemaProviderImpl;
-import io.oasp.module.security.common.impl.rest.AuthenticationSuccessHandlerSendingOkHttpStatusCode;
-import io.oasp.module.security.common.impl.rest.JsonUsernamePasswordAuthenticationFilter;
-import io.oasp.module.security.common.impl.rest.LogoutSuccessHandlerReturningOkHttpStatusCode;
+import com.devonfw.module.security.common.api.accesscontrol.AccessControlProvider;
+import com.devonfw.module.security.common.base.accesscontrol.AccessControlSchemaProvider;
+import com.devonfw.module.security.common.impl.accesscontrol.AccessControlProviderImpl;
+import com.devonfw.module.security.common.impl.accesscontrol.AccessControlSchemaProviderImpl;
+import com.devonfw.module.security.common.impl.rest.AuthenticationSuccessHandlerSendingOkHttpStatusCode;
+import com.devonfw.module.security.common.impl.rest.JsonUsernamePasswordAuthenticationFilter;
+import com.devonfw.module.security.common.impl.rest.LogoutSuccessHandlerReturningOkHttpStatusCode;
 
 /**
  * Security configuration based on {@link WebSecurityConfigurerAdapter}. This configuration is by purpose designed most

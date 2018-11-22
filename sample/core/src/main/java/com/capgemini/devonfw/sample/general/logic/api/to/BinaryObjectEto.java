@@ -16,10 +16,10 @@
 package com.devonfw.sample.general.logic.api.to;
 
 import com.devonfw.sample.general.common.api.BinaryObject;
-import io.oasp.module.basic.common.api.to.AbstractEto;
+import com.devonfw.module.basic.common.api.to.AbstractEto;
 
 /**
- * The {@link io.oasp.module.basic.common.api.to.AbstractEto ETO} for a {@link BinaryObject}.
+ * The {@link com.devonfw.module.basic.common.api.to.AbstractEto ETO} for a {@link BinaryObject}.
  *
  * @author sspielma
  */

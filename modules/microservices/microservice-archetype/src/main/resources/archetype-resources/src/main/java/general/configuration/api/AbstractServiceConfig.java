@@ -41,8 +41,8 @@ import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 // END ARCHETYPE SKIP
-import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
-import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
+import com.devonfw.module.rest.service.impl.RestServiceExceptionFacade;
+import com.devonfw.module.json.common.base.ObjectMapperFactory;
 
 /**
  * {@link Configuration} for (REST or SOAP) services using CXF.

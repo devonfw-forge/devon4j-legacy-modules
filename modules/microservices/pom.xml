@@ -14,7 +14,7 @@
   <description>Devonfw microservices archetypes and module</description>
 
   <properties>
-        <spring.cloud.boot.version>Dalston.SR4</spring.cloud.boot.version>
+        <spring.cloud.boot.version>Finchley.SR2</spring.cloud.boot.version>
   </properties>
 
   <modules>

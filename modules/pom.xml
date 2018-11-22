@@ -11,7 +11,7 @@
 
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
-  <description>Reusable modules of the Open Application Standard Platform for Java (OASP4J).</description>
+  <description>Reusable modules of the Open Application Standard Platform for Java (devon4j).</description>
 
   <modules>
   <!-- <module>foo</module> -->
@@ -35,11 +35,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- BOM of OASP4J -->
+      <!-- BOM of devon4j -->
       <dependency>
-        <groupId>io.oasp.java</groupId>
-        <artifactId>oasp4j-bom</artifactId>
-        <version>${oasp4j.version}</version>
+        <groupId>com.devonfw.java.boms</groupId>
+        <artifactId>devon4j-bom</artifactId>
+        <version>${devon4j.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -76,20 +76,20 @@
           <!--<additionalparam>-Xdoclint:none -source ${java.version}</additionalparam> -->
           <links>
             <link>http://docs.oracle.com/javase/7/docs/api/</link>
-            <link>http://oasp.github.io/oasp4j/maven/apidocs/</link>
+            <link>http://devonfw.github.io/devon4j/maven/apidocs/</link>
           </links>
           <doctitle>JavaDocs for ${project.name}</doctitle>
           <windowtitle>JavaDocs for ${project.name}</windowtitle>
         </configuration>
         <reportSets>
           <reportSet>
-            <id>oasp.javadoc</id>
+            <id>devon.javadoc</id>
             <reports>
               <report>javadoc</report>
             </reports>
           </reportSet>
           <reportSet>
-            <id>oasp.javadoc.aggregate</id>
+            <id>devon.javadoc.aggregate</id>
             <reports>
               <report>aggregate</report>
             </reports>

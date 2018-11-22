@@ -13,7 +13,7 @@
   <name>${project.artifactId}</name>
 
   <packaging>pom</packaging>
-  <description>Dependencies (BOM) of the Devon Framework based on OASP4J.</description>
+  <description>Dependencies (BOM) of the Devon Framework based on devon4j.</description>
 
   <url>?</url>
   <inceptionYear>2016</inceptionYear>
@@ -27,7 +27,7 @@
   </scm>
 
   <properties>
-    <oasp4j.version>2.3.0-SNAPSHOT</oasp4j.version>
+    <devon4j.version>3.0.0</devon4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <cxf.version>3.1.6</cxf.version>
@@ -35,11 +35,11 @@
     <devon.flatten.mode>bom</devon.flatten.mode>
     <devon.gpg.keyname>?</devon.gpg.keyname>
 
-    <java.version>1.7</java.version>
-    <oasp.port.range>81</oasp.port.range>
-    <oasp.http.port>${oasp.port.range}81</oasp.http.port>
-    <oasp.db.port>${oasp.port.range}43</oasp.db.port>
-    <oasp.test.excluded.groups>io.oasp.module.test.common.api.category.CategorySubsystemTest,io.oasp.module.test.common.api.category.CategorySystemTest</oasp.test.excluded.groups>
+    <java.version>1.8</java.version>
+    <devon.port.range>81</devon.port.range>
+    <devon.http.port>${devon.port.range}81</devon.http.port>
+    <devon.db.port>${devon.port.range}43</devon.db.port>
+    <devon.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySubsystemTest,com.devonfw.module.test.common.api.category.CategorySystemTest</devon.test.excluded.groups>
 
   </properties>
 

@@ -15,8 +15,8 @@
  ******************************************************************************/
 package com.devonfw.sample.general.dataaccess.base.dao;
 
-import io.oasp.module.jpa.dataaccess.api.MutablePersistenceEntity;
-import io.oasp.module.jpa.dataaccess.api.RevisionedMasterDataDao;
+import com.devonfw.module.jpa.dataaccess.api.MutablePersistenceEntity;
+import com.devonfw.module.jpa.dataaccess.api.RevisionedMasterDataDao;
 
 import java.util.List;
 

@@ -19,7 +19,7 @@ import javax.inject.Named;
 
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 
-import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
+import com.devonfw.module.rest.service.impl.json.ObjectMapperFactory;
 
 /**
  * The MappingFactory class to resolve polymorphic conflicts within the devonfw-sample application.

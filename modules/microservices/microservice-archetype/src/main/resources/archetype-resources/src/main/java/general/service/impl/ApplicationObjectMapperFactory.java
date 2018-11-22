@@ -21,7 +21,7 @@ package ${package}.general.service.impl;
 import javax.inject.Named;
 
 // END ARCHETYPE SKIP
-import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
+import com.devonfw.module.json.common.base.ObjectMapperFactory;
 
 /**
  * The MappingFactory class to resolve polymorphic conflicts within the application.

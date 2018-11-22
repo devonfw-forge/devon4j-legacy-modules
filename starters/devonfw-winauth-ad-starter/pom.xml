@@ -47,15 +47,15 @@
       <version>${devonfw.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-test</artifactId>
-      <version>${oasp4j.version}</version>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-test</artifactId>
+      <version>${devon4j.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator-annotation-processor</artifactId>
-      <version>4.1.0.Final</version><!--$NO-MVN-MAN-VER$ -->
+      <version>6.0.13.Final</version><!--$NO-MVN-MAN-VER$ -->
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -30,7 +30,7 @@ import com.devonfw.module.base.IntegrationTestApp;
 import com.devonfw.module.integration.common.api.Integration;
 import com.devonfw.module.integration.common.api.SubscriptionHandler;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * Tests the out-of-the-box simple communication channel

@@ -26,7 +26,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.devonfw.module.base.AsyncTestApp;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * Test class for Devonfw Async module

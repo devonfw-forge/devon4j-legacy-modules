@@ -21,7 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.devonfw.module.i18n.logic.impl.I18nImpl;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * @author VAPADWAL

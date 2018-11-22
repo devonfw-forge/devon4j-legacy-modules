@@ -29,7 +29,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.devonfw.module.integration.common.api.Integration;
 import com.devonfw.module.integration.common.api.SubscriptionHandler;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * @author vapadwal

@@ -13,22 +13,14 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
 package ${package}.general.dataaccess.api.dao;
 
-import io.oasp.module.jpa.dataaccess.api.GenericRevisionedDao;
-import io.oasp.module.jpa.dataaccess.api.MutablePersistenceEntity;
-import io.oasp.module.jpa.dataaccess.api.RevisionedDao;
+import com.devonfw.module.jpa.dataaccess.api.data.DefaultRepository;
+import ${package}.general.dataaccess.api.BinaryObjectEntity;
 
 /**
- * Interface for all {@link GenericRevisionedDao DAOs} (Data Access Object) of this application.
- *
- *
- * @param <ENTITY> is the type of the managed entity.
+ * {@link DefaultRepository} for {@link BinaryObjectEntity}.
  */
-public interface ApplicationRevisionedDao<ENTITY extends MutablePersistenceEntity<Long>>
-    extends ApplicationDao<ENTITY>, RevisionedDao<ENTITY> {
+public interface BinaryObjectRepository extends DefaultRepository<BinaryObjectEntity> {
 
 }
