@@ -13,14 +13,18 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************/
-package ${package}.general.dataaccess.api.dao;
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.general.common.api;
 
-import com.devonfw.module.jpa.dataaccess.api.data.DefaultRepository;
-import ${package}.general.dataaccess.api.BinaryObjectEntity;
+import com.devonfw.module.basic.common.api.entity.GenericEntity;
 
 /**
- * {@link DefaultRepository} for {@link BinaryObjectEntity}.
+ * This is the abstract interface for a {@link MutableGenericEntity} of this application. We are using {@link Long} for
+ * all {@link ${symbol_pound}getId() primary keys}.
+ *
  */
-public interface BinaryObjectRepository extends DefaultRepository<BinaryObjectEntity> {
+public abstract interface ApplicationEntity extends GenericEntity<Long> {
 
 }

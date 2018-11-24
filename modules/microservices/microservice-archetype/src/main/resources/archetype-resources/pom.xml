@@ -16,7 +16,7 @@
     <spring.boot.version>^spring.boot.version^</spring.boot.version>
     <devon4j.version>^devon4j.version^</devon4j.version>
     <scala.version>2.10.4</scala.version>
-    <querydsl.version>3.4.3</querydsl.version>
+    <!-- <querydsl.version>3.4.3</querydsl.version> -->
     
     <start-class>com.devonfw.microservices.foo.FooBootApp</start-class>
   </properties>
@@ -87,7 +87,10 @@
       <groupId>com.devonfw.java.modules</groupId>
       <artifactId>devon4j-basic</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-jpa-basic</artifactId>
+    </dependency>
     <dependency>
       <groupId>com.devonfw.java.modules</groupId>
       <artifactId>devon4j-jpa-envers</artifactId>
@@ -97,9 +100,17 @@
       <groupId>com.devonfw.java.modules</groupId>
       <artifactId>devon4j-web</artifactId>
     </dependency>
-     <dependency>
+     <!-- <dependency>
     <groupId>com.devonfw.java.modules</groupId>
     <artifactId>devon4j-jpa-spring-data</artifactId>
+    </dependency> -->
+    <dependency>
+      <groupId>com.devonfw.java.starters</groupId>
+      <artifactId>devon4j-starter-spring-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>

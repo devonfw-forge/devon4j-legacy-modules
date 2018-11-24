@@ -15,7 +15,7 @@
  ******************************************************************************/
 package ${package}.general.common.api;
 
-import ${package}.general.dataaccess.api.ApplicationEntity;
+import ${package}.general.common.api.ApplicationEntity;
 
 /**
  * This is the interface for a {@link BinaryObject} of the devonfw-sample.
