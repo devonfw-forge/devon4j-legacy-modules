@@ -10,7 +10,7 @@ toc::[]
 
 === Notes on Code Contributions
 
-Both projects, devon and OASP, are intended to be easy to contribute to. One service allowing such simplicity is GitHub was therefore selected as preferred collaboration platform.
+project devonfw is intended to be easy to contribute to. One service allowing such simplicity is GitHub was therefore selected as preferred collaboration platform.
 
 In order to contribute code, git and GitHub specific pull-requests are being used.
 
@@ -20,11 +20,11 @@ It is mandatory to follow the <<Contributor Covenant Code of Conduct,code of con
 
 Git is a version control system used for a coordinated and versioned collaboration of computer files. It enables a project to be easily worked on by multiple developers and contributors.
 
-GitHub is an online repository used by deonvfw and OASP in order to host the corresponding files. Using the command line tool or the GUI Tool "GitHub Desktop" a user can easily manage project files. There are private and public repositories. Public ones (like OASP) can be accessed by everyone, private repositories (like devon) require access permissions.
+GitHub is an online repository used by deonvfw in order to host the corresponding files. Using the command line tool or the GUI Tool "GitHub Desktop" a user can easily manage project files.
 
 ==== Creating a new user account
 
-The devon and OASP projects use GitHub as hosting service. Therefore you'll need an account to allow collaboration. Visit https://github.com/join?source=header-home[this page] to create a new account. If available, use *your CORP username* as GitHub username and *your CORP email address*.
+The devonfw project use GitHub as hosting service. Therefore you'll need an account to allow collaboration. Visit https://github.com/join?source=header-home[this page] to create a new account. If available, use *your CORP username* as GitHub username and *your CORP email address*.
 
 A GitHub account is essential for contributing code and gaining permissions to access private repositories.
 
@@ -34,12 +34,12 @@ An in-depth documentation on basic Git syntax and usage can be found on the http
 
 === Structure of our projects
 
-In total, there are three GitHub projects regarding OASP and devon:
+In total, there are three GitHub projects regarding devonfw:
 
-* link:https://github.com/oasp-forge[*oasp-forge*]
+* link:https://github.com/devonfw-forge[*devonfw-forge*]
 +
 Repository used for work on the guide - Similar to the according devon repository link:https://github.com/devonfw/devon-guide/wiki[*devon-guide*]
-* link:https://github.com/oasp/[*oasp*]
+* link:https://github.com/devonfw/[*devonfw*]
 +
 The official _Open Application Standard Platform_ project repository. Usually, two main branches exist:
 
@@ -52,17 +52,17 @@ This branch contains software in release state.
 
 * link:https://github.com/devonfw/[*devonfw*]
 +
-This is a private repository. You have to be logged in and have permissions to access the project and its repositories. Similar to OASP, there are usually two branches:
+You have to be logged in and have permissions to access the project and its repositories. Similar to DEVONFW, there are usually two branches:
 
 ** *develop*
 ** *master*
 
 === Contributing to our projects
 
-In order to contribute to our projects, developers must follow the following <<Development Guidelines,development guidelines>>. Other sources about contributing to devon/OASP:
+In order to contribute to our projects, developers must follow the following <<Development Guidelines,development guidelines>>. Other sources about contributing to devonfw:
 
-* https://github.com/oasp/oasp4j/wiki/oasp-code-contributions[OASP code contributions]
-* https://github.com/oasp/oasp4j/wiki/oasp-documentation[OASP documentation]
+* https://github.com/devonfw/devon4j/wiki/devonfw-code-contributions[DEVONFW code contributions]
+* https://github.com/devonfw/devon4j/wiki/devonfw-documentation[DEVONFW documentation]
 * https://troom.capgemini.com/sites/vcc/devon/collaboration.aspx[Devon collaboration]
 
 *Every project must include the following files* in order to establish the contributing rules and facilitate the process:
@@ -74,7 +74,7 @@ In order to contribute to our projects, developers must follow the following <<D
 
 This files should be included at the root folder or in a `docs` folder. https://github.com/stevemao/github-issue-templates[This repository] is a good resource to find the perfect templates for issues and pull requests that fit in your repository. 
 
-==== Process of contributing code to the devon/OASP projects
+==== Process of contributing code to the devonfw project
 
 * Use the issue tracker to check whether the issue you would like to be working on exists. Otherwise create a new issue.
 +
@@ -98,7 +98,7 @@ git checkout develop-x.y.z
 ----
 git checkout -b myBranchName
 ----
-* Apply your modifications according to the https://github.com/oasp/oasp4j/wiki/coding-conventions[coding conventions] to the newly created branch
+* Apply your modifications according to the https://github.com/devonfw/devon4j/wiki/coding-conventions[coding conventions] to the newly created branch
 * Verify your changes to only include relevant and required changes.
 * Commit your changes locally
 ** When commiting changes please follow this pattern for your commit message:
@@ -120,7 +120,7 @@ For example:
 +
 [source]
 ----
-oasp/oasp4j#1: added REST service for tablemanagement
+devonfw/devon4j#1: added REST service for tablemanagement
 ----
 +
 *Note:* Starting directly with a # symbol will comment out the line when using the editor to insert a commit message. Instead, you should use a prefix like a space or simply typing "Issue". E.g.:
