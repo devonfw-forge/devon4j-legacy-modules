@@ -16,7 +16,7 @@
 package com.devonfw.sample.general.dataaccess.api;
 
 import com.devonfw.sample.general.common.api.ApplicationEntity;
-import io.oasp.module.jpa.dataaccess.api.AbstractPersistenceEntity;
+import com.devonfw.module.jpa.dataaccess.api.AbstractPersistenceEntity;
 
 import javax.persistence.MappedSuperclass;
 

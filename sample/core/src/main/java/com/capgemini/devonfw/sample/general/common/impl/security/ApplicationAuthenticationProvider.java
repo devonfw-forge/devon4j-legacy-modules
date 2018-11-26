@@ -31,7 +31,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.devonfw.sample.general.common.api.UserProfile;
 import com.devonfw.sample.general.common.api.Usermanagement;
 import com.devonfw.sample.general.common.api.security.UserData;
-import io.oasp.module.security.common.base.accesscontrol.AbstractAccessControlBasedAuthenticationProvider;
+import com.devonfw.module.security.common.base.accesscontrol.AbstractAccessControlBasedAuthenticationProvider;
 
 /**
  * This class is responsible for the security aspects of authentication as well as providing user profile data and the

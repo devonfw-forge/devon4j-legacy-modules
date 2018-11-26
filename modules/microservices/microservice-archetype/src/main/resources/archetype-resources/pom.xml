@@ -12,11 +12,11 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.7</java.version>
+    <java.version>1.8</java.version>
     <spring.boot.version>^spring.boot.version^</spring.boot.version>
-    <oasp4j.version>^oasp4j.version^</oasp4j.version>
+    <devon4j.version>^devon4j.version^</devon4j.version>
     <scala.version>2.10.4</scala.version>
-    <querydsl.version>3.4.3</querydsl.version>
+    <!-- <querydsl.version>3.4.3</querydsl.version> -->
     
     <start-class>com.devonfw.microservices.foo.FooBootApp</start-class>
   </properties>
@@ -32,11 +32,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- BOM of OASP4J -->
+      <!-- BOM of devon4j -->
       <dependency>
-        <groupId>io.oasp.java</groupId>
-        <artifactId>oasp4j-bom</artifactId>
-        <version>${oasp4j.version}</version>
+        <groupId>com.devonfw.java.boms</groupId>
+        <artifactId>devon4j-bom</artifactId>
+        <version>${devon4j.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -58,46 +58,60 @@
       <version>^devonfw.version^</version>
     </dependency>
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-batch</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-batch</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-logging</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-logging</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-beanmapping</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-beanmapping</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-security</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-security</artifactId>
     </dependency>
 
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-rest</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-rest</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-basic</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-basic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-jpa-basic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-jpa-envers</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-jpa-envers</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-web</artifactId>
     </dependency>
-
+     <!-- <dependency>
+    <groupId>com.devonfw.java.modules</groupId>
+    <artifactId>devon4j-jpa-spring-data</artifactId>
+    </dependency> -->
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-web</artifactId>
+      <groupId>com.devonfw.java.starters</groupId>
+      <artifactId>devon4j-starter-spring-data-jpa</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -166,7 +180,7 @@
       <artifactId>cglib</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.hibernate</groupId>
+      <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
     </dependency>
 
@@ -226,8 +240,8 @@
     </dependency>
 
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-test</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-test</artifactId>
       <scope>test</scope>
     </dependency>
 
@@ -268,14 +282,13 @@
     </dependency>
 
     <dependency>
-      <groupId>com.mysema.querydsl</groupId>
+      <groupId>com.querydsl</groupId>
       <artifactId>querydsl-apt</artifactId>
-      <version>${querydsl.version}</version>
       <scope>provided</scope>
     </dependency>
 
     <dependency>
-      <groupId>com.mysema.querydsl</groupId>
+      <groupId>com.querydsl</groupId>
       <artifactId>querydsl-jpa</artifactId>
       </dependency>
   

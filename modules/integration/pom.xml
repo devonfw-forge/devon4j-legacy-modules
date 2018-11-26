@@ -42,12 +42,12 @@
         <artifactId>spring-integration-jms</artifactId>
     </dependency>
     
-    <dependency>
+    <!-- <dependency>
         <groupId>org.springframework.integration</groupId>
         <artifactId>spring-integration-java-dsl</artifactId>
         <version>1.2.1.RELEASE</version>
     </dependency>
-    
+     -->
     
     <dependency>
        <groupId>org.springframework</groupId>
@@ -56,8 +56,8 @@
     </dependency>
     
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-test</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-test</artifactId>
       <scope>test</scope>
     </dependency>
 

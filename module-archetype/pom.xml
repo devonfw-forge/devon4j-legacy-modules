@@ -15,8 +15,8 @@
 
  
   <properties>
-    <oasp4j.version>2.1.0</oasp4j.version>
-    <spring.boot.version>1.3.3.RELEASE</spring.boot.version>
+    <devon4j.version>3.0.0</devon4j.version>
+    <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
 	<spring.context.version>4.2.5.RELEASE</spring.context.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -26,11 +26,11 @@
     <devon.gpg.keyname>?</devon.gpg.keyname>
 
     <java.version>1.8</java.version>
-    <oasp.port.range>81</oasp.port.range>
-    <oasp.http.port>${oasp.port.range}81</oasp.http.port>
-    <oasp.db.port>${oasp.port.range}43</oasp.db.port>
-    <oasp.test.excluded.groups>io.oasp.module.test.common.api.category.CategorySubsystemTest,io.oasp.module.test.common.api.category.CategorySystemTest</oasp.test.excluded.groups>
-	 <oasp.flatten.mode>oss</oasp.flatten.mode>
+    <devon.port.range>81</devon.port.range>
+    <devon.http.port>${devon.port.range}81</devon.http.port>
+    <devon.db.port>${devon.port.range}43</devon.db.port>
+    <devon.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySubsystemTest,com.devonfw.module.test.common.api.category.CategorySystemTest</devon.test.excluded.groups>
+	 <devon.flatten.mode>oss</devon.flatten.mode>
 
   </properties>
 
@@ -143,7 +143,7 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <excludedGroups>${oasp.test.excluded.groups}</excludedGroups>
+          <excludedGroups>${devon.test.excluded.groups}</excludedGroups>
         </configuration>
       </plugin>
 
@@ -152,7 +152,7 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>flatten-maven-plugin</artifactId>
         <configuration>
-          <flattenMode>${oasp.flatten.mode}</flattenMode>
+          <flattenMode>${devon.flatten.mode}</flattenMode>
         </configuration>
         <executions>
           <execution>
@@ -184,11 +184,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- BOM of OASP4J -->
+      <!-- BOM of devon4j -->
       <dependency>
-        <groupId>io.oasp.java</groupId>
-        <artifactId>oasp4j-bom</artifactId>
-        <version>${oasp4j.version}</version>
+        <groupId>com.devonfw.java.boms</groupId>
+        <artifactId>devon4j-bom</artifactId>
+        <version>${devon4j.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -242,15 +242,15 @@
 	 
   </dependency>
    <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-test</artifactId>
-	  <!--<version>${oasp4j.version}</version>-->
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-test</artifactId>
+	  <!--<version>${devon4j.version}</version>-->
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-configuration</artifactId>
-	  <!--<version>${oasp4j.version}</version>-->
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-configuration</artifactId>
+	  <!--<version>${devon4j.version}</version>-->
       <scope>test</scope>
     </dependency>
 
@@ -262,13 +262,13 @@
     <profile>
       <id>subsystemtest</id>
       <properties>
-        <oasp.test.excluded.groups>io.oasp.module.test.common.api.category.CategorySystemTest</oasp.test.excluded.groups>
+        <devon.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySystemTest</devon.test.excluded.groups>
       </properties>
     </profile>
     <profile>
       <id>systemtest</id>
       <properties>
-        <oasp.test.excluded.groups/>
+        <devon.test.excluded.groups/>
       </properties>
     </profile>
   </profiles>

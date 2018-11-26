@@ -15,7 +15,7 @@
  ******************************************************************************/
 package com.devonfw.sample.general.common.base;
 
-import io.oasp.module.beanmapping.common.api.BeanMapper;
+import com.devonfw.module.beanmapping.common.api.BeanMapper;
 
 import javax.inject.Inject;
 

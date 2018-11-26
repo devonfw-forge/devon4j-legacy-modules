@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2015-2018 Capgemini SE.
- * 
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,16 +22,16 @@ import javax.inject.Named;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * This is the configuration class for the moduleConfig module. Spring will inject values with prefix =  * "devon.moduleconfig" from any
- * configured property source (application.properties etc)
- * Please ensure, that this prefix matches with prefix of key of property defined in configured property source * (application.properties etc).
+ * This is the configuration class for the moduleConfig module. Spring will inject values with prefix = *
+ * "devon.module-config" from any configured property source (application.properties etc) Please ensure, that this
+ * prefix matches with prefix of key of property defined in configured property source * (application.properties etc).
  *
- * Examples: devon.moduleconfig.baz=baz devon.moduleconfig.bar.one=bar1 devon.moduleconfig.bar.two=bar2
+ * Examples: devon.module-config.baz=baz devon.module-config.bar.one=bar1 devon.module-config.bar.two=bar2
  *
  * @author ivanderk
  * @since 1.1
  */
-@ConfigurationProperties(prefix = "devon.moduleConfig")
+@ConfigurationProperties(prefix = "devon.module-config")
 @Named
 public class ModuleConfigProperties {
 

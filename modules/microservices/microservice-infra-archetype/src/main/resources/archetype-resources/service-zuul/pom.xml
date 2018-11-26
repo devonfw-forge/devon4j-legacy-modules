@@ -20,7 +20,7 @@
   <properties>
     <start-class>${package}.zuul.ZuulBootApp</start-class>
     <spring.boot.version>^spring.boot.version^</spring.boot.version>
-    <oasp4j.version>^oasp4j.version^</oasp4j.version>
+    <devon4j.version>^devon4j.version^</devon4j.version>
   </properties>
   
   <dependencyManagement>
@@ -38,11 +38,13 @@
    <dependencies>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-eureka</artifactId>
+      <!-- <artifactId>spring-cloud-starter-eureka</artifactId> -->
+       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-zuul</artifactId>
+      <!-- <artifactId>spring-cloud-starter-zuul</artifactId> -->
+      <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
     </dependency>
   </dependencies>
 

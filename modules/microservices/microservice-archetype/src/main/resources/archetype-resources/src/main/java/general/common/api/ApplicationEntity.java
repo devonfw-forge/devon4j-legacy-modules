@@ -16,19 +16,15 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.general.dataaccess.api.dao;
+package ${package}.general.common.api;
 
-import io.oasp.module.jpa.dataaccess.api.GenericRevisionedDao;
-import io.oasp.module.jpa.dataaccess.api.MutablePersistenceEntity;
-import io.oasp.module.jpa.dataaccess.api.RevisionedDao;
+import com.devonfw.module.basic.common.api.entity.GenericEntity;
 
 /**
- * Interface for all {@link GenericRevisionedDao DAOs} (Data Access Object) of this application.
+ * This is the abstract interface for a {@link MutableGenericEntity} of this application. We are using {@link Long} for
+ * all {@link ${symbol_pound}getId() primary keys}.
  *
- *
- * @param <ENTITY> is the type of the managed entity.
  */
-public interface ApplicationRevisionedDao<ENTITY extends MutablePersistenceEntity<Long>>
-    extends ApplicationDao<ENTITY>, RevisionedDao<ENTITY> {
+public abstract interface ApplicationEntity extends GenericEntity<Long> {
 
 }

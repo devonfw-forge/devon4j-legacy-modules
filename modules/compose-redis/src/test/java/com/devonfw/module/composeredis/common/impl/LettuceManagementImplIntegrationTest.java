@@ -34,7 +34,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.devonfw.module.composeredis.common.api.LettuceManagement;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * Test class for LettuceManagementImpl

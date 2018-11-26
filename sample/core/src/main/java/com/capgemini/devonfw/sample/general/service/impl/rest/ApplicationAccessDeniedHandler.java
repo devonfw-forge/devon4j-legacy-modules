@@ -15,7 +15,7 @@
  ******************************************************************************/
 package com.devonfw.sample.general.service.impl.rest;
 
-import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
+import com.devonfw.module.rest.service.impl.RestServiceExceptionFacade;
 
 import java.io.IOException;
 

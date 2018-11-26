@@ -16,8 +16,8 @@
 package com.devonfw.sample.general.dataaccess.base.dao;
 
 import com.devonfw.sample.general.dataaccess.api.dao.ApplicationDao;
-import io.oasp.module.jpa.dataaccess.api.MutablePersistenceEntity;
-import io.oasp.module.jpa.dataaccess.base.AbstractRevisionedDao;
+import com.devonfw.module.jpa.dataaccess.api.MutablePersistenceEntity;
+import com.devonfw.module.jpa.dataaccess.base.AbstractRevisionedDao;
 
 import org.springframework.stereotype.Repository;
 

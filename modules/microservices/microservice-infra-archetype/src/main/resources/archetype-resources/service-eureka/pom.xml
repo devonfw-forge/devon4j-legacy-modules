@@ -20,7 +20,7 @@
 	<properties>
 		<start-class>${package}.eureka.EurekaBootApp</start-class>
     <spring.boot.version>^spring.boot.version^</spring.boot.version>
-    <oasp4j.version>^oasp4j.version^</oasp4j.version>
+    <devon4j.version>^devon4j.version^</devon4j.version>
 	</properties>
   
   
@@ -39,7 +39,7 @@
    <dependencies>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-eureka-server</artifactId>
+      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
     </dependency>
   </dependencies>
 

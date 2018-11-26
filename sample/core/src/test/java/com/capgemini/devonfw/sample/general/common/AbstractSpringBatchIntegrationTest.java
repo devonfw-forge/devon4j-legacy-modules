@@ -36,9 +36,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.devonfw.sample.general.common.api.security.UserData;
 import com.devonfw.sample.general.dataaccess.base.DatabaseMigrator;
 
-import io.oasp.module.security.common.api.accesscontrol.AccessControlPermission;
-import io.oasp.module.security.common.base.accesscontrol.AccessControlGrantedAuthority;
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.security.common.api.accesscontrol.AccessControlPermission;
+import com.devonfw.module.security.common.base.accesscontrol.AccessControlGrantedAuthority;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * Base class for all spring batch integration tests. It helps to do End-to-End job tests.

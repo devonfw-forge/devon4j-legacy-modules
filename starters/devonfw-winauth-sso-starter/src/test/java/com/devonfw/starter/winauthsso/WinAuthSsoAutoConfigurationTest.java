@@ -25,7 +25,7 @@ import com.devonfw.module.winauthsso.common.api.WinauthSSO;
 import com.devonfw.module.winauthsso.common.impl.security.NegotiateSecurityFilterSSO;
 import com.devonfw.module.winauthsso.common.impl.security.WinauthSSOImpl;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * @author vapadwal

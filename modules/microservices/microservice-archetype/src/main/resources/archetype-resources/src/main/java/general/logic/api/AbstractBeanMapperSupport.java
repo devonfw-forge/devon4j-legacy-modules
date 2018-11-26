@@ -20,7 +20,7 @@ package ${package}.general.logic.api;
 
 import javax.inject.Inject;
 
-import io.oasp.module.beanmapping.common.api.BeanMapper;
+import com.devonfw.module.beanmapping.common.api.BeanMapper;
 
 /**
  * This abstract class provides {@link ${symbol_pound}getBeanMapper() access} to the {@link BeanMapper}.

@@ -15,7 +15,7 @@
  ******************************************************************************/
 package com.devonfw.sample.general.common;
 
-import io.oasp.module.test.common.base.ModuleTest;
+import com.devonfw.module.test.common.base.ModuleTest;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,7 +61,7 @@ public class AccessControlSchemaXmlValidationTest extends ModuleTest {
     SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
     // load a WXS schema, represented by a Schema instance
-    URL schemaPath = getClass().getResource("/io/oasp/module/security/access-control-schema.xsd");
+    URL schemaPath = getClass().getResource("/com/devonfw/module/security/access-control-schema.xsd");
     Schema schema = factory.newSchema(schemaPath);
 
     // create a Validator instance, which can be used to validate an instance document

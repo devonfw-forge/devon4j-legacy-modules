@@ -28,7 +28,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.devonfw.module.foo.common.FooTestApp;
 import com.devonfw.module.foo.common.api.Foo;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * Test class to test {@link Foo}.

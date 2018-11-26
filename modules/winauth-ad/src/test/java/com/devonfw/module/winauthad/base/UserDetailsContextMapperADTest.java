@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2015-2018 Capgemini SE.
- * 
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,9 +20,8 @@ import javax.inject.Inject;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.devonfw.module.test.common.base.ComponentTest;
 import com.devonfw.module.winauthad.common.impl.security.UserDetailsContextMapperAD;
-
-import io.oasp.module.test.common.base.ComponentTest;
 
 /**
  * This is the test-case for {@link UserDetailsContextMapperAD}
@@ -37,8 +36,7 @@ public class UserDetailsContextMapperADTest extends ComponentTest {
 
   /**
    * Test method for
-   * {@link com.devonfw.module.winauth.common.impl.security.UserDetailsContextMapperAD#getAuthenticationSource()}
-   * .
+   * {@link com.devonfw.module.winauth.common.impl.security.UserDetailsContextMapperAD#getAuthenticationSource()} .
    */
   @Test
   public void testGetAuthenticationSource() {

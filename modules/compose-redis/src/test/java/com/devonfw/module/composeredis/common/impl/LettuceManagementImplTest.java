@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2015-2018 Capgemini SE.
- * 
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,10 +37,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.devonfw.module.composeredis.common.impl.LettuceManagementImpl;
+import com.devonfw.module.test.common.base.ComponentTest;
 import com.lambdaworks.redis.RedisConnection;
-
-import io.oasp.module.test.common.base.ComponentTest;
 
 /**
  * Test class for LettuceManagementImpl
@@ -213,8 +211,7 @@ public class LettuceManagementImplTest extends ComponentTest {
   @Test
   public void setHashTest() {
 
-    when(this.redisConnection.hmset((String) Matchers.anyObject(), (Map<String, String>) Matchers.anyMap()))
-        .thenReturn(OK);
+    when(this.redisConnection.hmset((String) Matchers.anyObject(), Matchers.anyMap())).thenReturn(OK);
 
     assertTrue("Hash map set", OK.equals(this.lettuceManagement.setHash(MAPNAME, TEST_MAP)));
 
@@ -226,8 +223,7 @@ public class LettuceManagementImplTest extends ComponentTest {
   @Test
   public void setHashFailTest() {
 
-    when(this.redisConnection.hmset((String) Matchers.anyObject(), (Map<String, String>) Matchers.anyMap()))
-        .thenReturn(NOK);
+    when(this.redisConnection.hmset((String) Matchers.anyObject(), Matchers.anyMap())).thenReturn(NOK);
 
     assertTrue("Hash map set Fail", NOK.equals(this.lettuceManagement.setHash(MAPNAME, TEST_MAP)));
 

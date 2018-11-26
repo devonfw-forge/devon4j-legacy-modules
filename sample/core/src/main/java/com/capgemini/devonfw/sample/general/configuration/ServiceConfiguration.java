@@ -39,8 +39,8 @@ import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
-import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
-import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
+import com.devonfw.module.rest.service.impl.RestServiceExceptionFacade;
+import com.devonfw.module.rest.service.impl.json.ObjectMapperFactory;
 
 /**
  * TODO jhcore This type ...

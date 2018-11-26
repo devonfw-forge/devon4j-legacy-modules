@@ -21,7 +21,7 @@ import javax.inject.Named;
 
 import com.devonfw.module.winauthad.common.api.PrincipalProfile;
 
-import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;
+import com.devonfw.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;
 
 /**
  * Implementation of PrincipalAccessControlProvider

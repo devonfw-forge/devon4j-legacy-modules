@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  
+
   <parent>
     <groupId>com.devonfw.dev</groupId>
     <artifactId>devonfw-microservices</artifactId>
@@ -11,7 +12,7 @@
   <artifactId>microservices</artifactId>
   <version>${devonfw.version}</version>
   <packaging>jar</packaging>
-  
+
   <name>microservices</name>
   <description>A microservices module of Devonfw</description>
 
@@ -36,48 +37,55 @@
 
 
   <dependencies>
-  
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-    
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-feign</artifactId>
+      <!-- <artifactId>spring-cloud-starter-feign</artifactId> -->
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-hystrix</artifactId>
+      <!-- <artifactId>spring-cloud-starter-hystrix</artifactId> -->
+      <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-eureka</artifactId>
+      <!-- <artifactId>spring-cloud-starter-eureka</artifactId> -->
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-config</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-core</artifactId>
-    </dependency> 
-     
+    </dependency>
+
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt</artifactId>
       <version>${jsonwebtoken.version}</version>
     </dependency>
-  
+
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-basic</artifactId>
-      <version>${oasp4j.version}</version>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-basic</artifactId>
+      <version>${devon4j.version}</version>
     </dependency>
 
     <dependency>
@@ -89,7 +97,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-sleuth</artifactId>

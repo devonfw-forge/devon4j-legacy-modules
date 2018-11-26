@@ -15,10 +15,10 @@
  ******************************************************************************/
 package com.devonfw.sample.general.configuration;
 
-import io.oasp.module.logging.common.api.DiagnosticContextFacade;
-import io.oasp.module.logging.common.impl.DiagnosticContextFacadeImpl;
-import io.oasp.module.logging.common.impl.DiagnosticContextFilter;
-import io.oasp.module.logging.common.impl.PerformanceLogFilter;
+import com.devonfw.module.logging.common.api.DiagnosticContextFacade;
+import com.devonfw.module.logging.common.impl.DiagnosticContextFacadeImpl;
+import com.devonfw.module.logging.common.impl.DiagnosticContextFilter;
+import com.devonfw.module.logging.common.impl.PerformanceLogFilter;
 
 import javax.servlet.Filter;
 

@@ -19,10 +19,10 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
     <start-class>${package}.configserver.ConfigServerBootApp</start-class>
     <spring.boot.version>^spring.boot.version^</spring.boot.version>
-    <oasp4j.version>^oasp4j.version^</oasp4j.version>
+    <devon4j.version>^devon4j.version^</devon4j.version>
 	</properties>
   
   <dependencyManagement>  
@@ -46,7 +46,8 @@
     
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-eureka</artifactId>
+      <!-- <artifactId>spring-cloud-starter-eureka</artifactId> -->
+       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
     </dependency>
   </dependencies>
 

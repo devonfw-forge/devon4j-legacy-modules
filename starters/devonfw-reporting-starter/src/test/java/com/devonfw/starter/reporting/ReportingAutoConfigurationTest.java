@@ -36,7 +36,7 @@ import com.devonfw.module.reporting.common.api.Reporting;
 import com.devonfw.module.reporting.common.api.dataType.ReportFormat;
 import com.devonfw.module.reporting.common.api.entity.Report;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * @author vapadwal

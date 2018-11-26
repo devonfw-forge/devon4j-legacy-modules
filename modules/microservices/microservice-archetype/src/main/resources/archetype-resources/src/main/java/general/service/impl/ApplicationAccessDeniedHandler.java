@@ -30,7 +30,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
-import io.oasp.module.rest.service.impl.RestServiceExceptionFacade;
+import com.devonfw.module.rest.service.impl.RestServiceExceptionFacade;
 
 /**
  *

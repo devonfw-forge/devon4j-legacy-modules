@@ -15,9 +15,9 @@
  ******************************************************************************/
 package com.devonfw.sample.general.dataaccess.api.dao;
 
-import io.oasp.module.jpa.dataaccess.api.Dao;
-import io.oasp.module.jpa.dataaccess.api.GenericRevisionedDao;
-import io.oasp.module.jpa.dataaccess.api.MutablePersistenceEntity;
+import com.devonfw.module.jpa.dataaccess.api.Dao;
+import com.devonfw.module.jpa.dataaccess.api.GenericRevisionedDao;
+import com.devonfw.module.jpa.dataaccess.api.MutablePersistenceEntity;
 
 /**
  * Interface for all {@link GenericRevisionedDao DAOs} (Data Access Object) of this application.

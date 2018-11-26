@@ -10,10 +10,10 @@
   <artifactId>devonfw-sample-server</artifactId>
   <packaging>war</packaging>
   <name>${project.artifactId}</name>
-  <description>Server for the devonfw-sample application - a simple example using the Open Application Standard Platform for Java (OASP4J).</description>
+  <description>Server for the devonfw-sample application - a simple example using the Open Application Standard Platform for Java (devon4j).</description>
 
   <properties>
-    <java.version>1.7</java.version>
+    <java.version>1.8</java.version>
   </properties>
 
   <dependencies>
@@ -121,7 +121,7 @@
             <artifactId>docker-maven-plugin</artifactId>
             <version>0.14.1</version>
             <configuration>
-              <mainClass>io.oasp.gastronomy.restaurant.SpringBootApp</mainClass>
+              <mainClass>com.devonfw.gastronomy.restaurant.SpringBootApp</mainClass>
               <images>
                 <image>
                   <alias>service</alias>

@@ -21,7 +21,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
-import io.oasp.module.basic.common.api.to.AbstractTo;
+import com.devonfw.module.basic.common.api.to.AbstractTo;
 
 /**
  * This is the {@link AbstractTo TO} for the client view on the user details.

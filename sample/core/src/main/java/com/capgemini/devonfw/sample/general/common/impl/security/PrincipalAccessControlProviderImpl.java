@@ -21,7 +21,7 @@ import java.util.Collection;
 import javax.inject.Named;
 
 import com.devonfw.sample.general.common.api.UserProfile;
-import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;
+import com.devonfw.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;
 
 /**
  * The implementation of {@link PrincipalAccessControlProvider} for this sample application.<br/>

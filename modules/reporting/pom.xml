@@ -42,13 +42,13 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-test</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-test</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.oasp.java.modules</groupId>
-      <artifactId>oasp4j-configuration</artifactId>
+      <groupId>com.devonfw.java.modules</groupId>
+      <artifactId>devon4j-configuration</artifactId>
       <scope>test</scope>
     </dependency>
 
@@ -63,10 +63,14 @@
       <artifactId>poi</artifactId>
     </dependency>
 
-    <dependency>
+   <!--  <dependency>
       <groupId>net.sf.m-m-m</groupId>
       <artifactId>mmm-util-core</artifactId>
-    </dependency>
-
+    </dependency> -->
+    
+     <dependency>
+      <groupId>net.sf.m-m-m</groupId>
+      <artifactId>mmm-util-exception</artifactId>
+     </dependency>
   </dependencies>
 </project>

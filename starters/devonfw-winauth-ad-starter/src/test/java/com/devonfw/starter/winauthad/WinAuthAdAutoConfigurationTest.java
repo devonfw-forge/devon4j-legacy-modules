@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.devonfw.module.winauthad.common.api.AuthenticationManagerAD;
 
-import io.oasp.module.test.common.base.ComponentTest;
+import com.devonfw.module.test.common.base.ComponentTest;
 
 /**
  * @author vapadwal

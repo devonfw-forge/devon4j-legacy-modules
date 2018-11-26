@@ -26,10 +26,10 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
-import io.oasp.module.logging.common.api.DiagnosticContextFacade;
-import io.oasp.module.logging.common.impl.DiagnosticContextFacadeImpl;
-import io.oasp.module.logging.common.impl.DiagnosticContextFilter;
-import io.oasp.module.logging.common.impl.PerformanceLogFilter;
+import com.devonfw.module.logging.common.api.DiagnosticContextFacade;
+import com.devonfw.module.logging.common.impl.DiagnosticContextFacadeImpl;
+import com.devonfw.module.logging.common.impl.DiagnosticContextFilter;
+import com.devonfw.module.logging.common.impl.PerformanceLogFilter;
 
 /**
  * Registers a number of filters for web requests.

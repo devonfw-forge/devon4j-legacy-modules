@@ -19,7 +19,7 @@ import java.util.List;
 
 import com.devonfw.module.winauthad.common.api.PrincipalProfile;
 
-import io.oasp.module.basic.common.api.to.AbstractTo;
+import com.devonfw.module.basic.common.api.to.AbstractTo;
 
 /**
  * This is the {@link AbstractTo TO} for the client view on the user AD details.

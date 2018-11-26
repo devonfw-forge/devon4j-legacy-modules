@@ -19,7 +19,7 @@
       </bean>
     </property>
     <property name="sql">
-      <bean class="io.oasp.module.jpa.dataaccess.base.NamedQueryFactoryBean">
+      <bean class="com.devonfw.module.jpa.dataaccess.base.NamedQueryFactoryBean">
         <property name="queryName" value="#{T(com.devonfw.sample.general.common.api.constants.NamedQueries).GET_ALL_IDS_OF_PAYED_BILLS}"/>
       </bean>
     </property>
