@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>devonfw</artifactId>
   <groupId>com.devonfw.dev</groupId>
@@ -7,6 +8,7 @@
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>Application based on the Open Application Standard Platform for Java (devon4j).</description>
+  <url>http://www.devonfw.com</url>
 
   <properties>
     <devon4j.version>3.0.0</devon4j.version>
@@ -18,7 +20,7 @@
     <devon.db.port>${devon.port.range}43</devon.db.port>
     <devon.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySubsystemTest,com.devonfw.module.test.common.api.category.CategorySystemTest</devon.test.excluded.groups>
     <devon.flatten.mode>oss</devon.flatten.mode>
-    
+
   </properties>
 
   <modules>
@@ -147,17 +149,17 @@
         </executions>
       </plugin>
 
-		<plugin>
-		  <groupId>org.sonatype.plugins</groupId>
-		  <artifactId>nexus-staging-maven-plugin</artifactId>
-		  <version>1.6.7</version>
-		  <extensions>true</extensions>
-		  <configuration>
-			 <serverId>ossrh</serverId>
-			 <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-			 <autoReleaseAfterClose>true</autoReleaseAfterClose>
-		  </configuration>
-		</plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
@@ -203,14 +205,83 @@
         <devon.test.excluded.groups/>
       </properties>
     </profile>
-
+    <!--
+      <profile>
+      <build>
+      <plugins>
+      also generate javadoc JARs
+      <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <configuration>
+      <additionalDependencies>
+      <additionalDependency>
+      <groupId>javax.interceptor</groupId>
+      <artifactId>javax.interceptor-api</artifactId>
+      <version>1.2</version>
+      </additionalDependency>
+      </additionalDependencies>
+      </configuration>
+      <executions>
+      <execution>
+      <id>attach-javadocs</id>
+      <goals>
+      <goal>jar</goal>
+      </goals>
+      </execution>
+      </executions>
+      </plugin>
+      Sign artifacts with PGP
+      <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-gpg-plugin</artifactId>
+      <version>1.5</version>
+      <executions>
+      <execution>
+      <id>sign-artifacts</id>
+      <phase>verify</phase>
+      <goals>
+      <goal>sign</goal>
+      </goals>
+      </execution>
+      </executions>
+      </plugin>
+      </plugins>
+      </build>
+      </profile> -->
     <profile>
+      <id>deploy</id>
       <build>
         <plugins>
+          <!-- also generate javadoc JARs -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <additionalDependencies>
+                <additionalDependency>
+                  <groupId>javax.interceptor</groupId>
+                  <artifactId>javax.interceptor-api</artifactId>
+                  <version>1.2</version>
+                </additionalDependency>
+              </additionalDependencies>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- Sign artifacts with PGP -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.5</version>
+            <configuration>
+              <keyname>${devon.gpg.secret}</keyname>
+            </configuration>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -225,5 +296,25 @@
       </build>
     </profile>
   </profiles>
+
+  <organization>
+    <name>devonfw</name>
+    <url>https://github.com/devonfw/devon/graphs/contributors</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>pablo-parra</id>
+      <name>Pablo Parra</name>
+      <email>pablo.parra-dominguez@capgemini.com</email>
+      <organization></organization>
+      <organizationUrl/>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>+1</timezone>
+      <properties/>
+    </developer>
+  </developers>
 
 </project>
