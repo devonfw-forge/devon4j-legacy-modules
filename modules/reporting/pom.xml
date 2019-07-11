@@ -46,12 +46,6 @@
       <artifactId>devon4j-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.devonfw.java.modules</groupId>
-      <artifactId>devon4j-configuration</artifactId>
-      <scope>test</scope>
-    </dependency>
-
     <!-- JASPER REPORTS LIBRARY -->
     <dependency>
       <groupId>net.sf.jasperreports</groupId>
@@ -67,7 +61,7 @@
       <groupId>net.sf.m-m-m</groupId>
       <artifactId>mmm-util-core</artifactId>
     </dependency> -->
-    
+
      <dependency>
       <groupId>net.sf.m-m-m</groupId>
       <artifactId>mmm-util-exception</artifactId>
