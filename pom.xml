@@ -11,7 +11,7 @@
   <url>http://www.devonfw.com</url>
 
   <properties>
-    <devon4j.version>3.0.0</devon4j.version>
+    <devon4j.version>3.1.0</devon4j.version>
     <devonfw.version>3.1.0-SNAPSHOT</devonfw.version>
     <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
     <java.version>1.8</java.version>
