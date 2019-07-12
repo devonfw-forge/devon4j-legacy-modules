@@ -1,3 +1,3 @@
-# devon
-Devon (general and technology-independent IP components and overview)
+# devonfw modules for devon4j
+devonfw general and technology-independent components and overview.
 
