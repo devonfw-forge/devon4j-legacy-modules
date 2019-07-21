@@ -1,0 +1,4 @@
+# devonfw modules for devon4j
+devonfw general and technology-independent components and overview. These are the former IP modules that now are **Open Source** as the rest of the devonfw assets.
+
+IMPORTANT: **The documentation included in the wiki of this repository is deprecated** and will be removed in the following days. Please refer to the new documentation available here https://github.com/devonfw/devonfw-guide/raw/master/devonfw_guide.pdf
