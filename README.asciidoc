@@ -1,4 +1,4 @@
-IMPORTANT: **The documentation included in the wiki of this repository is deprecated** and will be removed in the following days. Please refer to the new documentation available here https://github.com/devonfw/devonfw-guide/raw/master/devonfw_guide.pdf
+IMPORTANT: **These modules for devon4j are considered as legacy and are deprecated.** Most of the features are or will be migrated to https://github.com/devonfw/devon4j[devon4j]. If you are still using these modules in your project you can find all code and documentation still in this repository. Please refer to the new documentation available here https://github.com/devonfw/devonfw-guide/raw/master/devonfw_guide.pdf
 
 # devonfw modules for devon4j
 devonfw general and technology-independent components and overview. These are the former IP modules that now are **Open Source** as the rest of the devonfw assets.
